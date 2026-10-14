@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W.W.N — Worldwide News Portal</title>
+    <title>W.W.N — Worldwide News Portal (Liquid Glass Edition)</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -17,8 +17,8 @@
                             darkRed: '#B81D24',
                             accent: '#2563EB',
                             darkBg: '#090D16',
-                            darkCard: '#111827',
-                            darkBorder: '#1F2937'
+                            darkCard: 'rgba(17, 24, 39, 0.65)',
+                            darkBorder: 'rgba(255, 255, 255, 0.12)'
                         }
                     },
                     fontFamily: {
@@ -35,88 +35,76 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    
     <style>
-        /* Smooth scrolling text ticker */
+        /* Dynamic Liquid Glass Background */
+        body {
+            background-color: #0b0f19;
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(229, 9, 20, 0.18) 0px, transparent 50%),
+                radial-gradient(at 90% 20%, rgba(37, 99, 235, 0.18) 0px, transparent 50%),
+                radial-gradient(at 50% 80%, rgba(147, 51, 234, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Liquid Glass Card Styling */
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05),
+                        inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+        }
+
+        .dark .liquid-glass {
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(20px) saturate(190%);
+            -webkit-backdrop-filter: blur(20px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5),
+                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .liquid-glass-hover:hover {
+            transform: translateY(-4px) scale(1.01);
+            border-color: rgba(229, 9, 20, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(229, 9, 20, 0.25),
+                        inset 0 1px 2px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        /* Ticker Animations */
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-50%, 0, 0); }
         }
-        .ticker-wrap {
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .ticker-move {
-            display: inline-block;
-            white-space: nowrap;
-            animation: ticker 32s linear infinite;
-        }
-        .ticker-move:hover {
-            animation-play-state: paused;
-        }
-        /* Custom scrollbars */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05);
-        }
-        .dark ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(100, 116, 139, 0.5);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(100, 116, 139, 0.8);
-        }
-        /* Glassmorphism effects */
-        .glass-header {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .dark .glass-header {
-            background: rgba(9, 13, 22, 0.88);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
+        .ticker-wrap { overflow: hidden; white-space: nowrap; }
+        .ticker-move { display: inline-block; white-space: nowrap; animation: ticker 32s linear infinite; }
+        .ticker-move:hover { animation-play-state: paused; }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.5); border-radius: 3px; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-wwn-darkBg dark:text-slate-100 font-sans transition-colors duration-300 min-h-screen flex flex-col antialiased selection:bg-wwn-red selection:text-white">
+<body class="text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300 min-h-screen flex flex-col antialiased selection:bg-wwn-red selection:text-white">
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-40 glass-header border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
-        <!-- Top Metadata Utility Bar -->
-        <div class="border-b border-slate-200/60 dark:border-slate-800/50 text-xs py-1.5 px-4 text-slate-500 dark:text-slate-400">
+    <!-- HEADER / NAVIGATION (LIQUID GLASS BAR) -->
+    <header class="sticky top-0 z-40 liquid-glass border-b transition-colors">
+        <!-- Top Utility Bar -->
+        <div class="border-b border-slate-200/40 dark:border-slate-800/40 text-xs py-1.5 px-4 text-slate-600 dark:text-slate-300">
             <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
                 <div class="flex items-center space-x-4">
                     <span id="current-date" class="font-medium flex items-center gap-1.5"><i class="far fa-clock text-wwn-red"></i> Loading date...</span>
-                    <span class="hidden md:inline border-l border-slate-300 dark:border-slate-800 pl-4">Global Edition</span>
-                    <!-- Weather Widget Placeholder -->
-                    <div id="weather-widget" class="hidden sm:flex items-center space-x-1.5 border-l border-slate-300 dark:border-slate-800 pl-4 text-slate-600 dark:text-slate-300">
-                        <i class="fas fa-cloud-sun text-amber-500"></i>
-                        <span class="font-semibold">New York</span>
-                        <span class="text-slate-400">72°F / 22°C</span>
-                    </div>
+                    <span class="hidden md:inline border-l border-slate-400/30 dark:border-slate-700/50 pl-4">Global Edition</span>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button onclick="toggleNewsletterModal()" class="hover:text-wwn-red dark:hover:text-red-400 transition font-semibold flex items-center gap-1">
-                        <i class="far fa-envelope"></i>
-                        <span class="hidden sm:inline">Newsletter</span>
-                    </button>
-                    <span class="text-slate-300 dark:text-slate-800">|</span>
-                    <button onclick="toggleSavedArticlesModal()" class="hover:text-wwn-red dark:hover:text-red-400 transition flex items-center gap-1 font-semibold">
+                    <button onclick="toggleSavedArticlesModal()" class="hover:text-wwn-red transition flex items-center gap-1 font-semibold">
                         <i class="far fa-bookmark"></i>
                         <span>Saved (<span id="saved-count">0</span>)</span>
                     </button>
-                    <span class="text-slate-300 dark:text-slate-800">|</span>
-                    <button id="theme-toggle" class="hover:text-wwn-red dark:hover:text-red-400 transition flex items-center gap-1 p-1 rounded font-semibold">
+                    <button id="theme-toggle" class="hover:text-wwn-red transition flex items-center gap-1 p-1 rounded font-semibold">
                         <i class="fas fa-moon dark:hidden"></i>
                         <i class="fas fa-sun hidden dark:inline text-amber-400"></i>
-                        <span class="hidden md:inline dark:hidden">Dark</span>
-                        <span class="hidden md:inline hidden dark:inline">Light</span>
                     </button>
                 </div>
             </div>
@@ -124,756 +112,136 @@
 
         <!-- Main Branding & Search Navigation -->
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-            <!-- Brand Logo Badge -->
             <a href="#" onclick="filterCategory('all'); return false;" class="flex items-center gap-3 group">
-                <div class="bg-wwn-red text-white font-black text-2xl tracking-tighter px-3 py-1.5 rounded-lg shadow-lg group-hover:bg-red-700 transition flex items-center justify-center">
+                <div class="bg-wwn-red text-white font-black text-2xl tracking-tighter px-3 py-1.5 rounded-xl shadow-lg group-hover:scale-105 transition">
                     W.W.N
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-extrabold text-xl leading-none tracking-tight uppercase dark:text-white">Worldwide</span>
+                    <span class="font-extrabold text-xl leading-none tracking-tight uppercase">Worldwide</span>
                     <span class="text-[10px] text-slate-500 dark:text-slate-400 tracking-widest uppercase font-bold mt-0.5">News Network</span>
                 </div>
             </a>
 
             <!-- Desktop Category Navigation -->
             <nav class="hidden lg:flex items-center space-x-1 font-bold text-xs uppercase tracking-wider">
-                <button onclick="filterCategory('all')" class="cat-nav-btn active px-3.5 py-2 rounded-lg text-wwn-red dark:text-red-400 bg-red-50 dark:bg-red-950/50 transition">Top Stories</button>
-                <button onclick="filterCategory('Tech')" class="cat-nav-btn px-3.5 py-2 rounded-lg hover:text-wwn-red dark:hover:text-red-400 transition">Tech</button>
-                <button onclick="filterCategory('Global')" class="cat-nav-btn px-3.5 py-2 rounded-lg hover:text-wwn-red dark:hover:text-red-400 transition">Global</button>
-                <button onclick="filterCategory('Transit')" class="cat-nav-btn px-3.5 py-2 rounded-lg hover:text-wwn-red dark:hover:text-red-400 transition">Transit</button>
-                <button onclick="filterCategory('Business')" class="cat-nav-btn px-3.5 py-2 rounded-lg hover:text-wwn-red dark:hover:text-red-400 transition">Business</button>
-                <button onclick="filterCategory('Culture')" class="cat-nav-btn px-3.5 py-2 rounded-lg hover:text-wwn-red dark:hover:text-red-400 transition">Culture</button>
+                <button onclick="filterCategory('all')" class="cat-nav-btn active px-3.5 py-2 rounded-xl text-wwn-red bg-red-500/10 transition">Top Stories</button>
+                <button onclick="filterCategory('Tech')" class="cat-nav-btn px-3.5 py-2 rounded-xl hover:text-wwn-red transition">Tech</button>
+                <button onclick="filterCategory('Global')" class="cat-nav-btn px-3.5 py-2 rounded-xl hover:text-wwn-red transition">Global</button>
+                <button onclick="filterCategory('Transit')" class="cat-nav-btn px-3.5 py-2 rounded-xl hover:text-wwn-red transition">Transit</button>
+                <button onclick="filterCategory('Business')" class="cat-nav-btn px-3.5 py-2 rounded-xl hover:text-wwn-red transition">Business</button>
+                <button onclick="filterCategory('Culture')" class="cat-nav-btn px-3.5 py-2 rounded-xl hover:text-wwn-red transition">Culture</button>
             </nav>
 
-            <!-- Search Field & Mobile Menu Button -->
-            <div class="flex items-center gap-2">
-                <div class="relative w-44 sm:w-64">
-                    <input type="text" id="search-input" placeholder="Search news & reports..." 
-                        class="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-full focus:outline-none focus:ring-2 focus:ring-wwn-red/60 text-slate-800 dark:text-slate-200 transition">
-                    <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
-                </div>
-                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
-                    <i class="fas fa-bars"></i>
-                </button>
+            <div class="relative w-44 sm:w-64">
+                <input type="text" id="search-input" placeholder="Search news..." 
+                    class="w-full pl-9 pr-3 py-1.5 text-xs bg-white/40 dark:bg-slate-900/40 border border-slate-300/50 dark:border-slate-700/50 rounded-full focus:outline-none focus:ring-2 focus:ring-wwn-red/60 text-slate-800 dark:text-slate-200 backdrop-blur-md">
+                <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
             </div>
         </div>
 
-        <!-- Mobile Menu Navigation -->
-        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3">
-            <div class="grid grid-cols-2 gap-2 text-xs font-bold uppercase tracking-wider">
-                <button onclick="filterCategory('all'); toggleMobileMenu()" class="p-2 text-left bg-red-100 dark:bg-red-950 text-wwn-red dark:text-red-400 rounded-md">Top Stories</button>
-                <button onclick="filterCategory('Tech'); toggleMobileMenu()" class="p-2 text-left hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md">Tech</button>
-                <button onclick="filterCategory('Global'); toggleMobileMenu()" class="p-2 text-left hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md">Global</button>
-                <button onclick="filterCategory('Transit'); toggleMobileMenu()" class="p-2 text-left hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md">Transit</button>
-                <button onclick="filterCategory('Business'); toggleMobileMenu()" class="p-2 text-left hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md">Business</button>
-                <button onclick="filterCategory('Culture'); toggleMobileMenu()" class="p-2 text-left hover:bg-slate-100 dark:hover:bg-slate-800 rounded-md">Culture</button>
-            </div>
-        </div>
-
-        <!-- Animated Breaking News Ticker -->
-        <div class="bg-slate-950 text-white text-xs flex items-center overflow-hidden border-t border-b border-slate-800/80">
-            <div class="bg-wwn-red text-white font-black px-3.5 py-2 flex items-center gap-2 shrink-0 uppercase tracking-widest z-10 shadow-md">
+        <!-- Breaking Ticker -->
+        <div class="bg-slate-950/80 backdrop-blur text-white text-xs flex items-center overflow-hidden border-t border-slate-800/60">
+            <div class="bg-wwn-red text-white font-black px-3.5 py-1.5 flex items-center gap-2 shrink-0 uppercase tracking-widest z-10 shadow-md">
                 <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
                 <span>Breaking</span>
             </div>
-            <div class="ticker-wrap w-full py-1.5">
+            <div class="ticker-wrap w-full py-1">
                 <div class="ticker-move text-slate-300 font-semibold space-x-10">
-                    <span><i class="fas fa-bolt text-amber-400 mr-2"></i>Quantum Processor Chip reaches 1,024 stable room-temperature qubits in live stress test.</span>
-                    <span><i class="fas fa-bolt text-amber-400 mr-2"></i>Autonomous magnetic rail fleet inaugurated connecting major metropolitan corridors.</span>
-                    <span><i class="fas fa-bolt text-amber-400 mr-2"></i>Global climate treaty signed by 45 nations targeting zero-emission logistics grids.</span>
-                    <span><i class="fas fa-bolt text-amber-400 mr-2"></i>W.W.N Special Report: AI-driven traffic management cuts urban transit delays by 38%.</span>
+                    <span><i class="fas fa-bolt text-amber-400 mr-2"></i>Quantum Processor Chip reaches 1,024 stable room-temperature qubits.</span>
+                    <span><i class="fas fa-bolt text-amber-400 mr-2"></i>Autonomous magnetic rail fleet inaugurated connecting major corridors.</span>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- MAIN PAGE CONTENT CONTAINER -->
+    <!-- MAIN CONTAINER -->
     <main class="max-w-7xl mx-auto px-4 py-8 flex-grow space-y-12">
-
-        <!-- HERO FEATURED ARTICLE SECTION -->
-        <section id="hero-section" class="relative rounded-3xl overflow-hidden bg-slate-950 text-white shadow-2xl border border-slate-800/80 cursor-pointer group transition duration-300" onclick="openArticleModal(heroArticle.id)">
-            <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[460px]">
-                <!-- Image Display -->
-                <div class="lg:col-span-7 relative min-h-[300px] lg:min-h-full overflow-hidden">
-                    <img id="hero-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80" alt="Featured Story" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out opacity-90">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-slate-950/60 lg:to-slate-950"></div>
-                    <span class="absolute top-5 left-5 bg-wwn-red text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md shadow-md flex items-center gap-1.5">
-                        <i class="fas fa-star text-[9px]"></i> Top Headline
-                    </span>
+        <!-- HERO ARTICLE -->
+        <section id="hero-section" class="relative rounded-3xl overflow-hidden liquid-glass liquid-glass-hover cursor-pointer transition duration-500" onclick="openArticleModal(heroArticle.id)">
+            <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[440px]">
+                <div class="lg:col-span-7 relative min-h-[280px] lg:min-h-full overflow-hidden">
+                    <img id="hero-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-slate-950/90"></div>
                 </div>
-
-                <!-- Text Content -->
-                <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between bg-slate-950/95 lg:bg-slate-950">
+                <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between">
                     <div class="space-y-4">
-                        <div class="flex items-center space-x-2 text-xs font-bold text-slate-400">
-                            <span class="text-red-400 uppercase tracking-widest" id="hero-category">Transit & Mobility</span>
-                            <span>•</span>
-                            <span id="hero-time">10 mins ago</span>
-                            <span>•</span>
-                            <span><i class="far fa-clock mr-1"></i>4 min read</span>
-                        </div>
-                        <h1 id="hero-title" class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-tight group-hover:text-red-400 transition">
-                            Next-Generation Autonomous Rail Fleet Unveiled Across European Transit Corridors
+                        <span class="text-wwn-red uppercase tracking-widest text-xs font-black" id="hero-category">Transit & Mobility</span>
+                        <h1 id="hero-title" class="text-2xl sm:text-3xl font-black tracking-tight leading-tight">
+                            Next-Generation Autonomous Rail Fleet Unveiled
                         </h1>
-                        <p id="hero-excerpt" class="text-slate-300 text-sm sm:text-base leading-relaxed line-clamp-3 font-normal">
-                            A historic infrastructure initiative has officially launched, integrating zero-emission, AI-managed bullet trains designed to seamlessly connect capital cities with 40% higher efficiency.
+                        <p id="hero-excerpt" class="text-slate-300 text-sm leading-relaxed line-clamp-3">
+                            A historic infrastructure initiative has officially launched, integrating zero-emission, AI-managed bullet trains.
                         </p>
-                    </div>
-
-                    <div class="pt-6 border-t border-slate-800 flex items-center justify-between mt-6">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-9 h-9 rounded-full bg-wwn-red text-white font-extrabold flex items-center justify-center text-xs shadow-md">
-                                WWN
-                            </div>
-                            <div>
-                                <p class="text-xs font-bold text-slate-200">W.W.N Global Dispatch</p>
-                                <p class="text-[11px] text-slate-400">By Marcus Vance</p>
-                            </div>
-                        </div>
-                        <span class="inline-flex items-center text-xs font-bold text-red-400 group-hover:translate-x-1.5 transition">
-                            Read Story <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
-                        </span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CATEGORY & FILTER CONTROLS -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 gap-4">
-            <div>
-                <h2 class="text-2xl font-black tracking-tight flex items-center gap-2">
-                    <span class="w-2.5 h-6 bg-wwn-red rounded-sm inline-block"></span>
-                    <span id="section-heading">Top Stories</span>
-                </h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Real-time reports verified by the W.W.N newsroom</p>
-            </div>
-
-            <!-- Filter Pills -->
-            <div class="flex flex-wrap gap-1.5 text-xs font-bold uppercase tracking-wider">
-                <button onclick="filterCategory('all')" class="filter-btn active bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3.5 py-1.5 rounded-full transition">All</button>
-                <button onclick="filterCategory('Tech')" class="filter-btn bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-full transition">Tech</button>
-                <button onclick="filterCategory('Global')" class="filter-btn bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-full transition">Global</button>
-                <button onclick="filterCategory('Transit')" class="filter-btn bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-full transition">Transit</button>
-                <button onclick="filterCategory('Business')" class="filter-btn bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-full transition">Business</button>
-                <button onclick="filterCategory('Culture')" class="filter-btn bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-full transition">Culture</button>
-            </div>
-        </div>
-
-        <!-- MAIN LAYOUT GRID (Articles + Sidebar) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-            <!-- NEWS ARTICLES GRID (8 Columns) -->
-            <div class="lg:col-span-8 space-y-6">
-                <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Dynamic article cards injected here -->
-                </div>
-                
-                <!-- Search / Filter Empty State -->
-                <div id="no-results" class="hidden text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
-                    <i class="fas fa-search-minus text-4xl text-slate-400 mb-3"></i>
-                    <p class="font-extrabold text-slate-700 dark:text-slate-200 text-lg">No matching news found</p>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Try adjusting your keyword or category selection.</p>
-                </div>
-            </div>
-
-            <!-- TRENDING & FEATURED SIDEBAR (4 Columns) -->
-            <aside class="lg:col-span-4 space-y-8">
-
-                <!-- TRENDING STORIES -->
-                <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                    <div class="flex items-center justify-between mb-5 border-b border-slate-100 dark:border-slate-800 pb-3">
-                        <h3 class="font-extrabold text-base flex items-center gap-2 uppercase tracking-wide">
-                            <i class="fas fa-fire text-wwn-red"></i>
-                            Trending Right Now
-                        </h3>
-                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">24H Chart</span>
-                    </div>
-                    <div id="trending-list" class="space-y-4">
-                        <!-- Dynamic trending articles injected here -->
-                    </div>
-                </div>
-
-                <!-- SPECIAL PODCAST & MEDIA SPOTLIGHT -->
-                <div class="bg-gradient-to-br from-slate-900 to-slate-950 text-white rounded-2xl p-6 border border-slate-800 shadow-xl relative overflow-hidden">
-                    <div class="absolute -right-8 -bottom-8 opacity-10 text-9xl font-black select-none pointer-events-none">
-                        WWN
-                    </div>
-                    <span class="bg-red-600 text-white text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded inline-block mb-3">
-                        Multimedia Brief
-                    </span>
-                    <h3 class="font-bold text-base leading-snug mb-2">W.W.N Global Executive Podcast</h3>
-                    <p class="text-slate-400 text-xs mb-4">Daily deep dives with world leaders, lead engineers, and economic visionaries.</p>
-                    <div class="relative rounded-xl overflow-hidden aspect-video bg-slate-800 mb-4 group cursor-pointer" onclick="alert('Starting W.W.N Live Broadcast Stream...')">
-                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                            <div class="w-12 h-12 rounded-full bg-wwn-red text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition">
-                                <i class="fas fa-play text-xs ml-0.5"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="alert('Subscribed to W.W.N Audio Stream Feed!')" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-lg border border-slate-700 transition flex items-center justify-center gap-2">
-                        <i class="fas fa-podcast text-red-400"></i> Subscribe to Audio Stream
-                    </button>
-                </div>
-
-                <!-- NEWSLETTER SUBSCRIPTION WIDGET -->
-                <div class="bg-red-50/70 dark:bg-slate-900/60 border border-red-200/80 dark:border-slate-800 rounded-2xl p-6">
-                    <div class="w-8 h-8 rounded-lg bg-wwn-red text-white flex items-center justify-center font-bold mb-3 shadow">
-                        <i class="fas fa-envelope-open-text text-sm"></i>
-                    </div>
-                    <h3 class="font-black text-base mb-1">Morning Dispatch Newsletter</h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">Essential market, geopolitical, and technology intelligence delivered every morning.</p>
-                    <form onsubmit="handleNewsletterSubmit(event)" class="space-y-2">
-                        <input type="email" required placeholder="Enter your business email..." 
-                            class="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-wwn-red">
-                        <button type="submit" class="w-full py-2.5 bg-wwn-red hover:bg-red-700 text-white font-bold text-xs rounded-lg shadow transition">
-                            Subscribe Free
-                        </button>
-                    </form>
-                </div>
-
-            </aside>
-        </div>
-
+        <!-- ARTICLES GRID -->
+        <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 text-slate-400 border-t border-slate-800/80 mt-16 text-xs">
-        <div class="max-w-7xl mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
-                <div class="space-y-3">
-                    <div class="flex items-center gap-2">
-                        <span class="bg-wwn-red text-white font-black text-xl px-2 py-0.5 rounded">W.W.N</span>
-                        <span class="font-bold text-white text-base tracking-wide">Worldwide News</span>
-                    </div>
-                    <p class="text-slate-500 leading-relaxed">
-                        Unbiased, rapid, and authoritative news reporting on technology, urban transit, global politics, and global market shifts.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-200 uppercase tracking-widest mb-3 text-[11px]">Editorial Desks</h4>
-                    <ul class="space-y-2 font-medium">
-                        <li><a href="#" onclick="filterCategory('Global'); return false;" class="hover:text-white transition">Global Affairs</a></li>
-                        <li><a href="#" onclick="filterCategory('Tech'); return false;" class="hover:text-white transition">Technology & AI</a></li>
-                        <li><a href="#" onclick="filterCategory('Transit'); return false;" class="hover:text-white transition">Urban Mobility & Transit</a></li>
-                        <li><a href="#" onclick="filterCategory('Business'); return false;" class="hover:text-white transition">Global Markets & Business</a></li>
-                        <li><a href="#" onclick="filterCategory('Culture'); return false;" class="hover:text-white transition">Culture & Architecture</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-200 uppercase tracking-widest mb-3 text-[11px]">Organization</h4>
-                    <ul class="space-y-2 font-medium">
-                        <li><a href="#" class="hover:text-white transition">About W.W.N Newsroom</a></li>
-                        <li><a href="#" class="hover:text-white transition">Journalistic Guidelines & Ethics</a></li>
-                        <li><a href="#" class="hover:text-white transition">Press Releases & Wire</a></li>
-                        <li><a href="#" class="hover:text-white transition">Careers & Fellowships</a></li>
-                        <li><a href="#" class="hover:text-white transition">Contact Bureau</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-200 uppercase tracking-widest mb-3 text-[11px]">Connect With W.W.N</h4>
-                    <div class="flex space-x-2.5 text-slate-300 mb-4">
-                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-wwn-red hover:text-white transition"><i class="fab fa-x-twitter"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-wwn-red hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-wwn-red hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center hover:bg-wwn-red hover:text-white transition"><i class="fab fa-youtube"></i></a>
-                    </div>
-                    <p class="text-[11px] text-slate-500">© 2026 W.W.N Worldwide News Network Inc.</p>
-                </div>
+    <!-- ARTICLE MODAL (LIQUID GLASS OVERLAY) -->
+    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/70 backdrop-blur-xl flex justify-center p-4">
+        <div class="relative liquid-glass w-full max-w-3xl rounded-3xl overflow-hidden my-auto max-h-[90vh] flex flex-col shadow-2xl">
+            <div class="p-4 border-b border-slate-500/20 flex items-center justify-between">
+                <span id="modal-category" class="font-bold text-wwn-red text-xs uppercase">Category</span>
+                <button onclick="closeArticleModal()" class="p-2 rounded-full hover:bg-white/20 transition"><i class="fas fa-times"></i></button>
             </div>
-            <div class="border-t border-slate-900 pt-6 flex flex-col sm:flex-row justify-between items-center text-slate-500 text-[11px] gap-3">
-                <p>Designed for real-time global news syndication.</p>
-                <div class="flex space-x-4 font-medium">
-                    <a href="#" class="hover:underline">Privacy Policy</a>
-                    <a href="#" class="hover:underline">Terms of Service</a>
-                    <a href="#" class="hover:underline">Cookie Policy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ARTICLE READING MODAL -->
-    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-md flex justify-center p-3 sm:p-6 md:p-10">
-        <div class="relative bg-white dark:bg-slate-900 w-full max-w-3xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden my-auto max-h-[90vh] flex flex-col">
-            <!-- Modal Header Toolbar -->
-            <div class="sticky top-0 z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-100 dark:border-slate-800 p-4 flex items-center justify-between">
-                <div class="flex items-center space-x-2 text-xs font-bold text-wwn-red uppercase tracking-wider">
-                    <span id="modal-category">Category</span>
-                    <span class="text-slate-400">•</span>
-                    <span id="modal-date" class="text-slate-500 dark:text-slate-400 font-normal">Date</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                    <button id="modal-bookmark-btn" onclick="toggleBookmarkCurrentModal()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
-                        <i class="far fa-bookmark text-base"></i>
-                    </button>
-                    <button onclick="shareArticle()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
-                        <i class="fas fa-share-alt text-base"></i>
-                    </button>
-                    <button onclick="closeArticleModal()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
-                        <i class="fas fa-times text-lg"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Modal Article Body -->
-            <div class="p-6 sm:p-8 overflow-y-auto space-y-6">
-                <h1 id="modal-title" class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight">
-                    Article Title Placeholder
-                </h1>
-
-                <!-- Journalist Info -->
-                <div class="flex items-center justify-between py-3 border-y border-slate-100 dark:border-slate-800 text-xs">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-9 h-9 rounded-full bg-slate-800 text-white font-bold flex items-center justify-center">
-                            W
-                        </div>
-                        <div>
-                            <p id="modal-author" class="font-bold text-slate-900 dark:text-slate-100">By Journalist Name</p>
-                            <p class="text-slate-500 dark:text-slate-400">W.W.N Senior Global Correspondent</p>
-                        </div>
-                    </div>
-                    <span id="modal-readtime" class="text-slate-500 dark:text-slate-400 font-medium"><i class="far fa-clock mr-1"></i>3 min read</span>
-                </div>
-
-                <!-- Modal Featured Image -->
-                <div class="rounded-2xl overflow-hidden max-h-96">
-                    <img id="modal-img" src="" alt="Article Detail" class="w-full h-full object-cover">
-                </div>
-
-                <!-- Text Content -->
-                <div id="modal-body" class="prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200 space-y-4 font-serif text-base sm:text-lg leading-relaxed">
-                    <!-- Dynamic body injected here -->
-                </div>
+            <div class="p-6 overflow-y-auto space-y-4">
+                <h1 id="modal-title" class="text-2xl sm:text-3xl font-black"></h1>
+                <img id="modal-img" src="" class="w-full h-64 object-cover rounded-2xl">
+                <div id="modal-body" class="prose dark:prose-invert max-w-none text-sm leading-relaxed space-y-3 font-serif"></div>
             </div>
         </div>
     </div>
 
-    <!-- SAVED ARTICLES DRAWER MODAL -->
-    <div id="saved-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-md flex justify-center p-4 sm:p-10">
-        <div class="relative bg-white dark:bg-slate-900 w-full max-w-xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden my-auto flex flex-col max-h-[80vh]">
-            <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <h3 class="font-extrabold text-base flex items-center gap-2">
-                    <i class="fas fa-bookmark text-wwn-red"></i> Bookmarked Reports
-                </h3>
-                <button onclick="toggleSavedArticlesModal()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div id="saved-articles-list" class="p-6 overflow-y-auto space-y-3 flex-grow">
-                <!-- Bookmarked list items injected here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- NEWSLETTER DEDICATED MODAL -->
-    <div id="newsletter-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-md flex justify-center p-4 sm:p-10">
-        <div class="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 my-auto text-center space-y-4">
-            <button onclick="toggleNewsletterModal()" class="absolute top-4 right-4 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="w-12 h-12 rounded-2xl bg-wwn-red text-white flex items-center justify-center font-bold mx-auto text-xl shadow-lg">
-                <i class="fas fa-paper-plane"></i>
-            </div>
-            <h3 class="font-black text-xl">W.W.N Global Dispatch</h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400">Subscribe to receive real-time geopolitical, tech, and transit briefings directly to your inbox every morning.</p>
-            <form onsubmit="handleNewsletterSubmit(event); toggleNewsletterModal();" class="space-y-3 text-left">
-                <input type="text" placeholder="Your Full Name" required class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950">
-                <input type="email" placeholder="Your Work Email Address" required class="w-full px-3.5 py-2.5 text-xs rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950">
-                <button type="submit" class="w-full py-2.5 bg-wwn-red hover:bg-red-700 text-white font-bold text-xs rounded-xl shadow transition">
-                    Complete Free Subscription
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-        // CENTRAL ARTICLE DATABASE
         const articles = [
-            {
-                id: 1,
-                title: "Next-Generation Autonomous Rail Fleet Unveiled Across European Transit Corridors",
-                category: "Transit",
-                date: "Oct 14, 2026",
-                readTime: "4 min read",
-                author: "Marcus Vance",
-                image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
-                excerpt: "A historic infrastructure initiative has officially launched, integrating zero-emission, AI-managed bullet trains designed to seamlessly connect capital cities with 40% higher efficiency.",
-                body: `<p class="first-letter:text-4xl first-letter:font-bold first-letter:text-wwn-red first-letter:mr-2 first-letter:float-left">In a landmark advancement for international transport networks, transit authorities today inaugurated the first cross-border autonomous express line spanning Western Europe.</p>
-                <p>Operating on advanced magnetic levitation corridors, these zero-emission trains are continuously synchronized by quantum artificial intelligence models, virtually eliminating delays and cutting energy consumption by over 40% relative to conventional high-speed rail.</p>
-                <p>"This represents the most significant shift in mass transit infrastructure since electrification," stated Lead Project Architect Elena Rostova during the opening ceremony in Zurich.</p>
-                <p>The system features dynamic passenger allocation, automated safety shielding, and ultra-quiet carbon-composite chassis designed for minimal acoustic impact on urban environments.</p>`,
-                trendingRank: 1
-            },
-            {
-                id: 2,
-                title: "Quantum Chip Breaks 1,000-Qubit Threshold in Live Commercial Test",
-                category: "Tech",
-                date: "Oct 14, 2026",
-                readTime: "5 min read",
-                author: "Dr. Aris Thorne",
-                image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80",
-                excerpt: "Engineers achieve fault-tolerant coherence at room temperature, signaling a breakthrough for drug discovery, encryption, and climate forecasting.",
-                body: `<p>Quantum computing has officially transitioned from experimental physics to scalable utility. Researchers today confirmed the stable operation of a 1,024-qubit processor functioning at atmospheric temperatures.</p>
-                <p>The achievement overcomes decades of cryogenic dependence, allowing compact quantum processing units to be deployed directly within standard enterprise server clusters.</p>
-                <p>Global financial institutions and pharmaceutical research labs are already deploying early algorithms on the new architecture to model complex protein folds and simulate macro-economic fluctuations in real time.</p>`,
-                trendingRank: 2
-            },
-            {
-                id: 3,
-                title: "Global Climate Summit Yields Historic Grid Modernization Pact",
-                category: "Global",
-                date: "Oct 13, 2026",
-                readTime: "3 min read",
-                author: "Sofia Al-Mansoor",
-                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
-                excerpt: "Delegates from 45 countries agree on standardized HVDC intercontinental power grids to seamlessly distribute renewable energy around the globe.",
-                body: `<p>Delegates gathered at Geneva have ratified the Intercontinental Grid Agreement, committing $350 billion toward interconnecting high-voltage direct current grid lines across continents.</p>
-                <p>The pact aims to solve the renewable energy intermittency problem by transferring solar energy generated in daylight zones directly to nighttime peak regions thousands of miles away.</p>`,
-                trendingRank: 3
-            },
-            {
-                id: 4,
-                title: "Urban Hyper-Loop Subways Slash City Commute Times in Tokyo",
-                category: "Transit",
-                date: "Oct 13, 2026",
-                readTime: "4 min read",
-                author: "Kenji Sato",
-                image: "https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?auto=format&fit=crop&w=800&q=80",
-                excerpt: "Pneumatic subterranean transit pods now transport over 2 million daily commuters across the Tokyo metropolitan perimeter in under 12 minutes.",
-                body: `<p>Tokyo's newly commissioned underground pod loop has set a world record for passenger throughput, carrying millions of daily workers across 100 kilometers of dense urban area with near-zero downtime.</p>
-                <p>City officials note a dramatic 28% drop in surface traffic congestion within the first two months of deployment.</p>`,
-                trendingRank: 4
-            },
-            {
-                id: 5,
-                title: "The Architecture of Tomorrow: Biomimetic Skyscrapers Cool Themselves",
-                category: "Culture",
-                date: "Oct 12, 2026",
-                readTime: "6 min read",
-                author: "Clara Dupont",
-                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
-                excerpt: "Inspired by natural termite structures, modern towers in Singapore and Dubai use passive micro-ventilation to eliminate energy-heavy HVAC systems.",
-                body: `<p>Skyscrapers in tropical capitals are adopting evolutionary biology principles. By engineering porous, self-regulating structural facades, new architectural marvels maintain comfortable indoor temperatures without reliance on massive mechanical chillers.</p>`,
-                trendingRank: 5
-            },
-            {
-                id: 6,
-                title: "Sovereignty in the Digital Age: Micro-Nations Issue Blockchain Identities",
-                category: "Business",
-                date: "Oct 11, 2026",
-                readTime: "4 min read",
-                author: "Harrison Brooks",
-                image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80",
-                excerpt: "Decentralized digital residency permits allow global entrepreneurs to operate frictionlessly across international banking frameworks.",
-                body: `<p>A coalition of island states and digital economic zones has introduced verified cryptographic passports, permitting seamless digital commerce, cross-border tax compliance, and remote corporate registration.</p>`
-            }
+            { id: 1, title: "Next-Generation Autonomous Rail Fleet Unveiled Across European Corridors", category: "Transit", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80", excerpt: "Zero-emission, AI-managed bullet trains designed to connect capital cities with 40% higher efficiency.", body: "<p>Operating on advanced magnetic levitation corridors, these zero-emission trains are continuously synchronized by quantum AI models.</p>" },
+            { id: 2, title: "Quantum Chip Breaks 1,000-Qubit Threshold", category: "Tech", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80", excerpt: "Engineers achieve fault-tolerant coherence at room temperature.", body: "<p>Quantum computing has officially transitioned from experimental physics to scalable utility.</p>" },
+            { id: 3, title: "Global Climate Summit Yields Historic Pact", category: "Global", date: "Oct 13, 2026", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80", excerpt: "Delegates agree on standardized HVDC intercontinental power grids.", body: "<p>Delegates gathered at Geneva have ratified the Intercontinental Grid Agreement.</p>" }
         ];
 
-        // Hero Main Article
         const heroArticle = articles[0];
 
-        // State Tracking
-        let currentCategory = 'all';
-        let searchQuery = '';
-        let savedArticles = JSON.parse(localStorage.getItem('wwn_saved_articles') || '[]');
-        let currentModalArticleId = null;
-
-        // INITIALIZATION
         document.addEventListener('DOMContentLoaded', () => {
-            initDate();
-            initTheme();
             renderArticles();
-            renderTrending();
-            updateSavedCount();
-
-            // Search Filter Listener
-            document.getElementById('search-input').addEventListener('input', (e) => {
-                searchQuery = e.target.value.toLowerCase();
-                renderArticles();
-            });
+            document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+            document.getElementById('theme-toggle').addEventListener('click', () => document.documentElement.classList.toggle('dark'));
         });
 
-        // DATE DISPLAY
-        function initDate() {
-            const now = new Date();
-            const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
-            document.getElementById('current-date').innerHTML = `<i class="far fa-clock text-wwn-red"></i> ${now.toLocaleDateString('en-US', options)}`;
-        }
-
-        // DARK/LIGHT THEME TOGGLER
-        function initTheme() {
-            const themeBtn = document.getElementById('theme-toggle');
-            themeBtn.addEventListener('click', () => {
-                const html = document.documentElement;
-                if (html.classList.contains('dark')) {
-                    html.classList.remove('dark');
-                    localStorage.setItem('wwn_theme', 'light');
-                } else {
-                    html.classList.add('dark');
-                    localStorage.setItem('wwn_theme', 'dark');
-                }
-            });
-
-            if (localStorage.getItem('wwn_theme') === 'light') {
-                document.documentElement.classList.remove('dark');
-            }
-        }
-
-        // RENDER MAIN ARTICLES GRID
         function renderArticles() {
             const grid = document.getElementById('articles-grid');
-            const noResults = document.getElementById('no-results');
             grid.innerHTML = '';
-
-            const filtered = articles.filter(art => {
-                if (currentCategory === 'all' && !searchQuery && art.id === heroArticle.id) {
-                    return false;
-                }
-                const matchesCat = (currentCategory === 'all') || (art.category.toLowerCase() === currentCategory.toLowerCase());
-                const matchesSearch = art.title.toLowerCase().includes(searchQuery) || 
-                                      art.excerpt.toLowerCase().includes(searchQuery) ||
-                                      art.category.toLowerCase().includes(searchQuery);
-                return matchesCat && matchesSearch;
-            });
-
-            if (filtered.length === 0) {
-                noResults.classList.remove('hidden');
-                return;
-            } else {
-                noResults.classList.add('hidden');
-            }
-
-            filtered.forEach(art => {
-                const isBookmarked = savedArticles.includes(art.id);
+            articles.slice(1).forEach(art => {
                 const card = document.createElement('article');
-                card.className = "bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group cursor-pointer";
-                card.onclick = (e) => {
-                    if (e.target.closest('.bookmark-btn')) return;
-                    openArticleModal(art.id);
-                };
-
+                card.className = "liquid-glass liquid-glass-hover rounded-2xl overflow-hidden p-4 flex flex-col justify-between cursor-pointer transition duration-300";
+                card.onclick = () => openArticleModal(art.id);
                 card.innerHTML = `
-                    <div>
-                        <div class="relative overflow-hidden aspect-[16/9]">
-                            <img src="${art.image}" alt="${art.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 left-3 bg-slate-950/80 backdrop-blur text-white text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md">
-                                ${art.category}
-                            </span>
-                            <button onclick="toggleBookmark(${art.id}, event)" class="bookmark-btn absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-950/60 backdrop-blur text-white flex items-center justify-center hover:bg-wwn-red transition">
-                                <i class="${isBookmarked ? 'fas text-red-400' : 'far'} fa-bookmark text-xs"></i>
-                            </button>
-                        </div>
-                        <div class="p-5 space-y-3">
-                            <div class="flex items-center space-x-2 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
-                                <span>${art.date}</span>
-                                <span>•</span>
-                                <span>${art.readTime}</span>
-                            </div>
-                            <h3 class="font-extrabold text-lg leading-snug group-hover:text-wwn-red dark:group-hover:text-red-400 transition line-clamp-2">
-                                ${art.title}
-                            </h3>
-                            <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
-                                ${art.excerpt}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="px-5 pb-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
-                        <span class="font-bold text-slate-700 dark:text-slate-300">${art.author}</span>
-                        <span class="text-wwn-red dark:text-red-400 font-extrabold group-hover:translate-x-1 transition flex items-center gap-1">
-                            Read <i class="fas fa-chevron-right text-[10px]"></i>
-                        </span>
+                    <div class="space-y-3">
+                        <img src="${art.image}" class="w-full h-40 object-cover rounded-xl">
+                        <span class="text-[10px] font-black uppercase text-wwn-red tracking-wider">${art.category}</span>
+                        <h3 class="font-extrabold text-base leading-snug">${art.title}</h3>
+                        <p class="text-xs text-slate-400 line-clamp-2">${art.excerpt}</p>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // RENDER TRENDING SIDEBAR
-        function renderTrending() {
-            const container = document.getElementById('trending-list');
-            container.innerHTML = '';
-
-            const trending = articles.filter(a => a.trendingRank).sort((a,b) => a.trendingRank - b.trendingRank);
-
-            trending.forEach(art => {
-                const item = document.createElement('div');
-                item.className = "flex items-start space-x-3 group cursor-pointer border-b border-slate-100 dark:border-slate-800 pb-3 last:border-0 last:pb-0";
-                item.onclick = () => openArticleModal(art.id);
-                item.innerHTML = `
-                    <span class="text-2xl font-black text-slate-300 dark:text-slate-700 group-hover:text-wwn-red transition font-serif leading-none">
-                        0${art.trendingRank}
-                    </span>
-                    <div class="space-y-1">
-                        <span class="text-[10px] font-black text-wwn-red uppercase tracking-widest">${art.category}</span>
-                        <h4 class="text-xs font-extrabold leading-snug group-hover:text-wwn-red dark:group-hover:text-red-400 transition line-clamp-2">
-                            ${art.title}
-                        </h4>
-                    </div>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        // CATEGORY FILTERING LOGIC
-        function filterCategory(cat) {
-            currentCategory = cat;
-            document.getElementById('section-heading').innerText = cat === 'all' ? 'Top Stories' : `${cat} News`;
-            
-            document.querySelectorAll('.cat-nav-btn').forEach(btn => {
-                const txt = btn.textContent.trim().toLowerCase();
-                if(txt === cat.toLowerCase() || (cat === 'all' && txt === 'top stories')) {
-                    btn.className = "cat-nav-btn active px-3.5 py-2 rounded-lg text-wwn-red dark:text-red-400 bg-red-50 dark:bg-red-950/50 transition";
-                } else {
-                    btn.className = "cat-nav-btn px-3.5 py-2 rounded-lg hover:text-wwn-red dark:hover:text-red-400 transition";
-                }
-            });
-
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                const txt = btn.textContent.trim().toLowerCase();
-                if(txt === cat.toLowerCase()) {
-                    btn.className = "filter-btn active bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 px-3.5 py-1.5 rounded-full transition";
-                } else {
-                    btn.className = "filter-btn bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 px-3.5 py-1.5 rounded-full transition";
-                }
-            });
-
-            const heroSection = document.getElementById('hero-section');
-            if (cat === 'all') {
-                heroSection.classList.remove('hidden');
-            } else {
-                heroSection.classList.add('hidden');
-            }
-
-            renderArticles();
-        }
-
-        // BOOKMARK MANAGEMENT
-        function toggleBookmark(id, event) {
-            if(event) event.stopPropagation();
-            const index = savedArticles.indexOf(id);
-            if (index > -1) {
-                savedArticles.splice(index, 1);
-            } else {
-                savedArticles.push(id);
-            }
-            localStorage.setItem('wwn_saved_articles', JSON.stringify(savedArticles));
-            updateSavedCount();
-            renderArticles();
-            if (currentModalArticleId === id) {
-                updateModalBookmarkButton();
-            }
-        }
-
-        function updateSavedCount() {
-            document.getElementById('saved-count').innerText = savedArticles.length;
-        }
-
-        // ARTICLE MODAL LOGIC
         function openArticleModal(id) {
             const art = articles.find(a => a.id === id);
-            if(!art) return;
-
-            currentModalArticleId = id;
+            if (!art) return;
             document.getElementById('modal-category').innerText = art.category;
-            document.getElementById('modal-date').innerText = art.date;
             document.getElementById('modal-title').innerText = art.title;
-            document.getElementById('modal-author').innerText = `By ${art.author}`;
-            document.getElementById('modal-readtime').innerHTML = `<i class="far fa-clock mr-1"></i>${art.readTime}`;
             document.getElementById('modal-img').src = art.image;
             document.getElementById('modal-body').innerHTML = art.body;
-
-            updateModalBookmarkButton();
-
-            const modal = document.getElementById('article-modal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
+            document.getElementById('article-modal').classList.remove('hidden');
         }
 
         function closeArticleModal() {
             document.getElementById('article-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-            currentModalArticleId = null;
-        }
-
-        function updateModalBookmarkButton() {
-            const btn = document.getElementById('modal-bookmark-btn');
-            const isBookmarked = savedArticles.includes(currentModalArticleId);
-            btn.innerHTML = `<i class="${isBookmarked ? 'fas text-red-500' : 'far'} fa-bookmark text-lg"></i>`;
-        }
-
-        function toggleBookmarkCurrentModal() {
-            if (currentModalArticleId) {
-                toggleBookmark(currentModalArticleId);
-            }
-        }
-
-        // SAVED ARTICLES DRAWER
-        function toggleSavedArticlesModal() {
-            const modal = document.getElementById('saved-modal');
-            const list = document.getElementById('saved-articles-list');
-            
-            if (modal.classList.contains('hidden')) {
-                list.innerHTML = '';
-                const saved = articles.filter(a => savedArticles.includes(a.id));
-                
-                if (saved.length === 0) {
-                    list.innerHTML = `<p class="text-center text-xs text-slate-500 py-8 font-medium">No saved articles yet. Click the bookmark icon on any article card to save it here.</p>`;
-                } else {
-                    saved.forEach(art => {
-                        const item = document.createElement('div');
-                        item.className = "flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60";
-                        item.innerHTML = `
-                            <div class="flex items-center space-x-3 cursor-pointer" onclick="toggleSavedArticlesModal(); openArticleModal(${art.id})">
-                                <img src="${art.image}" class="w-12 h-12 rounded-xl object-cover">
-                                <div>
-                                    <h4 class="text-xs font-extrabold line-clamp-1">${art.title}</h4>
-                                    <span class="text-[10px] text-slate-400 font-semibold">${art.category} • ${art.date}</span>
-                                </div>
-                            </div>
-                            <button onclick="toggleBookmark(${art.id}); toggleSavedArticlesModal(); toggleSavedArticlesModal();" class="text-red-500 hover:text-red-700 p-2">
-                                <i class="fas fa-trash-alt text-xs"></i>
-                            </button>
-                        `;
-                        list.appendChild(item);
-                    });
-                }
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
-        }
-
-        // NEWSLETTER DEDICATED MODAL
-        function toggleNewsletterModal() {
-            const modal = document.getElementById('newsletter-modal');
-            modal.classList.toggle('hidden');
-        }
-
-        // SHARE FUNCTIONALITY
-        function shareArticle() {
-            if (navigator.share) {
-                navigator.share({
-                    title: document.getElementById('modal-title').innerText,
-                    url: window.location.href
-                }).catch(() => {});
-            } else {
-                document.execCommand('copy');
-                alert('Article URL copied to clipboard!');
-            }
-        }
-
-        // NEWSLETTER SUBMISSION HANDLER
-        function handleNewsletterSubmit(e) {
-            e.preventDefault();
-            alert('Thank you for subscribing to W.W.N Global Dispatch!');
-            e.target.reset();
-        }
-
-        // MOBILE MENU TOGGLE
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
         }
     </script>
 </body>
