@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W.W.N // The Local European Wire</title>
+    <title>W.W.N // Worldwide News</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -113,7 +113,7 @@
                     W.W.N
                 </div>
                 <div class="flex flex-col font-mono">
-                    <span class="font-black text-lg leading-none tracking-widest text-white neon-glow">WORLDWIDE</span>
+                    <span class="font-black text-lg leading-none tracking-widest text-white neon-glow">Worldwide News</span>
                     <span class="text-[9px] text-cyber-cyan tracking-[0.25em] uppercase font-bold mt-0.5">The Local Bureau</span>
                 </div>
             </a>
@@ -173,7 +173,7 @@
                         </p>
                     </div>
                     <div class="pt-4 border-t border-cyber-border flex items-center justify-between text-xs font-mono">
-                        <span class="text-slate-400">SOURCE: THE LOCAL EUROPE</span>
+                        <span class="text-slate-400">SOURCE: WORLDWIDE NEWS</span>
                         <span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">
                             READ REPORT <i class="fas fa-chevron-right text-[10px]"></i>
                         </span>
@@ -187,7 +187,7 @@
             <div>
                 <h2 class="text-xl font-black tracking-wider font-mono flex items-center gap-2 text-white">
                     <span class="w-2 h-5 bg-cyber-cyan rounded-sm inline-block shadow-[0_0_10px_rgba(0,240,255,0.8)]"></span>
-                    <span id="section-heading" class="neon-glow">THE_LOCAL // ALL_EDITIONS</span>
+                    <span id="section-heading" class="neon-glow">WORLDWIDE NEWS // ALL_EDITIONS</span>
                 </h2>
             </div>
             <div class="flex flex-wrap gap-2 font-mono text-xs">
@@ -363,7 +363,7 @@
                         </p>
                     </div>
                     <div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">
-                        <span class="text-slate-500">THE LOCAL WIRE</span>
+                        <span class="text-slate-500">WORLDWIDE NEWS</span>
                         <span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">
                             READ <i class="fas fa-chevron-right text-[9px]"></i>
                         </span>
@@ -375,7 +375,7 @@
 
         function filterCategory(cat) {
             currentCategory = cat;
-            document.getElementById('section-heading').innerText = cat === 'all' ? 'THE_LOCAL // ALL_EDITIONS' : `THE_LOCAL // ${cat.toUpperCase()}`;
+            document.getElementById('section-heading').innerText = cat === 'all' ? 'WORLDWIDE NEWS // ALL_EDITIONS' : `WORLDWIDE NEWS // ${cat.toUpperCase()}`;
             
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 if(btn.textContent.trim().toLowerCase() === cat.toLowerCase() || (cat === 'all' && btn.textContent.trim() === 'ALL')) {
