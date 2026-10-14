@@ -94,12 +94,12 @@
     <div class="bg-slate-950/90 border-b border-cyber-border text-xs py-1.5 px-4 font-mono text-cyan-400">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> THE_LOCAL_EUROPE_FEED: ONLINE</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> NETWORK_FEED: ONLINE</span>
                 <span class="hidden md:inline text-slate-500">|</span>
                 <span id="system-time" class="hidden md:inline text-slate-300">SYNCHRONIZING...</span>
             </div>
             <div class="flex items-center space-x-6 text-[11px]">
-                <span class="text-slate-400">STATUS: <strong class="text-cyber-cyan">LIVE EUROPEAN DISPATCH</strong></span>
+                <span class="text-slate-400">STATUS: <strong class="text-cyber-cyan">LIVE GLOBAL DISPATCH</strong></span>
                 <button onclick="toggleSavedArticlesModal()" class="hover:text-cyber-cyan transition">SAVED_REPORTS (<span id="saved-count">0</span>)</button>
             </div>
         </div>
@@ -108,13 +108,14 @@
     <!-- MAIN HEADER -->
     <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-cyber-border">
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            <!-- BRAND LOGO CLEANED -->
             <a href="#" onclick="filterCategory('all'); return false;" class="flex items-center gap-3 group">
                 <div class="bg-gradient-to-br from-cyber-cyan to-blue-600 text-slate-950 font-black text-xl tracking-tighter px-3.5 py-1.5 rounded-lg shadow-[0_0_20px_rgba(0,240,255,0.4)] group-hover:scale-105 transition font-mono">
                     W.W.N
                 </div>
                 <div class="flex flex-col font-mono">
-                    <span class="font-black text-lg leading-none tracking-widest text-white neon-glow">Worldwide News</span>
-                    <span class="text-[9px] text-cyber-cyan tracking-[0.25em] uppercase font-bold mt-0.5">The Local Bureau</span>
+                    <span class="font-black text-lg leading-none tracking-widest text-white neon-glow">WORLDWIDE</span>
+                    <span class="text-[10px] text-cyber-cyan tracking-[0.25em] uppercase font-bold mt-0.5">NEWS</span>
                 </div>
             </a>
 
@@ -127,7 +128,7 @@
             </nav>
 
             <div class="relative w-44 sm:w-60">
-                <input type="text" id="search-input" placeholder="Search The Local wire..." 
+                <input type="text" id="search-input" placeholder="Search news database..." 
                     class="w-full pl-8 pr-3 py-1.5 text-xs font-mono bg-slate-900/80 border border-cyber-border rounded-md focus:outline-none focus:border-cyber-cyan text-cyan-300 placeholder:text-slate-600">
                 <i class="fas fa-terminal absolute left-2.5 top-2 text-cyber-cyan/60 text-xs"></i>
             </div>
@@ -137,12 +138,12 @@
         <div class="bg-slate-950 text-xs font-mono flex items-center overflow-hidden border-t border-cyber-border/60">
             <div class="bg-cyber-red text-white font-black px-3.5 py-1.5 flex items-center gap-2 shrink-0 uppercase tracking-widest z-10 shadow-[0_0_15px_rgba(255,0,85,0.6)]">
                 <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-                <span>THE LOCAL WIRE</span>
+                <span>LIVE WIRE</span>
             </div>
             <div class="ticker-wrap w-full py-1">
                 <div class="ticker-move text-cyan-300 font-semibold space-x-12">
-                    <span>[+] อัปเดตข่าวสารล่าสุดจาก The Local: เกาะติดสถานการณ์ในสวีเดน เดนมาร์ก เยอรมนี และทั่วยุโรป</span>
-                    <span>[+] รายงานนโยบายวีซ่า การย้ายถิ่นฐาน กฎหมายแรงงาน และเศรษฐกิจยุโรปประจำวัน</span>
+                    <span>[+] อัปเดตข่าวสารล่าสุดจาก Worldwide News: เกาะติดสถานการณ์ในสวีเดน เดนมาร์ก เยอรมนี และทั่วยุโรป</span>
+                    <span>[+] รายงานนโยบายวีซ่า การย้ายถิ่นฐาน กฎหมายแรงงาน และเศรษฐกิจประจำวัน</span>
                 </div>
             </div>
         </div>
