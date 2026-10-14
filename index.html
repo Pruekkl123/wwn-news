@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W.W.N // Quantum Global Network</title>
+    <title>W.W.N // The Local European Wire</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -34,7 +34,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Futuristic Background & Hologram Grid */
         body {
             background-color: #030712;
             background-image: 
@@ -46,7 +45,6 @@
             background-attachment: fixed;
         }
 
-        /* Holographic Glass Card */
         .holo-card {
             background: rgba(13, 20, 38, 0.65);
             backdrop-filter: blur(20px) saturate(200%);
@@ -62,16 +60,10 @@
             transform: translateY(-4px);
         }
 
-        /* Neon Glowing Text */
         .neon-glow {
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
         }
-        
-        .neon-glow-red {
-            text-shadow: 0 0 10px rgba(255, 0, 85, 0.7);
-        }
 
-        /* Scanning Line Animation */
         @keyframes scanline {
             0% { transform: translateY(-100%); }
             100% { transform: translateY(1000%); }
@@ -84,7 +76,6 @@
             animation: scanline 4s linear infinite;
         }
 
-        /* Ticker Animation */
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-50%, 0, 0); }
@@ -95,68 +86,63 @@
 
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.3); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 240, 255, 0.6); }
     </style>
 </head>
 <body class="text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-cyber-cyan selection:text-slate-950">
 
-    <!-- TOP QUANTUM TELEMETRY BAR -->
+    <!-- TOP TELEMETRY BAR -->
     <div class="bg-slate-950/90 border-b border-cyber-border text-xs py-1.5 px-4 font-mono text-cyan-400">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> QUANTUM_LINK: ONLINE</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> THE_LOCAL_EUROPE_FEED: ONLINE</span>
                 <span class="hidden md:inline text-slate-500">|</span>
                 <span id="system-time" class="hidden md:inline text-slate-300">SYNCHRONIZING...</span>
             </div>
             <div class="flex items-center space-x-6 text-[11px]">
-                <span class="text-slate-400">ENCRYPTION: <strong class="text-cyber-cyan">AES-256-QUANTUM</strong></span>
+                <span class="text-slate-400">STATUS: <strong class="text-cyber-cyan">LIVE EUROPEAN DISPATCH</strong></span>
                 <button onclick="toggleSavedArticlesModal()" class="hover:text-cyber-cyan transition">SAVED_REPORTS (<span id="saved-count">0</span>)</button>
             </div>
         </div>
     </div>
 
-    <!-- MAIN HOLOGRAPHIC HEADER -->
+    <!-- MAIN HEADER -->
     <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-cyber-border">
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-            <!-- Brand Logo -->
             <a href="#" onclick="filterCategory('all'); return false;" class="flex items-center gap-3 group">
                 <div class="bg-gradient-to-br from-cyber-cyan to-blue-600 text-slate-950 font-black text-xl tracking-tighter px-3.5 py-1.5 rounded-lg shadow-[0_0_20px_rgba(0,240,255,0.4)] group-hover:scale-105 transition font-mono">
                     W.W.N
                 </div>
                 <div class="flex flex-col font-mono">
                     <span class="font-black text-lg leading-none tracking-widest text-white neon-glow">WORLDWIDE</span>
-                    <span class="text-[9px] text-cyber-cyan tracking-[0.25em] uppercase font-bold mt-0.5">Neural Network</span>
+                    <span class="text-[9px] text-cyber-cyan tracking-[0.25em] uppercase font-bold mt-0.5">The Local Bureau</span>
                 </div>
             </a>
 
-            <!-- Category Navigation -->
             <nav class="hidden lg:flex items-center space-x-1 font-mono text-xs uppercase tracking-widest">
-                <button onclick="filterCategory('all')" class="cat-nav-btn active px-3 py-1.5 rounded text-cyber-cyan bg-cyan-950/50 border border-cyber-cyan/30 transition">Main_Grid</button>
-                <button onclick="filterCategory('Tech')" class="cat-nav-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition">Quantum_AI</button>
-                <button onclick="filterCategory('Global')" class="cat-nav-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition">Geopolitics</button>
-                <button onclick="filterCategory('Transit')" class="cat-nav-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition">Hyperloop</button>
-                <button onclick="filterCategory('Business')" class="cat-nav-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition">Markets</button>
+                <button onclick="filterCategory('all')" class="cat-nav-btn active px-3 py-1.5 rounded text-cyber-cyan bg-cyan-950/50 border border-cyber-cyan/30 transition">All Reports</button>
+                <button onclick="filterCategory('Sweden')" class="cat-nav-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition">Sweden</button>
+                <button onclick="filterCategory('Denmark')" class="cat-nav-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition">Denmark</button>
+                <button onclick="filterCategory('Germany')" class="cat-nav-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition">Germany</button>
+                <button onclick="filterCategory('Europe')" class="cat-nav-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition">Wider Europe</button>
             </nav>
 
-            <!-- Search Field -->
             <div class="relative w-44 sm:w-60">
-                <input type="text" id="search-input" placeholder="Query neural database..." 
+                <input type="text" id="search-input" placeholder="Search The Local wire..." 
                     class="w-full pl-8 pr-3 py-1.5 text-xs font-mono bg-slate-900/80 border border-cyber-border rounded-md focus:outline-none focus:border-cyber-cyan text-cyan-300 placeholder:text-slate-600">
                 <i class="fas fa-terminal absolute left-2.5 top-2 text-cyber-cyan/60 text-xs"></i>
             </div>
         </div>
 
-        <!-- Cybernetic Ticker -->
+        <!-- Ticker -->
         <div class="bg-slate-950 text-xs font-mono flex items-center overflow-hidden border-t border-cyber-border/60">
             <div class="bg-cyber-red text-white font-black px-3.5 py-1.5 flex items-center gap-2 shrink-0 uppercase tracking-widest z-10 shadow-[0_0_15px_rgba(255,0,85,0.6)]">
                 <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-                <span>ALERT</span>
+                <span>THE LOCAL WIRE</span>
             </div>
             <div class="ticker-wrap w-full py-1">
                 <div class="ticker-move text-cyan-300 font-semibold space-x-12">
-                    <span>[+] Q-Chip v9 architecture achieves 99.999% error correction threshold in orbital servers.</span>
-                    <span>[+] Trans-Atlantic Hyperloop corridor construction reaches 88% structural completion.</span>
-                    <span>[+] Automated orbital weather shields successfully deflect solar flare CME-2026.</span>
+                    <span>[+] อัปเดตข่าวสารล่าสุดจาก The Local: เกาะติดสถานการณ์ในสวีเดน เดนมาร์ก เยอรมนี และทั่วยุโรป</span>
+                    <span>[+] รายงานนโยบายวีซ่า การย้ายถิ่นฐาน กฎหมายแรงงาน และเศรษฐกิจยุโรปประจำวัน</span>
                 </div>
             </div>
         </div>
@@ -169,27 +155,27 @@
         <section id="hero-section" class="relative rounded-2xl overflow-hidden holo-card scanner-beam cursor-pointer group" onclick="openArticleModal(heroArticle.id)">
             <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[420px]">
                 <div class="lg:col-span-7 relative min-h-[280px] lg:min-h-full overflow-hidden">
-                    <img id="hero-img" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80">
+                    <img id="hero-img" src="https://images.unsplash.com/photo-1509356843151-3c7d96241c75?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-slate-950"></div>
                 </div>
                 <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-slate-950/90">
                     <div class="space-y-3 font-mono">
                         <div class="flex items-center space-x-2 text-[10px] text-cyber-cyan uppercase tracking-widest">
-                            <span class="px-2 py-0.5 rounded bg-cyan-950 border border-cyber-cyan/40">Priority_01</span>
+                            <span class="px-2 py-0.5 rounded bg-cyan-950 border border-cyber-cyan/40" id="hero-category">Sweden</span>
                             <span>•</span>
-                            <span id="hero-time">12m ago</span>
+                            <span id="hero-time">Oct 14, 2026</span>
                         </div>
                         <h1 id="hero-title" class="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-cyber-cyan transition">
-                            Next-Generation Autonomous Rail Fleet Unveiled Across European Corridors
+                            Sweden leaves recession behind with stronger growth and falling unemployment
                         </h1>
                         <p id="hero-excerpt" class="text-slate-400 text-xs sm:text-sm leading-relaxed line-clamp-3">
-                            A historic infrastructure initiative integrating zero-emission, AI-managed high-speed transit networks across continental capitals.
+                            Economic indicators point toward a robust post-recession recovery across Sweden, accompanied by steady employment gains and positive market stabilization.
                         </p>
                     </div>
                     <div class="pt-4 border-t border-cyber-border flex items-center justify-between text-xs font-mono">
-                        <span class="text-slate-400">SOURCE: W.W.N NEURAL BUREAU</span>
+                        <span class="text-slate-400">SOURCE: THE LOCAL EUROPE</span>
                         <span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">
-                            ACCESS_FILE <i class="fas fa-chevron-right text-[10px]"></i>
+                            READ REPORT <i class="fas fa-chevron-right text-[10px]"></i>
                         </span>
                     </div>
                 </div>
@@ -201,16 +187,15 @@
             <div>
                 <h2 class="text-xl font-black tracking-wider font-mono flex items-center gap-2 text-white">
                     <span class="w-2 h-5 bg-cyber-cyan rounded-sm inline-block shadow-[0_0_10px_rgba(0,240,255,0.8)]"></span>
-                    <span id="section-heading" class="neon-glow">MAIN_DATABASE // TOP_STORIES</span>
+                    <span id="section-heading" class="neon-glow">THE_LOCAL // ALL_EDITIONS</span>
                 </h2>
             </div>
-            <!-- Filter Pills -->
             <div class="flex flex-wrap gap-2 font-mono text-xs">
                 <button onclick="filterCategory('all')" class="filter-btn active bg-cyber-cyan text-slate-950 font-bold px-3 py-1 rounded shadow-[0_0_10px_rgba(0,240,255,0.4)] transition">ALL</button>
-                <button onclick="filterCategory('Tech')" class="filter-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition">TECH</button>
-                <button onclick="filterCategory('Global')" class="filter-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition">GLOBAL</button>
-                <button onclick="filterCategory('Transit')" class="filter-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition">TRANSIT</button>
-                <button onclick="filterCategory('Business')" class="filter-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition">MARKETS</button>
+                <button onclick="filterCategory('Sweden')" class="filter-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition">SWEDEN</button>
+                <button onclick="filterCategory('Denmark')" class="filter-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition">DENMARK</button>
+                <button onclick="filterCategory('Germany')" class="filter-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition">GERMANY</button>
+                <button onclick="filterCategory('Europe')" class="filter-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition">EUROPE</button>
             </div>
         </div>
 
@@ -255,53 +240,63 @@
         const articles = [
             {
                 id: 1,
-                title: "Next-Generation Autonomous Rail Fleet Unveiled Across European Corridors",
-                category: "Transit",
+                title: "Sweden leaves recession behind with stronger growth and falling unemployment",
+                category: "Sweden",
                 date: "Oct 14, 2026",
                 readTime: "4m read",
-                image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
-                excerpt: "Zero-emission, AI-managed bullet trains designed to connect capital cities with 40% higher efficiency.",
-                body: `<p>Operating on advanced magnetic levitation corridors, these zero-emission trains are continuously synchronized by quantum artificial intelligence models, virtually eliminating delays and cutting energy consumption.</p><p>"This represents the most significant shift in mass transit infrastructure," stated Lead Project Architect Elena Rostova.</p>`
+                image: "https://images.unsplash.com/photo-1509356843151-3c7d96241c75?auto=format&fit=crop&w=1200&q=80",
+                excerpt: "Economic indicators point toward a robust post-recession recovery across Sweden, accompanied by steady employment gains.",
+                body: `<p>Sweden has officially left behind the recent economic downturn, showing stronger GDP growth and a positive trend in falling unemployment numbers across major metropolitan regions.</p><p>Financial experts note that domestic consumption and stabilization in key export industries are driving the national recovery.</p>`
             },
             {
                 id: 2,
-                title: "Quantum Chip Breaks 1,000-Qubit Threshold in Commercial Test",
-                category: "Tech",
+                title: "Denmark to slash work permit salary threshold for some applicants by almost 20,000 kroner",
+                category: "Denmark",
                 date: "Oct 14, 2026",
-                readTime: "5m read",
-                image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80",
-                excerpt: "Engineers achieve fault-tolerant coherence at room temperature, signaling a breakthrough for AI and cryptography.",
-                body: `<p>Quantum computing has officially transitioned from experimental physics to scalable utility. Researchers today confirmed stable operation of a 1,024-qubit processor functioning at atmospheric temperatures.</p>`
+                readTime: "4m read",
+                image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80",
+                excerpt: "Denmark is set to introduce a new collective agreement-based work permit scheme from the beginning of next year.",
+                body: `<p>Denmark is set to introduce a new collective agreement-based work permit scheme from the beginning of next year, making it easier for citizens of 16 select countries to secure permits.</p><p>The measure is designed to resolve pressing labor shortages in specialized engineering and tech sectors.</p>`
             },
             {
                 id: 3,
-                title: "Global Climate Summit Yields Historic Grid Modernization Pact",
-                category: "Global",
+                title: "Foreign researchers make up half of new hires at Swedish universities",
+                category: "Sweden",
                 date: "Oct 13, 2026",
                 readTime: "3m read",
-                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
-                excerpt: "Delegates agree on standardized HVDC intercontinental power grids to distribute renewable energy globally.",
-                body: `<p>Delegates gathered at Geneva have ratified the Intercontinental Grid Agreement, committing $350 billion toward interconnecting high-voltage direct current grid lines across continents.</p>`
+                image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80",
+                excerpt: "Recent figures indicate that international academic talent accounts for 50% of recent university staffing in Sweden.",
+                body: `<p>Recent academic recruitment figures show that international researchers make up half of all new hires at Swedish universities, highlighting the country's appeal as a global research hub.</p>`
             },
             {
                 id: 4,
-                title: "Urban Hyper-Loop Subways Slash City Commute Times in Tokyo",
-                category: "Transit",
+                title: "Germany introduces stricter border checks and digital transit verification",
+                category: "Germany",
                 date: "Oct 13, 2026",
                 readTime: "4m read",
-                image: "https://images.unsplash.com/photo-1494515843206-f3117d3f51b7?auto=format&fit=crop&w=800&q=80",
-                excerpt: "Pneumatic subterranean transit pods now transport over 2 million daily commuters across Tokyo in under 12 minutes.",
-                body: `<p>Tokyo's newly commissioned underground pod loop has set a world record for passenger throughput, carrying millions of daily workers across dense urban areas with zero downtime.</p>`
+                image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80",
+                excerpt: "Federal authorities in Berlin implement enhanced digital border controls to streamline Schengen transit verification.",
+                body: `<p>Germany has rolled out modernized digital verification systems at major transit hubs to bolster security and accelerate passenger processing across regional borders.</p>`
             },
             {
                 id: 5,
-                title: "Biomimetic Skyscrapers Cool Themselves Without Mechanical HVAC",
-                category: "Business",
+                title: "Europe's airports and airlines demand EES rethink as delays continue",
+                category: "Europe",
                 date: "Oct 12, 2026",
-                readTime: "6m read",
-                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
-                excerpt: "Inspired by natural termite mounds, modern towers in Singapore use passive micro-ventilation.",
-                body: `<p>Skyscrapers in tropical capitals are adopting evolutionary biology principles, engineering porous structural facades that maintain comfortable indoor temperatures passively.</p>`
+                readTime: "5m read",
+                image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
+                excerpt: "Major aviation stakeholders call for urgent structural adjustments to manage entry/exit system queues across Schengen airports.",
+                body: `<p>Aviation authorities across Europe are urging the EU to reconsider implementation timelines for the Entry/Exit System (EES) to prevent severe bottlenecks at international terminals.</p>`
+            },
+            {
+                id: 6,
+                title: "How to navigate the latest tax changes for freelancers and expats in Scandinavia",
+                category: "Sweden",
+                date: "Oct 11, 2026",
+                readTime: "4m read",
+                image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+                excerpt: "Essential financial guidelines and regulatory updates for independent workers operating across Nordic tax frameworks.",
+                body: `<p>Tax authorities in Sweden and neighboring Nordic countries have released updated filing guidelines affecting digital nomads, remote workers, and local freelancers.</p>`
             }
         ];
 
@@ -368,7 +363,7 @@
                         </p>
                     </div>
                     <div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">
-                        <span class="text-slate-500">W.W.N FEED</span>
+                        <span class="text-slate-500">THE LOCAL WIRE</span>
                         <span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">
                             READ <i class="fas fa-chevron-right text-[9px]"></i>
                         </span>
@@ -380,7 +375,7 @@
 
         function filterCategory(cat) {
             currentCategory = cat;
-            document.getElementById('section-heading').innerText = cat === 'all' ? 'MAIN_DATABASE // TOP_STORIES' : `MAIN_DATABASE // ${cat.toUpperCase()}`;
+            document.getElementById('section-heading').innerText = cat === 'all' ? 'THE_LOCAL // ALL_EDITIONS' : `THE_LOCAL // ${cat.toUpperCase()}`;
             
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 if(btn.textContent.trim().toLowerCase() === cat.toLowerCase() || (cat === 'all' && btn.textContent.trim() === 'ALL')) {
