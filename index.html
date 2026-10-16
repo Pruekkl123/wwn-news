@@ -110,13 +110,13 @@
     <div class="bg-slate-950/90 border-b border-cyber-border text-xs py-1.5 px-4 font-mono text-cyan-400">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> NETWORK_FEED: ACTIVE (10 REPORTS/COUNTRY)[cite: 10]</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> NETWORK_FEED: ACTIVE (10 REPORTS/COUNTRY)</span>
                 <span class="hidden md:inline text-slate-500">|</span>
-                <span id="system-time" class="hidden md:inline text-slate-300">BANGKOK TIME (ICT): 19:55:00[cite: 10]</span>
+                <span id="system-time" class="hidden md:inline text-slate-300">BANGKOK TIME (ICT): 19:55:00</span>
             </div>
             <div class="flex items-center space-x-6 text-[11px]">
-                <button onclick="toggleArchiveModal()" class="hover:text-cyber-cyan transition cursor-pointer text-amber-400"><i class="fas fa-archive"></i> ARCHIVE_LOGS[cite: 10]</button>
-                <button onclick="toggleSavedModal()" class="hover:text-cyber-cyan transition cursor-pointer">SAVED_REPORTS (<span id="saved-count">0</span>)[cite: 10]</button>
+                <button onclick="toggleArchiveModal()" class="hover:text-cyber-cyan transition cursor-pointer text-amber-400"><i class="fas fa-archive"></i> ARCHIVE_LOGS</button>
+                <button onclick="toggleSavedModal()" class="hover:text-cyber-cyan transition cursor-pointer">SAVED_REPORTS (<span id="saved-count">0</span>)</button>
             </div>
         </div>
     </div>
@@ -135,11 +135,11 @@
             </a>
 
             <nav class="hidden lg:flex items-center space-x-1 font-mono text-xs uppercase tracking-widest">
-                <button onclick="filterCategory('all')" class="cat-btn active px-3 py-1.5 rounded text-cyber-cyan bg-cyan-950/50 border border-cyber-cyan/30 transition cursor-pointer" data-cat="all">All Reports[cite: 10]</button>
-                <button onclick="filterCategory('Sweden')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Sweden">Sweden (10)[cite: 10]</button>
-                <button onclick="filterCategory('Denmark')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Denmark">Denmark (10)[cite: 10]</button>
-                <button onclick="filterCategory('Germany')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Germany">Germany (10)[cite: 10]</button>
-                <button onclick="filterCategory('Europe')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Europe">Wider Europe (10)[cite: 10]</button>
+                <button onclick="filterCategory('all')" class="cat-btn active px-3 py-1.5 rounded text-cyber-cyan bg-cyan-950/50 border border-cyber-cyan/30 transition cursor-pointer" data-cat="all">All Reports</button>
+                <button onclick="filterCategory('Sweden')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Sweden">Sweden (10)</button>
+                <button onclick="filterCategory('Denmark')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Denmark">Denmark (10)</button>
+                <button onclick="filterCategory('Germany')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Germany">Germany (10)</button>
+                <button onclick="filterCategory('Europe')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Europe">Wider Europe (10)</button>
             </nav>
 
             <div class="relative w-44 sm:w-60">
@@ -157,8 +157,8 @@
             </div>
             <div class="ticker-wrap w-full py-1">
                 <div class="ticker-move text-cyan-300 font-semibold space-x-12">
-                    <span>[+] อัปเดตข่าวสารประจำวัน 10 ข่าวต่อประเทศ: เกาะติดสวีเดน เดนมาร์ก เยอรมนี และทั่วยุโรปแบบเรียลไทม์[cite: 9]</span>
-                    <span>[+] ระบบคลังข้อมูลอัตโนมัติจัดเก็บข่าวเก่าและประวัติย้อนหลังเรียบร้อยแล้ว[cite: 9]</span>
+                    <span>[+] อัปเดตข่าวสารประจำวัน 10 ข่าวต่อประเทศ: เกาะติดสวีเดน เดนมาร์ก เยอรมนี และทั่วยุโรปแบบเรียลไทม์</span>
+                    <span>[+] ระบบคลังข้อมูลอัตโนมัติจัดเก็บข่าวเก่าและประวัติย้อนหลังเรียบร้อยแล้ว</span>
                 </div>
             </div>
         </div>
@@ -172,7 +172,7 @@
             <div>
                 <h2 class="text-xl font-black tracking-wider font-mono flex items-center gap-2 text-white">
                     <span class="w-2 h-5 bg-cyber-cyan rounded-sm inline-block shadow-[0_0_10px_rgba(0,240,255,0.8)]"></span>
-                    <span id="section-heading" class="neon-glow">WORLDWIDE NEWS // ALL_DISPATCHES (40 REPORTS)[cite: 9, 10]</span>
+                    <span id="section-heading" class="neon-glow">WORLDWIDE NEWS // ALL_DISPATCHES (40 REPORTS)</span>
                 </h2>
             </div>
             <div class="flex flex-wrap gap-2 font-mono text-xs">
@@ -213,7 +213,7 @@
     <div id="saved-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
         <div class="relative holo-card w-full max-w-lg rounded-3xl overflow-hidden my-auto flex flex-col max-h-[80vh] border border-cyber-cyan/40">
             <div class="p-4 border-b border-cyber-border flex items-center justify-between font-mono">
-                <h3 class="font-bold text-xs text-cyber-cyan flex items-center gap-2"><i class="fas fa-database"></i> BOOKMARKED_FILES[cite: 10]</h3>
+                <h3 class="font-bold text-xs text-cyber-cyan flex items-center gap-2"><i class="fas fa-database"></i> BOOKMARKED_FILES</h3>
                 <button onclick="toggleSavedModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times"></i></button>
             </div>
             <div id="saved-articles-list" class="p-6 overflow-y-auto space-y-3 flex-grow font-mono text-xs"></div>
@@ -224,21 +224,21 @@
     <div id="archive-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
         <div class="relative holo-card w-full max-w-xl rounded-3xl overflow-hidden my-auto flex flex-col max-h-[80vh] border border-amber-500/40">
             <div class="p-4 border-b border-amber-500/30 flex items-center justify-between font-mono">
-                <h3 class="font-bold text-xs text-amber-400 flex items-center gap-2"><i class="fas fa-archive"></i> HISTORICAL ARCHIVE LOGS (PREVIOUS DAYS)[cite: 9, 10]</h3>
+                <h3 class="font-bold text-xs text-amber-400 flex items-center gap-2"><i class="fas fa-archive"></i> HISTORICAL ARCHIVE LOGS (PREVIOUS DAYS)</h3>
                 <button onclick="toggleArchiveModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times"></i></button>
             </div>
             <div class="p-6 overflow-y-auto space-y-4 flex-grow font-mono text-xs">
                 <div class="p-3 rounded bg-slate-900 border border-slate-800">
-                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 15, 2026[cite: 9, 10]</span>
-                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports across Sweden, Denmark, Germany, and Wider Europe. All database entries secured.[cite: 9, 10]</p>
+                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 15, 2026</span>
+                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports across Sweden, Denmark, Germany, and Wider Europe. All database entries secured.</p>
                 </div>
                 <div class="p-3 rounded bg-slate-900 border border-slate-800">
-                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 14, 2026[cite: 9, 10]</span>
-                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Economic stabilization and border policy archives archived successfully.[cite: 9, 10]</p>
+                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 14, 2026</span>
+                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Economic stabilization and border policy archives archived successfully.</p>
                 </div>
                 <div class="p-3 rounded bg-slate-900 border border-slate-800">
-                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 13, 2026[cite: 9, 10]</span>
-                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Regional Nordic policy logs secured in long-term quantum storage.[cite: 9, 10]</p>
+                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 13, 2026</span>
+                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Regional Nordic policy logs secured in long-term quantum storage.</p>
                 </div>
             </div>
         </div>
@@ -471,7 +471,6 @@
             }
         }
 
-        // Initialize App Immediately & safely
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
                 updateSavedCount();
