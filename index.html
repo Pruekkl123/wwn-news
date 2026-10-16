@@ -110,13 +110,13 @@
     <div class="bg-slate-950/90 border-b border-cyber-border text-xs py-1.5 px-4 font-mono text-cyan-400">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> NETWORK_FEED: ACTIVE (10 REPORTS/COUNTRY)</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> NETWORK_FEED: ACTIVE (10 REPORTS/COUNTRY)[cite: 10]</span>
                 <span class="hidden md:inline text-slate-500">|</span>
-                <span id="system-time" class="hidden md:inline text-slate-300">BANGKOK TIME (ICT): 19:55:00</span>
+                <span id="system-time" class="hidden md:inline text-slate-300">BANGKOK TIME (ICT): 19:55:00[cite: 10]</span>
             </div>
             <div class="flex items-center space-x-6 text-[11px]">
-                <button onclick="toggleArchiveModal()" class="hover:text-cyber-cyan transition cursor-pointer text-amber-400"><i class="fas fa-archive"></i> ARCHIVE_LOGS</button>
-                <button onclick="toggleSavedModal()" class="hover:text-cyber-cyan transition cursor-pointer">SAVED_REPORTS (<span id="saved-count">0</span>)</button>
+                <button onclick="toggleArchiveModal()" class="hover:text-cyber-cyan transition cursor-pointer text-amber-400"><i class="fas fa-archive"></i> ARCHIVE_LOGS[cite: 10]</button>
+                <button onclick="toggleSavedModal()" class="hover:text-cyber-cyan transition cursor-pointer">SAVED_REPORTS (<span id="saved-count">0</span>)[cite: 10]</button>
             </div>
         </div>
     </div>
@@ -135,11 +135,11 @@
             </a>
 
             <nav class="hidden lg:flex items-center space-x-1 font-mono text-xs uppercase tracking-widest">
-                <button onclick="filterCategory('all')" class="cat-btn active px-3 py-1.5 rounded text-cyber-cyan bg-cyan-950/50 border border-cyber-cyan/30 transition cursor-pointer" data-cat="all">All Reports</button>
-                <button onclick="filterCategory('Sweden')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Sweden">Sweden (10)</button>
-                <button onclick="filterCategory('Denmark')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Denmark">Denmark (10)</button>
-                <button onclick="filterCategory('Germany')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Germany">Germany (10)</button>
-                <button onclick="filterCategory('Europe')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Europe">Wider Europe (10)</button>
+                <button onclick="filterCategory('all')" class="cat-btn active px-3 py-1.5 rounded text-cyber-cyan bg-cyan-950/50 border border-cyber-cyan/30 transition cursor-pointer" data-cat="all">All Reports[cite: 10]</button>
+                <button onclick="filterCategory('Sweden')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Sweden">Sweden (10)[cite: 10]</button>
+                <button onclick="filterCategory('Denmark')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Denmark">Denmark (10)[cite: 10]</button>
+                <button onclick="filterCategory('Germany')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Germany">Germany (10)[cite: 10]</button>
+                <button onclick="filterCategory('Europe')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Europe">Wider Europe (10)[cite: 10]</button>
             </nav>
 
             <div class="relative w-44 sm:w-60">
@@ -172,7 +172,7 @@
             <div>
                 <h2 class="text-xl font-black tracking-wider font-mono flex items-center gap-2 text-white">
                     <span class="w-2 h-5 bg-cyber-cyan rounded-sm inline-block shadow-[0_0_10px_rgba(0,240,255,0.8)]"></span>
-                    <span id="section-heading" class="neon-glow">WORLDWIDE NEWS // ALL_DISPATCHES (40 REPORTS)[cite: 9]</span>
+                    <span id="section-heading" class="neon-glow">WORLDWIDE NEWS // ALL_DISPATCHES (40 REPORTS)[cite: 9, 10]</span>
                 </h2>
             </div>
             <div class="flex flex-wrap gap-2 font-mono text-xs">
@@ -213,7 +213,7 @@
     <div id="saved-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
         <div class="relative holo-card w-full max-w-lg rounded-3xl overflow-hidden my-auto flex flex-col max-h-[80vh] border border-cyber-cyan/40">
             <div class="p-4 border-b border-cyber-border flex items-center justify-between font-mono">
-                <h3 class="font-bold text-xs text-cyber-cyan flex items-center gap-2"><i class="fas fa-database"></i> BOOKMARKED_FILES</h3>
+                <h3 class="font-bold text-xs text-cyber-cyan flex items-center gap-2"><i class="fas fa-database"></i> BOOKMARKED_FILES[cite: 10]</h3>
                 <button onclick="toggleSavedModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times"></i></button>
             </div>
             <div id="saved-articles-list" class="p-6 overflow-y-auto space-y-3 flex-grow font-mono text-xs"></div>
@@ -224,21 +224,21 @@
     <div id="archive-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
         <div class="relative holo-card w-full max-w-xl rounded-3xl overflow-hidden my-auto flex flex-col max-h-[80vh] border border-amber-500/40">
             <div class="p-4 border-b border-amber-500/30 flex items-center justify-between font-mono">
-                <h3 class="font-bold text-xs text-amber-400 flex items-center gap-2"><i class="fas fa-archive"></i> HISTORICAL ARCHIVE LOGS (PREVIOUS DAYS)[cite: 9]</h3>
+                <h3 class="font-bold text-xs text-amber-400 flex items-center gap-2"><i class="fas fa-archive"></i> HISTORICAL ARCHIVE LOGS (PREVIOUS DAYS)[cite: 9, 10]</h3>
                 <button onclick="toggleArchiveModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times"></i></button>
             </div>
             <div class="p-6 overflow-y-auto space-y-4 flex-grow font-mono text-xs">
                 <div class="p-3 rounded bg-slate-900 border border-slate-800">
-                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 15, 2026[cite: 9]</span>
-                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports across Sweden, Denmark, Germany, and Wider Europe. All database entries secured.[cite: 9]</p>
+                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 15, 2026[cite: 9, 10]</span>
+                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports across Sweden, Denmark, Germany, and Wider Europe. All database entries secured.[cite: 9, 10]</p>
                 </div>
                 <div class="p-3 rounded bg-slate-900 border border-slate-800">
-                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 14, 2026[cite: 9]</span>
-                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Economic stabilization and border policy archives archived successfully.[cite: 9]</p>
+                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 14, 2026[cite: 9, 10]</span>
+                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Economic stabilization and border policy archives archived successfully.[cite: 9, 10]</p>
                 </div>
                 <div class="p-3 rounded bg-slate-900 border border-slate-800">
-                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 13, 2026[cite: 9]</span>
-                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Regional Nordic policy logs secured in long-term quantum storage.[cite: 9]</p>
+                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 13, 2026[cite: 9, 10]</span>
+                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Regional Nordic policy logs secured in long-term quantum storage.[cite: 9, 10]</p>
                 </div>
             </div>
         </div>
@@ -336,4 +336,151 @@
                             '<div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-950 min-h-[160px]">' +
                                 '<img src="' + art.image + '" alt="' + art.title + '" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">' +
                                 '<span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyber-cyan text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-cyber-border z-20">' + art.category + '</span>' +
-                                '<button onclick="event.stopPropagation(); toggleBookmark(' + id + ')" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center
+                                '<button onclick="event.stopPropagation(); toggleBookmark(' + id + ')" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center justify-center hover:bg-cyber-cyan hover:text-slate-950 transition cursor-pointer z-20">' +
+                                    '<i class="' + (isSaved ? 'fas text-cyan-400' : 'far') + ' fa-bookmark text-[10px]" id="bm-' + id + '"></i>' +
+                                '</button>' +
+                            '</div>' +
+                            '<div class="space-y-1 font-mono text-[10px] text-slate-400"><span>' + art.date + '</span> • <span>3m read</span></div>' +
+                            '<h3 class="font-extrabold text-sm leading-snug group-hover:text-cyber-cyan transition text-white card-title-text">' + art.title + '</h3>' +
+                            '<p class="text-xs text-slate-400 card-excerpt-text">' + art.body.replace(/<[^>]*>?/gm, '') + '</p>' +
+                        '</div>' +
+                        '<div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">' +
+                            '<span class="text-slate-500">WORLDWIDE NEWS</span>' +
+                            '<span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>' +
+                        '</div>';
+                    grid.appendChild(card);
+                }
+            });
+
+            var heading = document.getElementById('section-heading');
+            if (heading) {
+                heading.innerText = filterCat === 'all' ? 'WORLDWIDE NEWS // ALL_DISPATCHES (40 REPORTS)' : 'WORLDWIDE NEWS // ' + filterCat.toUpperCase() + ' (' + count + ' REPORTS)';
+            }
+        }
+
+        function filterCategory(cat) {
+            document.querySelectorAll('.cat-btn').forEach(function(btn) {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.className = "cat-btn active bg-cyber-cyan text-slate-950 font-bold px-3 py-1 rounded shadow-[0_0_10px_rgba(0,240,255,0.4)] transition cursor-pointer";
+                } else {
+                    btn.className = "cat-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition cursor-pointer";
+                }
+            });
+            renderArticles(cat);
+        }
+
+        function handleSearch(val) {
+            var query = val.toLowerCase();
+            var cards = document.querySelectorAll('.news-card');
+            cards.forEach(function(card) {
+                var text = card.textContent.toLowerCase();
+                card.style.display = (text.indexOf(query) !== -1) ? 'flex' : 'none';
+            });
+        }
+
+        function toggleBookmark(id) {
+            var numId = Number(id);
+            var idx = savedArticles.indexOf(numId);
+            if (idx > -1) {
+                savedArticles.splice(idx, 1);
+            } else {
+                savedArticles.push(numId);
+            }
+            localStorage.setItem('wwn_saved', JSON.stringify(savedArticles));
+            updateSavedCount();
+            
+            var icon = document.getElementById('bm-' + id);
+            if (icon) {
+                icon.className = (savedArticles.indexOf(numId) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark text-[10px]';
+            }
+            if (currentModalId === numId) {
+                var modalIcon = document.getElementById('modal-bm-icon');
+                if (modalIcon) {
+                    modalIcon.className = (savedArticles.indexOf(numId) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark';
+                }
+            }
+        }
+
+        function openArticleModal(id) {
+            var art = articlesData[id];
+            if (!art) return;
+            currentModalId = Number(id);
+            
+            document.getElementById('modal-category').innerText = art.category;
+            document.getElementById('modal-title').innerText = art.title;
+            document.getElementById('modal-image').src = art.image;
+            document.getElementById('modal-body').innerHTML = art.body;
+            
+            var modalBmIcon = document.getElementById('modal-bm-icon');
+            if (modalBmIcon) {
+                modalBmIcon.className = (savedArticles.indexOf(currentModalId) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark';
+            }
+            
+            document.getElementById('article-modal').classList.remove('hidden');
+        }
+
+        function closeArticleModal() {
+            document.getElementById('article-modal').classList.add('hidden');
+            currentModalId = null;
+        }
+
+        function toggleCurrentModalBookmark() {
+            if (currentModalId) toggleBookmark(currentModalId);
+        }
+
+        function toggleSavedModal() {
+            var modal = document.getElementById('saved-modal');
+            var list = document.getElementById('saved-articles-list');
+            if (!modal || !list) return;
+
+            if (modal.classList.contains('hidden')) {
+                list.innerHTML = '';
+                if (savedArticles.length === 0) {
+                    list.innerHTML = '<p class="text-center text-slate-500 py-6">No files bookmarked in quantum storage.</p>';
+                } else {
+                    savedArticles.forEach(function(id) {
+                        var art = articlesData[id];
+                        if (art) {
+                            var item = document.createElement('div');
+                            item.className = "flex items-center justify-between p-2.5 rounded bg-slate-900 border border-cyber-border";
+                            item.innerHTML = 
+                                '<div class="flex items-center space-x-3 cursor-pointer flex-grow" onclick="toggleSavedModal(); openArticleModal(' + id + ')">' +
+                                    '<div class="w-10 h-10 rounded bg-slate-800 overflow-hidden shrink-0"><img src="' + art.image + '" class="w-full h-full object-cover"></div>' +
+                                    '<div>' +
+                                        '<h4 class="font-bold text-white line-clamp-1">' + art.title + '</h4>' +
+                                        '<span class="text-[10px] text-cyan-400">' + art.category + '</span>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<button onclick="toggleBookmark(' + id + '); toggleSavedModal(); toggleSavedModal();" class="text-rose-500 hover:text-rose-400 p-2 cursor-pointer">' +
+                                    '<i class="fas fa-trash text-xs"></i>' +
+                                '</button>';
+                            list.appendChild(item);
+                        }
+                    });
+                }
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function toggleArchiveModal() {
+            var modal = document.getElementById('archive-modal');
+            if (modal) {
+                modal.classList.toggle('hidden');
+            }
+        }
+
+        // Initialize App Immediately & safely
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                updateSavedCount();
+                renderArticles('all');
+            });
+        } else {
+            updateSavedCount();
+            renderArticles('all');
+        }
+    </script>
+</body>
+</html>
