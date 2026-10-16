@@ -80,18 +80,6 @@
             word-break: break-word;
         }
 
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(1000%); }
-        }
-        .scanner-beam::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.8), transparent);
-            animation: scanline 4s linear infinite;
-        }
-
         @keyframes ticker {
             0% { transform: translate3d(0, 0, 0); }
             100% { transform: translate3d(-50%, 0, 0); }
@@ -201,8 +189,8 @@
             </div>
             <div class="p-6 sm:p-8 overflow-y-auto space-y-6">
                 <h1 id="modal-title" class="text-2xl sm:text-3xl font-black tracking-tight text-white"></h1>
-                <div class="rounded-xl overflow-hidden border border-cyber-border h-56 bg-slate-950">
-                    <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover">
+                <div class="rounded-xl overflow-hidden border border-cyber-border h-56 bg-slate-950 relative">
+                    <img id="modal-image" src="" alt="News Image" class="absolute inset-0 w-full h-full object-cover">
                 </div>
                 <div id="modal-body" class="prose prose-invert max-w-none text-slate-300 font-sans text-sm sm:text-base leading-relaxed space-y-4"></div>
             </div>
