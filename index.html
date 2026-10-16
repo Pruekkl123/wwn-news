@@ -112,7 +112,7 @@
             <div class="flex items-center space-x-4">
                 <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> NETWORK_FEED: ONLINE</span>
                 <span class="hidden md:inline text-slate-500">|</span>
-                <span id="system-time" class="hidden md:inline text-slate-300">BANGKOK TIME (ICT): 19:18:00</span>
+                <span id="system-time" class="hidden md:inline text-slate-300">BANGKOK TIME (ICT): 19:20:00</span>
             </div>
             <div class="flex items-center space-x-6 text-[11px]">
                 <span class="text-slate-400">STATUS: <strong class="text-cyber-cyan">LIVE GLOBAL DISPATCH</strong></span>
@@ -218,5 +218,342 @@
         <!-- ARTICLES GRID -->
         <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
             
-            <!-- Card 2: Denmark Work Permit (Passport / Visa Image) -->
-            <article class="news-card holo-card rounded-2xl p-4 flex flex-col justify-
+            <!-- Card 2: Denmark Work Permit -->
+            <article class="news-card holo-card rounded-2xl p-4 flex flex-col justify-between cursor-pointer group" data-category="Denmark" onclick="openArticleModal(2)">
+                <div class="space-y-3">
+                    <div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-950">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" alt="Passport and Visa" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyber-cyan text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-cyber-border z-20">Denmark</span>
+                        <button onclick="event.stopPropagation(); toggleBookmark(2)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center justify-center hover:bg-cyber-cyan hover:text-slate-950 transition cursor-pointer z-20">
+                            <i class="far fa-bookmark text-[10px]" id="bm-2"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-1 font-mono text-[10px] text-slate-400"><span>Oct 16, 2026</span> • <span>4m read</span></div>
+                    <h3 class="font-extrabold text-sm leading-snug group-hover:text-cyber-cyan transition text-white card-title-text">Denmark to slash work permit salary threshold for some applicants by almost 20,000 kroner</h3>
+                    <p class="text-xs text-slate-400 card-excerpt-text">Denmark is set to introduce a new collective agreement-based work permit scheme from the beginning of next year.</p>
+                </div>
+                <div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">
+                    <span class="text-slate-500">WORLDWIDE NEWS</span>
+                    <span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>
+                </div>
+            </article>
+
+            <!-- Card 3: Sweden University Researchers -->
+            <article class="news-card holo-card rounded-2xl p-4 flex flex-col justify-between cursor-pointer group" data-category="Sweden" onclick="openArticleModal(3)">
+                <div class="space-y-3">
+                    <div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-950">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80" alt="University Education" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyber-cyan text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-cyber-border z-20">Sweden</span>
+                        <button onclick="event.stopPropagation(); toggleBookmark(3)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center justify-center hover:bg-cyber-cyan hover:text-slate-950 transition cursor-pointer z-20">
+                            <i class="far fa-bookmark text-[10px]" id="bm-3"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-1 font-mono text-[10px] text-slate-400"><span>Oct 15, 2026</span> • <span>3m read</span></div>
+                    <h3 class="font-extrabold text-sm leading-snug group-hover:text-cyber-cyan transition text-white card-title-text">Foreign researchers make up half of new hires at Swedish universities</h3>
+                    <p class="text-xs text-slate-400 card-excerpt-text">Recent figures indicate that international academic talent accounts for 50% of recent university staffing in Sweden.</p>
+                </div>
+                <div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">
+                    <span class="text-slate-500">WORLDWIDE NEWS</span>
+                    <span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>
+                </div>
+            </article>
+
+            <!-- Card 4: Germany Border Checks -->
+            <article class="news-card holo-card rounded-2xl p-4 flex flex-col justify-between cursor-pointer group" data-category="Germany" onclick="openArticleModal(4)">
+                <div class="space-y-3">
+                    <div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-950">
+                        <img src="https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=800&q=80" alt="Border Security" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyber-cyan text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-cyber-border z-20">Germany</span>
+                        <button onclick="event.stopPropagation(); toggleBookmark(4)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center justify-center hover:bg-cyber-cyan hover:text-slate-950 transition cursor-pointer z-20">
+                            <i class="far fa-bookmark text-[10px]" id="bm-4"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-1 font-mono text-[10px] text-slate-400"><span>Oct 15, 2026</span> • <span>4m read</span></div>
+                    <h3 class="font-extrabold text-sm leading-snug group-hover:text-cyber-cyan transition text-white card-title-text">Germany introduces stricter border checks and digital transit verification</h3>
+                    <p class="text-xs text-slate-400 card-excerpt-text">Federal authorities in Berlin implement enhanced digital border controls to streamline Schengen transit verification.</p>
+                </div>
+                <div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">
+                    <span class="text-slate-500">WORLDWIDE NEWS</span>
+                    <span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>
+                </div>
+            </article>
+
+            <!-- Card 5: Europe Airport EES -->
+            <article class="news-card holo-card rounded-2xl p-4 flex flex-col justify-between cursor-pointer group" data-category="Europe" onclick="openArticleModal(5)">
+                <div class="space-y-3">
+                    <div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-950">
+                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" alt="Airport and Aviation" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyber-cyan text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-cyber-border z-20">Wider Europe</span>
+                        <button onclick="event.stopPropagation(); toggleBookmark(5)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center justify-center hover:bg-cyber-cyan hover:text-slate-950 transition cursor-pointer z-20">
+                            <i class="far fa-bookmark text-[10px]" id="bm-5"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-1 font-mono text-[10px] text-slate-400"><span>Oct 14, 2026</span> • <span>5m read</span></div>
+                    <h3 class="font-extrabold text-sm leading-snug group-hover:text-cyber-cyan transition text-white card-title-text">Europe's airports and airlines demand EES rethink as delays continue</h3>
+                    <p class="text-xs text-slate-400 card-excerpt-text">Major aviation stakeholders call for urgent structural adjustments to manage entry/exit system queues across Schengen airports.</p>
+                </div>
+                <div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">
+                    <span class="text-slate-500">WORLDWIDE NEWS</span>
+                    <span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>
+                </div>
+            </article>
+
+            <!-- Card 6: Tax Changes for Freelancers -->
+            <article class="news-card holo-card rounded-2xl p-4 flex flex-col justify-between cursor-pointer group" data-category="Sweden" onclick="openArticleModal(6)">
+                <div class="space-y-3">
+                    <div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-950">
+                        <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80" alt="Tax and Finance" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">
+                        <span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyber-cyan text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-cyber-border z-20">Sweden</span>
+                        <button onclick="event.stopPropagation(); toggleBookmark(6)" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center justify-center hover:bg-cyber-cyan hover:text-slate-950 transition cursor-pointer z-20">
+                            <i class="far fa-bookmark text-[10px]" id="bm-6"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-1 font-mono text-[10px] text-slate-400"><span>Oct 14, 2026</span> • <span>4m read</span></div>
+                    <h3 class="font-extrabold text-sm leading-snug group-hover:text-cyber-cyan transition text-white card-title-text">How to navigate the latest tax changes for freelancers and expats in Scandinavia</h3>
+                    <p class="text-xs text-slate-400 card-excerpt-text">Essential financial guidelines and regulatory updates for independent workers operating across Nordic tax frameworks.</p>
+                </div>
+                <div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">
+                    <span class="text-slate-500">WORLDWIDE NEWS</span>
+                    <span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>
+                </div>
+            </article>
+
+        </div>
+
+    </main>
+
+    <!-- ARTICLE READING MODAL -->
+    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
+        <div class="relative holo-card w-full max-w-3xl rounded-3xl overflow-hidden my-auto max-h-[90vh] flex flex-col border border-cyber-cyan/40">
+            <div class="sticky top-0 z-10 bg-slate-950/95 border-b border-cyber-border p-4 flex items-center justify-between font-mono text-xs">
+                <span id="modal-category" class="text-cyber-cyan font-bold uppercase tracking-widest">CATEGORY</span>
+                <div class="flex items-center space-x-3">
+                    <button onclick="toggleCurrentModalBookmark()" class="p-2 rounded hover:bg-slate-900 text-cyan-400 transition cursor-pointer"><i class="far fa-bookmark" id="modal-bm-icon"></i></button>
+                    <button onclick="closeArticleModal()" class="p-2 rounded hover:bg-slate-900 text-slate-400 hover:text-white transition cursor-pointer"><i class="fas fa-times text-base"></i></button>
+                </div>
+            </div>
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6">
+                <h1 id="modal-title" class="text-2xl sm:text-3xl font-black tracking-tight text-white"></h1>
+                <div class="rounded-xl overflow-hidden border border-cyber-border h-56 bg-slate-950">
+                    <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover">
+                </div>
+                <div id="modal-body" class="prose prose-invert max-w-none text-slate-300 font-sans text-sm sm:text-base leading-relaxed space-y-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SAVED ARTICLES MODAL -->
+    <div id="saved-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
+        <div class="relative holo-card w-full max-w-lg rounded-3xl overflow-hidden my-auto flex flex-col max-h-[80vh] border border-cyber-cyan/40">
+            <div class="p-4 border-b border-cyber-border flex items-center justify-between font-mono">
+                <h3 class="font-bold text-xs text-cyber-cyan flex items-center gap-2"><i class="fas fa-database"></i> BOOKMARKED_FILES</h3>
+                <button onclick="toggleSavedModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="saved-articles-list" class="p-6 overflow-y-auto space-y-3 flex-grow font-mono text-xs"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        var articlesData = {
+            1: {
+                title: "Sweden leaves recession behind with stronger growth and falling unemployment",
+                category: "Sweden",
+                image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1200&q=80",
+                body: "<p>Sweden has officially left behind the recent economic downturn, showing stronger GDP growth and a positive trend in falling unemployment numbers across major metropolitan regions.</p><p>Financial experts note that domestic consumption and stabilization in key export industries are driving the national recovery.</p>"
+            },
+            2: {
+                title: "Denmark to slash work permit salary threshold for some applicants by almost 20,000 kroner",
+                category: "Denmark",
+                image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+                body: "<p>Denmark is set to introduce a new collective agreement-based work permit scheme from the beginning of next year, making it easier for citizens of 16 select countries to secure permits.</p><p>The measure is designed to resolve pressing labor shortages in specialized engineering and tech sectors.</p>"
+            },
+            3: {
+                title: "Foreign researchers make up half of new hires at Swedish universities",
+                category: "Sweden",
+                image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80",
+                body: "<p>Recent academic recruitment figures show that international researchers make up half of all new hires at Swedish universities, highlighting the country's appeal as a global research hub.</p>"
+            },
+            4: {
+                title: "Germany introduces stricter border checks and digital transit verification",
+                category: "Germany",
+                image: "https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=800&q=80",
+                body: "<p>Germany has rolled out modernized digital verification systems at major transit hubs to bolster security and accelerate passenger processing across regional borders.</p>"
+            },
+            5: {
+                title: "Europe's airports and airlines demand EES rethink as delays continue",
+                category: "Wider Europe",
+                image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
+                body: "<p>Aviation authorities across Europe are urging the EU to reconsider implementation timelines for the Entry/Exit System (EES) to prevent severe bottlenecks at international terminals.</p>"
+            },
+            6: {
+                title: "How to navigate the latest tax changes for freelancers and expats in Scandinavia",
+                category: "Sweden",
+                image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
+                body: "<p>Tax authorities in Sweden and neighboring Nordic countries have released updated filing guidelines affecting digital nomads, remote workers, and local freelancers.</p>"
+            }
+        };
+
+        var savedArticles = JSON.parse(localStorage.getItem('wwn_saved') || '[]');
+        var currentModalId = null;
+
+        // Clock Update (Bangkok ICT)
+        function updateClock() {
+            var now = new Date();
+            var timeEl = document.getElementById('system-time');
+            if (timeEl) {
+                var h = String(now.getHours()).padStart(2, '0');
+                var m = String(now.getMinutes()).padStart(2, '0');
+                var s = String(now.getSeconds()).padStart(2, '0');
+                timeEl.innerText = "BANGKOK TIME (ICT): " + h + ":" + m + ":" + s;
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function updateSavedCount() {
+            var countEl = document.getElementById('saved-count');
+            if (countEl) countEl.innerText = savedArticles.length;
+        }
+
+        function filterCategory(cat) {
+            var heading = document.getElementById('section-heading');
+            if (heading) {
+                heading.innerText = cat === 'all' ? 'WORLDWIDE NEWS // ALL_EDITIONS' : 'WORLDWIDE NEWS // ' + cat.toUpperCase();
+            }
+            
+            document.querySelectorAll('.cat-btn').forEach(function(btn) {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.className = "cat-btn active bg-cyber-cyan text-slate-950 font-bold px-3 py-1 rounded shadow-[0_0_10px_rgba(0,240,255,0.4)] transition cursor-pointer";
+                } else {
+                    btn.className = "cat-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition cursor-pointer";
+                }
+            });
+
+            var heroSec = document.getElementById('hero-section');
+            if (heroSec) {
+                heroSec.style.display = (cat === 'all') ? 'block' : 'none';
+            }
+
+            var cards = document.querySelectorAll('.news-card');
+            cards.forEach(function(card) {
+                var cardCat = card.getAttribute('data-category');
+                if (cat === 'all' || cardCat.toLowerCase() === cat.toLowerCase()) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function handleSearch(val) {
+            var query = val.toLowerCase();
+            var cards = document.querySelectorAll('.news-card');
+            cards.forEach(function(card) {
+                var text = card.textContent.toLowerCase();
+                if (text.indexOf(query) !== -1) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            var heroSec = document.getElementById('hero-section');
+            if (heroSec) {
+                heroSec.style.display = query ? 'none' : 'block';
+            }
+        }
+
+        function toggleBookmark(id) {
+            var idx = savedArticles.indexOf(id);
+            if (idx > -1) {
+                savedArticles.splice(idx, 1);
+            } else {
+                savedArticles.push(id);
+            }
+            localStorage.setItem('wwn_saved', JSON.stringify(savedArticles));
+            updateSavedCount();
+            
+            var icon = document.getElementById('bm-' + id);
+            if (icon) {
+                icon.className = (savedArticles.indexOf(id) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark text-[10px]';
+            }
+            if (currentModalId === id) {
+                var modalIcon = document.getElementById('modal-bm-icon');
+                if (modalIcon) {
+                    modalIcon.className = (savedArticles.indexOf(id) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark';
+                }
+            }
+        }
+
+        function openArticleModal(id) {
+            var art = articlesData[id];
+            if (!art) return;
+            currentModalId = id;
+            
+            document.getElementById('modal-category').innerText = art.category;
+            document.getElementById('modal-title').innerText = art.title;
+            document.getElementById('modal-image').src = art.image;
+            document.getElementById('modal-body').innerHTML = art.body;
+            
+            var modalBmIcon = document.getElementById('modal-bm-icon');
+            if (modalBmIcon) {
+                modalBmIcon.className = (savedArticles.indexOf(id) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark';
+            }
+            
+            document.getElementById('article-modal').classList.remove('hidden');
+        }
+
+        function closeArticleModal() {
+            document.getElementById('article-modal').classList.add('hidden');
+            currentModalId = null;
+        }
+
+        function toggleCurrentModalBookmark() {
+            if (currentModalId) toggleBookmark(currentModalId);
+        }
+
+        function toggleSavedModal() {
+            var modal = document.getElementById('saved-modal');
+            var list = document.getElementById('saved-articles-list');
+            if (!modal || !list) return;
+
+            if (modal.classList.contains('hidden')) {
+                list.innerHTML = '';
+                if (savedArticles.length === 0) {
+                    list.innerHTML = '<p class="text-center text-slate-500 py-6">No files bookmarked in quantum storage.</p>';
+                } else {
+                    savedArticles.forEach(function(id) {
+                        var art = articlesData[id];
+                        if (art) {
+                            var item = document.createElement('div');
+                            item.className = "flex items-center justify-between p-2.5 rounded bg-slate-900 border border-cyber-border";
+                            item.innerHTML = 
+                                '<div class="flex items-center space-x-3 cursor-pointer flex-grow" onclick="toggleSavedModal(); openArticleModal(' + id + ')">' +
+                                    '<div class="w-10 h-10 rounded bg-slate-800 overflow-hidden shrink-0"><img src="' + art.image + '" class="w-full h-full object-cover"></div>' +
+                                    '<div>' +
+                                        '<h4 class="font-bold text-white line-clamp-1">' + art.title + '</h4>' +
+                                        '<span class="text-[10px] text-cyan-400">' + art.category + '</span>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<button onclick="toggleBookmark(' + id + '); toggleSavedModal(); toggleSavedModal();" class="text-rose-500 hover:text-rose-400 p-2 cursor-pointer">' +
+                                    '<i class="fas fa-trash text-xs"></i>' +
+                                '</button>';
+                            list.appendChild(item);
+                        }
+                    });
+                }
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Initialize state
+        updateSavedCount();
+        savedArticles.forEach(function(id) {
+            var icon = document.getElementById('bm-' + id);
+            if (icon) icon.className = 'fas text-cyan-400 fa-bookmark text-[10px]';
+        });
+    </script>
+</body>
+</html>
