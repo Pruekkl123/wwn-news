@@ -201,4 +201,269 @@
     <div id="saved-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
         <div class="relative holo-card w-full max-w-lg rounded-3xl overflow-hidden my-auto flex flex-col max-h-[80vh] border border-cyber-cyan/40">
             <div class="p-4 border-b border-cyber-border flex items-center justify-between font-mono">
-                <h3 class="font-bold text-xs text-cyber
+                <h3 class="font-bold text-xs text-cyber-cyan flex items-center gap-2"><i class="fas fa-database"></i> BOOKMARKED_FILES</h3>
+                <button onclick="toggleSavedModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="saved-articles-list" class="p-6 overflow-y-auto space-y-3 flex-grow font-mono text-xs"></div>
+        </div>
+    </div>
+
+    <!-- ARCHIVE MODAL -->
+    <div id="archive-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
+        <div class="relative holo-card w-full max-w-xl rounded-3xl overflow-hidden my-auto flex flex-col max-h-[80vh] border border-amber-500/40">
+            <div class="p-4 border-b border-amber-500/30 flex items-center justify-between font-mono">
+                <h3 class="font-bold text-xs text-amber-400 flex items-center gap-2"><i class="fas fa-archive"></i> HISTORICAL ARCHIVE LOGS (PREVIOUS DAYS)</h3>
+                <button onclick="toggleArchiveModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 flex-grow font-mono text-xs">
+                <div class="p-3 rounded bg-slate-900 border border-slate-800">
+                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 15, 2026</span>
+                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports across Sweden, Denmark, Germany, and Wider Europe. All database entries secured.</p>
+                </div>
+                <div class="p-3 rounded bg-slate-900 border border-slate-800">
+                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 14, 2026</span>
+                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Economic stabilization and border policy archives archived successfully.</p>
+                </div>
+                <div class="p-3 rounded bg-slate-900 border border-slate-800">
+                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 13, 2026</span>
+                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Regional Nordic policy logs secured in long-term quantum storage.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        var articlesData = {
+            1: { title: "Sweden leaves recession behind with stronger growth and falling unemployment", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80", body: "<p>Sweden has officially left behind the recent economic downturn, showing stronger GDP growth and falling unemployment.</p>" },
+            2: { title: "Foreign researchers make up half of new hires at Swedish universities", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=800&q=80", body: "<p>International academic talent accounts for 50% of recent university staffing across major Swedish institutions.</p>" },
+            3: { title: "Stockholm expands green public transport network with electric hydrofoils", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80", body: "<p>Stockholm is rolling out advanced electric hydrofoil ferries to slash commuter carbon emissions.</p>" },
+            4: { title: "Riksbank hints at steady interest rates amid balanced inflation data", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80", body: "<p>Sweden's central bank maintains stable monetary policy as inflation aligns with target projections.</p>" },
+            5: { title: "Tech startups in Gothenburg secure record venture capital funding", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80", body: "<p>Gothenburg's tech ecosystem attracts major global investors focusing on sustainable innovations.</p>" },
+            6: { title: "Sweden upgrades national defense infrastructure in cooperation with Nordic allies", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80", body: "<p>New defense protocols enhance regional security cooperation across Scandinavia and the Baltic Sea.</p>" },
+            7: { title: "Major forestry reforms announced to balance timber industry and biodiversity", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80", body: "<p>Environmental ministries introduce stricter guidelines to protect old-growth forests while supporting logging.</p>" },
+            8: { title: "Swedish healthcare sector adopts AI diagnostics in regional hospitals", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80", body: "<p>Artificial intelligence tools are deployed across emergency wards to accelerate patient triage and care.</p>" },
+            9: { title: "Record tourism numbers boost hospitality businesses in northern Lapland", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80", body: "<p>Lapland experiences an unprecedented surge in international visitors seeking arctic winter experiences.</p>" },
+            10: { title: "New wind farm projects approved off the southern coast of Sweden", category: "Sweden", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=80", body: "<p>Massive offshore wind installations will significantly expand Sweden's renewable energy capacity.</p>" },
+
+            11: { title: "Denmark to slash work permit salary threshold for applicants", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80", body: "<p>Denmark introduces a new collective agreement-based work permit scheme to attract international specialists.</p>" },
+            12: { title: "Copenhagen port completes transition to 100% shore power for cruise ships", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80", body: "<p>Environmental upgrades eliminate harbor emissions while vessels dock in the capital.</p>" },
+            13: { title: "Danish pharmaceutical exports reach historic high in global markets", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=800&q=80", body: "<p>Strong international demand for specialized medical treatments drives Danish trade surplus.</p>" },
+            14: { title: "Aarhus unveils smart city initiative utilizing IoT sensor networks", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", body: "<p>Aarhus implements urban IoT sensors to optimize traffic flow and municipal energy consumption.</p>" },
+            15: { title: "Government invests in green hydrogen production plants across Jutland", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80", body: "<p>New subsidies accelerate industrial green hydrogen scaling to power heavy transport.</p>" },
+            16: { title: "Denmark reforms higher education system to shorten master's degrees", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80", body: "<p>University structures shift to align graduates more quickly with labor market demands.</p>" },
+            17: { title: "Danish wind turbine manufacturer secures massive offshore contract", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?auto=format&fit=crop&w=800&q=80", body: "<p>Global energy developers partner with Danish firms for next-gen turbine deployments.</p>" },
+            18: { title: "Organic food consumption in Denmark maintains top global ranking", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80", body: "<p>Consumer preference for sustainable agriculture keeps organic produce sales robust.</p>" },
+            19: { title: "New cycling superhighways connect suburban commuters to Copenhagen", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80", body: "<p>Expanded bicycle infrastructure encourages eco-friendly commuting across greater Copenhagen.</p>" },
+            20: { title: "Danish cultural heritage sites integrate augmented reality tours", category: "Denmark", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80", body: "<p>Museums across the country launch immersive AR applications to enhance visitor experiences.</p>" },
+
+            21: { title: "Germany introduces stricter border checks and digital transit verification", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80", body: "<p>Federal authorities implement digital border controls to streamline Schengen transit verification.</p>" },
+            22: { title: "Berlin tech sector welcomes new digital nomad visa fast-track", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80", body: "<p>New immigration procedures simplify residency permits for remote software engineers and tech professionals.</p>" },
+            23: { title: "Automotive giants accelerate electric vehicle manufacturing in Bavaria", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80", body: "<p>Major car manufacturers transition assembly lines entirely toward next-gen electric platforms.</p>" },
+            24: { title: "Deutsche Bahn invests billions in rail network modernization", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80", body: "<p>Infrastructure upgrades aim to improve punctuality and passenger capacity across interstate corridors.</p>" },
+            25: { title: "Frankfurt financial hub reports steady growth in fintech investments", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", body: "<p>Frankfurt consolidates its position as a leading European financial technology center.</p>" },
+            26: { title: "Renewable energy output in Germany surpasses coal for consecutive quarters", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=80", body: "<p>Solar and wind power generation exceed traditional fossil fuel benchmarks nationwide.</p>" },
+            27: { title: "Hamburg port expands automated container terminal operations", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80", body: "<p>Port logistics upgrade to automated crane systems to handle rising global cargo volumes.</p>" },
+            28: { title: "Germany enacts skilled labor immigration reforms to combat shortages", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80", body: "<p>Streamlined point-based immigration policies facilitate hiring for non-EU qualified workers.</p>" },
+            29: { title: "Munich research institutes pioneer quantum computing breakthroughs", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80", body: "<p>Academic consortia achieve stable qubit entanglement in advanced laboratory environments.</p>" },
+            30: { title: "Cultural festivals across Germany attract record international attendance", category: "Germany", date: "Oct 16, 2026", image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80", body: "<p>Artistic exhibitions and music events draw vibrant crowds to Berlin, Cologne, and Munich.</p>" },
+
+            31: { title: "Europe's airports and airlines demand EES rethink as delays continue", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80", body: "<p>Aviation stakeholders call for urgent adjustments to manage entry/exit system queues across Schengen airports.</p>" },
+            32: { title: "European Central Bank evaluates digital euro rollout timeline", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80", body: "<p>ECB officials discuss privacy safeguards and technological architecture for the digital currency.</p>" },
+            33: { title: "EU passes comprehensive AI regulatory framework for tech compliance", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80", body: "<p>New compliance standards govern artificial intelligence deployment across member states.</p>" },
+            34: { title: "European space agency launches advanced Earth observation satellite", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80", body: "<p>Orbital telemetry instruments will monitor climate change indicators with high precision.</p>" },
+            35: { title: "Trans-European high-speed rail corridor project secures funding", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1515165562839-978bbcfc9cc4?auto=format&fit=crop&w=800&q=80", body: "<p>Cross-border rail networks receive substantial grants to connect major capital cities seamlessly.</p>" },
+            36: { title: "Mediterranean renewable energy grids integrate North African solar power", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-150931365360-809297f99726?auto=format&fit=crop&w=800&q=80", body: "<p>Subsea HVDC cables successfully transmit clean solar electricity across the Mediterranean basin.</p>" },
+            37: { title: "European tourism board promotes sustainable off-season travel destinations", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80", body: "<p>New campaigns encourage travelers to explore cultural heritage sites during shoulder seasons.</p>" },
+            38: { title: "European semiconductor manufacturing alliances boost chip self-sufficiency", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80", body: "<p>Foundry investments across European tech hubs reduce reliance on overseas microchip imports.</p>" },
+            39: { title: "Cross-border academic exchange programs expand research funding", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80", body: "<p>University consortia receive expanded grants for collaborative scientific investigations.</p>" },
+            40: { title: "European maritime authorities strengthen Baltic environmental protections", category: "Wider Europe", date: "Oct 14, 2026", image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", body: "<p>Joint maritime patrols enforce rigorous emission standards and ecological safeguards.</p>" }
+        };
+
+        var savedArticles = JSON.parse(localStorage.getItem('wwn_saved') || '[]');
+        var currentModalId = null;
+
+        function updateClock() {
+            var now = new Date();
+            var timeEl = document.getElementById('system-time');
+            if (timeEl) {
+                var h = String(now.getHours()).padStart(2, '0');
+                var m = String(now.getMinutes()).padStart(2, '0');
+                var s = String(now.getSeconds()).padStart(2, '0');
+                timeEl.innerText = "BANGKOK TIME (ICT): " + h + ":" + m + ":" + s;
+            }
+        }
+        setInterval(updateClock, 1000);
+
+        function updateSavedCount() {
+            var countEl = document.getElementById('saved-count');
+            if (countEl) countEl.innerText = savedArticles.length;
+        }
+
+        function renderArticles(filterCat = 'all') {
+            var grid = document.getElementById('articles-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            var keys = Object.keys(articlesData);
+            var count = 0;
+
+            keys.forEach(function(id) {
+                var art = articlesData[id];
+                if (filterCat === 'all' || art.category.toLowerCase() === filterCat.toLowerCase() || (filterCat === 'Europe' && art.category === 'Wider Europe')) {
+                    count++;
+                    var isSaved = savedArticles.indexOf(Number(id)) !== -1;
+                    var card = document.createElement('article');
+                    card.className = "news-card holo-card rounded-2xl p-4 flex flex-col justify-between cursor-pointer group";
+                    card.setAttribute('data-category', art.category);
+                    card.onclick = function() { openArticleModal(id); };
+
+                    card.innerHTML = 
+                        '<div class="space-y-3">' +
+                            '<div class="relative rounded-xl overflow-hidden h-44 border border-cyber-border bg-slate-950">' +
+                                '<img src="' + art.image + '" alt="' + art.title + '" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">' +
+                                '<span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyber-cyan text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-cyber-border z-20">' + art.category + '</span>' +
+                                '<button onclick="event.stopPropagation(); toggleBookmark(' + id + ')" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center justify-center hover:bg-cyber-cyan hover:text-slate-950 transition cursor-pointer z-20">' +
+                                    '<i class="' + (isSaved ? 'fas text-cyan-400' : 'far') + ' fa-bookmark text-[10px]" id="bm-' + id + '"></i>' +
+                                '</button>' +
+                            '</div>' +
+                            '<div class="space-y-1 font-mono text-[10px] text-slate-400"><span>' + art.date + '</span> • <span>3m read</span></div>' +
+                            '<h3 class="font-extrabold text-sm leading-snug group-hover:text-cyber-cyan transition text-white card-title-text">' + art.title + '</h3>' +
+                            '<p class="text-xs text-slate-400 card-excerpt-text">' + art.body.replace(/<[^>]*>?/gm, '') + '</p>' +
+                        '</div>' +
+                        '<div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">' +
+                            '<span class="text-slate-500">WORLDWIDE NEWS</span>' +
+                            '<span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>' +
+                        '</div>';
+                    grid.appendChild(card);
+                }
+            });
+
+            var heading = document.getElementById('section-heading');
+            if (heading) {
+                heading.innerText = filterCat === 'all' ? 'WORLDWIDE NEWS // ALL_DISPATCHES (40 REPORTS)' : 'WORLDWIDE NEWS // ' + filterCat.toUpperCase() + ' (' + count + ' REPORTS)';
+            }
+        }
+
+        function filterCategory(cat) {
+            document.querySelectorAll('.cat-btn').forEach(function(btn) {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.className = "cat-btn active bg-cyber-cyan text-slate-950 font-bold px-3 py-1 rounded shadow-[0_0_10px_rgba(0,240,255,0.4)] transition cursor-pointer";
+                } else {
+                    btn.className = "cat-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition cursor-pointer";
+                }
+            });
+            renderArticles(cat);
+        }
+
+        function handleSearch(val) {
+            var query = val.toLowerCase();
+            var cards = document.querySelectorAll('.news-card');
+            cards.forEach(function(card) {
+                var text = card.textContent.toLowerCase();
+                card.style.display = (text.indexOf(query) !== -1) ? 'flex' : 'none';
+            });
+        }
+
+        function toggleBookmark(id) {
+            var numId = Number(id);
+            var idx = savedArticles.indexOf(numId);
+            if (idx > -1) {
+                savedArticles.splice(idx, 1);
+            } else {
+                savedArticles.push(numId);
+            }
+            localStorage.setItem('wwn_saved', JSON.stringify(savedArticles));
+            updateSavedCount();
+            
+            var icon = document.getElementById('bm-' + id);
+            if (icon) {
+                icon.className = (savedArticles.indexOf(numId) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark text-[10px]';
+            }
+            if (currentModalId === numId) {
+                var modalIcon = document.getElementById('modal-bm-icon');
+                if (modalIcon) {
+                    modalIcon.className = (savedArticles.indexOf(numId) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark';
+                }
+            }
+        }
+
+        function openArticleModal(id) {
+            var art = articlesData[id];
+            if (!art) return;
+            currentModalId = Number(id);
+            
+            document.getElementById('modal-category').innerText = art.category;
+            document.getElementById('modal-title').innerText = art.title;
+            document.getElementById('modal-image').src = art.image;
+            document.getElementById('modal-body').innerHTML = art.body;
+            
+            var modalBmIcon = document.getElementById('modal-bm-icon');
+            if (modalBmIcon) {
+                modalBmIcon.className = (savedArticles.indexOf(currentModalId) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark';
+            }
+            
+            document.getElementById('article-modal').classList.remove('hidden');
+        }
+
+        function closeArticleModal() {
+            document.getElementById('article-modal').classList.add('hidden');
+            currentModalId = null;
+        }
+
+        function toggleCurrentModalBookmark() {
+            if (currentModalId) toggleBookmark(currentModalId);
+        }
+
+        function toggleSavedModal() {
+            var modal = document.getElementById('saved-modal');
+            var list = document.getElementById('saved-articles-list');
+            if (!modal || !list) return;
+
+            if (modal.classList.contains('hidden')) {
+                list.innerHTML = '';
+                if (savedArticles.length === 0) {
+                    list.innerHTML = '<p class="text-center text-slate-500 py-6">No files bookmarked in quantum storage.</p>';
+                } else {
+                    savedArticles.forEach(function(id) {
+                        var art = articlesData[id];
+                        if (art) {
+                            var item = document.createElement('div');
+                            item.className = "flex items-center justify-between p-2.5 rounded bg-slate-900 border border-cyber-border";
+                            item.innerHTML = 
+                                '<div class="flex items-center space-x-3 cursor-pointer flex-grow" onclick="toggleSavedModal(); openArticleModal(' + id + ')">' +
+                                    '<div class="w-10 h-10 rounded bg-slate-800 overflow-hidden shrink-0"><img src="' + art.image + '" class="w-full h-full object-cover"></div>' +
+                                    '<div>' +
+                                        '<h4 class="font-bold text-white line-clamp-1">' + art.title + '</h4>' +
+                                        '<span class="text-[10px] text-cyan-400">' + art.category + '</span>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<button onclick="toggleBookmark(' + id + '); toggleSavedModal(); toggleSavedModal();" class="text-rose-500 hover:text-rose-400 p-2 cursor-pointer">' +
+                                    '<i class="fas fa-trash text-xs"></i>' +
+                                '</button>';
+                            list.appendChild(item);
+                        }
+                    });
+                }
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function toggleArchiveModal() {
+            var modal = document.getElementById('archive-modal');
+            if (modal) {
+                modal.classList.toggle('hidden');
+            }
+        }
+
+        // Guaranteed execution on window load
+        window.onload = function() {
+            updateClock();
+            updateSavedCount();
+            renderArticles('all');
+        };
+    </script>
+</body>
+</html>
