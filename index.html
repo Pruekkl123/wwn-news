@@ -110,9 +110,9 @@
     <div class="bg-slate-950/90 border-b border-cyber-border text-xs py-1.5 px-4 font-mono text-cyan-400">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> NETWORK_FEED: ACTIVE (10 REPORTS/COUNTRY)[cite: 9]</span>
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> NETWORK_FEED: ACTIVE (10 REPORTS/COUNTRY)</span>
                 <span class="hidden md:inline text-slate-500">|</span>
-                <span id="system-time" class="hidden md:inline text-slate-300">BANGKOK TIME (ICT): 19:50:00</span>
+                <span id="system-time" class="hidden md:inline text-slate-300">BANGKOK TIME (ICT): 19:55:00</span>
             </div>
             <div class="flex items-center space-x-6 text-[11px]">
                 <button onclick="toggleArchiveModal()" class="hover:text-cyber-cyan transition cursor-pointer text-amber-400"><i class="fas fa-archive"></i> ARCHIVE_LOGS</button>
@@ -333,149 +333,7 @@
 
                     card.innerHTML = 
                         '<div class="space-y-3">' +
-                            '<div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-950">' +
-                                '<img src="' + art.image + '" alt="' + art.title + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">' +
+                            '<div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-950 min-h-[160px]">' +
+                                '<img src="' + art.image + '" alt="' + art.title + '" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80">' +
                                 '<span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyber-cyan text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-cyber-border z-20">' + art.category + '</span>' +
-                                '<button onclick="event.stopPropagation(); toggleBookmark(' + id + ')" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center justify-center hover:bg-cyber-cyan hover:text-slate-950 transition cursor-pointer z-20">' +
-                                    '<i class="' + (isSaved ? 'fas text-cyan-400' : 'far') + ' fa-bookmark text-[10px]" id="bm-' + id + '"></i>' +
-                                '</button>' +
-                            '</div>' +
-                            '<div class="space-y-1 font-mono text-[10px] text-slate-400"><span>' + art.date + '</span> • <span>3m read</span></div>' +
-                            '<h3 class="font-extrabold text-sm leading-snug group-hover:text-cyber-cyan transition text-white card-title-text">' + art.title + '</h3>' +
-                            '<p class="text-xs text-slate-400 card-excerpt-text">' + art.body.replace(/<[^>]*>?/gm, '') + '</p>' +
-                        '</div>' +
-                        '<div class="pt-4 mt-4 border-t border-cyber-border flex items-center justify-between font-mono text-[11px]">' +
-                            '<span class="text-slate-500">WORLDWIDE NEWS</span>' +
-                            '<span class="text-cyber-cyan group-hover:translate-x-1 transition font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>' +
-                        '</div>';
-                    grid.appendChild(card);
-                }
-            });
-
-            var heading = document.getElementById('section-heading');
-            if (heading) {
-                heading.innerText = filterCat === 'all' ? 'WORLDWIDE NEWS // ALL_DISPATCHES (40 REPORTS)' : 'WORLDWIDE NEWS // ' + filterCat.toUpperCase() + ' (' + count + ' REPORTS)';
-            }
-        }
-
-        function filterCategory(cat) {
-            document.querySelectorAll('.cat-btn').forEach(function(btn) {
-                if (btn.getAttribute('data-cat') === cat) {
-                    btn.className = "cat-btn active bg-cyber-cyan text-slate-950 font-bold px-3 py-1 rounded shadow-[0_0_10px_rgba(0,240,255,0.4)] transition cursor-pointer";
-                } else {
-                    btn.className = "cat-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition cursor-pointer";
-                }
-            });
-            renderArticles(cat);
-        }
-
-        function handleSearch(val) {
-            var query = val.toLowerCase();
-            var cards = document.querySelectorAll('.news-card');
-            cards.forEach(function(card) {
-                var text = card.textContent.toLowerCase();
-                card.style.display = (text.indexOf(query) !== -1) ? 'flex' : 'none';
-            });
-        }
-
-        function toggleBookmark(id) {
-            var numId = Number(id);
-            var idx = savedArticles.indexOf(numId);
-            if (idx > -1) {
-                savedArticles.splice(idx, 1);
-            } else {
-                savedArticles.push(numId);
-            }
-            localStorage.setItem('wwn_saved', JSON.stringify(savedArticles));
-            updateSavedCount();
-            
-            var icon = document.getElementById('bm-' + id);
-            if (icon) {
-                icon.className = (savedArticles.indexOf(numId) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark text-[10px]';
-            }
-            if (currentModalId === numId) {
-                var modalIcon = document.getElementById('modal-bm-icon');
-                if (modalIcon) {
-                    modalIcon.className = (savedArticles.indexOf(numId) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark';
-                }
-            }
-        }
-
-        function openArticleModal(id) {
-            var art = articlesData[id];
-            if (!art) return;
-            currentModalId = Number(id);
-            
-            document.getElementById('modal-category').innerText = art.category;
-            document.getElementById('modal-title').innerText = art.title;
-            document.getElementById('modal-image').src = art.image;
-            document.getElementById('modal-body').innerHTML = art.body;
-            
-            var modalBmIcon = document.getElementById('modal-bm-icon');
-            if (modalBmIcon) {
-                modalBmIcon.className = (savedArticles.indexOf(currentModalId) !== -1 ? 'fas text-cyan-400' : 'far') + ' fa-bookmark';
-            }
-            
-            document.getElementById('article-modal').classList.remove('hidden');
-        }
-
-        function closeArticleModal() {
-            document.getElementById('article-modal').classList.add('hidden');
-            currentModalId = null;
-        }
-
-        function toggleCurrentModalBookmark() {
-            if (currentModalId) toggleBookmark(currentModalId);
-        }
-
-        function toggleSavedModal() {
-            var modal = document.getElementById('saved-modal');
-            var list = document.getElementById('saved-articles-list');
-            if (!modal || !list) return;
-
-            if (modal.classList.contains('hidden')) {
-                list.innerHTML = '';
-                if (savedArticles.length === 0) {
-                    list.innerHTML = '<p class="text-center text-slate-500 py-6">No files bookmarked in quantum storage.</p>';
-                } else {
-                    savedArticles.forEach(function(id) {
-                        var art = articlesData[id];
-                        if (art) {
-                            var item = document.createElement('div');
-                            item.className = "flex items-center justify-between p-2.5 rounded bg-slate-900 border border-cyber-border";
-                            item.innerHTML = 
-                                '<div class="flex items-center space-x-3 cursor-pointer flex-grow" onclick="toggleSavedModal(); openArticleModal(' + id + ')">' +
-                                    '<div class="w-10 h-10 rounded bg-slate-800 overflow-hidden shrink-0"><img src="' + art.image + '" class="w-full h-full object-cover"></div>' +
-                                    '<div>' +
-                                        '<h4 class="font-bold text-white line-clamp-1">' + art.title + '</h4>' +
-                                        '<span class="text-[10px] text-cyan-400">' + art.category + '</span>' +
-                                    '</div>' +
-                                '</div>' +
-                                '<button onclick="toggleBookmark(' + id + '); toggleSavedModal(); toggleSavedModal();" class="text-rose-500 hover:text-rose-400 p-2 cursor-pointer">' +
-                                    '<i class="fas fa-trash text-xs"></i>' +
-                                '</button>';
-                            list.appendChild(item);
-                        }
-                    });
-                }
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
-        }
-
-        function toggleArchiveModal() {
-            var modal = document.getElementById('archive-modal');
-            if (modal) {
-                modal.classList.toggle('hidden');
-            }
-        }
-
-        // Initialize App on DOM Content Loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            updateSavedCount();
-            renderArticles('all');
-        });
-    </script>
-</body>
-</html>
+                                '<button onclick="event.stopPropagation(); toggleBookmark(' + id + ')" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-slate-950/80 text-cyan-400 flex items-center
