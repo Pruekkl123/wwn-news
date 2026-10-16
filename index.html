@@ -154,10 +154,9 @@
         <!-- HERO FEATURED ARTICLE -->
         <section id="hero-section" class="relative rounded-2xl overflow-hidden holo-card scanner-beam cursor-pointer group">
             <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[420px]">
-                <div class="lg:col-span-7 relative min-h-[280px] lg:min-h-full overflow-hidden bg-slate-900 flex items-center justify-center">
-                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-950/40 to-slate-950 flex items-center justify-center">
-                        <i class="fas fa-globe-europe text-6xl text-cyber-cyan/30 animate-pulse"></i>
-                    </div>
+                <div class="lg:col-span-7 relative min-h-[280px] lg:min-h-full overflow-hidden bg-slate-900">
+                    <img id="hero-img" src="https://images.unsplash.com/photo-1509356843151-3c7d96241c75?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80" alt="Sweden News">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-slate-950"></div>
                 </div>
                 <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-slate-950/90">
                     <div class="space-y-3 font-mono">
@@ -217,8 +216,8 @@
             </div>
             <div class="p-6 sm:p-8 overflow-y-auto space-y-6">
                 <h1 id="modal-title" class="text-2xl sm:text-3xl font-black tracking-tight text-white"></h1>
-                <div class="rounded-xl overflow-hidden border border-cyber-border h-48 bg-slate-900 flex items-center justify-center">
-                    <i class="fas fa-newspaper text-5xl text-cyber-cyan/30"></i>
+                <div class="rounded-xl overflow-hidden border border-cyber-border max-h-80">
+                    <img id="modal-img" src="" class="w-full h-full object-cover">
                 </div>
                 <div id="modal-body" class="prose prose-invert max-w-none text-slate-300 font-sans text-sm sm:text-base leading-relaxed space-y-4"></div>
             </div>
@@ -246,6 +245,7 @@
                     category: "Sweden",
                     date: "Oct 16, 2026",
                     readTime: "4m read",
+                    image: "https://images.unsplash.com/photo-1509356843151-3c7d96241c75?auto=format&fit=crop&w=800&q=80",
                     excerpt: "Economic indicators point toward a robust post-recession recovery across Sweden, accompanied by steady employment gains.",
                     body: "<p>Sweden has officially left behind the recent economic downturn, showing stronger GDP growth and a positive trend in falling unemployment numbers across major metropolitan regions.</p><p>Financial experts note that domestic consumption and stabilization in key export industries are driving the national recovery.</p>"
                 },
@@ -255,6 +255,7 @@
                     category: "Denmark",
                     date: "Oct 16, 2026",
                     readTime: "4m read",
+                    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80",
                     excerpt: "Denmark is set to introduce a new collective agreement-based work permit scheme from the beginning of next year.",
                     body: "<p>Denmark is set to introduce a new collective agreement-based work permit scheme from the beginning of next year, making it easier for citizens of 16 select countries to secure permits.</p><p>The measure is designed to resolve pressing labor shortages in specialized engineering and tech sectors.</p>"
                 },
@@ -264,6 +265,7 @@
                     category: "Sweden",
                     date: "Oct 15, 2026",
                     readTime: "3m read",
+                    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80",
                     excerpt: "Recent figures indicate that international academic talent accounts for 50% of recent university staffing in Sweden.",
                     body: "<p>Recent academic recruitment figures show that international researchers make up half of all new hires at Swedish universities, highlighting the country's appeal as a global research hub.</p>"
                 },
@@ -273,6 +275,7 @@
                     category: "Germany",
                     date: "Oct 15, 2026",
                     readTime: "4m read",
+                    image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80",
                     excerpt: "Federal authorities in Berlin implement enhanced digital border controls to streamline Schengen transit verification.",
                     body: "<p>Germany has rolled out modernized digital verification systems at major transit hubs to bolster security and accelerate passenger processing across regional borders.</p>"
                 },
@@ -282,6 +285,7 @@
                     category: "Europe",
                     date: "Oct 14, 2026",
                     readTime: "5m read",
+                    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
                     excerpt: "Major aviation stakeholders call for urgent structural adjustments to manage entry/exit system queues across Schengen airports.",
                     body: "<p>Aviation authorities across Europe are urging the EU to reconsider implementation timelines for the Entry/Exit System (EES) to prevent severe bottlenecks at international terminals.</p>"
                 },
@@ -291,6 +295,7 @@
                     category: "Sweden",
                     date: "Oct 14, 2026",
                     readTime: "4m read",
+                    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
                     excerpt: "Essential financial guidelines and regulatory updates for independent workers operating across Nordic tax frameworks.",
                     body: "<p>Tax authorities in Sweden and neighboring Nordic countries have released updated filing guidelines affecting digital nomads, remote workers, and local freelancers.</p>"
                 }
@@ -341,8 +346,8 @@
 
                     card.innerHTML = 
                         '<div class="space-y-3">' +
-                            '<div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-900 flex items-center justify-center">' +
-                                '<i class="fas fa-file-alt text-3xl text-cyber-cyan/40"></i>' +
+                            '<div class="relative rounded-xl overflow-hidden aspect-video border border-cyber-border bg-slate-900">' +
+                                '<img src="' + art.image + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-90" alt="' + art.title + '">' +
                                 '<span class="absolute top-2 left-2 bg-slate-950/80 backdrop-blur text-cyber-cyan text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-cyber-border">' +
                                     art.category +
                                 '</span>' +
@@ -420,6 +425,7 @@
                 
                 document.getElementById('modal-category').innerText = art.category;
                 document.getElementById('modal-title').innerText = art.title;
+                document.getElementById('modal-img').src = art.image;
                 document.getElementById('modal-body').innerHTML = art.body;
                 
                 updateModalBookmarkBtn();
@@ -455,7 +461,7 @@
                             item.className = "flex items-center justify-between p-2.5 rounded bg-slate-900 border border-cyber-border";
                             item.innerHTML = 
                                 '<div class="flex items-center space-x-3 cursor-pointer flex-grow art-item-click">' +
-                                    '<div class="w-10 h-10 rounded bg-slate-800 flex items-center justify-center text-cyber-cyan"><i class="fas fa-file-alt"></i></div>' +
+                                    '<img src="' + art.image + '" class="w-10 h-10 rounded object-cover">' +
                                     '<div>' +
                                         '<h4 class="font-bold text-white line-clamp-1">' + art.title + '</h4>' +
                                         '<span class="text-[10px] text-cyan-400">' + art.category + '</span>' +
