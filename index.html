@@ -40,7 +40,7 @@
 </head>
 <body class="text-slate-100 min-h-screen flex flex-col relative">
 
-    <!-- ANIMATED STARFIELD WALLPAPER -->
+    <!-- ANIMATED DENSE STARFIELD WALLPAPER -->
     <canvas id="starfield"></canvas>
 
     <!-- HEADER -->
@@ -86,7 +86,7 @@
 
     <!-- SCRIPT -->
     <script>
-        /* ANIMATED STARFIELD WALLPAPER */
+        /* ANIMATED DENSE STARFIELD WALLPAPER WITH SHOOTING STARS */
         function initStarfield() {
             var canvas = document.getElementById('starfield');
             if (!canvas) return;
@@ -96,23 +96,43 @@
             var height = canvas.height = window.innerHeight;
             
             var stars = [];
-            var numStars = 150;
+            var numStars = 450; // Increased density
+            var shootingStars = [];
+
+            // Colors for realistic galaxy stars
+            var starColors = ['rgba(0, 240, 255, ', 'rgba(255, 255, 255, ', 'rgba(150, 220, 255, ', 'rgba(200, 240, 255, '];
             
             for (var i = 0; i < numStars; i++) {
                 stars.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    radius: Math.random() * 1.5 + 0.5,
-                    vx: (Math.random() - 0.5) * 0.2,
-                    vy: (Math.random() - 0.5) * 0.2,
+                    radius: Math.random() * 1.8 + 0.2,
+                    vx: (Math.random() - 0.5) * 0.15,
+                    vy: (Math.random() - 0.5) * 0.15,
+                    color: starColors[Math.floor(Math.random() * starColors.length)],
                     alpha: Math.random(),
+                    speed: Math.random() * 0.008 + 0.002,
                     decreasing: Math.random() > 0.5
                 });
+            }
+
+            function createShootingStar() {
+                if (Math.random() < 0.03 && shootingStars.length < 3) {
+                    shootingStars.push({
+                        x: Math.random() * width,
+                        y: Math.random() * (height / 2),
+                        length: Math.random() * 80 + 40,
+                        speed: Math.random() * 10 + 6,
+                        angle: Math.PI / 4, // 45 degree angle
+                        alpha: 1
+                    });
+                }
             }
             
             function animate() {
                 ctx.clearRect(0, 0, width, height);
                 
+                // Render Stars
                 for (var i = 0; i < stars.length; i++) {
                     var s = stars[i];
                     
@@ -125,19 +145,50 @@
                     if (s.y > height) s.y = 0;
                     
                     if (s.decreasing) {
-                        s.alpha -= 0.005;
-                        if (s.alpha <= 0.2) s.decreasing = false;
+                        s.alpha -= s.speed;
+                        if (s.alpha <= 0.1) s.decreasing = false;
                     } else {
-                        s.alpha += 0.005;
+                        s.alpha += s.speed;
                         if (s.alpha >= 1) s.decreasing = true;
                     }
                     
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(0, 240, 255, ' + s.alpha + ')';
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = '#00F0FF';
+                    ctx.fillStyle = s.color + s.alpha + ')';
+                    if (s.radius > 1.2) {
+                        ctx.shadowBlur = 6;
+                        ctx.shadowColor = '#00F0FF';
+                    } else {
+                        ctx.shadowBlur = 0;
+                    }
                     ctx.fill();
+                }
+
+                // Render Shooting Stars
+                createShootingStar();
+                for (var j = shootingStars.length - 1; j >= 0; j--) {
+                    var ss = shootingStars[j];
+                    var endX = ss.x - ss.length * Math.cos(ss.angle);
+                    var endY = ss.y + ss.length * Math.sin(ss.angle);
+
+                    var gradient = ctx.createLinearGradient(ss.x, ss.y, endX, endY);
+                    gradient.addColorStop(0, 'rgba(0, 240, 255, ' + ss.alpha + ')');
+                    gradient.addColorStop(1, 'rgba(0, 240, 255, 0)');
+
+                    ctx.beginPath();
+                    ctx.moveTo(ss.x, ss.y);
+                    ctx.lineTo(endX, endY);
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+
+                    ss.x += ss.speed * Math.cos(ss.angle);
+                    ss.y += ss.speed * Math.sin(ss.angle);
+                    ss.alpha -= 0.015;
+
+                    if (ss.alpha <= 0 || ss.x > width || ss.y > height) {
+                        shootingStars.splice(j, 1);
+                    }
                 }
                 
                 requestAnimationFrame(animate);
@@ -145,122 +196,4 @@
             
             window.onresize = function() {
                 width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            };
-            
-            animate();
-        }
-
-        var newsData = [
-            { id: 1, title: "Sweden leaves recession behind with stronger growth", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/10/800/600", desc: "Sweden has officially left behind the recent economic downturn, showing stronger GDP growth and falling unemployment.", content: "Sweden has officially left behind the recent economic downturn, showing stronger GDP growth and falling unemployment. Financial analysts report robust market stabilization across major industrial hubs." },
-            { id: 2, title: "Foreign researchers make up half of new hires at Swedish universities", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/20/800/600", desc: "International academic talent accounts for 50% of recent university staffing across major Swedish institutions.", content: "International academic talent accounts for 50% of recent university staffing across major Swedish institutions, reflecting a strong global pull for higher education and scientific innovation." },
-            { id: 3, title: "Stockholm expands green public transport network", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/30/800/600", desc: "Stockholm is rolling out advanced electric hydrofoil ferries to slash commuter carbon emissions.", content: "Stockholm is rolling out advanced electric hydrofoil ferries to slash commuter carbon emissions. The initiative is part of the capital's aggressive timeline toward complete carbon neutrality." },
-            { id: 4, title: "Riksbank hints at steady interest rates amid balanced inflation", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/40/800/600", desc: "Sweden's central bank maintains stable monetary policy as inflation aligns with target projections.", content: "Sweden's central bank maintains stable monetary policy as inflation aligns with target projections, providing relief for commercial borrowers and residential mortgage holders." },
-            { id: 5, title: "Tech startups in Gothenburg secure record venture capital", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/50/800/600", desc: "Gothenburg's tech ecosystem attracts major global investors focusing on sustainable innovations.", content: "Gothenburg's tech ecosystem attracts major global investors focusing on sustainable innovations, particularly in green energy and autonomous vehicle software development." },
-            { id: 6, title: "Sweden upgrades national defense infrastructure", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/60/800/600", desc: "New defense protocols enhance regional security cooperation across Scandinavia and the Baltic Sea.", content: "New defense protocols enhance regional security cooperation across Scandinavia and the Baltic Sea, reinforcing strategic readiness among Nordic allies." },
-            { id: 7, title: "Major forestry reforms announced to balance timber and biodiversity", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/70/800/600", desc: "Environmental ministries introduce stricter guidelines to protect old-growth forests while supporting logging.", content: "Environmental ministries introduce stricter guidelines to protect old-growth forests while supporting sustainable logging practices for the country's prominent timber sector." },
-            { id: 8, title: "Swedish healthcare sector adopts AI diagnostics", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/80/800/600", desc: "Artificial intelligence tools are deployed across emergency wards to accelerate patient triage and care.", content: "Artificial intelligence tools are deployed across emergency wards to accelerate patient triage and care, significantly reducing wait times in regional hospitals." },
-            { id: 9, title: "Record tourism numbers boost northern Lapland", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/90/800/600", desc: "Lapland experiences an unprecedented surge in international visitors seeking arctic winter experiences.", content: "Lapland experiences an unprecedented surge in international visitors seeking arctic winter experiences, boosting local hospitality businesses and eco-tourism operators." },
-            { id: 10, title: "New wind farm projects approved off southern coast", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/100/800/600", desc: "Massive offshore wind installations will significantly expand Sweden's renewable energy capacity.", content: "Massive offshore wind installations will significantly expand Sweden's renewable energy capacity, feeding clean electricity directly into the national grid." },
-            { id: 11, title: "Denmark to slash work permit salary threshold", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/110/800/600", desc: "Denmark introduces a new collective agreement-based work permit scheme to attract international specialists.", content: "Denmark introduces a new collective agreement-based work permit scheme to attract international specialists and fill critical gaps in the domestic labor market." },
-            { id: 12, title: "Copenhagen port completes transition to 100% shore power", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/120/800/600", desc: "Environmental upgrades eliminate harbor emissions while vessels dock in the capital.", content: "Environmental upgrades eliminate harbor emissions while vessels dock in the capital, setting a new environmental standard for Baltic cruise terminals." },
-            { id: 13, title: "Danish pharmaceutical exports reach historic high", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/130/800/600", desc: "Strong international demand for specialized medical treatments drives Danish trade surplus.", content: "Strong international demand for specialized medical treatments drives Danish trade surplus to record levels, led by world-class biotechnology firms." },
-            { id: 14, title: "Aarhus unveils smart city initiative utilizing IoT", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/140/800/600", desc: "Aarhus implements urban IoT sensors to optimize traffic flow and municipal energy consumption.", content: "Aarhus implements urban IoT sensors to optimize traffic flow and municipal energy consumption, improving the quality of urban life for residents." },
-            { id: 15, title: "Government invests in green hydrogen production across Jutland", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/150/800/600", desc: "New subsidies accelerate industrial green hydrogen scaling to power heavy transport.", content: "New subsidies accelerate industrial green hydrogen scaling to power heavy transport and shipping vessels across the Scandinavian region." },
-            { id: 16, title: "Denmark reforms higher education system", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/160/800/600", desc: "University structures shift to align graduates more quickly with labor market demands.", content: "University structures shift to align graduates more quickly with labor market demands, introducing shorter master's programs and specialized tracks." },
-            { id: 17, title: "Danish wind turbine manufacturer secures offshore contract", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/170/800/600", desc: "Global energy developers partner with Danish firms for next-gen turbine deployments.", content: "Global energy developers partner with Danish firms for next-gen turbine deployments, cementing the country's leadership in wind power technology." },
-            { id: 18, title: "Organic food consumption in Denmark maintains top ranking", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/180/800/600", desc: "Consumer preference for sustainable agriculture keeps organic produce sales robust.", content: "Consumer preference for sustainable agriculture keeps organic produce sales robust across Danish supermarket chains and local markets." },
-            { id: 19, title: "New cycling superhighways connect commuters", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/190/800/600", desc: "Expanded bicycle infrastructure encourages eco-friendly commuting across greater Copenhagen.", content: "Expanded bicycle infrastructure encourages eco-friendly commuting across greater Copenhagen, featuring dedicated bridges and rest stops." },
-            { id: 20, title: "Danish cultural heritage sites integrate AR tours", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/200/800/600", desc: "Museums across the country launch immersive AR applications to enhance visitor experiences.", content: "Museums across the country launch immersive augmented reality applications to enhance visitor experiences and historical education." },
-            { id: 21, title: "Germany introduces stricter border checks", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/210/800/600", desc: "Federal authorities implement digital border controls to streamline Schengen transit verification.", content: "Federal authorities implement digital border controls to streamline Schengen transit verification and enhance national security measures." },
-            { id: 22, title: "Berlin tech sector welcomes digital nomad visa", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/220/800/600", desc: "New immigration procedures simplify residency permits for remote software engineers and tech professionals.", content: "New immigration procedures simplify residency permits for remote software engineers and tech professionals looking to base themselves in the capital." },
-            { id: 23, title: "Automotive giants accelerate EV manufacturing", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/230/800/600", desc: "Major car manufacturers transition assembly lines entirely toward next-gen electric platforms.", content: "Major car manufacturers transition assembly lines entirely toward next-gen electric platforms, backed by robust state incentives for battery production." },
-            { id: 24, title: "Deutsche Bahn invests billions in rail modernization", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/240/800/600", desc: "Infrastructure upgrades aim to improve punctuality and passenger capacity across interstate corridors.", content: "Infrastructure upgrades aim to improve punctuality and passenger capacity across major interstate railway corridors throughout the country." },
-            { id: 25, title: "Frankfurt financial hub reports steady fintech growth", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/250/800/600", desc: "Frankfurt consolidates its position as a leading European financial technology center.", content: "Frankfurt consolidates its position as a leading European financial technology center, attracting venture capital and digital banking startups." },
-            { id: 26, title: "Renewable energy output in Germany surpasses coal", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/260/800/600", desc: "Solar and wind power generation exceed traditional fossil fuel benchmarks nationwide.", content: "Solar and wind power generation exceed traditional fossil fuel benchmarks nationwide, marking a historic milestone in the nation's energy transition." },
-            { id: 27, title: "Hamburg port expands automated container operations", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/270/800/600", desc: "Port logistics upgrade to automated crane systems to handle rising global cargo volumes.", content: "Port logistics upgrade to automated crane systems to handle rising global cargo volumes efficiently and sustainably." },
-            { id: 28, title: "Germany enacts skilled labor immigration reforms", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/280/800/600", desc: "Streamlined point-based immigration policies facilitate hiring for non-EU qualified workers.", content: "Streamlined point-based immigration policies facilitate hiring for non-EU qualified workers across engineering, healthcare, and IT sectors." },
-            { id: 29, title: "Munich research institutes pioneer quantum computing", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/290/800/600", desc: "Academic consortia achieve stable qubit entanglement in advanced laboratory environments.", content: "Academic consortia achieve stable qubit entanglement in advanced laboratory environments, paving the way for next-gen commercial processors." },
-            { id: 30, title: "Cultural festivals across Germany attract record crowds", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/300/800/600", desc: "Artistic exhibitions and music events draw vibrant crowds to Berlin, Cologne, and Munich.", content: "Artistic exhibitions and music events draw vibrant international crowds to cultural hubs including Berlin, Cologne, and Munich." },
-            { id: 31, title: "Europe's airports and airlines demand EES rethink", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/310/800/600", desc: "Aviation stakeholders call for urgent adjustments to manage entry/exit system queues across Schengen airports.", content: "Aviation stakeholders call for urgent adjustments to manage entry/exit system queues across Schengen airports to prevent severe travel disruption." },
-            { id: 32, title: "European Central Bank evaluates digital euro timeline", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/320/800/600", desc: "ECB officials discuss privacy safeguards and technological architecture for the digital currency.", content: "ECB officials discuss privacy safeguards and technological architecture for the digital currency ahead of official legislative proposals." },
-            { id: 33, title: "EU passes comprehensive AI regulatory framework", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/330/800/600", desc: "New compliance standards govern artificial intelligence deployment across member states.", content: "New compliance standards govern artificial intelligence deployment across member states, balancing innovation with strict ethical safeguards." },
-            { id: 34, title: "European space agency launches Earth observation satellite", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/340/800/600", desc: "Orbital telemetry instruments will monitor climate change indicators with high precision.", content: "Orbital telemetry instruments will monitor climate change indicators with high precision from low Earth orbit." },
-            { id: 35, title: "Trans-European high-speed rail project secures funding", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/350/800/600", desc: "Cross-border rail networks receive substantial grants to connect major capital cities seamlessly.", content: "Cross-border rail networks receive substantial grants to connect major capital cities seamlessly and reduce reliance on intra-European flights." },
-            { id: 36, title: "Mediterranean renewable energy grids integrate solar power", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/360/800/600", desc: "Subsea HVDC cables successfully transmit clean solar electricity across the Mediterranean basin.", content: "Subsea HVDC cables successfully transmit clean solar electricity across the Mediterranean basin, linking North African solar farms to southern Europe." },
-            { id: 37, title: "European tourism board promotes off-season travel", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/370/800/600", desc: "New campaigns encourage travelers to explore cultural heritage sites during shoulder seasons.", content: "New campaigns encourage travelers to explore cultural heritage sites during shoulder seasons to alleviate overcrowding in major tourist hotspots." },
-            { id: 38, title: "European semiconductor manufacturing alliances boost chips", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/380/800/600", desc: "Foundry investments across European tech hubs reduce reliance on overseas microchip imports.", content: "Foundry investments across European tech hubs reduce reliance on overseas microchip imports and secure regional supply chains." },
-            { id: 39, title: "Cross-border academic exchange programs expand", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/390/800/600", desc: "University consortia receive expanded grants for collaborative scientific investigations.", content: "University consortia receive expanded grants for collaborative scientific investigations and student mobility initiatives." },
-            { id: 40, title: "European maritime authorities strengthen Baltic protections", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/400/800/600", desc: "Joint maritime patrols enforce rigorous emission standards and ecological safeguards.", content: "Joint maritime patrols enforce rigorous emission standards and ecological safeguards across critical Baltic Sea shipping lanes." }
-        ];
-
-        function renderNews(filter) {
-            var catFilter = filter || 'all';
-            var grid = document.getElementById('grid');
-            var heading = document.getElementById('heading');
-            if (!grid || !heading) return;
-            grid.innerHTML = '';
-            
-            var count = 0;
-            for (var i = 0; i < newsData.length; i++) {
-                var item = newsData[i];
-                if (catFilter === 'all' || item.cat.toLowerCase() === catFilter.toLowerCase()) {
-                    count++;
-                    var card = document.createElement('div');
-                    card.className = "holo-card rounded-xl p-4 flex flex-col justify-between cursor-pointer group";
-                    card.setAttribute('data-id', item.id);
-                    card.onclick = (function(newsItem) {
-                        return function() { openModal(newsItem); };
-                    })(item);
-
-                    card.innerHTML = 
-                        '<div>' +
-                            '<div class="relative h-44 rounded-lg overflow-hidden bg-slate-900 mb-3">' +
-                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">' +
-                                '<span class="absolute top-2 left-2 bg-slate-950/80 text-cyan-400 font-mono text-[10px] px-2 py-0.5 rounded border border-cyan-500/30">' + item.cat + '</span>' +
-                            '</div>' +
-                            '<div class="font-mono text-xs text-slate-400 mb-1">' + item.date + ' • 3m read</div>' +
-                            '<h3 class="font-bold text-sm text-white line-clamp-2 mb-2 group-hover:text-cyan-400 transition">' + item.title + '</h3>' +
-                            '<p class="text-xs text-slate-400 line-clamp-3">' + item.desc + '</p>' +
-                        '</div>' +
-                        '<div class="mt-4 pt-3 border-t border-cyan-500/20 flex justify-between items-center font-mono text-xs">' +
-                            '<span class="text-slate-500">W.W.N</span>' +
-                            '<span class="text-cyan-400 font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>' +
-                        '</div>';
-                    grid.appendChild(card);
-                }
-            }
-            heading.innerText = 'WORLDWIDE NEWS // ' + catFilter.toUpperCase() + ' REPORTS (' + count + ')';
-        }
-
-        function openModal(item) {
-            document.getElementById('modal-category').innerText = item.cat;
-            document.getElementById('modal-title').innerText = item.title;
-            document.getElementById('modal-date').innerText = item.date + ' • 3m read';
-            document.getElementById('modal-image').src = item.img;
-            document.getElementById('modal-body').innerHTML = '<p>' + item.content + '</p>';
-            document.getElementById('article-modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('article-modal').classList.add('hidden');
-        }
-
-        function filterNews(cat) {
-            var btns = document.querySelectorAll('.cat-btn');
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].className = "cat-btn px-3 py-1.5 rounded bg-slate-900/90 text-slate-300 border border-cyan-500/30 cursor-pointer";
-            }
-            if (window.event && window.event.target) {
-                window.event.target.className = "cat-btn px-3 py-1.5 rounded bg-cyan-400 text-slate-950 font-bold cursor-pointer";
-            }
-            renderNews(cat);
-        }
-
-        window.onload = function() {
-            initStarfield();
-            renderNews('all');
-        };
-    </script>
-</body>
-</html>
+                height = canvas.height = window
