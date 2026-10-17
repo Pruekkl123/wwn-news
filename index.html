@@ -64,4 +64,300 @@
             background: rgba(2, 6, 23, 0.65);
             backdrop-filter: blur(35px) saturate(200%);
             -webkit-backdrop-filter: blur(35px) saturate(200%);
-            border-bottom: 1px solid rgba(255, 255, 255,
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+    <canvas id="starfield"></canvas>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="liquid-header sticky top-0 z-40 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-tr from-cyan-400 to-sky-300 text-slate-950 font-black px-3.5 py-1.5 rounded-2xl font-mono text-lg shadow-[0_0_25px_rgba(56,189,248,0.5)] border border-white/40">W.W.N</div>
+                <span class="font-mono font-bold tracking-widest text-slate-100 text-sm drop-shadow">WORLDWIDE NEWS</span>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+                <!-- CATEGORY BUTTONS -->
+                <button onclick="filterNews('all')" class="cat-btn px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold shadow-[0_0_20px_rgba(34,211,238,0.5)] transition cursor-pointer">ALL</button>
+                <button onclick="filterNews('Sweden')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">SWEDEN</button>
+                <button onclick="filterNews('Denmark')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">DENMARK</button>
+                <button onclick="filterNews('Germany')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">GERMANY</button>
+                <button onclick="filterNews('Europe')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">EUROPE</button>
+                
+                <!-- REAL-TIME CLOCK -->
+                <div class="liquid-glass-card px-3.5 py-2 rounded-xl text-cyan-300 font-bold flex items-center gap-2 border border-cyan-400/30">
+                    <i class="far fa-clock text-cyan-400 animate-pulse"></i>
+                    <span id="live-clock">00:00:00 UTC</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ARCHIVE & CYBER DOG BAR -->
+    <div class="liquid-glass-card border-x-0 border-t-0 rounded-none py-2.5 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto flex items-center justify-between font-mono text-xs">
+            <span class="text-sky-300 font-semibold flex items-center"><i class="fas fa-satellite-dish mr-2 text-cyan-400 animate-pulse"></i> LIVE NEWS DISPATCHES:</span>
+            
+            <div class="flex items-center gap-4">
+                <!-- CYBER NEON DOG CANVAS -->
+                <canvas id="neonDogCanvas" width="120" height="35" class="hidden sm:block"></canvas>
+                <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-200 border border-sky-400/30" id="live-date">OCT 17, 2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT GRID -->
+    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full relative z-10">
+        <h2 id="heading" class="font-mono text-sky-300 font-bold text-sm tracking-wider mb-6 drop-shadow">WORLDWIDE NEWS // ALL REPORTS</h2>
+        <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </main>
+
+    <!-- ARTICLE READING MODAL -->
+    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/75 backdrop-blur-2xl flex justify-center items-center p-4">
+        <div class="relative liquid-glass-card w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="sticky top-0 z-10 liquid-header p-5 flex items-center justify-between font-mono text-xs border-b border-white/10">
+                <span id="modal-category" class="text-cyan-300 font-bold uppercase tracking-widest">CATEGORY</span>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 flex items-center justify-center transition cursor-pointer"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-5">
+                <h1 id="modal-title" class="text-xl sm:text-2xl font-black text-white leading-snug"></h1>
+                <div class="font-mono text-xs text-slate-400" id="modal-date"></div>
+                <div class="rounded-2xl overflow-hidden h-72 bg-slate-900/40 border border-white/15 shadow-inner">
+                    <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover">
+                </div>
+                <div id="modal-body" class="text-slate-200 text-sm leading-relaxed space-y-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        var newsData = [];
+        var currentFilter = 'all';
+
+        function updateClock() {
+            var now = new Date();
+            var hours = String(now.getHours()).padStart(2, '0');
+            var minutes = String(now.getMinutes()).padStart(2, '0');
+            var seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            var clockElem = document.getElementById('live-clock');
+            if (clockElem) {
+                clockElem.innerText = hours + ':' + minutes + ':' + seconds;
+            }
+
+            var options = { month: 'short', day: 'numeric', year: 'numeric' };
+            var dateStr = now.toLocaleDateString('en-US', options).toUpperCase();
+            var dateElem = document.getElementById('live-date');
+            if (dateElem) {
+                dateElem.innerText = dateStr;
+            }
+        }
+        setInterval(updateClock, 1000);
+
+        // ANIMATED CYBER NEON DOG
+        function initNeonDog() {
+            var canvas = document.getElementById('neonDogCanvas');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var t = 0;
+
+            function drawDog() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                t += 0.15;
+
+                var legAngle1 = Math.sin(t) * 8;
+                var legAngle2 = -Math.sin(t) * 8;
+                var tailWag = Math.sin(t * 2) * 6;
+                var headBob = Math.abs(Math.sin(t)) * 2;
+
+                ctx.save();
+                ctx.translate(20, 5);
+                ctx.strokeStyle = '#00F0FF';
+                ctx.lineWidth = 2.2;
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = '#00F0FF';
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                // Body
+                ctx.beginPath();
+                ctx.moveTo(20, 18); ctx.lineTo(50, 18);
+                ctx.stroke();
+
+                // Tail (Wagging)
+                ctx.beginPath();
+                ctx.moveTo(20, 18); ctx.lineTo(10, 10 + tailWag);
+                ctx.stroke();
+
+                // Legs
+                ctx.beginPath();
+                // Back Legs
+                ctx.moveTo(24, 18); ctx.lineTo(24 + legAngle1, 28);
+                ctx.moveTo(28, 18); ctx.lineTo(28 + legAngle2, 28);
+                // Front Legs
+                ctx.moveTo(44, 18); ctx.lineTo(44 + legAngle2, 28);
+                ctx.moveTo(48, 18); ctx.lineTo(48 + legAngle1, 28);
+                ctx.stroke();
+
+                // Head & Ear
+                ctx.beginPath();
+                ctx.moveTo(50, 18); ctx.lineTo(58, 10 - headBob);
+                ctx.lineTo(68, 12 - headBob); ctx.lineTo(60, 20 - headBob);
+                ctx.closePath();
+                ctx.stroke();
+
+                // Ear
+                ctx.beginPath();
+                ctx.moveTo(55, 12 - headBob); ctx.lineTo(50, 4 - headBob); ctx.lineTo(58, 8 - headBob);
+                ctx.stroke();
+
+                // Eye
+                ctx.fillStyle = '#FFFFFF';
+                ctx.shadowColor = '#FFFFFF';
+                ctx.beginPath();
+                ctx.arc(63, 13 - headBob, 1.2, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+                requestAnimationFrame(drawDog);
+            }
+            drawDog();
+        }
+
+        function initStarfield() {
+            var canvas = document.getElementById('starfield');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var width = canvas.width = window.innerWidth;
+            var height = canvas.height = window.innerHeight;
+            var stars = [];
+            var colors = ['#38bdf8', '#ffffff', '#7dd3fc', '#0284c7'];
+
+            for (var i = 0; i < 150; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.8 + 0.4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vx: (Math.random() - 0.5) * 0.1,
+                    vy: (Math.random() - 0.5) * 0.1,
+                    alpha: Math.random() * 0.6 + 0.3,
+                    speed: Math.random() * 0.008 + 0.002,
+                    decreasing: Math.random() > 0.5
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                for (var i = 0; i < stars.length; i++) {
+                    var s = stars[i];
+                    s.x += s.vx; s.y += s.vy;
+                    if (s.x < 0) s.x = width; if (s.x > width) s.x = 0;
+                    if (s.y < 0) s.y = height; if (s.y > height) s.y = 0;
+                    if (s.decreasing) {
+                        s.alpha -= s.speed; if (s.alpha <= 0.2) s.decreasing = false;
+                    } else {
+                        s.alpha += s.speed; if (s.alpha >= 0.9) s.decreasing = true;
+                    }
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = s.color;
+                    ctx.globalAlpha = s.alpha;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = s.color;
+                    ctx.fill();
+                }
+                requestAnimationFrame(animate);
+            }
+            window.onresize = function() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+            animate();
+        }
+
+        function loadNews() {
+            fetch('news.json')
+                .then(response => response.json())
+                .then(data => {
+                    newsData = data;
+                    renderNews(currentFilter);
+                })
+                .catch(err => {
+                    console.log('Error loading news.json:', err);
+                });
+        }
+
+        function renderNews(filter) {
+            currentFilter = filter || 'all';
+            var grid = document.getElementById('grid');
+            var heading = document.getElementById('heading');
+            if (!grid || !heading) return;
+            grid.innerHTML = '';
+            
+            var count = 0;
+            for (var i = 0; i < newsData.length; i++) {
+                var item = newsData[i];
+                if (currentFilter === 'all' || item.cat.toLowerCase() === currentFilter.toLowerCase()) {
+                    count++;
+                    var card = document.createElement('div');
+                    card.className = "liquid-glass-card rounded-3xl p-5 flex flex-col justify-between cursor-pointer group";
+                    card.onclick = (function(newsItem) { return function() { openModal(newsItem); }; })(item);
+                    card.innerHTML = 
+                        '<div>' +
+                            '<div class="relative h-48 rounded-2xl overflow-hidden bg-slate-900/30 mb-4 border border-white/10 shadow-inner">' +
+                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out">' +
+                                '<span class="absolute top-3 left-3 glass-tag text-cyan-300 font-mono text-[10px] px-3 py-1 rounded-xl font-bold shadow-lg">' + item.cat + '</span>' +
+                            '</div>' +
+                            '<div class="font-mono text-xs text-slate-400 mb-2">' + item.date + ' • 3m read</div>' +
+                            '<h3 class="font-bold text-sm text-white line-clamp-2 mb-2.5 group-hover:text-cyan-300 transition">' + item.title + '</h3>' +
+                            '<p class="text-xs text-slate-300 line-clamp-3 leading-relaxed">' + item.desc + '</p>' +
+                        '</div>' +
+                        '<div class="mt-5 pt-3.5 border-t border-white/10 flex justify-between items-center font-mono text-xs">' +
+                            '<span class="text-slate-400 font-medium">W.W.N</span>' +
+                            '<span class="text-cyan-300 font-bold flex items-center gap-1 group-hover:translate-x-1 transition">READ <i class="fas fa-chevron-right text-[9px]"></i></span>' +
+                        '</div>';
+                    grid.appendChild(card);
+                }
+            }
+            heading.innerText = 'WORLDWIDE NEWS // ' + currentFilter.toUpperCase() + ' REPORTS (' + count + ')';
+        }
+
+        function openModal(item) {
+            document.getElementById('modal-category').innerText = item.cat;
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-date').innerText = item.date + ' • 3m read';
+            document.getElementById('modal-image').src = item.img;
+            document.getElementById('modal-body').innerHTML = '<p>' + item.desc + '</p>';
+            document.getElementById('article-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('article-modal').classList.add('hidden');
+        }
+
+        function filterNews(cat) {
+            var btns = document.querySelectorAll('.cat-btn');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].className = "cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer";
+            }
+            if (window.event && window.event.target) {
+                window.event.target.className = "cat-btn px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold shadow-[0_0_20px_rgba(34,211,238,0.5)] transition cursor-pointer";
+            }
+            renderNews(cat);
+        }
+
+        window.onload = function() {
+            updateClock();
+            initNeonDog();
+            initStarfield();
+            loadNews();
+        };
+    </script>
+</body>
+</html>
