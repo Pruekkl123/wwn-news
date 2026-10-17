@@ -24,7 +24,7 @@
             width: 100vw;
             height: 100vh;
             z-index: 0;
-            pointer-events: none;
+            pointer-events: auto; /* เปิดให้แคนวาสรับสัมผัส/คลิกได้ */
         }
 
         .liquid-glass-card {
@@ -96,7 +96,7 @@
         </div>
     </header>
 
-    <!-- ARCHIVE BAR (REMOVED 100 NEON ENTITIES TEXT) -->
+    <!-- ARCHIVE BAR -->
     <div class="liquid-glass-card border-x-0 border-t-0 rounded-none py-2.5 px-6 relative z-10">
         <div class="max-w-7xl mx-auto flex items-center justify-between font-mono text-xs">
             <span class="text-cyan-400 font-semibold flex items-center"><i class="fas fa-satellite-dish mr-2 text-cyan-400 animate-pulse"></i> LIVE NEWS DISPATCHES:</span>
@@ -105,9 +105,9 @@
     </div>
 
     <!-- MAIN CONTENT GRID -->
-    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full relative z-10">
-        <h2 id="heading" class="font-mono text-cyan-400 font-bold text-sm tracking-wider mb-6 drop-shadow">WORLDWIDE NEWS // ALL REPORTS</h2>
-        <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full relative z-10 pointer-events-none">
+        <h2 id="heading" class="font-mono text-cyan-400 font-bold text-sm tracking-wider mb-6 drop-shadow pointer-events-auto">WORLDWIDE NEWS // ALL REPORTS</h2>
+        <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pointer-events-auto"></div>
     </main>
 
     <!-- ARTICLE READING MODAL -->
@@ -153,7 +153,7 @@
         }
         setInterval(updateClock, 1000);
 
-        // 100 EXTREME NEON GLOW (10X INTENSITY) BACKGROUND ENTITIES
+        // 100 INTERACTIVE NEON ENTITIES WITH TOUCH/CLICK EXPANSION
         function initBackground() {
             var canvas = document.getElementById('starfield');
             if (!canvas) return;
@@ -170,13 +170,43 @@
                     y: Math.random() * height,
                     vx: (Math.random() - 0.5) * 0.5,
                     vy: (Math.random() - 0.5) * 0.5,
-                    size: Math.random() * 14 + 8,
+                    baseScale: 1,
+                    scale: 1,
+                    targetScale: 1,
                     type: Math.floor(Math.random() * 4),
                     color: colors[Math.floor(Math.random() * colors.length)],
                     angle: Math.random() * Math.PI * 2,
                     spin: (Math.random() - 0.5) * 0.03
                 });
             }
+
+            // TOUCH / CLICK DETECTOR FOR EXPANDING CHARACTERS
+            function handleInteraction(clientX, clientY) {
+                for (var i = 0; i < entities.length; i++) {
+                    var e = entities[i];
+                    var dx = clientX - e.x;
+                    var dy = clientY - e.y;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+
+                    // ถ้าแตะ/คลิกใกล้ตัวละครในรัศมี 45px
+                    if (dist < 45) {
+                        e.targetScale = 2.8; // ขยายใหญ่ชั่วคราว 2.8 เท่า
+                        setTimeout((function(entity) {
+                            return function() { entity.targetScale = 1; }; // ค่อยๆ หดกลับเป็นปกติ
+                        })(e), 1200);
+                    }
+                }
+            }
+
+            canvas.addEventListener('click', function(evt) {
+                handleInteraction(evt.clientX, evt.clientY);
+            });
+
+            canvas.addEventListener('touchstart', function(evt) {
+                if (evt.touches.length > 0) {
+                    handleInteraction(evt.touches[0].clientX, evt.touches[0].clientY);
+                }
+            }, { passive: true });
 
             function drawShape(ctx, e) {
                 if (e.type === 0) {
@@ -204,7 +234,7 @@
                 } else {
                     // Neon Star
                     ctx.beginPath();
-                    ctx.arc(0, 0, e.size / 2.2, 0, Math.PI * 2);
+                    ctx.arc(0, 0, 5, 0, Math.PI * 2);
                     ctx.fill();
                 }
             }
@@ -217,33 +247,37 @@
                     e.x += e.vx; e.y += e.vy;
                     e.angle += e.spin;
 
+                    // Smooth Scale Animation (Lerp)
+                    e.scale += (e.targetScale - e.scale) * 0.1;
+
                     if (e.x < -60) e.x = width + 60; if (e.x > width + 60) e.x = -60;
                     if (e.y < -60) e.y = height + 60; if (e.y > height + 60) e.y = -60;
 
                     ctx.save();
                     ctx.translate(e.x, e.y);
+                    ctx.scale(e.scale, e.scale);
                     ctx.rotate(e.angle);
                     ctx.strokeStyle = e.color;
                     ctx.fillStyle = e.color;
 
-                    // PASS 1: Outer Super Glow (Glow 10x)
+                    // PASS 1: Outer Extreme Glow
                     ctx.lineWidth = 6;
-                    ctx.shadowBlur = 40;
+                    ctx.shadowBlur = e.scale > 1.5 ? 60 : 40;
                     ctx.shadowColor = e.color;
-                    ctx.globalAlpha = 0.5;
+                    ctx.globalAlpha = 0.55;
                     drawShape(ctx, e);
 
                     // PASS 2: Middle Bright Glow
                     ctx.lineWidth = 3;
-                    ctx.shadowBlur = 18;
+                    ctx.shadowBlur = 20;
                     ctx.shadowColor = e.color;
                     ctx.globalAlpha = 0.85;
                     drawShape(ctx, e);
 
-                    // PASS 3: Crisp Core Line (Pure White/Vibrant)
+                    // PASS 3: Crisp Core Line
                     ctx.lineWidth = 1.8;
                     ctx.strokeStyle = '#FFFFFF';
-                    ctx.shadowBlur = 5;
+                    ctx.shadowBlur = 6;
                     ctx.shadowColor = '#FFFFFF';
                     ctx.globalAlpha = 0.95;
                     drawShape(ctx, e);
