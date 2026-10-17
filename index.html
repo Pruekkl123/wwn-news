@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body { 
-            background: radial-gradient(circle at 50% -20%, #0c1b33 0%, #020617 70%);
+            background: radial-gradient(circle at 50% -20%, #0f172a 0%, #020617 80%);
             font-family: 'Inter', sans-serif; 
             overflow-x: hidden; 
             color: #f8fafc;
@@ -27,37 +27,44 @@
             pointer-events: none;
         }
 
-        /* 10x Liquid Glass (Extreme Glassmorphism & High Performance) */
-        .liquid-glass-extreme {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(15, 23, 42, 0.6) 100%);
-            backdrop-filter: blur(40px) saturate(220%);
-            -webkit-backdrop-filter: blur(40px) saturate(220%);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-top: 1px solid rgba(255, 255, 255, 0.35);
+        /* Ultra Ultra-Clear Liquid Glass Card */
+        .liquid-glass-card {
+            background: rgba(255, 255, 255, 0.03); /* โปร่งใสเห็นพื้นหลังชัดเจน */
+            backdrop-filter: blur(20px) saturate(190%);
+            -webkit-backdrop-filter: blur(20px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 1px solid rgba(255, 255, 255, 0.35); /* ขอบบนสะท้อนแสงแบบกระจก Apple */
             box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+                0 20px 50px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .liquid-glass-extreme:hover {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(15, 23, 42, 0.75) 100%);
-            border-color: rgba(56, 189, 248, 0.6);
+        
+        .liquid-glass-card:hover {
+            background: rgba(56, 189, 248, 0.08); /* ใสอมฟ้าเมื่อโฮเวอร์ */
+            border-color: rgba(56, 189, 248, 0.5);
             border-top-color: rgba(255, 255, 255, 0.6);
             box-shadow: 
-                0 35px 70px rgba(0, 0, 0, 0.7), 
-                0 0 35px rgba(56, 189, 248, 0.25), 
-                inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                inset 0 -1px 0 rgba(56, 189, 248, 0.3);
+                0 25px 60px rgba(0, 0, 0, 0.6), 
+                0 0 30px rgba(56, 189, 248, 0.2), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
             transform: translateY(-5px);
         }
 
+        /* Glass Tag Badge */
+        .glass-tag {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
         .liquid-header {
-            background: rgba(2, 6, 23, 0.75);
-            backdrop-filter: blur(50px) saturate(250%);
-            -webkit-backdrop-filter: blur(50px) saturate(250%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(2, 6, 23, 0.65);
+            backdrop-filter: blur(35px) saturate(200%);
+            -webkit-backdrop-filter: blur(35px) saturate(200%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -72,22 +79,22 @@
     <header class="liquid-header sticky top-0 z-40 px-6 py-4">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3">
-                <div class="bg-gradient-to-tr from-cyan-400 to-sky-300 text-slate-950 font-black px-3.5 py-1.5 rounded-2xl font-mono text-lg shadow-[0_0_30px_rgba(56,189,248,0.6)] border border-white/40">W.W.N</div>
+                <div class="bg-gradient-to-tr from-cyan-400 to-sky-300 text-slate-950 font-black px-3.5 py-1.5 rounded-2xl font-mono text-lg shadow-[0_0_25px_rgba(56,189,248,0.5)] border border-white/40">W.W.N</div>
                 <span class="font-mono font-bold tracking-widest text-slate-100 text-sm drop-shadow">WORLDWIDE NEWS</span>
             </div>
             
             <div class="flex flex-wrap gap-2 font-mono text-xs">
                 <button onclick="filterNews('all')" class="cat-btn px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold shadow-[0_0_20px_rgba(34,211,238,0.5)] transition cursor-pointer">ALL</button>
-                <button onclick="filterNews('Sweden')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-extreme text-slate-200 hover:text-white transition cursor-pointer">SWEDEN</button>
-                <button onclick="filterNews('Denmark')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-extreme text-slate-200 hover:text-white transition cursor-pointer">DENMARK</button>
-                <button onclick="filterNews('Germany')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-extreme text-slate-200 hover:text-white transition cursor-pointer">GERMANY</button>
-                <button onclick="filterNews('Europe')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-extreme text-slate-200 hover:text-white transition cursor-pointer">EUROPE</button>
+                <button onclick="filterNews('Sweden')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">SWEDEN</button>
+                <button onclick="filterNews('Denmark')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">DENMARK</button>
+                <button onclick="filterNews('Germany')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">GERMANY</button>
+                <button onclick="filterNews('Europe')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">EUROPE</button>
             </div>
         </div>
     </header>
 
     <!-- ARCHIVE BAR -->
-    <div class="liquid-glass-extreme border-x-0 border-t-0 rounded-none py-2.5 px-6 relative z-10">
+    <div class="liquid-glass-card border-x-0 border-t-0 rounded-none py-2.5 px-6 relative z-10">
         <div class="max-w-7xl mx-auto flex items-center justify-between font-mono text-xs">
             <span class="text-sky-300 font-semibold flex items-center"><i class="fas fa-satellite-dish mr-2 text-cyan-400 animate-pulse"></i> LIVE NEWS DISPATCHES:</span>
             <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-200 border border-sky-400/30">TODAY (OCT 17, 2026)</span>
@@ -101,8 +108,8 @@
     </main>
 
     <!-- ARTICLE READING MODAL -->
-    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-2xl flex justify-center items-center p-4">
-        <div class="relative liquid-glass-extreme w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/75 backdrop-blur-2xl flex justify-center items-center p-4">
+        <div class="relative liquid-glass-card w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
             <div class="sticky top-0 z-10 liquid-header p-5 flex items-center justify-between font-mono text-xs border-b border-white/10">
                 <span id="modal-category" class="text-cyan-300 font-bold uppercase tracking-widest">CATEGORY</span>
                 <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 flex items-center justify-center transition cursor-pointer"><i class="fas fa-times"></i></button>
@@ -110,7 +117,7 @@
             <div class="p-6 sm:p-8 overflow-y-auto space-y-5">
                 <h1 id="modal-title" class="text-xl sm:text-2xl font-black text-white leading-snug"></h1>
                 <div class="font-mono text-xs text-slate-400" id="modal-date"></div>
-                <div class="rounded-2xl overflow-hidden h-72 bg-slate-900/50 border border-white/15 shadow-inner">
+                <div class="rounded-2xl overflow-hidden h-72 bg-slate-900/40 border border-white/15 shadow-inner">
                     <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover">
                 </div>
                 <div id="modal-body" class="text-slate-200 text-sm leading-relaxed space-y-4"></div>
@@ -197,13 +204,13 @@
                 if (currentFilter === 'all' || item.cat.toLowerCase() === currentFilter.toLowerCase()) {
                     count++;
                     var card = document.createElement('div');
-                    card.className = "liquid-glass-extreme rounded-3xl p-5 flex flex-col justify-between cursor-pointer group";
+                    card.className = "liquid-glass-card rounded-3xl p-5 flex flex-col justify-between cursor-pointer group";
                     card.onclick = (function(newsItem) { return function() { openModal(newsItem); }; })(item);
                     card.innerHTML = 
                         '<div>' +
-                            '<div class="relative h-48 rounded-2xl overflow-hidden bg-slate-900/50 mb-4 border border-white/10 shadow-inner">' +
+                            '<div class="relative h-48 rounded-2xl overflow-hidden bg-slate-900/30 mb-4 border border-white/10 shadow-inner">' +
                                 '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out">' +
-                                '<span class="absolute top-3 left-3 bg-slate-950/70 backdrop-blur-xl text-cyan-300 font-mono text-[10px] px-3 py-1 rounded-xl border border-white/20 shadow-lg">' + item.cat + '</span>' +
+                                '<span class="absolute top-3 left-3 glass-tag text-cyan-300 font-mono text-[10px] px-3 py-1 rounded-xl font-bold shadow-lg">' + item.cat + '</span>' +
                             '</div>' +
                             '<div class="font-mono text-xs text-slate-400 mb-2">' + item.date + ' • 3m read</div>' +
                             '<h3 class="font-bold text-sm text-white line-clamp-2 mb-2.5 group-hover:text-cyan-300 transition">' + item.title + '</h3>' +
@@ -235,7 +242,7 @@
         function filterNews(cat) {
             var btns = document.querySelectorAll('.cat-btn');
             for (var i = 0; i < btns.length; i++) {
-                btns[i].className = "cat-btn px-4 py-2 rounded-xl liquid-glass-extreme text-slate-200 hover:text-white transition cursor-pointer";
+                btns[i].className = "cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer";
             }
             if (window.event && window.event.target) {
                 window.event.target.className = "cat-btn px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold shadow-[0_0_20px_rgba(34,211,238,0.5)] transition cursor-pointer";
