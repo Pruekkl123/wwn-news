@@ -3,239 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W.W.N // Worldwide News - Global Dispatch</title>
-    <!-- Tailwind CSS CDN -->
+    <title>W.W.N // Worldwide News</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        cyber: {
-                            red: '#FF0055',
-                            cyan: '#00F0FF',
-                            neon: '#39FF14',
-                            darkBg: '#030712',
-                            cardBg: 'rgba(13, 20, 38, 0.85)',
-                            border: 'rgba(0, 240, 255, 0.25)'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace']
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #030712;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(255, 0, 85, 0.1) 0%, transparent 50%),
-                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-            background-attachment: fixed;
-        }
-
+        body { background-color: #030712; font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
         .holo-card {
             background: rgba(13, 20, 38, 0.85);
-            backdrop-filter: blur(20px) saturate(200%);
-            -webkit-backdrop-filter: blur(20px) saturate(200%);
             border: 1px solid rgba(0, 240, 255, 0.25);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 15px rgba(0, 240, 255, 0.05);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            transition: all 0.3s ease;
         }
-
         .holo-card:hover {
             border-color: rgba(0, 240, 255, 0.7);
-            box-shadow: 0 0 35px rgba(0, 240, 255, 0.3), inset 0 0 20px rgba(0, 240, 255, 0.15);
-            transform: translateY(-4px);
+            transform: translateY(-3px);
         }
-
-        .neon-glow {
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
-        }
-
-        .card-title-text {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            word-break: break-word;
-        }
-
-        .card-excerpt-text {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            word-break: break-word;
-        }
-
-        @keyframes ticker {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
-        }
-        .ticker-wrap { overflow: hidden; white-space: nowrap; }
-        .ticker-move { display: inline-block; white-space: nowrap; animation: ticker 32s linear infinite; }
-        .ticker-move:hover { animation-play-state: paused; }
-
-        ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.3); border-radius: 3px; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
-<body class="text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-cyber-cyan selection:text-slate-950">
+<body class="text-slate-100 min-h-screen flex flex-col">
 
-    <!-- TOP TELEMETRY BAR -->
-    <div class="bg-slate-950/90 border-b border-cyber-border text-xs py-1.5 px-4 font-mono text-cyan-400">
+    <!-- HEADER -->
+    <header class="bg-slate-950 border-b border-cyan-500/30 sticky top-0 z-40 px-4 py-3">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyber-neon animate-pulse"></span> NETWORK_FEED: ACTIVE (10 REPORTS/COUNTRY)</span>
-                <span class="hidden md:inline text-slate-500">|</span>
-                <span id="system-time" class="hidden md:inline text-slate-300">BANGKOK TIME (ICT): 19:55:00</span>
+            <div class="flex items-center gap-3">
+                <div class="bg-cyan-400 text-slate-950 font-black px-3 py-1.5 rounded font-mono text-lg">W.W.N</div>
+                <span class="font-mono font-bold tracking-widest text-white">WORLDWIDE NEWS</span>
             </div>
-            <div class="flex items-center space-x-6 text-[11px]">
-                <button onclick="toggleArchiveModal()" class="hover:text-cyber-cyan transition cursor-pointer text-amber-400"><i class="fas fa-archive"></i> ARCHIVE_LOGS</button>
-                <button onclick="toggleSavedModal()" class="hover:text-cyber-cyan transition cursor-pointer">SAVED_REPORTS (<span id="saved-count">0</span>)</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN HEADER -->
-    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-xl border-b border-cyber-border">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-            <a href="#" onclick="filterCategory('all'); return false;" class="flex items-center gap-3 group">
-                <div class="bg-gradient-to-br from-cyber-cyan to-blue-600 text-slate-950 font-black text-xl tracking-tighter px-3.5 py-1.5 rounded-lg shadow-[0_0_20px_rgba(0,240,255,0.4)] group-hover:scale-105 transition font-mono">
-                    W.W.N
-                </div>
-                <div class="flex flex-col font-mono">
-                    <span class="font-black text-lg leading-none tracking-widest text-white neon-glow">WORLDWIDE</span>
-                    <span class="font-black text-lg leading-none tracking-[0.18em] uppercase text-cyber-cyan mt-1 neon-glow">NEWS</span>
-                </div>
-            </a>
-
-            <nav class="hidden lg:flex items-center space-x-1 font-mono text-xs uppercase tracking-widest">
-                <button onclick="filterCategory('all')" class="cat-btn active px-3 py-1.5 rounded text-cyber-cyan bg-cyan-950/50 border border-cyber-cyan/30 transition cursor-pointer" data-cat="all">All Reports</button>
-                <button onclick="filterCategory('Sweden')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Sweden">Sweden (10)</button>
-                <button onclick="filterCategory('Denmark')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Denmark">Denmark (10)</button>
-                <button onclick="filterCategory('Germany')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Germany">Germany (10)</button>
-                <button onclick="filterCategory('Europe')" class="cat-btn px-3 py-1.5 rounded text-slate-400 hover:text-cyber-cyan transition cursor-pointer" data-cat="Europe">Wider Europe (10)</button>
-            </nav>
-
-            <div class="relative w-44 sm:w-60">
-                <input type="text" id="search-input" placeholder="Search news database..." oninput="handleSearch(this.value)"
-                    class="w-full pl-8 pr-3 py-1.5 text-xs font-mono bg-slate-900/80 border border-cyber-border rounded-md focus:outline-none focus:border-cyber-cyan text-cyan-300 placeholder:text-slate-600">
-                <i class="fas fa-terminal absolute left-2.5 top-2 text-cyber-cyan/60 text-xs"></i>
-            </div>
-        </div>
-
-        <!-- Ticker -->
-        <div class="bg-slate-950 text-xs font-mono flex items-center overflow-hidden border-t border-cyber-border/60">
-            <div class="bg-cyber-red text-white font-black px-3.5 py-1.5 flex items-center gap-2 shrink-0 uppercase tracking-widest z-10 shadow-[0_0_15px_rgba(255,0,85,0.6)]">
-                <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
-                <span>DAILY WIRE</span>
-            </div>
-            <div class="ticker-wrap w-full py-1">
-                <div class="ticker-move text-cyan-300 font-semibold space-x-12">
-                    <span>[+] อัปเดตข่าวสารประจำวัน 10 ข่าวต่อประเทศ: เกาะติดสวีเดน เดนมาร์ก เยอรมนี และทั่วยุโรปแบบเรียลไทม์</span>
-                    <span>[+] ระบบคลังข้อมูลอัตโนมัติจัดเก็บข่าวเก่าและประวัติย้อนหลังเรียบร้อยแล้ว</span>
-                </div>
+            <div class="flex gap-2 font-mono text-xs">
+                <button onclick="filterNews('all')" class="cat-btn px-3 py-1.5 rounded bg-cyan-400 text-slate-950 font-bold">ALL</button>
+                <button onclick="filterNews('Sweden')" class="cat-btn px-3 py-1.5 rounded bg-slate-900 text-slate-300 border border-cyan-500/30">SWEDEN</button>
+                <button onclick="filterNews('Denmark')" class="cat-btn px-3 py-1.5 rounded bg-slate-900 text-slate-300 border border-cyan-500/30">DENMARK</button>
+                <button onclick="filterNews('Germany')" class="cat-btn px-3 py-1.5 rounded bg-slate-900 text-slate-300 border border-cyan-500/30">GERMANY</button>
+                <button onclick="filterNews('Europe')" class="cat-btn px-3 py-1.5 rounded bg-slate-900 text-slate-300 border border-cyan-500/30">EUROPE</button>
             </div>
         </div>
     </header>
 
-    <!-- MAIN CONTAINER -->
-    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow space-y-12">
-
-        <!-- SECTION HEADING -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-cyber-border pb-4 gap-4">
-            <div>
-                <h2 class="text-xl font-black tracking-wider font-mono flex items-center gap-2 text-white">
-                    <span class="w-2 h-5 bg-cyber-cyan rounded-sm inline-block shadow-[0_0_10px_rgba(0,240,255,0.8)]"></span>
-                    <span id="section-heading" class="neon-glow">WORLDWIDE NEWS // ALL_DISPATCHES (40 REPORTS)</span>
-                </h2>
-            </div>
-            <div class="flex flex-wrap gap-2 font-mono text-xs">
-                <button onclick="filterCategory('all')" class="cat-btn active bg-cyber-cyan text-slate-950 font-bold px-3 py-1 rounded shadow-[0_0_10px_rgba(0,240,255,0.4)] transition cursor-pointer" data-cat="all">ALL</button>
-                <button onclick="filterCategory('Sweden')" class="cat-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition cursor-pointer" data-cat="Sweden">SWEDEN</button>
-                <button onclick="filterCategory('Denmark')" class="cat-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition cursor-pointer" data-cat="Denmark">DENMARK</button>
-                <button onclick="filterCategory('Germany')" class="cat-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition cursor-pointer" data-cat="Germany">GERMANY</button>
-                <button onclick="filterCategory('Europe')" class="cat-btn bg-slate-900 border border-cyber-border text-slate-300 hover:border-cyber-cyan px-3 py-1 rounded transition cursor-pointer" data-cat="Europe">EUROPE</button>
-            </div>
-        </div>
-
-        <!-- ARTICLES GRID -->
-        <div id="articles-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-
+    <!-- CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full">
+        <h2 id="heading" class="font-mono text-cyan-400 font-bold mb-6">WORLDWIDE NEWS // ALL REPORTS (40)</h2>
+        <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </main>
-
-    <!-- ARTICLE READING MODAL -->
-    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
-        <div class="relative holo-card w-full max-w-3xl rounded-3xl overflow-hidden my-auto max-h-[90vh] flex flex-col border border-cyber-cyan/40">
-            <div class="sticky top-0 z-10 bg-slate-950/95 border-b border-cyber-border p-4 flex items-center justify-between font-mono text-xs">
-                <span id="modal-category" class="text-cyber-cyan font-bold uppercase tracking-widest">CATEGORY</span>
-                <div class="flex items-center space-x-3">
-                    <button onclick="toggleCurrentModalBookmark()" class="p-2 rounded hover:bg-slate-900 text-cyan-400 transition cursor-pointer"><i class="far fa-bookmark" id="modal-bm-icon"></i></button>
-                    <button onclick="closeArticleModal()" class="p-2 rounded hover:bg-slate-900 text-slate-400 hover:text-white transition cursor-pointer"><i class="fas fa-times text-base"></i></button>
-                </div>
-            </div>
-            <div class="p-6 sm:p-8 overflow-y-auto space-y-6">
-                <h1 id="modal-title" class="text-2xl sm:text-3xl font-black tracking-tight text-white"></h1>
-                <div class="rounded-xl overflow-hidden border border-cyber-border h-56 bg-slate-950 relative">
-                    <img id="modal-image" src="" alt="News Image" class="absolute inset-0 w-full h-full object-cover">
-                </div>
-                <div id="modal-body" class="prose prose-invert max-w-none text-slate-300 font-sans text-sm sm:text-base leading-relaxed space-y-4"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SAVED ARTICLES MODAL -->
-    <div id="saved-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
-        <div class="relative holo-card w-full max-w-lg rounded-3xl overflow-hidden my-auto flex flex-col max-h-[80vh] border border-cyber-cyan/40">
-            <div class="p-4 border-b border-cyber-border flex items-center justify-between font-mono">
-                <h3 class="font-bold text-xs text-cyber-cyan flex items-center gap-2"><i class="fas fa-database"></i> BOOKMARKED_FILES</h3>
-                <button onclick="toggleSavedModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="saved-articles-list" class="p-6 overflow-y-auto space-y-3 flex-grow font-mono text-xs"></div>
-        </div>
-    </div>
-
-    <!-- ARCHIVE MODAL -->
-    <div id="archive-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center p-4">
-        <div class="relative holo-card w-full max-w-xl rounded-3xl overflow-hidden my-auto flex flex-col max-h-[80vh] border border-amber-500/40">
-            <div class="p-4 border-b border-amber-500/30 flex items-center justify-between font-mono">
-                <h3 class="font-bold text-xs text-amber-400 flex items-center gap-2"><i class="fas fa-archive"></i> HISTORICAL ARCHIVE LOGS (PREVIOUS DAYS)</h3>
-                <button onclick="toggleArchiveModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="p-6 overflow-y-auto space-y-4 flex-grow font-mono text-xs">
-                <div class="p-3 rounded bg-slate-900 border border-slate-800">
-                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 15, 2026</span>
-                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports across Sweden, Denmark, Germany, and Wider Europe. All database entries secured.</p>
-                </div>
-                <div class="p-3 rounded bg-slate-900 border border-slate-800">
-                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 14, 2026</span>
-                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Economic stabilization and border policy archives archived successfully.</p>
-                </div>
-                <div class="p-3 rounded bg-slate-900 border border-slate-800">
-                    <span class="text-amber-400 font-bold">DISPATCH_LOG: OCT 13, 2026</span>
-                    <p class="text-slate-400 text-[11px] mt-1">Stored 40 daily reports. Regional Nordic policy logs secured in long-term quantum storage.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- SCRIPT -->
     <script>
-        var articlesData = {
-            1: { title: "Sweden leaves recession behind with stronger growth and falling unemployment", category: "Sweden", date: "Oct 16, 2026", image: "https://picsum.photos/id/10/800/600", body: "<p>Sweden has officially left behind the recent economic downturn, showing stronger GDP growth and falling unemployment.</p>" },
-            2: { title: "Foreign researchers make up half of new hires at Swedish universities", category: "Sweden", date: "Oct 16, 2026", image: "https://picsum.photos/id/20/800/600", body: "<p>International academic talent accounts for 50% of recent university staffing across major Swedish institutions.</p>" },
-            3: { title: "Stockholm expands green public transport network with electric hydrofoils", category: "Sweden", date: "Oct 16, 2026", image: "https://picsum.photos/id/30/800/600", body: "<p>Stockholm is rolling out advanced electric hydrofoil ferries to slash commuter carbon emissions.</p>" },
-            4: { title: "Riksbank hints at steady interest rates amid balanced inflation data", category: "Sweden", date: "Oct 16, 2026", image: "
+        const newsData = [
+            { id: 1, title: "Sweden leaves recession behind with stronger growth", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/10/800/600", desc: "Sweden has officially left behind the recent economic downturn, showing stronger GDP growth and falling unemployment." },
+            { id: 2, title: "Foreign researchers make up half of new hires at Swedish universities", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/20/800/600", desc: "International academic talent accounts for 50% of recent university staffing across major Swedish institutions." },
+            { id: 3, title: "Stockholm expands green public transport network", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/30/800/600", desc: "Stockholm is rolling out advanced electric hydrofoil ferries to slash commuter carbon emissions." },
+            { id: 4, title: "Riksbank hints at steady interest rates amid balanced inflation", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/40/800/600", desc: "Sweden's central bank maintains stable monetary policy as inflation aligns with target projections." },
+            { id: 5, title: "Tech startups in Gothenburg secure record venture capital", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/50/800/600", desc: "Gothenburg's tech ecosystem attracts major global investors focusing on sustainable innovations." },
+            { id: 6, title: "Sweden upgrades national defense infrastructure", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/60/800/600", desc: "New defense protocols enhance regional security cooperation across Scandinavia and the Baltic Sea." },
+            { id: 7, title: "Major forestry reforms announced to balance timber and biodiversity", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/70/800/600", desc: "Environmental ministries introduce stricter guidelines to protect old-growth forests while supporting logging." },
+            { id: 8, title: "Swedish healthcare sector adopts AI diagnostics", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/80/800/600", desc: "Artificial intelligence tools are deployed across emergency wards to accelerate patient triage and care." },
+            { id: 9, title: "Record tourism numbers boost northern Lapland", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/90/800/600", desc: "Lapland experiences an unprecedented surge in international visitors seeking arctic winter experiences." },
+            { id: 10, title: "New wind farm projects approved off southern coast", cat: "Sweden", date: "Oct 16, 2026", img: "https://picsum.photos/id/100/800/600", desc: "Massive offshore wind installations will significantly expand Sweden's renewable energy capacity." },
+
+            { id: 11, title: "Denmark to slash work permit salary threshold", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/110/800/600", desc: "Denmark introduces a new collective agreement-based work permit scheme to attract international specialists." },
+            { id: 12, title: "Copenhagen port completes transition to 100% shore power", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/120/800/600", desc: "Environmental upgrades eliminate harbor emissions while vessels dock in the capital." },
+            { id: 13, title: "Danish pharmaceutical exports reach historic high", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/130/800/600", desc: "Strong international demand for specialized medical treatments drives Danish trade surplus." },
+            { id: 14, title: "Aarhus unveils smart city initiative utilizing IoT", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/140/800/600", desc: "Aarhus implements urban IoT sensors to optimize traffic flow and municipal energy consumption." },
+            { id: 15, title: "Government invests in green hydrogen production across Jutland", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/150/800/600", desc: "New subsidies accelerate industrial green hydrogen scaling to power heavy transport." },
+            { id: 16, title: "Denmark reforms higher education system", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/160/800/600", desc: "University structures shift to align graduates more quickly with labor market demands." },
+            { id: 17, title: "Danish wind turbine manufacturer secures offshore contract", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/170/800/600", desc: "Global energy developers partner with Danish firms for next-gen turbine deployments." },
+            { id: 18, title: "Organic food consumption in Denmark maintains top ranking", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/180/800/600", desc: "Consumer preference for sustainable agriculture keeps organic produce sales robust." },
+            { id: 19, title: "New cycling superhighways connect commuters", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/190/800/600", desc: "Expanded bicycle infrastructure encourages eco-friendly commuting across greater Copenhagen." },
+            { id: 20, title: "Danish cultural heritage sites integrate AR tours", cat: "Denmark", date: "Oct 16, 2026", img: "https://picsum.photos/id/200/800/600", desc: "Museums across the country launch immersive AR applications to enhance visitor experiences." },
+
+            { id: 21, title: "Germany introduces stricter border checks", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/210/800/600", desc: "Federal authorities implement digital border controls to streamline Schengen transit verification." },
+            { id: 22, title: "Berlin tech sector welcomes digital nomad visa", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/220/800/600", desc: "New immigration procedures simplify residency permits for remote software engineers and tech professionals." },
+            { id: 23, title: "Automotive giants accelerate EV manufacturing", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/230/800/600", desc: "Major car manufacturers transition assembly lines entirely toward next-gen electric platforms." },
+            { id: 24, title: "Deutsche Bahn invests billions in rail modernization", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/240/800/600", desc: "Infrastructure upgrades aim to improve punctuality and passenger capacity across interstate corridors." },
+            { id: 25, title: "Frankfurt financial hub reports steady fintech growth", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/250/800/600", desc: "Frankfurt consolidates its position as a leading European financial technology center." },
+            { id: 26, title: "Renewable energy output in Germany surpasses coal", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/260/800/600", desc: "Solar and wind power generation exceed traditional fossil fuel benchmarks nationwide." },
+            { id: 27, title: "Hamburg port expands automated container operations", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/270/800/600", desc: "Port logistics upgrade to automated crane systems to handle rising global cargo volumes." },
+            { id: 28, title: "Germany enacts skilled labor immigration reforms", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/280/800/600", desc: "Streamlined point-based immigration policies facilitate hiring for non-EU qualified workers." },
+            29: { title: "Munich research institutes pioneer quantum computing", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/290/800/600", desc: "Academic consortia achieve stable qubit entanglement in advanced laboratory environments." },
+            30: { title: "Cultural festivals across Germany attract record crowds", cat: "Germany", date: "Oct 16, 2026", img: "https://picsum.photos/id/300/800/600", desc: "Artistic exhibitions and music events draw vibrant crowds to Berlin, Cologne, and Munich." },
+
+            31: { title: "Europe's airports and airlines demand EES rethink", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/310/800/600", desc: "Aviation stakeholders call for urgent adjustments to manage entry/exit system queues across Schengen airports." },
+            32: { title: "European Central Bank evaluates digital euro timeline", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/320/800/600", desc: "ECB officials discuss privacy safeguards and technological architecture for the digital currency." },
+            33: { title: "EU passes comprehensive AI regulatory framework", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/330/800/600", desc: "New compliance standards govern artificial intelligence deployment across member states." },
+            34: { title: "European space agency launches Earth observation satellite", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/340/800/600", desc: "Orbital telemetry instruments will monitor climate change indicators with high precision." },
+            35: { title: "Trans-European high-speed rail project secures funding", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/350/800/600", desc: "Cross-border rail networks receive substantial grants to connect major capital cities seamlessly." },
+            36: { title: "Mediterranean renewable energy grids integrate solar power", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/360/800/600", desc: "Subsea HVDC cables successfully transmit clean solar electricity across the Mediterranean basin." },
+            37: { title: "European tourism board promotes off-season travel", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/370/800/600", desc: "New campaigns encourage travelers to explore cultural heritage sites during shoulder seasons." },
+            38: { title: "European semiconductor manufacturing alliances boost chips", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/380/800/600", desc: "Foundry investments across European tech hubs reduce reliance on overseas microchip imports." },
+            39: { title: "Cross-border academic exchange programs expand", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/390/800/600", desc: "University consortia receive expanded grants for collaborative scientific investigations." },
+            40: { title: "European maritime authorities strengthen Baltic protections", cat: "Europe", date: "Oct 14, 2026", img: "https://picsum.photos/id/400/800/600", desc: "Joint maritime patrols enforce rigorous emission standards and ecological safeguards." }
+        };
+
+        function renderNews(filter = 'all') {
+            const grid = document.getElementById('grid');
+            const heading = document.getElementById('heading');
+            grid.innerHTML = '';
+            
+            let count = 0;
+            newsData.forEach(item => {
+                if (filter === 'all' || item.cat.toLowerCase() === filter.toLowerCase()) {
+                    count++;
+                    const card = document.createElement('div');
+                    card.className = "holo-card rounded-xl p-4 flex flex-col justify-between";
+                    card.innerHTML = `
+                        <div>
+                            <div class="relative h-44 rounded-lg overflow-hidden bg-slate-900 mb-3">
+                                <img src="${item.img}" class="w-full h-full object-cover">
+                                <span class="absolute top-2 left-2 bg-slate-950/80 text-cyan-400 font-mono text-[10px] px-2 py-0.5 rounded border border-cyan-500/30">${item.cat}</span>
+                            </div>
+                            <div class="font-mono text-xs text-slate-400 mb-1">${item.date} • 3m read</div>
+                            <h3 class="font-bold text-sm text-white line-clamp-2 mb-2">${item.title}</h3>
+                            <p class="text-xs text-slate-400 line-clamp-3">${item.desc}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-cyan-500/20 flex justify-between items-center font-mono text-xs">
+                            <span class="text-slate-500">W.W.N</span>
+                            <span class="text-cyan-400 font-bold">DISPATCH</span>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+            heading.innerText = `WORLDWIDE NEWS // ${filter.toUpperCase()} REPORTS (${count})`;
+        }
+
+        function filterNews(cat) {
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-3 py-1.5 rounded bg-slate-900 text-slate-300 border border-cyan-500/30";
+            });
+            event.target.className = "cat-btn px-3 py-1.5 rounded bg-cyan-400 text-slate-950 font-bold";
+            renderNews(cat);
+        }
+
+        window.onload = function() {
+            renderNews('all');
+        };
+    </script>
+</body>
+</html>
