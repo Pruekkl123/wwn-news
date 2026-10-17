@@ -33,7 +33,7 @@
             backdrop-filter: blur(40px) saturate(220%);
             -webkit-backdrop-filter: blur(40px) saturate(220%);
             border: 1px solid rgba(255, 255, 255, 0.18);
-            border-top: 1px solid rgba(255, 255, 255, 0.35); /* Apple Highlight Edge */
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
             box-shadow: 
                 0 30px 60px rgba(0, 0, 0, 0.5),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3),
@@ -89,7 +89,7 @@
     <!-- ARCHIVE BAR -->
     <div class="liquid-glass-extreme border-x-0 border-t-0 rounded-none py-2.5 px-6 relative z-10">
         <div class="max-w-7xl mx-auto flex items-center justify-between font-mono text-xs">
-            <span class="text-sky-300 font-semibold flex items-center"><i class="fas fa-satellite-dish mr-2 text-cyan-400 animate-pulse"></i> LIVE LIQUID FEED:</span>
+            <span class="text-sky-300 font-semibold flex items-center"><i class="fas fa-satellite-dish mr-2 text-cyan-400 animate-pulse"></i> LIVE NEWS DISPATCHES:</span>
             <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-200 border border-sky-400/30">TODAY (OCT 17, 2026)</span>
         </div>
     </div>
@@ -132,7 +132,6 @@
             var stars = [];
             var colors = ['#38bdf8', '#ffffff', '#7dd3fc', '#0284c7'];
 
-            // Optimized star count for buttery smooth performance
             for (var i = 0; i < 150; i++) {
                 stars.push({
                     x: Math.random() * width,
