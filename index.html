@@ -24,7 +24,7 @@
             width: 100vw;
             height: 100vh;
             z-index: 0;
-            pointer-events: auto; /* เปิดให้แคนวาสรับสัมผัส/คลิกได้ */
+            pointer-events: auto;
         }
 
         .liquid-glass-card {
@@ -153,7 +153,7 @@
         }
         setInterval(updateClock, 1000);
 
-        // 100 INTERACTIVE NEON ENTITIES WITH TOUCH/CLICK EXPANSION
+        // 100 NEON ENTITIES WITH MOUSE MOVE HOVER EXPANSION
         function initBackground() {
             var canvas = document.getElementById('starfield');
             if (!canvas) return;
@@ -161,6 +161,7 @@
             var width = canvas.width = window.innerWidth;
             var height = canvas.height = window.innerHeight;
             
+            var mouse = { x: -1000, y: -1000 };
             var entities = [];
             var colors = ['#00FFFF', '#00F0FF', '#FF007F', '#00FF66', '#BF00FF', '#FFD700'];
 
@@ -170,7 +171,6 @@
                     y: Math.random() * height,
                     vx: (Math.random() - 0.5) * 0.5,
                     vy: (Math.random() - 0.5) * 0.5,
-                    baseScale: 1,
                     scale: 1,
                     targetScale: 1,
                     type: Math.floor(Math.random() * 4),
@@ -180,31 +180,16 @@
                 });
             }
 
-            // TOUCH / CLICK DETECTOR FOR EXPANDING CHARACTERS
-            function handleInteraction(clientX, clientY) {
-                for (var i = 0; i < entities.length; i++) {
-                    var e = entities[i];
-                    var dx = clientX - e.x;
-                    var dy = clientY - e.y;
-                    var dist = Math.sqrt(dx * dx + dy * dy);
-
-                    // ถ้าแตะ/คลิกใกล้ตัวละครในรัศมี 45px
-                    if (dist < 45) {
-                        e.targetScale = 2.8; // ขยายใหญ่ชั่วคราว 2.8 เท่า
-                        setTimeout((function(entity) {
-                            return function() { entity.targetScale = 1; }; // ค่อยๆ หดกลับเป็นปกติ
-                        })(e), 1200);
-                    }
-                }
-            }
-
-            canvas.addEventListener('click', function(evt) {
-                handleInteraction(evt.clientX, evt.clientY);
+            // MOUSE / TOUCH MOVE LISTENER FOR HOVER EFFECT
+            window.addEventListener('mousemove', function(evt) {
+                mouse.x = evt.clientX;
+                mouse.y = evt.clientY;
             });
 
-            canvas.addEventListener('touchstart', function(evt) {
+            window.addEventListener('touchmove', function(evt) {
                 if (evt.touches.length > 0) {
-                    handleInteraction(evt.touches[0].clientX, evt.touches[0].clientY);
+                    mouse.x = evt.touches[0].clientX;
+                    mouse.y = evt.touches[0].clientY;
                 }
             }, { passive: true });
 
@@ -247,8 +232,20 @@
                     e.x += e.vx; e.y += e.vy;
                     e.angle += e.spin;
 
-                    // Smooth Scale Animation (Lerp)
-                    e.scale += (e.targetScale - e.scale) * 0.1;
+                    // คำนวณระยะห่างระหว่างเมาส์กับตัวละคร
+                    var dx = mouse.x - e.x;
+                    var dy = mouse.y - e.y;
+                    var dist = Math.sqrt(dx * dx + dy * dy);
+
+                    // ถ้าเมาส์เฉียดเข้าใกล้ในรัศมี 80px จะขยายใหญ่ขึ้นทันที
+                    if (dist < 80) {
+                        e.targetScale = 2.8;
+                    } else {
+                        e.targetScale = 1;
+                    }
+
+                    // Smooth Lerp Animation
+                    e.scale += (e.targetScale - e.scale) * 0.12;
 
                     if (e.x < -60) e.x = width + 60; if (e.x > width + 60) e.x = -60;
                     if (e.y < -60) e.y = height + 60; if (e.y > height + 60) e.y = -60;
@@ -260,21 +257,21 @@
                     ctx.strokeStyle = e.color;
                     ctx.fillStyle = e.color;
 
-                    // PASS 1: Outer Extreme Glow
+                    // PASS 1: Outer Glow (เรืองแสงเข้มข้นขึ้นเมื่อโดนเมาส์)
                     ctx.lineWidth = 6;
-                    ctx.shadowBlur = e.scale > 1.5 ? 60 : 40;
+                    ctx.shadowBlur = e.scale > 1.5 ? 65 : 35;
                     ctx.shadowColor = e.color;
-                    ctx.globalAlpha = 0.55;
+                    ctx.globalAlpha = 0.6;
                     drawShape(ctx, e);
 
-                    // PASS 2: Middle Bright Glow
+                    // PASS 2: Middle Glow
                     ctx.lineWidth = 3;
-                    ctx.shadowBlur = 20;
+                    ctx.shadowBlur = 18;
                     ctx.shadowColor = e.color;
                     ctx.globalAlpha = 0.85;
                     drawShape(ctx, e);
 
-                    // PASS 3: Crisp Core Line
+                    // PASS 3: Crisp Core
                     ctx.lineWidth = 1.8;
                     ctx.strokeStyle = '#FFFFFF';
                     ctx.shadowBlur = 6;
