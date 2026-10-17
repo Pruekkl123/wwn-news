@@ -6,82 +6,110 @@
     <title>W.W.N // Worldwide News</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #020617; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { 
+            background: radial-gradient(circle at 50% 0%, #0f172a 0%, #020617 100%);
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+            color: #f8fafc;
+        }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        #starfield { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
-        .holo-card {
-            background: rgba(10, 15, 30, 0.88);
-            backdrop-filter: blur(14px);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
-            transition: all 0.3s ease;
+        
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
         }
-        .holo-card:hover {
-            border-color: rgba(0, 240, 255, 0.8);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
-            transform: translateY(-3px);
+
+        /* Apple Liquid Glass Style */
+        .liquid-glass {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .liquid-glass:hover {
+            background: rgba(30, 41, 59, 0.75);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 189, 248, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px);
+        }
+
+        .liquid-header {
+            background: rgba(2, 6, 23, 0.8);
+            backdrop-filter: blur(30px) saturate(200%);
+            -webkit-backdrop-filter: blur(30px) saturate(200%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
-<body class="text-slate-100 min-h-screen flex flex-col relative">
+<body class="min-h-screen flex flex-col relative">
 
     <canvas id="starfield"></canvas>
 
-    <header class="bg-slate-950/90 backdrop-blur-md border-b border-cyan-500/40 sticky top-0 z-40 px-4 py-3">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+    <!-- HEADER / NAVIGATION -->
+    <header class="liquid-header sticky top-0 z-40 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3">
-                <div class="bg-cyan-400 text-slate-950 font-black px-3 py-1.5 rounded font-mono text-lg shadow-[0_0_20px_rgba(0,240,255,0.7)]">W.W.N</div>
-                <span class="font-mono font-bold tracking-widest text-white">WORLDWIDE NEWS</span>
+                <div class="bg-gradient-to-tr from-cyan-500 to-sky-400 text-slate-950 font-black px-3.5 py-1.5 rounded-xl font-mono text-lg shadow-[0_0_25px_rgba(56,189,248,0.5)]">W.W.N</div>
+                <span class="font-mono font-bold tracking-widest text-slate-200 text-sm">WORLDWIDE NEWS</span>
             </div>
             
-            <!-- CATEGORY FILTER BUTTONS -->
             <div class="flex flex-wrap gap-2 font-mono text-xs">
-                <button onclick="filterNews('all')" class="cat-btn px-3 py-1.5 rounded bg-cyan-400 text-slate-950 font-bold cursor-pointer">ALL</button>
-                <button onclick="filterNews('Sweden')" class="cat-btn px-3 py-1.5 rounded bg-slate-900/90 text-slate-300 border border-cyan-500/30 cursor-pointer">SWEDEN</button>
-                <button onclick="filterNews('Denmark')" class="cat-btn px-3 py-1.5 rounded bg-slate-900/90 text-slate-300 border border-cyan-500/30 cursor-pointer">DENMARK</button>
-                <button onclick="filterNews('Germany')" class="cat-btn px-3 py-1.5 rounded bg-slate-900/90 text-slate-300 border border-cyan-500/30 cursor-pointer">GERMANY</button>
-                <button onclick="filterNews('Europe')" class="cat-btn px-3 py-1.5 rounded bg-slate-900/90 text-slate-300 border border-cyan-500/30 cursor-pointer">EUROPE</button>
+                <button onclick="filterNews('all')" class="cat-btn px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold shadow-lg shadow-cyan-500/25 transition cursor-pointer">ALL</button>
+                <button onclick="filterNews('Sweden')" class="cat-btn px-4 py-2 rounded-xl bg-slate-900/50 text-slate-300 border border-white/10 hover:bg-slate-800 transition cursor-pointer">SWEDEN</button>
+                <button onclick="filterNews('Denmark')" class="cat-btn px-4 py-2 rounded-xl bg-slate-900/50 text-slate-300 border border-white/10 hover:bg-slate-800 transition cursor-pointer">DENMARK</button>
+                <button onclick="filterNews('Germany')" class="cat-btn px-4 py-2 rounded-xl bg-slate-900/50 text-slate-300 border border-white/10 hover:bg-slate-800 transition cursor-pointer">GERMANY</button>
+                <button onclick="filterNews('Europe')" class="cat-btn px-4 py-2 rounded-xl bg-slate-900/50 text-slate-300 border border-white/10 hover:bg-slate-800 transition cursor-pointer">EUROPE</button>
             </div>
         </div>
     </header>
 
-    <!-- ARCHIVE / OLD NEWS BAR -->
-    <div class="bg-slate-900/80 border-b border-cyan-500/20 py-2 px-4 relative z-10">
+    <!-- ARCHIVE BAR -->
+    <div class="bg-slate-900/40 backdrop-blur-md border-b border-white/5 py-2.5 px-6 relative z-10">
         <div class="max-w-7xl mx-auto flex items-center justify-between font-mono text-xs">
-            <span class="text-cyan-400"><i class="fas fa-history mr-1"></i> ARCHIVE DISPATCHES:</span>
-            <div id="archive-dates" class="flex gap-2 overflow-x-auto py-1">
-                <!-- ปุ่มเลือกดูข่าวเก่าจะถูกสร้างอัตโนมัติที่นี่ -->
-                <button onclick="loadArchive('today')" class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500 hover:text-slate-950 transition cursor-pointer">TODAY (Oct 17)</button>
+            <span class="text-sky-400 font-semibold"><i class="fas fa-satellite-dish mr-1.5"></i> LIVE DISPATCH FEED:</span>
+            <div class="flex gap-2">
+                <span class="px-3 py-1 rounded-lg bg-sky-500/10 text-sky-300 border border-sky-500/30">TODAY (OCT 17, 2026)</span>
             </div>
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full relative z-10">
-        <h2 id="heading" class="font-mono text-cyan-400 font-bold mb-6 drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">WORLDWIDE NEWS // LOADING DISPATCHES...</h2>
+    <!-- MAIN CONTENT GRID -->
+    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full relative z-10">
+        <h2 id="heading" class="font-mono text-sky-400 font-bold text-sm tracking-wider mb-6">WORLDWIDE NEWS // ALL REPORTS</h2>
         <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </main>
 
-    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/85 backdrop-blur-md flex justify-center items-center p-4">
-        <div class="relative holo-card w-full max-w-2xl rounded-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div class="sticky top-0 z-10 bg-slate-950/95 border-b border-cyan-500/40 p-4 flex items-center justify-between font-mono text-xs">
-                <span id="modal-category" class="text-cyan-400 font-bold uppercase tracking-widest">CATEGORY</span>
-                <button onclick="closeModal()" class="p-2 text-slate-400 hover:text-white cursor-pointer"><i class="fas fa-times text-base"></i></button>
+    <!-- ARTICLE READING MODAL (LIQUID GLASS) -->
+    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/80 backdrop-blur-xl flex justify-center items-center p-4">
+        <div class="relative liquid-glass w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="sticky top-0 z-10 bg-slate-950/80 backdrop-blur-md border-b border-white/10 p-5 flex items-center justify-between font-mono text-xs">
+                <span id="modal-category" class="text-sky-400 font-bold uppercase tracking-widest">CATEGORY</span>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-300 flex items-center justify-center transition cursor-pointer"><i class="fas fa-times"></i></button>
             </div>
-            <div class="p-6 overflow-y-auto space-y-4">
-                <h1 id="modal-title" class="text-xl sm:text-2xl font-black text-white"></h1>
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-5">
+                <h1 id="modal-title" class="text-xl sm:text-2xl font-black text-white leading-snug"></h1>
                 <div class="font-mono text-xs text-slate-400" id="modal-date"></div>
-                <div class="rounded-xl overflow-hidden h-64 bg-slate-900 border border-cyan-500/30">
+                <div class="rounded-2xl overflow-hidden h-72 bg-slate-900 border border-white/10 shadow-inner">
                     <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover">
                 </div>
-                <div id="modal-body" class="text-slate-300 text-sm leading-relaxed space-y-3"></div>
+                <div id="modal-body" class="text-slate-300 text-sm leading-relaxed space-y-4"></div>
             </div>
         </div>
     </div>
 
+    <!-- SCRIPT -->
     <script>
         var newsData = [];
         var currentFilter = 'all';
@@ -94,18 +122,18 @@
             var height = canvas.height = window.innerHeight;
             var stars = [];
             var shootingStars = [];
-            var colors = ['#00F0FF', '#FFFFFF', '#38BDF8', '#A5F3FC'];
+            var colors = ['#38bdf8', '#ffffff', '#0284c7', '#7dd3fc'];
 
-            for (var i = 0; i < 500; i++) {
+            for (var i = 0; i < 400; i++) {
                 stars.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    radius: Math.random() * 2.5 + 0.6,
+                    radius: Math.random() * 2 + 0.5,
                     color: colors[Math.floor(Math.random() * colors.length)],
-                    vx: (Math.random() - 0.5) * 0.2,
-                    vy: (Math.random() - 0.5) * 0.2,
-                    alpha: Math.random() * 0.6 + 0.4,
-                    speed: Math.random() * 0.015 + 0.005,
+                    vx: (Math.random() - 0.5) * 0.15,
+                    vy: (Math.random() - 0.5) * 0.15,
+                    alpha: Math.random() * 0.7 + 0.3,
+                    speed: Math.random() * 0.01 + 0.003,
                     decreasing: Math.random() > 0.5
                 });
             }
@@ -118,32 +146,32 @@
                     if (s.x < 0) s.x = width; if (s.x > width) s.x = 0;
                     if (s.y < 0) s.y = height; if (s.y > height) s.y = 0;
                     if (s.decreasing) {
-                        s.alpha -= s.speed; if (s.alpha <= 0.3) s.decreasing = false;
+                        s.alpha -= s.speed; if (s.alpha <= 0.2) s.decreasing = false;
                     } else {
-                        s.alpha += s.speed; if (s.alpha >= 1) s.decreasing = true;
+                        s.alpha += s.speed; if (s.alpha >= 0.9) s.decreasing = true;
                     }
                     ctx.beginPath();
                     ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
                     ctx.fillStyle = s.color;
                     ctx.globalAlpha = s.alpha;
-                    ctx.shadowBlur = (s.radius > 1.8) ? 12 : 4;
+                    ctx.shadowBlur = (s.radius > 1.5) ? 10 : 3;
                     ctx.shadowColor = s.color;
                     ctx.fill();
                 }
-                if (Math.random() < 0.04 && shootingStars.length < 4) {
-                    shootingStars.push({ x: Math.random() * width, y: Math.random() * (height / 2), length: Math.random() * 100 + 60, speed: Math.random() * 12 + 8, alpha: 1 });
+                if (Math.random() < 0.03 && shootingStars.length < 3) {
+                    shootingStars.push({ x: Math.random() * width, y: Math.random() * (height / 2), length: Math.random() * 120 + 80, speed: Math.random() * 10 + 6, alpha: 1 });
                 }
                 for (var j = shootingStars.length - 1; j >= 0; j--) {
                     var ss = shootingStars[j];
                     var endX = ss.x - ss.length * 0.707;
                     var endY = ss.y + ss.length * 0.707;
                     var grad = ctx.createLinearGradient(ss.x, ss.y, endX, endY);
-                    grad.addColorStop(0, 'rgba(0, 240, 255, ' + ss.alpha + ')');
-                    grad.addColorStop(1, 'rgba(0, 240, 255, 0)');
+                    grad.addColorStop(0, 'rgba(56, 189, 248, ' + ss.alpha + ')');
+                    grad.addColorStop(1, 'rgba(56, 189, 248, 0)');
                     ctx.globalAlpha = 1;
                     ctx.beginPath();
                     ctx.moveTo(ss.x, ss.y); ctx.lineTo(endX, endY);
-                    ctx.strokeStyle = grad; ctx.lineWidth = 2.5; ctx.shadowBlur = 10; ctx.shadowColor = '#00F0FF'; ctx.stroke();
+                    ctx.strokeStyle = grad; ctx.lineWidth = 2; ctx.shadowBlur = 12; ctx.shadowColor = '#38bdf8'; ctx.stroke();
                     ss.x += ss.speed * 0.707; ss.y += ss.speed * 0.707; ss.alpha -= 0.02;
                     if (ss.alpha <= 0) shootingStars.splice(j, 1);
                 }
@@ -161,13 +189,8 @@
                     renderNews(currentFilter);
                 })
                 .catch(err => {
-                    console.log('Error loading news:', err);
+                    console.log('Error loading news.json:', err);
                 });
-        }
-
-        function loadArchive(dateKey) {
-            // ฟังก์ชันสำหรับเลือกดูข่าวตามวันที่เก็บไว้ในอนาคต
-            loadNews();
         }
 
         function renderNews(filter) {
@@ -183,21 +206,21 @@
                 if (currentFilter === 'all' || item.cat.toLowerCase() === currentFilter.toLowerCase()) {
                     count++;
                     var card = document.createElement('div');
-                    card.className = "holo-card rounded-xl p-4 flex flex-col justify-between cursor-pointer group";
+                    card.className = "liquid-glass rounded-2xl p-5 flex flex-col justify-between cursor-pointer group";
                     card.onclick = (function(newsItem) { return function() { openModal(newsItem); }; })(item);
                     card.innerHTML = 
                         '<div>' +
-                            '<div class="relative h-44 rounded-lg overflow-hidden bg-slate-900 mb-3">' +
-                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">' +
-                                '<span class="absolute top-2 left-2 bg-slate-950/80 text-cyan-400 font-mono text-[10px] px-2 py-0.5 rounded border border-cyan-500/30">' + item.cat + '</span>' +
+                            '<div class="relative h-48 rounded-xl overflow-hidden bg-slate-900/50 mb-4 border border-white/5">' +
+                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out">' +
+                                '<span class="absolute top-3 left-3 bg-slate-950/70 backdrop-blur-md text-sky-400 font-mono text-[10px] px-2.5 py-1 rounded-lg border border-white/10 shadow-lg">' + item.cat + '</span>' +
                             '</div>' +
-                            '<div class="font-mono text-xs text-slate-400 mb-1">' + item.date + ' • 3m read</div>' +
-                            '<h3 class="font-bold text-sm text-white line-clamp-2 mb-2 group-hover:text-cyan-400 transition">' + item.title + '</h3>' +
-                            '<p class="text-xs text-slate-400 line-clamp-3">' + item.desc + '</p>' +
+                            '<div class="font-mono text-xs text-slate-400 mb-2">' + item.date + ' • 3m read</div>' +
+                            '<h3 class="font-bold text-sm text-white line-clamp-2 mb-2.5 group-hover:text-sky-300 transition">' + item.title + '</h3>' +
+                            '<p class="text-xs text-slate-400 line-clamp-3 leading-relaxed">' + item.desc + '</p>' +
                         '</div>' +
-                        '<div class="mt-4 pt-3 border-t border-cyan-500/20 flex justify-between items-center font-mono text-xs">' +
-                            '<span class="text-slate-500">W.W.N</span>' +
-                            '<span class="text-cyan-400 font-bold flex items-center gap-1">READ <i class="fas fa-chevron-right text-[9px]"></i></span>' +
+                        '<div class="mt-5 pt-3.5 border-t border-white/10 flex justify-between items-center font-mono text-xs">' +
+                            '<span class="text-slate-500 font-medium">W.W.N</span>' +
+                            '<span class="text-sky-400 font-bold flex items-center gap-1 group-hover:translate-x-1 transition">READ <i class="fas fa-chevron-right text-[9px]"></i></span>' +
                         '</div>';
                     grid.appendChild(card);
                 }
@@ -221,10 +244,10 @@
         function filterNews(cat) {
             var btns = document.querySelectorAll('.cat-btn');
             for (var i = 0; i < btns.length; i++) {
-                btns[i].className = "cat-btn px-3 py-1.5 rounded bg-slate-900/90 text-slate-300 border border-cyan-500/30 cursor-pointer";
+                btns[i].className = "cat-btn px-4 py-2 rounded-xl bg-slate-900/50 text-slate-300 border border-white/10 hover:bg-slate-800 transition cursor-pointer";
             }
             if (window.event && window.event.target) {
-                window.event.target.className = "cat-btn px-3 py-1.5 rounded bg-cyan-400 text-slate-950 font-bold cursor-pointer";
+                window.event.target.className = "cat-btn px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold shadow-lg shadow-cyan-500/25 transition cursor-pointer";
             }
             renderNews(cat);
         }
