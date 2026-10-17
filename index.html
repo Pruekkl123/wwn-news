@@ -32,12 +32,14 @@
     <canvas id="starfield"></canvas>
 
     <header class="bg-slate-950/90 backdrop-blur-md border-b border-cyan-500/40 sticky top-0 z-40 px-4 py-3">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
             <div class="flex items-center gap-3">
                 <div class="bg-cyan-400 text-slate-950 font-black px-3 py-1.5 rounded font-mono text-lg shadow-[0_0_20px_rgba(0,240,255,0.7)]">W.W.N</div>
                 <span class="font-mono font-bold tracking-widest text-white">WORLDWIDE NEWS</span>
             </div>
-            <div class="flex gap-2 font-mono text-xs">
+            
+            <!-- CATEGORY FILTER BUTTONS -->
+            <div class="flex flex-wrap gap-2 font-mono text-xs">
                 <button onclick="filterNews('all')" class="cat-btn px-3 py-1.5 rounded bg-cyan-400 text-slate-950 font-bold cursor-pointer">ALL</button>
                 <button onclick="filterNews('Sweden')" class="cat-btn px-3 py-1.5 rounded bg-slate-900/90 text-slate-300 border border-cyan-500/30 cursor-pointer">SWEDEN</button>
                 <button onclick="filterNews('Denmark')" class="cat-btn px-3 py-1.5 rounded bg-slate-900/90 text-slate-300 border border-cyan-500/30 cursor-pointer">DENMARK</button>
@@ -47,8 +49,19 @@
         </div>
     </header>
 
+    <!-- ARCHIVE / OLD NEWS BAR -->
+    <div class="bg-slate-900/80 border-b border-cyan-500/20 py-2 px-4 relative z-10">
+        <div class="max-w-7xl mx-auto flex items-center justify-between font-mono text-xs">
+            <span class="text-cyan-400"><i class="fas fa-history mr-1"></i> ARCHIVE DISPATCHES:</span>
+            <div id="archive-dates" class="flex gap-2 overflow-x-auto py-1">
+                <!-- ปุ่มเลือกดูข่าวเก่าจะถูกสร้างอัตโนมัติที่นี่ -->
+                <button onclick="loadArchive('today')" class="px-3 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500 hover:text-slate-950 transition cursor-pointer">TODAY (Oct 17)</button>
+            </div>
+        </div>
+    </div>
+
     <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full relative z-10">
-        <h2 id="heading" class="font-mono text-cyan-400 font-bold mb-6 drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">WORLDWIDE NEWS // LOADING LIVE DISPATCHES...</h2>
+        <h2 id="heading" class="font-mono text-cyan-400 font-bold mb-6 drop-shadow-[0_0_10px_rgba(0,240,255,0.5)]">WORLDWIDE NEWS // LOADING DISPATCHES...</h2>
         <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </main>
 
@@ -148,8 +161,13 @@
                     renderNews(currentFilter);
                 })
                 .catch(err => {
-                    console.log('Using fallback local data:', err);
+                    console.log('Error loading news:', err);
                 });
+        }
+
+        function loadArchive(dateKey) {
+            // ฟังก์ชันสำหรับเลือกดูข่าวตามวันที่เก็บไว้ในอนาคต
+            loadNews();
         }
 
         function renderNews(filter) {
