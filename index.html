@@ -121,8 +121,8 @@
             <div class="p-6 sm:p-8 overflow-y-auto space-y-5">
                 <h1 id="modal-title" class="text-xl sm:text-2xl font-black text-white leading-snug"></h1>
                 <div class="font-mono text-xs text-slate-400" id="modal-date"></div>
-                <div class="rounded-2xl overflow-hidden h-72 bg-slate-950 border border-cyan-500/30 shadow-inner">
-                    <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover">
+                <div class="rounded-2xl overflow-hidden h-72 bg-slate-950 border border-cyan-500/30 shadow-inner flex items-center justify-center">
+                    <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop'">
                 </div>
                 <div id="modal-body" class="text-slate-300 text-sm leading-relaxed space-y-4"></div>
             </div>
@@ -154,7 +154,7 @@
         }
         setInterval(updateClock, 1000);
 
-        // HIGH PERFORMANCE 60FPS BACKGROUND ANIMATION
+        // BACKGROUND ANIMATION (60 FPS)
         function initBackground() {
             var canvas = document.getElementById('starfield');
             if (!canvas) return;
@@ -166,7 +166,7 @@
             var entities = [];
             var colors = ['#00FFFF', '#00F0FF', '#FF007F', '#00FF66', '#BF00FF', '#FFD700'];
 
-            for (var i = 0; i < 70; i++) { // ปรับสมดุลปริมาณเพื่อความลื่นไหลระดับ 60 FPS
+            for (var i = 0; i < 70; i++) {
                 entities.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
@@ -221,7 +221,6 @@
             }
 
             function animate() {
-                // เคลียร์หน้าจอด้วยสีกรมท่ามืด
                 ctx.fillStyle = '#020617';
                 ctx.fillRect(0, 0, width, height);
 
@@ -234,14 +233,12 @@
                     var dy = mouse.y - e.y;
                     var distSq = dx * dx + dy * dy;
 
-                    // ตรวจจับรัศมีเมาส์แบบคำนวณเร็ว (Squared distance)
-                    if (distSq < 10000) { // รัศมี ~100px
+                    if (distSq < 10000) {
                         e.targetScale = 2.6;
                     } else {
                         e.targetScale = 1;
                     }
 
-                    // Easing ลื่นๆ ตอบสนองทันที
                     e.scale += (e.targetScale - e.scale) * 0.2;
 
                     if (e.x < -60) e.x = width + 60; if (e.x > width + 60) e.x = -60;
@@ -252,18 +249,15 @@
                     ctx.scale(e.scale, e.scale);
                     ctx.rotate(e.angle);
 
-                    // Optimized Glowing Pass (วาด 2 รอบแบบลื่นๆ)
                     ctx.strokeStyle = e.color;
                     ctx.fillStyle = e.color;
                     
-                    // Outer Bloom
                     ctx.lineWidth = 4;
                     ctx.shadowBlur = e.scale > 1.5 ? 25 : 12;
                     ctx.shadowColor = e.color;
                     ctx.globalAlpha = 0.7;
                     drawShapePath(ctx, e.type);
 
-                    // Core Line
                     ctx.lineWidth = 1.8;
                     ctx.strokeStyle = '#FFFFFF';
                     ctx.shadowBlur = 0;
@@ -311,8 +305,8 @@
                     card.onclick = (function(newsItem) { return function() { openModal(newsItem); }; })(item);
                     card.innerHTML = 
                         '<div>' +
-                            '<div class="relative h-48 rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-cyan-500/20 shadow-inner">' +
-                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out">' +
+                            '<div class="relative h-48 rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-cyan-500/20 shadow-inner flex items-center justify-center">' +
+                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.src=\'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop\'">' +
                                 '<span class="absolute top-3 left-3 glass-tag text-cyan-400 font-mono text-[10px] px-3 py-1 rounded-xl font-bold shadow-lg">' + item.cat + '</span>' +
                             '</div>' +
                             '<div class="font-mono text-xs text-slate-400 mb-2">' + item.date + ' • 3m read</div>' +
