@@ -8,7 +8,432 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        body { <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W.W.N // Worldwide News</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
         body { 
+            background: radial-gradient(circle at 50% -20%, #0f172a 0%, #020617 85%);
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Ultra-Clear Apple-Inspired Liquid Glass */
+        .liquid-glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .liquid-glass-card:hover {
+            background: rgba(56, 189, 248, 0.08);
+            border-color: rgba(56, 189, 248, 0.5);
+            border-top-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.7), 
+                0 0 35px rgba(56, 189, 248, 0.25), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px);
+        }
+
+        /* Glass Tag Badge */
+        .glass-tag {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .liquid-header {
+            background: rgba(2, 6, 23, 0.65);
+            backdrop-filter: blur(35px) saturate(200%);
+            -webkit-backdrop-filter: blur(35px) saturate(200%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative select-none">
+
+    <!-- BACKGROUND CANVAS (STARS + 100 ANIMATED NEON CHARACTERS) -->
+    <canvas id="canvas-bg"></canvas>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="liquid-header sticky top-0 z-40 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-gradient-to-tr from-cyan-400 to-sky-300 text-slate-950 font-black px-3.5 py-1.5 rounded-2xl font-mono text-lg shadow-[0_0_25px_rgba(56,189,248,0.5)] border border-white/40">W.W.N</div>
+                <span class="font-mono font-bold tracking-widest text-slate-100 text-sm drop-shadow">WORLDWIDE NEWS</span>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+                <!-- CATEGORY BUTTONS -->
+                <button onclick="filterNews('all')" class="cat-btn px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold shadow-[0_0_20px_rgba(34,211,238,0.5)] transition cursor-pointer">ALL</button>
+                <button onclick="filterNews('Sweden')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">SWEDEN</button>
+                <button onclick="filterNews('Denmark')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">DENMARK</button>
+                <button onclick="filterNews('Germany')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">GERMANY</button>
+                <button onclick="filterNews('Europe')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer">EUROPE</button>
+                
+                <!-- REAL-TIME UTC CLOCK -->
+                <div class="liquid-glass-card px-3.5 py-2 rounded-xl text-cyan-300 font-bold flex items-center gap-2 border border-cyan-400/30">
+                    <i class="far fa-clock text-cyan-400 animate-pulse"></i>
+                    <span id="live-clock">00:00:00 UTC</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ARCHIVE BAR -->
+    <div class="liquid-glass-card border-x-0 border-t-0 rounded-none py-2.5 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto flex items-center justify-between font-mono text-xs">
+            <span class="text-sky-300 font-semibold flex items-center"><i class="fas fa-satellite-dish mr-2 text-cyan-400 animate-pulse"></i> LIVE NEWS DISPATCHES:</span>
+            <div class="flex items-center gap-3">
+                <span class="hidden sm:inline text-slate-400 text-[11px]"><i class="fas fa-users-viewfinder text-cyan-400 mr-1"></i> 100 NEON ENTITIES ACTIVE IN BG</span>
+                <span class="px-3 py-1 rounded-lg bg-sky-500/20 text-sky-200 border border-sky-400/30" id="live-date">OCT 17, 2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT GRID -->
+    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow w-full relative z-10">
+        <h2 id="heading" class="font-mono text-sky-300 font-bold text-sm tracking-wider mb-6 drop-shadow">WORLDWIDE NEWS // ALL REPORTS</h2>
+        <div id="grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </main>
+
+    <!-- ARTICLE READING MODAL -->
+    <div id="article-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/75 backdrop-blur-2xl flex justify-center items-center p-4">
+        <div class="relative liquid-glass-card w-full max-w-2xl rounded-3xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="sticky top-0 z-10 liquid-header p-5 flex items-center justify-between font-mono text-xs border-b border-white/10">
+                <span id="modal-category" class="text-cyan-300 font-bold uppercase tracking-widest">CATEGORY</span>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 flex items-center justify-center transition cursor-pointer"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-5">
+                <h1 id="modal-title" class="text-xl sm:text-2xl font-black text-white leading-snug"></h1>
+                <div class="font-mono text-xs text-slate-400" id="modal-date"></div>
+                <div class="rounded-2xl overflow-hidden h-72 bg-slate-900/40 border border-white/15 shadow-inner">
+                    <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover">
+                </div>
+                <div id="modal-body" class="text-slate-200 text-sm leading-relaxed space-y-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN LOGIC -->
+    <script>
+        var newsData = [
+            { id: 1, cat: "Sweden", title: "OPINION: Why I wish Sweden would just stop with Halloween", desc: "For The Local's Mandy Pipher, who grew up trick-or-treating on Toronto streets packed with jack-o-lanterns, the pale imitation offered in Sweden leaves much to be desired as autumn sets in.", date: "Oct 17, 2026", img: "https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=800&q=80" },
+            { id: 2, cat: "Sweden", title: "Sweden announces new clean energy grid expansion for 2027", desc: "The Swedish government has unveiled plans to accelerate offshore wind production and strengthen cross-border electricity interconnectors across the Baltic Sea region.", date: "Oct 17, 2026", img: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=80" },
+            { id: 3, cat: "Denmark", title: "Copenhagen leads Northern Europe with breakthrough zero-emission transit", desc: "Denmark's capital completes its transition to 100% electric harbour buses and automated green metro networks ahead of target deadlines.", date: "Oct 16, 2026", img: "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=800&q=80" },
+            { id: 4, cat: "Germany", title: "Tech hubs in Berlin report surge in AI research investments", desc: "European tech founders gather in Berlin as funding for quantum computing and climate-tech artificial intelligence breaks decade records.", date: "Oct 16, 2026", img: "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80" },
+            { id: 5, cat: "Europe", title: "European Space Agency launches next-gen environmental satellite cluster", desc: "A fleet of advanced monitoring satellites deployed successfully to track atmospheric trends and marine biodiversity in real time.", date: "Oct 15, 2026", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" },
+            { id: 6, cat: "Sweden", title: "Stockholm Innovation Summit highlights Nordic sustainability breakthroughs", desc: "Startups across Sweden showcase revolutionary bio-materials and circular economy solutions designed for urban living.", date: "Oct 15, 2026", img: "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?auto=format&fit=crop&w=800&q=80" }
+        ];
+
+        var currentFilter = 'all';
+
+        // 1. REAL-TIME UTC CLOCK
+        function updateClock() {
+            var now = new Date();
+            var hours = String(now.getUTCHours()).padStart(2, '0');
+            var minutes = String(now.getUTCMinutes()).padStart(2, '0');
+            var seconds = String(now.getUTCSeconds()).padStart(2, '0');
+            
+            var clockElem = document.getElementById('live-clock');
+            if (clockElem) {
+                clockElem.innerText = hours + ':' + minutes + ':' + seconds + ' UTC';
+            }
+
+            var options = { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' };
+            var dateStr = now.toLocaleDateString('en-US', options).toUpperCase();
+            var dateElem = document.getElementById('live-date');
+            if (dateElem) {
+                dateElem.innerText = dateStr;
+            }
+        }
+        setInterval(updateClock, 1000);
+
+        // 2. HIGH-PERFORMANCE CANVAS (STARS + 100 DYNAMIC NEON CHARACTER PARTICLES)
+        function initBackgroundCanvas() {
+            var canvas = document.getElementById('canvas-bg');
+            if (!canvas) return;
+            var ctx = canvas.getContext('2d');
+            var width = canvas.width = window.innerWidth;
+            var height = canvas.height = window.innerHeight;
+
+            // Starfield Stars
+            var stars = [];
+            var starColors = ['#38bdf8', '#ffffff', '#7dd3fc', '#0284c7'];
+            for (var s = 0; s < 120; s++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.5 + 0.3,
+                    color: starColors[Math.floor(Math.random() * starColors.length)],
+                    vx: (Math.random() - 0.5) * 0.15,
+                    vy: (Math.random() - 0.5) * 0.15,
+                    alpha: Math.random() * 0.5 + 0.2
+                });
+            }
+
+            // 100 Moving Neon Character Particles (Dog, Cat, Robot, Satellite, Drone)
+            var characters = [];
+            var types = ['DOG', 'CAT', 'ROBOT', 'SATELLITE', 'DRONE'];
+            var neonPalette = ['#00F0FF', '#38BDF8', '#F43F5E', '#A855F7', '#10B981', '#F59E0B'];
+
+            for (var c = 0; c < 100; c++) {
+                characters.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    type: types[c % types.length],
+                    size: Math.random() * 10 + 16, // Size scaling
+                    color: neonPalette[c % neonPalette.length],
+                    vx: (Math.random() - 0.5) * 0.8,
+                    vy: (Math.random() - 0.5) * 0.8,
+                    animPhase: Math.random() * Math.PI * 2,
+                    rot: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 0.02,
+                    alpha: Math.random() * 0.45 + 0.35
+                });
+            }
+
+            // Vector drawing functions for characters
+            function drawCharacterShape(ctx, char) {
+                var p = char.animPhase;
+                ctx.strokeStyle = char.color;
+                ctx.fillStyle = char.color;
+                ctx.lineWidth = 1.8;
+                ctx.shadowColor = char.color;
+                ctx.shadowBlur = 10;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                var s = char.size / 20; // scale factor
+
+                switch (char.type) {
+                    case 'DOG':
+                        var tail = Math.sin(p * 3) * 5 * s;
+                        var leg = Math.sin(p * 2) * 4 * s;
+                        // Body
+                        ctx.beginPath(); ctx.moveTo(-10*s, 0); ctx.lineTo(10*s, 0); ctx.stroke();
+                        // Tail
+                        ctx.beginPath(); ctx.moveTo(-10*s, 0); ctx.lineTo(-18*s, -8*s + tail); ctx.stroke();
+                        // Legs
+                        ctx.beginPath();
+                        ctx.moveTo(-6*s, 0); ctx.lineTo(-6*s + leg, 10*s);
+                        ctx.moveTo(6*s, 0); ctx.lineTo(6*s - leg, 10*s);
+                        ctx.stroke();
+                        // Head & Ears
+                        ctx.beginPath();
+                        ctx.moveTo(10*s, 0); ctx.lineTo(16*s, -8*s); ctx.lineTo(22*s, -4*s); ctx.lineTo(14*s, 4*s);
+                        ctx.closePath(); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(14*s, -6*s); ctx.lineTo(10*s, -14*s); ctx.lineTo(16*s, -10*s); ctx.stroke();
+                        break;
+
+                    case 'CAT':
+                        var catTail = Math.cos(p * 2.5) * 8 * s;
+                        // Sleek body
+                        ctx.beginPath(); ctx.moveTo(-12*s, 2*s); ctx.lineTo(8*s, 2*s); ctx.stroke();
+                        // Tail
+                        ctx.beginPath(); ctx.moveTo(-12*s, 2*s); ctx.quadraticCurveTo(-18*s, -10*s + catTail, -14*s, -16*s + catTail); ctx.stroke();
+                        // Legs
+                        ctx.beginPath(); ctx.moveTo(-8*s, 2*s); ctx.lineTo(-8*s, 10*s); ctx.moveTo(5*s, 2*s); ctx.lineTo(5*s, 10*s); ctx.stroke();
+                        // Head & Sharp Ears
+                        ctx.beginPath(); ctx.arc(12*s, -2*s, 5*s, 0, Math.PI * 2); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(9*s, -6*s); ctx.lineTo(8*s, -14*s); ctx.lineTo(13*s, -7*s); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(12*s, -6*s); ctx.lineTo(16*s, -14*s); ctx.lineTo(16*s, -6*s); ctx.stroke();
+                        break;
+
+                    case 'ROBOT':
+                        var floatY = Math.sin(p * 2) * 3 * s;
+                        // Head Box
+                        ctx.strokeRect(-8*s, -12*s + floatY, 16*s, 12*s);
+                        // Antenna
+                        ctx.beginPath(); ctx.moveTo(0, -12*s + floatY); ctx.lineTo(0, -18*s + floatY); ctx.stroke();
+                        ctx.beginPath(); ctx.arc(0, -19*s + floatY, 2*s, 0, Math.PI * 2); ctx.fill();
+                        // Glowing Eyes
+                        ctx.fillRect(-5*s, -9*s + floatY, 3*s, 3*s);
+                        ctx.fillRect(2*s, -9*s + floatY, 3*s, 3*s);
+                        // Body
+                        ctx.strokeRect(-10*s, 3*s + floatY, 20*s, 10*s);
+                        break;
+
+                    case 'SATELLITE':
+                        // Center Orb
+                        ctx.beginPath(); ctx.arc(0, 0, 6*s, 0, Math.PI * 2); ctx.stroke();
+                        // Solar Panels
+                        ctx.strokeRect(-18*s, -4*s, 10*s, 8*s);
+                        ctx.strokeRect(8*s, -4*s, 10*s, 8*s);
+                        ctx.beginPath(); ctx.moveTo(-8*s, 0); ctx.lineTo(8*s, 0); ctx.stroke();
+                        break;
+
+                    case 'DRONE':
+                        // Quadcopter cross
+                        ctx.beginPath(); ctx.moveTo(-12*s, -12*s); ctx.lineTo(12*s, 12*s); ctx.moveTo(12*s, -12*s); ctx.lineTo(-12*s, 12*s); ctx.stroke();
+                        // Rotors
+                        var rRot = p * 4;
+                        [[-12,-12], [12,-12], [-12,12], [12,12]].forEach(function(pt) {
+                            ctx.beginPath();
+                            ctx.arc(pt[0]*s, pt[1]*s, 4*s, 0, Math.PI * 2);
+                            ctx.stroke();
+                        });
+                        break;
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                // Render Stars
+                for (var i = 0; i < stars.length; i++) {
+                    var st = stars[i];
+                    st.x += st.vx; st.y += st.vy;
+                    if (st.x < 0) st.x = width; if (st.x > width) st.x = 0;
+                    if (st.y < 0) st.y = height; if (st.y > height) st.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(st.x, st.y, st.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = st.color;
+                    ctx.globalAlpha = st.alpha;
+                    ctx.shadowColor = st.color;
+                    ctx.shadowBlur = 6;
+                    ctx.fill();
+                }
+
+                // Render 100 Characters
+                for (var j = 0; j < characters.length; j++) {
+                    var ch = characters[j];
+                    ch.x += ch.vx;
+                    ch.y += ch.vy;
+                    ch.animPhase += 0.05;
+                    ch.rot += ch.rotSpeed;
+
+                    // Screen Wrap
+                    if (ch.x < -30) ch.x = width + 30;
+                    if (ch.x > width + 30) ch.x = -30;
+                    if (ch.y < -30) ch.y = height + 30;
+                    if (ch.y > height + 30) ch.y = -30;
+
+                    ctx.save();
+                    ctx.translate(ch.x, ch.y);
+                    ctx.rotate(ch.rot);
+                    ctx.globalAlpha = ch.alpha;
+
+                    drawCharacterShape(ctx, ch);
+
+                    ctx.restore();
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            window.onresize = function() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            };
+
+            animate();
+        }
+
+        // 3. NEWS RENDER & FILTERING
+        function loadNews() {
+            renderNews(currentFilter);
+        }
+
+        function renderNews(filter) {
+            currentFilter = filter || 'all';
+            var grid = document.getElementById('grid');
+            var heading = document.getElementById('heading');
+            if (!grid || !heading) return;
+            grid.innerHTML = '';
+            
+            var count = 0;
+            for (var i = 0; i < newsData.length; i++) {
+                var item = newsData[i];
+                if (currentFilter === 'all' || item.cat.toLowerCase() === currentFilter.toLowerCase()) {
+                    count++;
+                    var card = document.createElement('div');
+                    card.className = "liquid-glass-card rounded-3xl p-5 flex flex-col justify-between cursor-pointer group";
+                    card.onclick = (function(newsItem) { return function() { openModal(newsItem); }; })(item);
+                    card.innerHTML = 
+                        '<div>' +
+                            '<div class="relative h-48 rounded-2xl overflow-hidden bg-slate-900/30 mb-4 border border-white/10 shadow-inner">' +
+                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out">' +
+                                '<span class="absolute top-3 left-3 glass-tag text-cyan-300 font-mono text-[10px] px-3 py-1 rounded-xl font-bold shadow-lg">' + item.cat + '</span>' +
+                            '</div>' +
+                            '<div class="font-mono text-xs text-slate-400 mb-2">' + item.date + ' • 3m read</div>' +
+                            '<h3 class="font-bold text-sm text-white line-clamp-2 mb-2.5 group-hover:text-cyan-300 transition">' + item.title + '</h3>' +
+                            '<p class="text-xs text-slate-300 line-clamp-3 leading-relaxed">' + item.desc + '</p>' +
+                        '</div>' +
+                        '<div class="mt-5 pt-3.5 border-t border-white/10 flex justify-between items-center font-mono text-xs">' +
+                            '<span class="text-slate-400 font-medium">W.W.N</span>' +
+                            '<span class="text-cyan-300 font-bold flex items-center gap-1 group-hover:translate-x-1 transition">READ <i class="fas fa-chevron-right text-[9px]"></i></span>' +
+                        '</div>';
+                    grid.appendChild(card);
+                }
+            }
+            heading.innerText = 'WORLDWIDE NEWS // ' + currentFilter.toUpperCase() + ' REPORTS (' + count + ')';
+        }
+
+        function openModal(item) {
+            document.getElementById('modal-category').innerText = item.cat;
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-date').innerText = item.date + ' • 3m read';
+            document.getElementById('modal-image').src = item.img;
+            document.getElementById('modal-body').innerHTML = '<p>' + item.desc + '</p>';
+            document.getElementById('article-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('article-modal').classList.add('hidden');
+        }
+
+        function filterNews(cat) {
+            var btns = document.querySelectorAll('.cat-btn');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].className = "cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-200 hover:text-white transition cursor-pointer";
+            }
+            if (window.event && window.event.target) {
+                window.event.target.className = "cat-btn px-4 py-2 rounded-xl bg-cyan-400 text-slate-950 font-bold shadow-[0_0_20px_rgba(34,211,238,0.5)] transition cursor-pointer";
+            }
+            renderNews(cat);
+        }
+
+        window.onload = function() {
+            updateClock();
+            initBackgroundCanvas();
+            loadNews();
+        };
+    </script>
+</body>
+</html>
             background: radial-gradient(circle at 50% -20%, #0f172a 0%, #020617 80%);
             font-family: 'Inter', sans-serif; 
             overflow-x: hidden; 
