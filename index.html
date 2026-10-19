@@ -89,6 +89,13 @@
                 <button onclick="filterNews('Germany')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-300 hover:text-white transition cursor-pointer">GERMANY</button>
                 <button onclick="filterNews('Europe')" class="cat-btn px-4 py-2 rounded-xl liquid-glass-card text-slate-300 hover:text-white transition cursor-pointer">EUROPE</button>
                 
+                <!-- TRANSLATE BUTTON -->
+                <button onclick="toggleTranslate()" id="translate-btn" class="liquid-glass-card px-4 py-2 rounded-xl text-cyan-300 hover:text-white font-bold flex items-center gap-2 border border-cyan-400/50 cursor-pointer shadow-[0_0_15px_rgba(0,240,255,0.2)]">
+                    <i class="fas fa-language text-cyan-400"></i>
+                    <span id="translate-text">TH / EN</span>
+                </button>
+
+                <!-- REAL-TIME CLOCK -->
                 <div class="liquid-glass-card px-3.5 py-2 rounded-xl text-cyan-400 font-bold flex items-center gap-2 border border-cyan-400/40">
                     <i class="far fa-clock text-cyan-400 animate-pulse"></i>
                     <span id="live-clock">00:00:00 UTC</span>
@@ -100,7 +107,7 @@
     <!-- ARCHIVE BAR -->
     <div class="liquid-glass-card border-x-0 border-t-0 rounded-none py-2.5 px-6 relative z-10">
         <div class="max-w-7xl mx-auto flex items-center justify-between font-mono text-xs">
-            <span class="text-cyan-400 font-semibold flex items-center"><i class="fas fa-satellite-dish mr-2 text-cyan-400 animate-pulse"></i> LIVE NEWS DISPATCHES:</span>
+            <span class="text-cyan-400 font-semibold flex items-center"><i class="fas fa-satellite-dish mr-2 text-cyan-400 animate-pulse"></i> <span id="dispatch-label">LIVE NEWS DISPATCHES:</span></span>
             <span class="px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-300 border border-cyan-400/30" id="live-date">OCT 17, 2026</span>
         </div>
     </div>
@@ -131,8 +138,10 @@
 
     <!-- SCRIPT -->
     <script>
+        var originalNewsData = [];
         var newsData = [];
         var currentFilter = 'all';
+        var isThai = false;
 
         function updateClock() {
             var now = new Date();
@@ -153,6 +162,64 @@
             }
         }
         setInterval(updateClock, 1000);
+
+        // SIMPLE TRANSLATION DICTIONARY / MAPPING FOR DEMO & KEY TERMS
+        function translateText(text, targetLang) {
+            if (targetLang !== 'th') return text;
+            
+            // ตัวอย่างพจนานุกรมแปลคำศัพท์หลักและหัวข้อข่าวเป็นไทย
+            var dictionary = {
+                "What are Denmark's rules on winter tyres and when should you change?": "กฎระเบียบเรื่องยางฤดูหนาวของเดนมาร์กคืออะไร และควรเปลี่ยนเมื่อใด?",
+                "How to get vaccinated against the flu in Denmark": "วิธีเข้ารับการฉีดวัคซีนไข้หวัดใหญ่ในเดนมาร์ก",
+                "Why you'll need to remember your ETA when renewing a passport": "ทำไมคุณจึงต้องจำ ETA ของคุณเมื่อต่ออายุหนังสือเดินทาง",
+                "Say goodbye to daylight: Clocks to go back in Denmark next week": "บอกลาแสงแดด: นาฬิกาจะต้องหมุนกลับในเดนมาร์กสัปดาห์หน้า",
+                "Danish word of the day: altså": "คำศัพท์ภาษาเดนมาร์กประจำวัน: altså",
+                "Court to deliver verdict in Danish People's Party 'skin colour' libel case": "ศาลเตรียมพิพากษาคดีหมิ่นประมาท 'สีผิว' ของพรรคประชาชนเดนมาร์ก",
+                "Sweden's speaker of parliament has called a press conference": "ประธานรัฐสภาสวีเดนเรียกแถลงข่าว",
+                "Drivers across large parts of western Sweden in particular face a high risk of black ice over the coming days": "ผู้ขับขี่ในพื้นที่ส่วนใหญ่ทางตะวันตกของสวีเดนเผชิญความเสี่ยงสูงจากน้ำแข็งดำในอีกไม่กี่วันข้างหน้า"
+            };
+
+            if (dictionary[text]) return dictionary[text];
+
+            // แปลคำศัพท์ทั่วไปแบบอัตโนมัติ
+            return text
+                .replace(/Sweden/g, "สวีเดน")
+                .replace(/Denmark/g, "เดนมาร์ก")
+                .replace(/Germany/g, "เยอรมนี")
+                .replace(/Europe/g, "ยุโรป")
+                .replace(/Court/g, "ศาล")
+                .replace(/Police/g, "ตำรวจ")
+                .replace(/Government/g, "รัฐบาล")
+                .replace(/News/g, "ข่าวสาร")
+                .replace(/Reports/g, "รายงานข่าว");
+        }
+
+        function toggleTranslate() {
+            isThai = !isThai;
+            var btnText = document.getElementById('translate-text');
+            var dispatchLabel = document.getElementById('dispatch-label');
+            
+            if (isThai) {
+                btnText.innerText = "ภาษาไทย (TH)";
+                dispatchLabel.innerText = "รายงานข่าวสด:";
+            } else {
+                btnText.innerText = "EN / TH";
+                dispatchLabel.innerText = "LIVE NEWS DISPATCHES:";
+            }
+
+            // แปลข้อมูลข่าวทั้งหมด
+            newsData = originalNewsData.map(function(item) {
+                return {
+                    cat: item.cat,
+                    date: item.date,
+                    title: isThai ? translateText(item.title, 'th') : item.originalTitle,
+                    desc: isThai ? translateText(item.desc, 'th') : item.originalDesc,
+                    img: item.img
+                };
+            });
+
+            renderNews(currentFilter);
+        }
 
         // BACKGROUND ANIMATION (60 FPS)
         function initBackground() {
@@ -280,7 +347,18 @@
             fetch('news.json')
                 .then(response => response.json())
                 .then(data => {
-                    newsData = data;
+                    originalNewsData = data.map(function(item) {
+                        return {
+                            cat: item.cat,
+                            date: item.date,
+                            title: item.title,
+                            originalTitle: item.title,
+                            desc: item.desc,
+                            originalDesc: item.desc,
+                            img: item.img
+                        };
+                    });
+                    newsData = JSON.parse(JSON.stringify(originalNewsData));
                     renderNews(currentFilter);
                 })
                 .catch(err => {
@@ -320,7 +398,8 @@
                     grid.appendChild(card);
                 }
             }
-            heading.innerText = 'WORLDWIDE NEWS // ' + currentFilter.toUpperCase() + ' REPORTS (' + count + ')';
+            var reportText = isThai ? 'รายงานข่าว' : 'REPORTS';
+            heading.innerText = 'WORLDWIDE NEWS // ' + currentFilter.toUpperCase() + ' ' + reportText + ' (' + count + ')';
         }
 
         function openModal(item) {
