@@ -163,18 +163,32 @@
         }
         setInterval(updateClock, 1000);
 
-        function getSmartFallbackImage(item) {
-            var text = ((item.title || item.originalTitle) + " " + item.cat).toLowerCase();
-            if (text.includes('sweden')) {
-                return 'https://images.unsplash.com/photo-1509356843155-3ac293282132?q=80&w=800&auto=format&fit=crop';
-            } else if (text.includes('denmark')) {
-                return 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=800&auto=format&fit=crop';
-            } else if (text.includes('germany')) {
-                return 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop';
-            } else if (text.includes('migration') || text.includes('court') || text.includes('law')) {
-                return 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop';
+        // ระบบแมปปิ้งรูปภาพให้ตรงกับเนื้อหาและหมวดหมู่ข่าวแบบแม่นยำ
+        function getAccurateImage(item) {
+            var title = (item.title || item.originalTitle || "").toLowerCase();
+            var cat = (item.cat || "").toLowerCase();
+
+            // กฎการจับคู่รูปภาพตามคีย์เวิร์ดในข่าว
+            if (title.includes('pregnancy') || title.includes('parenthood') || title.includes('migration') || title.includes('agency')) {
+                return 'https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=800&auto=format&fit=crop'; // ภาพครอบครัว / สำนักงานตรวจคนเข้าเมือง
+            } else if (title.includes('tyres') || title.includes('tires') || title.includes('winter') || title.includes('driving') || title.includes('ice')) {
+                return 'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=800&auto=format&fit=crop'; // ภาพการขับรถ / ฤดูหนาว / ถนน
+            } else if (title.includes('vaccin') || title.includes('flu') || title.includes('health')) {
+                return 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800&auto=format&fit=crop'; // ภาพการแพทย์ / วัคซีน
+            } else if (title.includes('passport') || title.includes('eta') || title.includes('travel')) {
+                return 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop'; // ภาพการเดินทาง / หนังสือเดินทาง
+            } else if (title.includes('court') || title.includes('libel') || title.includes('party') || title.includes('case')) {
+                return 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'; // ภาพศาล / คดีความ / การเมือง
+            } else if (title.includes('speaker') || title.includes('parliament') || title.includes('government')) {
+                return 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop'; // ภาพรัฐสภา / การประชุมรัฐบาล
+            } else if (cat === 'sweden') {
+                return 'https://images.unsplash.com/photo-1509356843155-3ac293282132?q=80&w=800&auto=format&fit=crop'; // วิวสวีเดน
+            } else if (cat === 'denmark') {
+                return 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=800&auto=format&fit=crop'; // วิวเดนมาร์ก
+            } else if (cat === 'germany') {
+                return 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop'; // วิวเยอรมนี
             } else {
-                return 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800&auto=format&fit=crop';
+                return 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800&auto=format&fit=crop'; // ข่าวทั่วไป
             }
         }
 
@@ -372,15 +386,12 @@
                         var tempItem = {
                             cat: item.cat,
                             date: item.date,
-                            title: item.title,
-                            desc: item.desc,
                             originalTitle: item.title,
                             originalDesc: item.desc,
                             img: item.img
                         };
-                        if (!item.img || item.img.trim() === "") {
-                            tempItem.img = getSmartFallbackImage(tempItem);
-                        }
+                        // แทนที่รูปด้วยระบบ Smart Image ที่แม่นยำตามหัวข้อข่าว
+                        tempItem.img = getAccurateImage(tempItem);
                         return tempItem;
                     });
                     newsData = JSON.parse(JSON.stringify(originalNewsData));
@@ -407,12 +418,12 @@
                     card.className = "liquid-glass-card rounded-3xl p-5 flex flex-col justify-between cursor-pointer group";
                     card.onclick = (function(newsItem) { return function() { openModal(newsItem); }; })(item);
                     
-                    var fallbackUrl = getSmartFallbackImage(item);
+                    var accurateImg = getAccurateImage(item);
 
                     card.innerHTML = 
                         '<div>' +
                             '<div class="relative h-48 rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-cyan-500/20 shadow-inner flex items-center justify-center">' +
-                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.src=\'' + fallbackUrl + '\'">' +
+                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.src=\'' + accurateImg + '\'">' +
                                 '<span class="absolute top-3 left-3 glass-tag text-cyan-400 font-mono text-[10px] px-3 py-1 rounded-xl font-bold shadow-lg">' + item.cat + '</span>' +
                             '</div>' +
                             '<div class="font-mono text-xs text-slate-400 mb-2">' + item.date + ' • 3m read</div>' +
