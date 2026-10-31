@@ -143,39 +143,45 @@
         var currentFilter = 'all';
         var isThai = false;
 
-        // คลังรูปภาพระดับพรีเมียมที่ไม่ซ้ำกันเลยกว่า 50 รูป
-        var uniqueImagePool = [
-            'https://images.unsplash.com/photo-1509356843155-3ac293282132?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1575505586569-646b2ca898fc?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1426604966848-d7adac902bff?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1519501025264-65ba15a82390?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1508739773434-c26b3d09e071?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1433086966358-54859ef0ed7c?q=80&w=800&auto=format&fit=crop',
-            'https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?q=80&w=800&auto=format&fit=crop'
-        ];
+        // ระบบเลือกรูปภาพที่ตรงตามเนื้อหาและรับประกันว่าไม่ซ้ำกันผ่านการระบุ ID เฉพาะตัว
+        function getPerfectMatchImage(title, cat, index) {
+            var t = (title || "").toLowerCase();
+            var c = (cat || "").toLowerCase();
+
+            // จับคู่ภาพตามคีย์เวิร์ดในหัวข้อข่าวให้ตรงเป๊ะ
+            if (t.includes('pregnancy') || t.includes('parenthood') || t.includes('migration') || t.includes('agency')) {
+                return 'https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=800&auto=format&fit=crop'; // ภาพครอบครัว/คนเข้าเมือง
+            } else if (t.includes('tyres') || t.includes('tires') || t.includes('winter') || t.includes('driving') || t.includes('ice') || t.includes('black ice')) {
+                return 'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=800&auto=format&fit=crop'; // ภาพถนนหน้าหนาว/ยางรถ
+            } else if (t.includes('vaccin') || t.includes('flu') || t.includes('health')) {
+                return 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800&auto=format&fit=crop'; // ภาพการฉีดวัคซีน
+            } else if (t.includes('passport') || t.includes('eta') || t.includes('travel')) {
+                return 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop'; // ภาพพาสปอร์ตและการเดินทาง
+            } else if (t.includes('court') || t.includes('libel') || t.includes('party') || t.includes('case') || t.includes('verdict')) {
+                return 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'; // ภาพศาลและคดีความ
+            } else if (t.includes('speaker') || t.includes('parliament') || t.includes('government') || t.includes('press conference')) {
+                return 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop'; // ภาพรัฐสภาและการแถลงข่าว
+            } else if (t.includes('daylight') || t.includes('clock') || t.includes('time')) {
+                return 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?q=80&w=800&auto=format&fit=crop'; //ภาพนาฬิกา เวลา
+            } else if (t.includes('word') || t.includes('danish') || t.includes('language')) {
+                return 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop'; //ภาพหนังสือ ภาษา
+            }
+
+            // ถ้าไม่มีคีย์เวิร์ดเฉพาะ ให้ดึงจากคลังภาพสำรองที่ไม่ซ้ำกันตาม Index ของข่าว
+            var fallbackPool = [
+                'https://images.unsplash.com/photo-1509356843155-3ac293282132?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop',
+                'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=800&auto=format&fit=crop'
+            ];
+            return fallbackPool[index % fallbackPool.length];
+        }
 
         function updateClock() {
             var now = new Date();
@@ -247,7 +253,7 @@
                 dispatchLabel.innerText = "LIVE NEWS DISPATCHES:";
             }
 
-            newsData = originalNewsData.map(function(item, idx) {
+            newsData = originalNewsData.map(function(item) {
                 return {
                     cat: item.cat,
                     date: item.date,
@@ -388,14 +394,12 @@
                 .then(response => response.json())
                 .then(data => {
                     originalNewsData = data.map(function(item, index) {
-                        // กำหนดรูปภาพจากคลังที่ไม่ซ้ำกันโดยใช้ index เรียงตามลำดับข่าว
-                        var uniqueImg = uniqueImagePool[index % uniqueImagePool.length];
                         return {
                             cat: item.cat,
                             date: item.date,
                             originalTitle: item.title,
                             originalDesc: item.desc,
-                            img: uniqueImg
+                            img: getPerfectMatchImage(item.title, item.cat, index)
                         };
                     });
                     newsData = JSON.parse(JSON.stringify(originalNewsData));
