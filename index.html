@@ -129,7 +129,7 @@
                 <h1 id="modal-title" class="text-xl sm:text-2xl font-black text-white leading-snug"></h1>
                 <div class="font-mono text-xs text-slate-400" id="modal-date"></div>
                 <div class="rounded-2xl overflow-hidden h-72 bg-slate-950 border border-cyan-500/30 shadow-inner flex items-center justify-center">
-                    <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop'">
+                    <img id="modal-image" src="" alt="News Image" class="w-full h-full object-cover">
                 </div>
                 <div id="modal-body" class="text-slate-300 text-sm leading-relaxed space-y-4"></div>
             </div>
@@ -163,10 +163,25 @@
         }
         setInterval(updateClock, 1000);
 
+        // ฟังก์ชันเลือกรูปภาพสำรองตามหมวดหมู่หรือเนื้อหาข่าวให้แม่นยำขึ้น
+        function getSmartFallbackImage(item) {
+            var text = (item.originalTitle + " " + item.cat).toLowerCase();
+            if (text.includes('sweden')) {
+                return 'https://images.unsplash.com/photo-1509356843155-3ac293282132?q=80&w=800&auto=format&fit=crop'; // ภาพแนวสวีเดน/ยุโรปเหนือ
+            } else if (text.includes('denmark')) {
+                return 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=800&auto=format&fit=crop'; // ภาพแนวเดนมาร์ก/โคเปนเฮเกน
+            } else if (text.includes('germany')) {
+                return 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop'; // ภาพแนวเยอรมนี
+            } else if (text.includes('migration') || text.includes('court') || text.includes('law')) {
+                return 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'; // ภาพแนวศาล กฎหมาย
+            } else {
+                return 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800&auto=format&fit=crop'; // ภาพข่าวทั่วไป
+            }
+        }
+
         function translateToThai(text) {
             if (!text) return "";
-            
-            var translated = text
+            return text
                 .replace(/Why don't pregnancy or parenthood matter for/gi, "ทำไมการตั้งครรภ์หรือการเป็นพ่อแม่จึงไม่มีความสำคัญต่อ")
                 .replace(/Migration Agency/gi, "สำนักงานตรวจคนเข้าเมือง")
                 .replace(/This week:/gi, "สัปดาห์นี้:")
@@ -181,7 +196,6 @@
                 .replace(/Court to deliver verdict in Danish People's Party 'skin colour' libel case/gi, "ศาลเตรียมพิพากษาคดีหมิ่นประมาท 'สีผิว' ของพรรคประชาชนเดนมาร์ก")
                 .replace(/Sweden's speaker of parliament has called a press conference/gi, "ประธานรัฐสภาสวีเดนเรียกแถลงข่าว")
                 .replace(/Drivers across large parts of western Sweden in particular face a high risk of black ice over the coming days/gi, "ผู้ขับขี่ในพื้นที่ส่วนใหญ่ทางตะวันตกของสวีเดนเผชิญความเสี่ยงสูงจากน้ำแข็งดำในอีกไม่กี่วันข้างหน้า")
-                
                 .replace(/\bSweden\b/gi, "สวีเดน")
                 .replace(/\bDenmark\b/gi, "เดนมาร์ก")
                 .replace(/\bGermany\b/gi, "เยอรมนี")
@@ -200,8 +214,6 @@
                 .replace(/\bWinter\b/gi, "ฤดูหนาว")
                 .replace(/\bTyres\b/gi, "ยางรถยนต์")
                 .replace(/\bTires\b/gi, "ยางรถยนต์");
-
-            return translated;
         }
 
         function toggleTranslate() {
@@ -358,15 +370,18 @@
                 .then(response => response.json())
                 .then(data => {
                     originalNewsData = data.map(function(item) {
-                        return {
+                        var tempItem = {
                             cat: item.cat,
                             date: item.date,
-                            title: item.title,
-                            desc: item.desc,
                             originalTitle: item.title,
                             originalDesc: item.desc,
                             img: item.img
                         };
+                        // ถ้าภาพจากฟีดไม่มี หรือเป็นภาพว่าง ให้ใช้ระบบเลือกภาพอัจฉริยะตามหมวดหมู่
+                        if (!item.img || item.img.trim() === "") {
+                            tempItem.img = getSmartFallbackImage(tempItem);
+                        }
+                        return tempItem;
                     });
                     newsData = JSON.parse(JSON.stringify(originalNewsData));
                     renderNews(currentFilter);
@@ -391,10 +406,14 @@
                     var card = document.createElement('div');
                     card.className = "liquid-glass-card rounded-3xl p-5 flex flex-col justify-between cursor-pointer group";
                     card.onclick = (function(newsItem) { return function() { openModal(newsItem); }; })(item);
+                    
+                    // ใช้ฟังก์ชันตรวจสอบและสลับภาพสำรองที่ตรงกับเนื้อหาทันทีหากรูปโหลดไม่ขึ้น
+                    var fallbackUrl = getSmartFallbackImage(item);
+
                     card.innerHTML = 
                         '<div>' +
                             '<div class="relative h-48 rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-cyan-500/20 shadow-inner flex items-center justify-center">' +
-                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.src=\'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop\'">' +
+                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.src=\'' + fallbackUrl + '\'">' +
                                 '<span class="absolute top-3 left-3 glass-tag text-cyan-400 font-mono text-[10px] px-3 py-1 rounded-xl font-bold shadow-lg">' + item.cat + '</span>' +
                             '</div>' +
                             '<div class="font-mono text-xs text-slate-400 mb-2">' + item.date + ' • 3m read</div>' +
