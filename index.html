@@ -163,19 +163,18 @@
         }
         setInterval(updateClock, 1000);
 
-        // ฟังก์ชันเลือกรูปภาพสำรองตามหมวดหมู่หรือเนื้อหาข่าวให้แม่นยำขึ้น
         function getSmartFallbackImage(item) {
-            var text = (item.originalTitle + " " + item.cat).toLowerCase();
+            var text = ((item.title || item.originalTitle) + " " + item.cat).toLowerCase();
             if (text.includes('sweden')) {
-                return 'https://images.unsplash.com/photo-1509356843155-3ac293282132?q=80&w=800&auto=format&fit=crop'; // ภาพแนวสวีเดน/ยุโรปเหนือ
+                return 'https://images.unsplash.com/photo-1509356843155-3ac293282132?q=80&w=800&auto=format&fit=crop';
             } else if (text.includes('denmark')) {
-                return 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=800&auto=format&fit=crop'; // ภาพแนวเดนมาร์ก/โคเปนเฮเกน
+                return 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=800&auto=format&fit=crop';
             } else if (text.includes('germany')) {
-                return 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop'; // ภาพแนวเยอรมนี
+                return 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop';
             } else if (text.includes('migration') || text.includes('court') || text.includes('law')) {
-                return 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'; // ภาพแนวศาล กฎหมาย
+                return 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop';
             } else {
-                return 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800&auto=format&fit=crop'; // ภาพข่าวทั่วไป
+                return 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=800&auto=format&fit=crop';
             }
         }
 
@@ -373,11 +372,12 @@
                         var tempItem = {
                             cat: item.cat,
                             date: item.date,
+                            title: item.title,
+                            desc: item.desc,
                             originalTitle: item.title,
                             originalDesc: item.desc,
                             img: item.img
                         };
-                        // ถ้าภาพจากฟีดไม่มี หรือเป็นภาพว่าง ให้ใช้ระบบเลือกภาพอัจฉริยะตามหมวดหมู่
                         if (!item.img || item.img.trim() === "") {
                             tempItem.img = getSmartFallbackImage(tempItem);
                         }
@@ -407,7 +407,6 @@
                     card.className = "liquid-glass-card rounded-3xl p-5 flex flex-col justify-between cursor-pointer group";
                     card.onclick = (function(newsItem) { return function() { openModal(newsItem); }; })(item);
                     
-                    // ใช้ฟังก์ชันตรวจสอบและสลับภาพสำรองที่ตรงกับเนื้อหาทันทีหากรูปโหลดไม่ขึ้น
                     var fallbackUrl = getSmartFallbackImage(item);
 
                     card.innerHTML = 
@@ -417,8 +416,8 @@
                                 '<span class="absolute top-3 left-3 glass-tag text-cyan-400 font-mono text-[10px] px-3 py-1 rounded-xl font-bold shadow-lg">' + item.cat + '</span>' +
                             '</div>' +
                             '<div class="font-mono text-xs text-slate-400 mb-2">' + item.date + ' • 3m read</div>' +
-                            '<h3 class="font-bold text-sm text-white line-clamp-2 mb-2.5 group-hover:text-cyan-400 transition">' + item.title + '</h3>' +
-                            '<p class="text-xs text-slate-300 line-clamp-3 leading-relaxed">' + item.desc + '</p>' +
+                            '<h3 class="font-bold text-sm text-white line-clamp-2 mb-2.5 group-hover:text-cyan-400 transition">' + (item.title || item.originalTitle) + '</h3>' +
+                            '<p class="text-xs text-slate-300 line-clamp-3 leading-relaxed">' + (item.desc || item.originalDesc) + '</p>' +
                         '</div>' +
                         '<div class="mt-5 pt-3.5 border-t border-cyan-500/20 flex justify-between items-center font-mono text-xs">' +
                             '<span class="text-slate-400 font-medium">W.W.N</span>' +
@@ -433,10 +432,10 @@
 
         function openModal(item) {
             document.getElementById('modal-category').innerText = item.cat;
-            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-title').innerText = item.title || item.originalTitle;
             document.getElementById('modal-date').innerText = item.date + ' • 3m read';
             document.getElementById('modal-image').src = item.img;
-            document.getElementById('modal-body').innerHTML = '<p>' + item.desc + '</p>';
+            document.getElementById('modal-body').innerHTML = '<p>' + (item.desc || item.originalDesc) + '</p>';
             document.getElementById('article-modal').classList.remove('hidden');
         }
 
