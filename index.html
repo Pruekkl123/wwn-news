@@ -143,37 +143,35 @@
         var currentFilter = 'all';
         var isThai = false;
 
-        // ระบบเลือกรูปภาพที่ตรงตามเนื้อหาและรับประกันว่าไม่ซ้ำกันผ่านการระบุ ID เฉพาะตัว
         function getPerfectMatchImage(title, cat, index) {
             var t = (title || "").toLowerCase();
             var c = (cat || "").toLowerCase();
 
-            // จับคู่ภาพตามคีย์เวิร์ดในหัวข้อข่าวให้ตรงเป๊ะ
-            if (t.includes('pregnancy') || t.includes('parenthood') || t.includes('migration') || t.includes('agency')) {
-                return 'https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=800&auto=format&fit=crop'; // ภาพครอบครัว/คนเข้าเมือง
+            if (t.includes('opinion') || t.includes('folk') || t.includes('swedes')) {
+                return 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop';
+            } else if (t.includes('pregnancy') || t.includes('parenthood') || t.includes('migration') || t.includes('agency')) {
+                return 'https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=800&auto=format&fit=crop';
             } else if (t.includes('tyres') || t.includes('tires') || t.includes('winter') || t.includes('driving') || t.includes('ice') || t.includes('black ice')) {
-                return 'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=800&auto=format&fit=crop'; // ภาพถนนหน้าหนาว/ยางรถ
+                return 'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?q=80&w=800&auto=format&fit=crop';
             } else if (t.includes('vaccin') || t.includes('flu') || t.includes('health')) {
-                return 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800&auto=format&fit=crop'; // ภาพการฉีดวัคซีน
+                return 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=800&auto=format&fit=crop';
             } else if (t.includes('passport') || t.includes('eta') || t.includes('travel')) {
-                return 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop'; // ภาพพาสปอร์ตและการเดินทาง
+                return 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800&auto=format&fit=crop';
             } else if (t.includes('court') || t.includes('libel') || t.includes('party') || t.includes('case') || t.includes('verdict')) {
-                return 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'; // ภาพศาลและคดีความ
+                return 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop';
             } else if (t.includes('speaker') || t.includes('parliament') || t.includes('government') || t.includes('press conference')) {
-                return 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop'; // ภาพรัฐสภาและการแถลงข่าว
+                return 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop';
             } else if (t.includes('daylight') || t.includes('clock') || t.includes('time')) {
-                return 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?q=80&w=800&auto=format&fit=crop'; //ภาพนาฬิกา เวลา
+                return 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?q=80&w=800&auto=format&fit=crop';
             } else if (t.includes('word') || t.includes('danish') || t.includes('language')) {
-                return 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop'; //ภาพหนังสือ ภาษา
+                return 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop';
             }
 
-            // ถ้าไม่มีคีย์เวิร์ดเฉพาะ ให้ดึงจากคลังภาพสำรองที่ไม่ซ้ำกันตาม Index ของข่าว
             var fallbackPool = [
                 'https://images.unsplash.com/photo-1509356843155-3ac293282132?q=80&w=800&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?q=80&w=800&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=800&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=800&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=800&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1444723121867-7a241cacace9?q=80&w=800&auto=format&fit=crop',
                 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop',
@@ -206,6 +204,7 @@
         function translateToThai(text) {
             if (!text) return "";
             return text
+                .replace(/OPINION: One Sweden, one 'folk'\?/gi, "ความคิดเห็น: สวีเดนหนึ่งเดียว, 'ชนชาติ' เดียว?")
                 .replace(/Why don't pregnancy or parenthood matter for/gi, "ทำไมการตั้งครรภ์หรือการเป็นพ่อแม่จึงไม่มีความสำคัญต่อ")
                 .replace(/Migration Agency/gi, "สำนักงานตรวจคนเข้าเมือง")
                 .replace(/This week:/gi, "สัปดาห์นี้:")
@@ -425,11 +424,13 @@
                     var card = document.createElement('div');
                     card.className = "liquid-glass-card rounded-3xl p-5 flex flex-col justify-between cursor-pointer group";
                     card.onclick = (function(newsItem) { return function() { openModal(newsItem); }; })(item);
+                    
+                    var safeImg = getPerfectMatchImage(item.originalTitle, item.cat, i);
 
                     card.innerHTML = 
                         '<div>' +
                             '<div class="relative h-48 rounded-2xl overflow-hidden bg-slate-950 mb-4 border border-cyan-500/20 shadow-inner flex items-center justify-center">' +
-                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out">' +
+                                '<img src="' + item.img + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out" onerror="this.src=\'' + safeImg + '\'">' +
                                 '<span class="absolute top-3 left-3 glass-tag text-cyan-400 font-mono text-[10px] px-3 py-1 rounded-xl font-bold shadow-lg">' + item.cat + '</span>' +
                             '</div>' +
                             '<div class="font-mono text-xs text-slate-400 mb-2">' + item.date + ' • 3m read</div>' +
