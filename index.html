@@ -33,29 +33,34 @@
 <body class="min-h-screen p-4 md:p-8">
 
     <!-- ส่วนหัวเว็บไซต์สไตล์ The Local -->
-    <header class="max-w-4xl mx-auto mb-8 text-center">
+    <header class="max-w-6xl mx-auto mb-8 text-center">
         <h1 class="text-4xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
             W.W.N // INTERNATIONAL
         </h1>
         <p class="text-sm text-gray-400 mt-2">Global News Network inspired by The Local</p>
 
-        <!-- แผงเลือกประเทศสไตล์ The Local & ปุ่มแปลภาษาทั้งหน้า -->
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4 mt-6 p-4 glass-card rounded-2xl">
+        <!-- แผงเลือกประเทศครบชุดตามเรฟ & ปุ่มแปลภาษาทั้งหน้า -->
+        <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl">
             
-            <!-- ปุ่มเลือกประเทศข่าว (The Local Style) -->
-            <div id="country-filters" class="flex flex-wrap gap-2 justify-center">
-                <button onclick="filterCountry('all')" class="glass-btn active px-4 py-2 rounded-xl text-xs font-semibold" data-country="all">All Countries</button>
-                <button onclick="filterCountry('Sweden')" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold" data-country="Sweden">Sweden</button>
-                <button onclick="filterCountry('Germany')" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold" data-country="Germany">Germany</button>
-                <button onclick="filterCountry('France')" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold" data-country="France">France</button>
-                <button onclick="filterCountry('Thailand')" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold" data-country="Thailand">Thailand</button>
+            <!-- ปุ่มเลือกประเทศข่าวครบทุกประเทศตามเรฟต้นฉบับ -->
+            <div id="country-filters" class="flex flex-wrap gap-2 justify-center items-center">
+                <button onclick="filterCountry('all')" class="glass-btn active px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="all">ALL</button>
+                <button onclick="filterCountry('Germany')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Germany">GERMANY</button>
+                <button onclick="filterCountry('France')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="France">FRANCE</button>
+                <button onclick="filterCountry('Sweden')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Sweden">SWEDEN</button>
+                <button onclick="filterCountry('Italy')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Italy">ITALY</button>
+                <button onclick="filterCountry('Spain')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Spain">SPAIN</button>
+                <button onclick="filterCountry('Denmark')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Denmark">DENMARK</button>
+                <button onclick="filterCountry('Switzerland')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Switzerland">SWITZERLAND</button>
+                <button onclick="filterCountry('Austria')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Austria">AUSTRIA</button>
+                <button onclick="filterCountry('Norway')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Norway">NORWAY</button>
             </div>
 
-            <!-- ปุ่มแปลภาษาทั้งหน้า (Google Translate Widget ซ่อนรูปแบบเดิมแล้วทำปุ่มคลิกเท่ๆ) -->
-            <div class="flex items-center gap-2">
+            <!-- ปุ่มแปลภาษาทั้งหน้า -->
+            <div class="flex justify-center items-center gap-2 pt-2 border-t border-white/10">
                 <div id="google_translate_element" style="display:none;"></div>
-                <button onclick="triggerTranslate('th')" class="glass-btn px-3 py-2 rounded-xl text-xs font-bold text-cyan-300 border-cyan-500/30">🇹🇭 แปลทั้งหน้าเป็นไทย</button>
-                <button onclick="triggerTranslate('en')" class="glass-btn px-3 py-2 rounded-xl text-xs font-bold text-gray-300">🇬🇧 English</button>
+                <button onclick="triggerTranslate('th')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-cyan-300 border-cyan-500/30">🇹🇭 แปลทั้งหน้าเป็นไทย</button>
+                <button onclick="triggerTranslate('en')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-gray-300">🇬🇧 English</button>
             </div>
         </div>
     </header>
@@ -65,12 +70,12 @@
         <!-- ข่าวจะแสดงตรงนี้ -->
     </main>
 
-    <!-- สคริปต์ Google Translate แบบซ่อนตัวเดิมแล้วสั่งงานผ่านปุ่ม -->
+    <!-- สคริปต์ Google Translate -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
-                includedLanguages: 'th,en,sv,de,fr',
+                includedLanguages: 'th,en,sv,de,fr,it,es,da,no',
                 autoDisplay: false
             }, 'google_translate_element');
         }
