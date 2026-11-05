@@ -1,30 +1,70 @@
-<!-- Google Translate Auto-Translate Script -->
-<div id="google_translate_element" style="display:none;"></div>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W.W.N - สำนักข่าวระดับโลก</title>
+    <!-- Tailwind CSS หรือสไตล์ Liquid Glass ของคุณเพตัน -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* สไตล์ Liquid Glass สุดฉ่ำ */
+        body {
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            font-family: 'Prompt', sans-serif; /* ฟอนต์ไทยสวยๆ ถ้ามี */
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
 
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-      pageLanguage: 'en', 
-      includedLanguages: 'th,en', // กำหนดให้เลือกแปลไทย หรืออังกฤษได้
-      autoDisplay: false
-    }, 'google_translate_element');
-    
-    // สั่งให้เว็บแปลงเป็นภาษาไทยให้อัตโนมัติทันทีที่โหลดเสร็จ
-    setTimeout(function() {
-      var selectField = document.querySelector(".goog-te-combo");
-      if (selectField) {
-        selectField.value = "th";
-        selectField.dispatchEvent(new Event("change"));
-      }
-    }, 1000);
-  }
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <!-- ส่วนหัวเว็บไซต์ -->
+    <header class="max-w-4xl mx-auto mb-8 text-center">
+        <h1 class="text-4xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+            W.W.N // ข่าวสารรอบโลก
+        </h1>
+        <p class="text-sm text-gray-400 mt-2">รายงานสถานการณ์สดและอัปเดตแบบเรียลไทม์</p>
+    </header>
 
-<style>
-  /* ซ่อนแถบแจ้งเตือนด้านบนของ Google ให้หน้าเว็บ Liquid Glass ของเราสวยเนียนไร้รอยต่อ */
-  .goog-te-banner-frame.skiptranslate { display: none !important; }
-  body { top: 0px !important; }
-  .goog-logo-link { display: none !important; }
-  .goog-te-gadget { color: transparent !important; }
-</style>
+    <!-- พื้นที่แสดงข่าว (ดึงข้อมูลจาก news.json มาแสดงผล) -->
+    <main id="news-container" class="max-w-4xl mx-auto space-y-6">
+        <!-- ข่าวจะถูกเรนเดอร์มาแสดงตรงนี้ผ่าน JavaScript -->
+    </main>
+
+    <script>
+        // โค้ด JavaScript สำหรับดึงข่าวจาก news.json มาแสดงผลเป็นภาษาไทย
+        async function loadNews() {
+            try {
+                const response = await fetch('news.json');
+                const newsList = await response.json();
+                const container = document.getElementById('news-container');
+                container.innerHTML = '';
+
+                newsList.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'glass-card p-6 rounded-2xl shadow-xl transition-all duration-300 hover:border-cyan-500/50';
+                    card.innerHTML = `
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="px-3 py-1 text-xs font-semibold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">${item.cat || 'ข่าวทั่วไป'}</span>
+                            <span class="text-xs text-gray-400">${item.date}</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-2 text-white">${item.title}</h2>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">${item.desc}</p>
+                        ${item.img ? `<img src="${item.img}" alt="รูปประกอบข่าว" class="w-full h-48 object-cover rounded-xl mt-2 border border-white/10">` : ''}
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error("เกิดข้อผิดพลาดในการโหลดข่าว:", error);
+            }
+        }
+
+        loadNews();
+    </script>
+</body>
+</html>
