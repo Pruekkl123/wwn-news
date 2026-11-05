@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W.W.N - สำนักข่าวระดับโลก</title>
-    <!-- Tailwind CSS หรือสไตล์ Liquid Glass ของคุณเพตัน -->
+    <title>W.W.N - สำนักข่าวรอบโลก</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* สไตล์ Liquid Glass สุดฉ่ำ */
         body {
             background-color: #0b0f19;
             color: #f3f4f6;
-            font-family: 'Prompt', sans-serif; /* ฟอนต์ไทยสวยๆ ถ้ามี */
+            font-family: 'Prompt', sans-serif;
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
@@ -19,49 +17,136 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        .glass-btn:hover, .glass-btn.active {
+            background: rgba(6, 182, 212, 0.2);
+            border-color: rgba(6, 182, 212, 0.5);
+            color: #22d3ee;
+        }
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-8">
 
     <!-- ส่วนหัวเว็บไซต์ -->
     <header class="max-w-4xl mx-auto mb-8 text-center">
-        <h1 class="text-4xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+        <h1 id="site-title" class="text-4xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
             W.W.N // ข่าวสารรอบโลก
         </h1>
-        <p class="text-sm text-gray-400 mt-2">รายงานสถานการณ์สดและอัปเดตแบบเรียลไทม์</p>
+        <p id="site-subtitle" class="text-sm text-gray-400 mt-2">รายงานสถานการณ์สดและอัปเดตแบบเรียลไทม์</p>
+
+        <!-- แผงควบคุม: ปุ่มเลือกประเทศ และ ปุ่มเลือกภาษา -->
+        <div class="flex flex-wrap justify-between items-center gap-4 mt-6 p-4 glass-card rounded-2xl">
+            <!-- ปุ่มเลือกประเทศข่าว -->
+            <div id="country-filters" class="flex flex-wrap gap-2">
+                <button onclick="filterNews('all')" class="glass-btn active px-4 py-2 rounded-xl text-xs font-semibold" data-cat="all">ทั้งหมด</button>
+                <button onclick="filterNews('Sweden')" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold" data-cat="Sweden">สวีเดน (Sweden)</button>
+                <button onclick="filterNews('Thailand')" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold" data-cat="Thailand">ไทย (Thailand)</button>
+            </div>
+
+            <!-- ปุ่มเลือกภาษา -->
+            <div class="flex gap-2">
+                <button onclick="switchLanguage('th')" id="btn-th" class="glass-btn active px-3 py-1.5 rounded-xl text-xs font-bold">TH</button>
+                <button onclick="switchLanguage('en')" id="btn-en" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold">EN</button>
+            </div>
+        </div>
     </header>
 
-    <!-- พื้นที่แสดงข่าว (ดึงข้อมูลจาก news.json มาแสดงผล) -->
+    <!-- พื้นที่แสดงข่าว -->
     <main id="news-container" class="max-w-4xl mx-auto space-y-6">
-        <!-- ข่าวจะถูกเรนเดอร์มาแสดงตรงนี้ผ่าน JavaScript -->
+        <!-- ข่าวจะถูกเรนเดอร์มาแสดงตรงนี้ -->
     </main>
 
     <script>
-        // โค้ด JavaScript สำหรับดึงข่าวจาก news.json มาแสดงผลเป็นภาษาไทย
+        let allNewsData = [];
+        let currentLang = 'th';
+        let currentCategory = 'all';
+
+        // ข้อความรองรับ 2 ภาษา
+        const texts = {
+            th: {
+                title: "W.W.N // ข่าวสารรอบโลก",
+                subtitle: "รายงานสถานการณ์สดและอัปเดตแบบเรียลไทม์",
+                allCat: "ทั้งหมด",
+                readMore: "อ่านเพิ่มเติม"
+            },
+            en: {
+                title: "W.W.N // World News Network",
+                subtitle: "Live updates and real-time reporting",
+                allCat: "All",
+                readMore: "Read More"
+            }
+        };
+
         async function loadNews() {
             try {
                 const response = await fetch('news.json');
-                const newsList = await response.json();
-                const container = document.getElementById('news-container');
-                container.innerHTML = '';
-
-                newsList.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'glass-card p-6 rounded-2xl shadow-xl transition-all duration-300 hover:border-cyan-500/50';
-                    card.innerHTML = `
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="px-3 py-1 text-xs font-semibold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">${item.cat || 'ข่าวทั่วไป'}</span>
-                            <span class="text-xs text-gray-400">${item.date}</span>
-                        </div>
-                        <h2 class="text-xl font-bold mb-2 text-white">${item.title}</h2>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">${item.desc}</p>
-                        ${item.img ? `<img src="${item.img}" alt="รูปประกอบข่าว" class="w-full h-48 object-cover rounded-xl mt-2 border border-white/10">` : ''}
-                    `;
-                    container.appendChild(card);
-                });
+                allNewsData = await response.json();
+                renderNews();
             } catch (error) {
                 console.error("เกิดข้อผิดพลาดในการโหลดข่าว:", error);
             }
+        }
+
+        function renderNews() {
+            const container = document.getElementById('news-container');
+            container.innerHTML = '';
+
+            // กรองตามหมวดหมู่ประเทศ
+            const filtered = currentCategory === 'all' 
+                ? allNewsData 
+                : allNewsData.filter(item => item.cat && item.cat.toLowerCase() === currentCategory.toLowerCase());
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="text-center text-gray-500 py-10">ไม่พบข่าวในหมวดหมู่นี้</div>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 rounded-2xl shadow-xl transition-all duration-300 hover:border-cyan-500/50';
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="px-3 py-1 text-xs font-semibold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">${item.cat || 'General'}</span>
+                        <span class="text-xs text-gray-400">${item.date}</span>
+                    </div>
+                    <h2 class="text-xl font-bold mb-2 text-white">${item.title}</h2>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">${item.desc}</p>
+                    ${item.img ? `<img src="${item.img}" alt="รูปประกอบข่าว" class="w-full h-48 object-cover rounded-xl mt-2 border border-white/10">` : ''}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterNews(category) {
+            currentCategory = category;
+            
+            // สลับสถานะ Active ของปุ่มหมวดหมู่
+            document.querySelectorAll('#country-filters button').forEach(btn => {
+                if (btn.getAttribute('data-cat') === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            renderNews();
+        }
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // สลับสถานะ Active ของปุ่มภาษา
+            document.getElementById('btn-th').classList.toggle('active', lang === 'th');
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+            // เปลี่ยนข้อความ UI หลักตามภาษา
+            document.getElementById('site-title').innerText = texts[lang].title;
+            document.getElementById('site-subtitle').innerText = texts[lang].subtitle;
         }
 
         loadNews();
