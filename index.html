@@ -7,12 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
+            background-color: #0b0f19; /* ล็อกพื้นหลังให้เป็นสีดำเข้มเสมอ ป้องกันจอเทา */
             color: #f3f4f6;
             font-family: 'Prompt', sans-serif;
             overflow-x: hidden;
+            margin: 0;
         }
         .glass-card {
-            background: rgba(11, 15, 25, 0.65);
+            background: rgba(11, 15, 25, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -33,12 +35,10 @@
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
 
-    <!-- วิดีโอแบ็กกราวด์ Loop สุดล้ำด้านหลัง -->
-    <video autoplay muted loop playsinline class="fixed top-0 left-0 w-full h-full object-cover -z-50 pointer-events-none">
+    <!-- วิดีโอแบ็กกราวด์ Loop -->
+    <video autoplay muted loop playsinline class="fixed top-0 left-0 w-full h-full object-cover -z-50 pointer-events-none opacity-40">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-numbers-31951-large.mp4" type="video/mp4">
     </video>
-    <!-- เลเยอร์สีดำโปร่งแสงทับวิดีโอเพื่อให้ตัวหนังสืออ่านง่ายและกระจกใสดูเด่นขึ้น -->
-    <div class="fixed inset-0 bg-[#0b0f19]/85 -z-40 pointer-events-none"></div>
 
     <!-- ส่วนหัวเว็บไซต์สไตล์ The Local -->
     <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
@@ -47,10 +47,8 @@
         </h1>
         <p class="text-sm text-gray-400 mt-2 tracking-wide">Global News Network inspired by The Local</p>
 
-        <!-- แผงเลือกประเทศครบชุด & ปุ่มแปลภาษาทั้งหน้า -->
+        <!-- แผงเลือกประเทศ & ปุ่มแปลภาษา -->
         <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl shadow-2xl">
-            
-            <!-- ปุ่มเลือกประเทศข่าวครบทุกประเทศตามเรฟต้นฉบับ -->
             <div id="country-filters" class="flex flex-wrap gap-2 justify-center items-center">
                 <button onclick="filterCountry('all')" class="glass-btn active px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="all">ALL</button>
                 <button onclick="filterCountry('Germany')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Germany">GERMANY</button>
@@ -64,7 +62,6 @@
                 <button onclick="filterCountry('Norway')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Norway">NORWAY</button>
             </div>
 
-            <!-- ปุ่มแปลภาษาทั้งหน้า -->
             <div class="flex justify-center items-center gap-2 pt-2 border-t border-white/10">
                 <div id="google_translate_element" style="display:none;"></div>
                 <button onclick="triggerTranslate('th')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-cyan-300 border-cyan-500/30">🇹🇭 แปลทั้งหน้าเป็นไทย</button>
@@ -78,7 +75,6 @@
         <!-- ข่าวจะแสดงตรงนี้ -->
     </main>
 
-    <!-- สคริปต์ Google Translate -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
