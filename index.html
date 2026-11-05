@@ -1,160 +1,65 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W.W.N - The Local Style</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-color: #0b0f19;
-            color: #f3f4f6;
-            font-family: 'Prompt', sans-serif;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .glass-btn {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
-        .glass-btn:hover, .glass-btn.active {
-            background: rgba(6, 182, 212, 0.2);
-            border-color: rgba(6, 182, 212, 0.5);
-            color: #22d3ee;
-        }
-    </style>
-</head>
-<body class="min-h-screen p-4 md:p-8">
-
-    <!-- ส่วนหัวเว็บไซต์สไตล์ The Local -->
-    <header class="max-w-6xl mx-auto mb-8 text-center">
-        <h1 class="text-4xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-            W.W.N // INTERNATIONAL
-        </h1>
-        <p class="text-sm text-gray-400 mt-2">Global News Network inspired by The Local</p>
-
-        <!-- แผงเลือกประเทศครบชุดตามเรฟ & ปุ่มแปลภาษาทั้งหน้า -->
-        <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl">
-            
-            <!-- ปุ่มเลือกประเทศข่าวครบทุกประเทศตามเรฟต้นฉบับ -->
-            <div id="country-filters" class="flex flex-wrap gap-2 justify-center items-center">
-                <button onclick="filterCountry('all')" class="glass-btn active px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="all">ALL</button>
-                <button onclick="filterCountry('Germany')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Germany">GERMANY</button>
-                <button onclick="filterCountry('France')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="France">FRANCE</button>
-                <button onclick="filterCountry('Sweden')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Sweden">SWEDEN</button>
-                <button onclick="filterCountry('Italy')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Italy">ITALY</button>
-                <button onclick="filterCountry('Spain')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Spain">SPAIN</button>
-                <button onclick="filterCountry('Denmark')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Denmark">DENMARK</button>
-                <button onclick="filterCountry('Switzerland')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Switzerland">SWITZERLAND</button>
-                <button onclick="filterCountry('Austria')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Austria">AUSTRIA</button>
-                <button onclick="filterCountry('Norway')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Norway">NORWAY</button>
-            </div>
-
-            <!-- ปุ่มแปลภาษาทั้งหน้า -->
-            <div class="flex justify-center items-center gap-2 pt-2 border-t border-white/10">
-                <div id="google_translate_element" style="display:none;"></div>
-                <button onclick="triggerTranslate('th')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-cyan-300 border-cyan-500/30">🇹🇭 แปลทั้งหน้าเป็นไทย</button>
-                <button onclick="triggerTranslate('en')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-gray-300">🇬🇧 English</button>
-            </div>
-        </div>
-    </header>
-
-    <!-- พื้นที่แสดงข่าว -->
-    <main id="news-container" class="max-w-4xl mx-auto space-y-6">
-        <!-- ข่าวจะแสดงตรงนี้ -->
-    </main>
-
-    <!-- สคริปต์ Google Translate -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'th,en,sv,de,fr,it,es,da,no',
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-
-        function triggerTranslate(lang) {
-            var selectField = document.querySelector(".goog-te-combo");
-            if (selectField) {
-                selectField.value = lang;
-                selectField.dispatchEvent(new Event("change"));
-            } else {
-                alert("ระบบแปลกำลังโหลด กรุณารอสักครู่แล้วลองใหม่อีกครั้งครับ");
-            }
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <style>
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; }
-        .goog-logo-link { display: none !important; }
-        .goog-te-gadget { color: transparent !important; }
-    </style>
-
-    <script>
-        let allNewsData = [];
-        let currentCountry = 'all';
-
-        async function loadNews() {
-            try {
-                const response = await fetch('news.json');
-                allNewsData = await response.json();
-                renderNews();
-            } catch (error) {
-                console.error("โหลดข่าวไม่สำเร็จ:", error);
-            }
-        }
-
-        function renderNews() {
-            const container = document.getElementById('news-container');
-            container.innerHTML = '';
-
-            const filtered = currentCountry === 'all' 
-                ? allNewsData 
-                : allNewsData.filter(item => item.cat && item.cat.toLowerCase() === currentCountry.toLowerCase());
-
-            if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center text-gray-500 py-10">No news found for this country.</div>`;
-                return;
-            }
-
-            filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'glass-card p-6 rounded-2xl shadow-xl transition-all duration-300 hover:border-cyan-500/50';
-                card.innerHTML = `
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="px-3 py-1 text-xs font-semibold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">${item.cat || 'General'}</span>
-                        <span class="text-xs text-gray-400">${item.date}</span>
-                    </div>
-                    <h2 class="text-xl font-bold mb-2 text-white">${item.title}</h2>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">${item.desc}</p>
-                    ${item.img ? `<img src="${item.img}" alt="News Image" class="w-full h-48 object-cover rounded-xl mt-2 border border-white/10">` : ''}
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function filterCountry(country) {
-            currentCountry = country;
-            document.querySelectorAll('#country-filters button').forEach(btn => {
-                if (btn.getAttribute('data-country') === country) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            renderNews();
-        }
-
-        loadNews();
-    </script>
-</body>
-</html>
+[
+    {
+        "cat": "Germany",
+        "date": "NOV 5, 2026",
+        "title": "Germany accelerates renewable energy rollout across major industrial hubs",
+        "desc": "The German government announced a massive investment package to upgrade the national grid, focusing on wind and solar integration to meet ambitious carbon-neutrality targets.",
+        "img": "https://picsum.photos/seed/germany_news/800/600"
+    },
+    {
+        "cat": "France",
+        "date": "NOV 5, 2026",
+        "title": "Paris unveils new urban mobility plans featuring extensive cycling infrastructure",
+        "desc": "City officials in Paris have introduced phase two of their green transit strategy, adding dozens of new protected bike lanes and expanding pedestrian-only zones in central districts.",
+        "img": "https://picsum.photos/seed/france_news/800/600"
+    },
+    {
+        "cat": "Sweden",
+        "date": "NOV 4, 2026",
+        "title": "Stockholm tech sector leads European innovation in sustainable digital infrastructure",
+        "desc": "Local startups and tech giants in Stockholm are pioneering energy-efficient data center designs, utilizing excess heat recycling to warm residential neighborhoods.",
+        "img": "https://picsum.photos/seed/sweden_news/800/600"
+    },
+    {
+        "cat": "Italy",
+        "date": "NOV 4, 2026",
+        "title": "Italy promotes cultural tourism revival in historical regional towns",
+        "desc": "A new nationwide initiative aims to draw international visitors away from major hotspots and into Italy's picturesque smaller villages by highlighting local heritage and gastronomy.",
+        "img": "https://picsum.photos/seed/italy_news/800/600"
+    },
+    {
+        "cat": "Spain",
+        "date": "NOV 3, 2026",
+        "title": "Barcelona modernizes public transit with smart AI-driven scheduling systems",
+        "desc": "The metropolitan transit authority of Barcelona has rolled out an artificial intelligence framework to optimize bus and metro frequencies in response to shifting commuter demands.",
+        "img": "https://picsum.photos/seed/spain_news/800/600"
+    },
+    {
+        "cat": "Denmark",
+        "date": "NOV 3, 2026",
+        "title": "Copenhagen sets new global standards for zero-emission maritime shipping",
+        "desc": "Danish maritime researchers and shipping firms successfully tested a green-ammonia powered cargo vessel, marking a major milestone toward decarbonizing global trade routes.",
+        "img": "https://picsum.photos/seed/denmark_news/800/600"
+    },
+    {
+        "cat": "Switzerland",
+        "date": "NOV 2, 2026",
+        "title": "Swiss alpine research stations report breakthrough in climate monitoring tech",
+        "desc": "High-altitude observatories across the Swiss Alps have deployed next-generation automated sensors to track glacier retreat and atmospheric shifts with unprecedented precision.",
+        "img": "https://picsum.photos/seed/switzerland_news/800/600"
+    },
+    {
+        "cat": "Austria",
+        "date": "NOV 2, 2026",
+        "title": "Vienna hosts international summit on smart city architecture and living spaces",
+        "desc": "Urban planners and architects gathered in Vienna to showcase modular housing designs and smart energy systems tailored for future urban growth.",
+        "img": "https://picsum.photos/seed/austria_news/800/600"
+    },
+    {
+        "cat": "Norway",
+        "date": "NOV 1, 2026",
+        "title": "Norway expands electric vehicle charging network across scenic national routes",
+        "desc": "The Norwegian Public Roads Administration has completed a major expansion of ultra-fast EV chargers along rural and coastal tourist highways, ensuring seamless electric travel.",
+        "img": "https://picsum.photos/seed/norway_news/800/600"
+    }
+]
