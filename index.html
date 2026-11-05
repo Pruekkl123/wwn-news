@@ -13,8 +13,8 @@
             overflow-x: hidden;
             margin: 0;
         }
-        /* แบ็กกราวด์ภาพแสงออโรร่าพรีเมียมแบบ Fix เต็มจอ */
-        .aurora-bg {
+        /* วิดีโอแบ็กกราวด์แสงออโรร่าขยับได้เต็มจอ */
+        .aurora-video {
             position: fixed;
             top: 0;
             left: 0;
@@ -22,7 +22,8 @@
             height: 100%;
             object-fit: cover;
             z-index: -50;
-            filter: brightness(0.4) saturate(1.2); /* ปรับความมืดและความสดให้พอดี เพื่อให้อ่านตัวหนังสือชัด */
+            pointer-events: none;
+            filter: brightness(0.5); /* ปรับความมืดให้อ่านข่าวสบายตา */
         }
         .glass-card {
             background: rgba(11, 15, 25, 0.70);
@@ -46,8 +47,10 @@
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
 
-    <!-- แบ็กกราวด์รูปแสงออโรร่าสุดสวย -->
-    <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1920&q=80" alt="Aurora Background" class="aurora-bg">
+    <!-- วิดีโอแบ็กกราวด์แสงออโรร่าเล่นวนลูปอัตโนมัติ -->
+    <video autoplay muted loop playsinline class="aurora-video">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-northern-lights-in-the-night-sky-42845-large.mp4" type="video/mp4">
+    </video>
 
     <!-- ส่วนหัวเว็บไซต์สไตล์ The Local -->
     <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
