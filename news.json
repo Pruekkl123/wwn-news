@@ -1,322 +1,65 @@
 [
-  {
-    "id": 1,
-    "title": "Pet passports set to be restored between the EU and the UK",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/10/800/600",
-    "desc": "An agreement set to be announced at the upcoming EU-UK summit could mark the return of pet passports allowing easier travel across the Channel for holidaymakers with dogs, cats and ferrets."
-  },
-  {
-    "id": 2,
-    "title": "Interest rates are rising in Sweden – what does that mean for your finances?",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/20/800/600",
-    "desc": "Sweden's Riksbank has raised the country's key interest rate from 1.75 percent to 2 percent, with more increases expected in the new year. How can foreigners in Sweden best plan their finances accordingly?"
-  },
-  {
-    "id": 3,
-    "title": "'I was crying two years ago': Americans in Sweden celebrate Democrats' election victory",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/30/800/600",
-    "desc": "American Democrats gathered over pancakes and coffee in Malmö on the morning of November 4th to celebrate their party's victories in the US midterm elections. But alongside the jubilation, some described the frustration of watching events unfold from thousands of miles away."
-  },
-  {
-    "id": 4,
-    "title": "Swedish word of the day: ränta",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/40/800/600",
-    "desc": "Today’s word of the day is an important one to understand if you own property or investments in Sweden."
-  },
-  {
-    "id": 5,
-    "title": "Member Q&A: When will Sweden get a new government?",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/50/800/600",
-    "desc": "Sweden doesn't have a new government yet, more than 50 days after the election. When will it get one? The Local's editor answered readers' questions."
-  },
-  {
-    "id": 6,
-    "title": "Sweden's central bank raises interest rate to 2 percent – and further hikes are expected",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/60/800/600",
-    "desc": "Sweden's central bank, the Riksbank, on Wednesday hiked the country's key interest rate from 1.75 percent to 2 percent."
-  },
-  {
-    "id": 7,
-    "title": "Markets brace for aggressive Sweden rate hikes as Riksbank plays catch-up",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/70/800/600",
-    "desc": "The financial markets are banking on the Riksbank raising Sweden's key interest rate at least four times – possibly even five – within the space of a single year."
-  },
-  {
-    "id": 8,
-    "title": "What happens next in the process to form a Swedish government?",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/80/800/600",
-    "desc": "It's over 50 days since Sweden's election and formally at least, the political parties have not moved even the tiniest step closer to forming a government. Here's what happens next."
-  },
-  {
-    "id": 9,
-    "title": "Today in Sweden: A roundup of the latest news on Wednesday",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/90/800/600",
-    "desc": "Clock ticks towards snap election as Sweden's prime minister votes hit deadlock – and markets brace for aggressive Sweden rate hikes as Riksbank plays catch-up. Here's the latest news."
-  },
-  {
-    "id": 10,
-    "title": "UPDATE: Hoax bomb threats disrupt flights around Europe",
-    "cat": "Sweden",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/100/800/600",
-    "desc": "About 10 European flights were targeted by bomb threats on Tuesday, forcing the brief closure of a Warsaw airport and the scrambling of air force planes in Rome, authorities said."
-  },
-  {
-    "id": 11,
-    "title": "Pet passports set to be restored between the EU and the UK",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/110/800/600",
-    "desc": "An agreement set to be announced at the upcoming EU-UK summit could mark the return of pet passports allowing easier travel across the Channel for holidaymakers with dogs, cats and ferrets."
-  },
-  {
-    "id": 12,
-    "title": "Danish People's Party wants three more names taken off citizenship bill",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/120/800/600",
-    "desc": "The Danish People's Party has identified three more people – two Syrian and one Pakistani – who it wants to remove  from the list of 2,055 people whose names are included in the long-stalled citizenship bill."
-  },
-  {
-    "id": 13,
-    "title": "New university checks, taxes and a hunt: What changes in Denmark in November",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/130/800/600",
-    "desc": "There's a busy month ahead in Denmark, with new legislation on security checks for university admission, a UN climate summit, and the annual Mortensaften duck dinner."
-  },
-  {
-    "id": 14,
-    "title": "'Enough is enough': Danish students protest education cuts",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/140/800/600",
-    "desc": "Thousands of young Danes took to the streets on Wednesday to protest over a government plan to cut student allowances, adding to a wave of European youth anger."
-  },
-  {
-    "id": 15,
-    "title": "Danish parties call for tougher language tests for citizenship",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/150/800/600",
-    "desc": "Foreigners can gain Danish citizenship without proving that they can speak Danish. According to politicians across the political spectrum, this needs to change."
-  },
-  {
-    "id": 16,
-    "title": "Danish word of the day: noieren",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/160/800/600",
-    "desc": "Today's word of the day describes that creepy feeling you just can't shake."
-  },
-  {
-    "id": 17,
-    "title": "How to understand your Danish electricity bill",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/170/800/600",
-    "desc": "The days are getting shorter and colder, and as a result the lights are on for longer and the heating is turned up. But what does this mean for our electricity bills?"
-  },
-  {
-    "id": 18,
-    "title": "Today in Denmark: A roundup of the latest news on Wednesday",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/180/800/600",
-    "desc": "Greenland's parliament votes 'yes' to US agreement, PM rues slow progress on ending agriculture on former peatlands, and other news from Denmark on Wednesday."
-  },
-  {
-    "id": 19,
-    "title": "UPDATE: Hoax bomb threats disrupt flights around Europe",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/190/800/600",
-    "desc": "About 10 European flights were targeted by bomb threats on Tuesday, forcing the brief closure of a Warsaw airport and the scrambling of air force planes in Rome, authorities said."
-  },
-  {
-    "id": 20,
-    "title": "Danish word of the day: rugbrødsmotor",
-    "cat": "Denmark",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/200/800/600",
-    "desc": "Are you an avid cyclist? Then today's Danish word of the day could be a good one to add to your vocabulary."
-  },
-  {
-    "id": 21,
-    "title": "German leaders react to the 'blue wave' after US mid-term elections",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/210/800/600",
-    "desc": "US President Donald Trump, and a long list of state and regional candidates associated with his MAGA movement, faced serious repudiation in the US mid-term elections on November 3rd. Here's what German leaders have said about the vote."
-  },
-  {
-    "id": 22,
-    "title": "Pet passports set to be restored between the EU and the UK",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/220/800/600",
-    "desc": "An agreement set to be announced at the upcoming EU-UK summit could mark the return of pet passports allowing easier travel across the Channel for holidaymakers with dogs, cats and ferrets."
-  },
-  {
-    "id": 23,
-    "title": "When does a German citizenship processing delay become a 'failure to act'?",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/230/800/600",
-    "desc": "Courts in Germany have contrasting views on how long an authority can reasonably take to process a naturalisation application. Immigration lawyer Nihat Kaygalak explains recent rulings in different states, and what they mean for people still waiting."
-  },
-  {
-    "id": 24,
-    "title": "'It took two years': What a foreign couple learnt renovating a house in Germany",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/240/800/600",
-    "desc": "Two years after a French couple bought an old rural house in Germany, they now have four usable rooms – and plenty of lessons to share about mortgages, tradespeople and expecting the unexpected."
-  },
-  {
-    "id": 25,
-    "title": "How many people benefited from Germany's 'Opportunity Residence' permits?",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/250/800/600",
-    "desc": "As Germany's pathway for people with 'tolerated' status to receive a more stable residence permit comes to an end, new figures shed light on how successful the initiative has been."
-  },
-  {
-    "id": 26,
-    "title": "Will Germany introduce €500 fines and cameras for drivers using phones?",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/260/800/600",
-    "desc": "Drivers in Germany could face a €500 penalty for using a phone at the wheel, while new cameras may make offences much easier to detect. Here is what could change – and what the rules say now."
-  },
-  {
-    "id": 27,
-    "title": "PODCAST🎧:  What really happened at the Gen Z protests, new parcel fees and November events",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/270/800/600",
-    "desc": "This week we analyse the Gen Z protests and ask why politicians are blaming people with a migrant background over the violence, we explain new fees on packages from outside the EU and we round up the best events."
-  },
-  {
-    "id": 28,
-    "title": "Today in Germany: A roundup of the latest news on Wednesday",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/280/800/600",
-    "desc": "Several German supermarkets affected by refrigeration cyberattacks, Germany follows US midterm results closely as Democrats celebrate victory, pensions expected to rise next year and more news on Wednesday November 4th."
-  },
-  {
-    "id": 29,
-    "title": "UPDATE: Hoax bomb threats disrupt flights around Europe",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/290/800/600",
-    "desc": "About 10 European flights were targeted by bomb threats on Tuesday, forcing the brief closure of a Warsaw airport and the scrambling of air force planes in Rome, authorities said."
-  },
-  {
-    "id": 30,
-    "title": "Zelensky says dozens dead and missing in Russian strike",
-    "cat": "Germany",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/300/800/600",
-    "desc": "Thirty-three people were killed and more than 50 could be trapped in rubble a day after multiple Russian strikes on a Ukrainian village, President Volodymyr Zelensky said in Berlin on Tuesday, calling it one of Moscow's worst attacks of the war."
-  },
-  {
-    "id": 31,
-    "title": "French protests: What to expect from November 5th strikes",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/310/800/600",
-    "desc": "Workers across France are being called to strike on Thursday, November 5th, in a nationwide day of action over wages, the cost of living and public services. From travel disruption and demo routes, here's what to expect."
-  },
-  {
-    "id": 32,
-    "title": "MAP: The route of the Paris protest march on November 5th",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/320/800/600",
-    "desc": "The route proposed by the unions for a demonstration on November 5th has been banned by the Paris police. Instead, another route has been approved."
-  },
-  {
-    "id": 33,
-    "title": "Pet passports set to be restored between the EU and the UK",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/330/800/600",
-    "desc": "An agreement set to be announced at the upcoming EU-UK summit could mark the return of pet passports allowing easier travel across the Channel for holidaymakers with dogs, cats and ferrets."
-  },
-  {
-    "id": 34,
-    "title": "PODCAST 🎧: Tear gas warning, health boost for rural France and which city speaks 'perfect' French?",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/340/800/600",
-    "desc": "Talking France is back with an update on all things protest-related in the country, why it might soon be easier to get a doctor's appointment in rural France, and where in the country locals speak the 'purest' French."
-  },
-  {
-    "id": 35,
-    "title": "ANALYSIS: French language requirements for foreign nationals are inherently political",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/350/800/600",
-    "desc": "The French government has already imposed tougher language requirements on foreigners in France, and some of the 2027 presidential candidates want to go further - linguistics professors Grégory Miras, Maude Vadot, and Myriam Dupouy explain why language tests are always political."
-  },
-  {
-    "id": 36,
-    "title": "What to do if you are a victim of bank card fraud in France",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/360/800/600",
-    "desc": "From blocking the transaction via your bank to reporting the fraud, here are the steps to follow, plus some useful French vocabulary."
-  },
-  {
-    "id": 37,
-    "title": "French bank hit by cyberattack that caused €118m 'fraudulent transactions'",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/370/800/600",
-    "desc": "A French regional bank said on Wednesday it had been the victim of a cyberattack that allowed fraudulent transactions, which reports claim amounted to €118 million."
-  },
-  {
-    "id": 38,
-    "title": "MAPS: How good is phone and internet coverage in rural France?",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/380/800/600",
-    "desc": "France's telecoms regulator has published detailed new data showing the level of phone and internet coverage around France."
-  },
-  {
-    "id": 39,
-    "title": "French Expression of the Day: Être à couteaux tirés",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/390/800/600",
-    "desc": "This French expression, often appearing in the press, is good to know - especially in times when political tensions are running high."
-  },
-  {
-    "id": 40,
-    "title": "OPINION: The violence at recent protests is not normal, even for France",
-    "cat": "Europe",
-    "date": "Nov 05, 2026",
-    "img": "https://picsum.photos/id/400/800/600",
-    "desc": "Violence is ingrained in French politics - writes John Lichfield - disputes go to the street in France faster and more aggressively than in other European countries."
-  }
+    {
+        "cat": "Germany",
+        "date": "NOV 5, 2026",
+        "title": "Germany accelerates renewable energy rollout across major industrial hubs",
+        "desc": "The German government announced a massive investment package to upgrade the national grid, focusing on wind and solar integration to meet ambitious carbon-neutrality targets.",
+        "img": "https://picsum.photos/seed/germany_news/800/600"
+    },
+    {
+        "cat": "France",
+        "date": "NOV 5, 2026",
+        "title": "Paris unveils new urban mobility plans featuring extensive cycling infrastructure",
+        "desc": "City officials in Paris have introduced phase two of their green transit strategy, adding dozens of new protected bike lanes and expanding pedestrian-only zones in central districts.",
+        "img": "https://picsum.photos/seed/france_news/800/600"
+    },
+    {
+        "cat": "Sweden",
+        "date": "NOV 4, 2026",
+        "title": "Stockholm tech sector leads European innovation in sustainable digital infrastructure",
+        "desc": "Local startups and tech giants in Stockholm are pioneering energy-efficient data center designs, utilizing excess heat recycling to warm residential neighborhoods.",
+        "img": "https://picsum.photos/seed/sweden_news/800/600"
+    },
+    {
+        "cat": "Italy",
+        "date": "NOV 4, 2026",
+        "title": "Italy promotes cultural tourism revival in historical regional towns",
+        "desc": "A new nationwide initiative aims to draw international visitors away from major hotspots and into Italy's picturesque smaller villages by highlighting local heritage and gastronomy.",
+        "img": "https://picsum.photos/seed/italy_news/800/600"
+    },
+    {
+        "cat": "Spain",
+        "date": "NOV 3, 2026",
+        "title": "Barcelona modernizes public transit with smart AI-driven scheduling systems",
+        "desc": "The metropolitan transit authority of Barcelona has rolled out an artificial intelligence framework to optimize bus and metro frequencies in response to shifting commuter demands.",
+        "img": "https://picsum.photos/seed/spain_news/800/600"
+    },
+    {
+        "cat": "Denmark",
+        "date": "NOV 3, 2026",
+        "title": "Copenhagen sets new global standards for zero-emission maritime shipping",
+        "desc": "Danish maritime researchers and shipping firms successfully tested a green-ammonia powered cargo vessel, marking a major milestone toward decarbonizing global trade routes.",
+        "img": "https://picsum.photos/seed/denmark_news/800/600"
+    },
+    {
+        "cat": "Switzerland",
+        "date": "NOV 2, 2026",
+        "title": "Swiss alpine research stations report breakthrough in climate monitoring tech",
+        "desc": "High-altitude observatories across the Swiss Alps have deployed next-generation automated sensors to track glacier retreat and atmospheric shifts with unprecedented precision.",
+        "img": "https://picsum.photos/seed/switzerland_news/800/600"
+    },
+    {
+        "cat": "Austria",
+        "date": "NOV 2, 2026",
+        "title": "Vienna hosts international summit on smart city architecture and living spaces",
+        "desc": "Urban planners and architects gathered in Vienna to showcase modular housing designs and smart energy systems tailored for future urban growth.",
+        "img": "https://picsum.photos/seed/austria_news/800/600"
+    },
+    {
+        "cat": "Norway",
+        "date": "NOV 1, 2026",
+        "title": "Norway expands electric vehicle charging network across scenic national routes",
+        "desc": "The Norwegian Public Roads Administration has completed a major expansion of ultra-fast EV chargers along rural and coastal tourist highways, ensuring seamless electric travel.",
+        "img": "https://picsum.photos/seed/norway_news/800/600"
+    }
 ]
