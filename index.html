@@ -7,26 +7,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #0b0f19;
+            background: #020617;
             color: #f3f4f6;
             font-family: 'Prompt', sans-serif;
             overflow-x: hidden;
             margin: 0;
         }
-        /* วิดีโอแบ็กกราวด์แสงออโรร่าขยับได้เต็มจอ */
-        .aurora-video {
+        /* บังคับวิดีโอให้อยู่หลังสุดและแสดงผลเต็มจอแบบสมูท */
+        .video-bg {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             object-fit: cover;
-            z-index: -50;
+            z-index: -99;
             pointer-events: none;
-            filter: brightness(0.5); /* ปรับความมืดให้อ่านข่าวสบายตา */
+            opacity: 0.6;
         }
         .glass-card {
-            background: rgba(11, 15, 25, 0.70);
+            background: rgba(11, 15, 25, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -47,8 +47,8 @@
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
 
-    <!-- วิดีโอแบ็กกราวด์แสงออโรร่าเล่นวนลูปอัตโนมัติ -->
-    <video autoplay muted loop playsinline class="aurora-video">
+    <!-- วิดีโอแบ็กกราวด์ขยับได้ -->
+    <video autoplay muted loop playsinline class="video-bg">
         <source src="https://assets.mixkit.co/videos/preview/mixkit-northern-lights-in-the-night-sky-42845-large.mp4" type="video/mp4">
     </video>
 
