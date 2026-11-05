@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W.W.N - The Local Style</title>
+    <title>W.W.N - International News Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #0b0f19;
             color: #f3f4f6;
             font-family: 'Prompt', sans-serif;
+            overflow-x: hidden;
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(11, 15, 25, 0.65);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -24,23 +24,31 @@
             transition: all 0.3s ease;
         }
         .glass-btn:hover, .glass-btn.active {
-            background: rgba(6, 182, 212, 0.2);
-            border-color: rgba(6, 182, 212, 0.5);
+            background: rgba(6, 182, 212, 0.25);
+            border-color: rgba(6, 182, 212, 0.6);
             color: #22d3ee;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
         }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
+<body class="min-h-screen p-4 md:p-8 relative">
+
+    <!-- วิดีโอแบ็กกราวด์ Loop สุดล้ำด้านหลัง -->
+    <video autoplay muted loop playsinline class="fixed top-0 left-0 w-full h-full object-cover -z-50 pointer-events-none">
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-numbers-31951-large.mp4" type="video/mp4">
+    </video>
+    <!-- เลเยอร์สีดำโปร่งแสงทับวิดีโอเพื่อให้ตัวหนังสืออ่านง่ายและกระจกใสดูเด่นขึ้น -->
+    <div class="fixed inset-0 bg-[#0b0f19]/85 -z-40 pointer-events-none"></div>
 
     <!-- ส่วนหัวเว็บไซต์สไตล์ The Local -->
-    <header class="max-w-6xl mx-auto mb-8 text-center">
-        <h1 class="text-4xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+    <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 drop-shadow-lg">
             W.W.N // INTERNATIONAL
         </h1>
-        <p class="text-sm text-gray-400 mt-2">Global News Network inspired by The Local</p>
+        <p class="text-sm text-gray-400 mt-2 tracking-wide">Global News Network inspired by The Local</p>
 
-        <!-- แผงเลือกประเทศครบชุดตามเรฟ & ปุ่มแปลภาษาทั้งหน้า -->
-        <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl">
+        <!-- แผงเลือกประเทศครบชุด & ปุ่มแปลภาษาทั้งหน้า -->
+        <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl shadow-2xl">
             
             <!-- ปุ่มเลือกประเทศข่าวครบทุกประเทศตามเรฟต้นฉบับ -->
             <div id="country-filters" class="flex flex-wrap gap-2 justify-center items-center">
@@ -66,7 +74,7 @@
     </header>
 
     <!-- พื้นที่แสดงข่าว -->
-    <main id="news-container" class="max-w-4xl mx-auto space-y-6">
+    <main id="news-container" class="max-w-4xl mx-auto space-y-6 relative z-10">
         <!-- ข่าวจะแสดงตรงนี้ -->
     </main>
 
@@ -122,7 +130,7 @@
                 : allNewsData.filter(item => item.cat && item.cat.toLowerCase() === currentCountry.toLowerCase());
 
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center text-gray-500 py-10">No news found for this country.</div>`;
+                container.innerHTML = `<div class="text-center text-gray-400 py-10 glass-card rounded-2xl">No news found for this country.</div>`;
                 return;
             }
 
@@ -141,3 +149,20 @@
                 container.appendChild(card);
             });
         }
+
+        function filterCountry(country) {
+            currentCountry = country;
+            document.querySelectorAll('#country-filters button').forEach(btn => {
+                if (btn.getAttribute('data-country') === country) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            renderNews();
+        }
+
+        loadNews();
+    </script>
+</body>
+</html>
