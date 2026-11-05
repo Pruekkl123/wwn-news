@@ -7,24 +7,34 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background: #020617;
+            background-color: #020617;
             color: #f3f4f6;
             font-family: 'Prompt', sans-serif;
             overflow-x: hidden;
             margin: 0;
+            min-height: 100vh;
         }
-        /* บังคับวิดีโอให้อยู่หลังสุดและแสดงผลเต็มจอแบบสมูท */
-        .video-bg {
+
+        /* แบ็กกราวด์แสงออโรร่าเคลื่อนไหวด้วย CSS สมูทๆ การันตีไม่จอดำ 100% */
+        .aurora-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            object-fit: cover;
-            z-index: -99;
+            z-index: -50;
             pointer-events: none;
-            opacity: 0.6;
+            background: linear-gradient(125deg, #020617, #064e3b, #0f172a, #1e3a8a, #020617);
+            background-size: 400% 400%;
+            animation: auroraFlow 15s ease infinite;
         }
+
+        @keyframes auroraFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .glass-card {
             background: rgba(11, 15, 25, 0.75);
             backdrop-filter: blur(16px);
@@ -47,10 +57,8 @@
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
 
-    <!-- วิดีโอแบ็กกราวด์ขยับได้ -->
-    <video autoplay muted loop playsinline class="video-bg">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-northern-lights-in-the-night-sky-42845-large.mp4" type="video/mp4">
-    </video>
+    <!-- แบ็กกราวด์แสงออโรร่าขยับได้ -->
+    <div class="aurora-bg"></div>
 
     <!-- ส่วนหัวเว็บไซต์สไตล์ The Local -->
     <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
@@ -59,7 +67,7 @@
         </h1>
         <p class="text-sm text-gray-300 mt-2 tracking-wide">Global News Network inspired by The Local</p>
 
-        <!-- แผงเลือกประเทศ & ปุ่มแปลภาษา -->
+        <!-- แผงเลือกประเทศครบชุด & ปุ่มแปลภาษา -->
         <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl shadow-2xl">
             <div id="country-filters" class="flex flex-wrap gap-2 justify-center items-center">
                 <button onclick="filterCountry('all')" class="glass-btn active px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="all">ALL</button>
