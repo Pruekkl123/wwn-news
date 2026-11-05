@@ -7,14 +7,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #0b0f19; /* ล็อกพื้นหลังให้เป็นสีดำเข้มเสมอ ป้องกันจอเทา */
+            background-color: #0b0f19;
             color: #f3f4f6;
             font-family: 'Prompt', sans-serif;
             overflow-x: hidden;
             margin: 0;
         }
+        /* แบ็กกราวด์ภาพแสงออโรร่าพรีเมียมแบบ Fix เต็มจอ */
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -50;
+            filter: brightness(0.4) saturate(1.2); /* ปรับความมืดและความสดให้พอดี เพื่อให้อ่านตัวหนังสือชัด */
+        }
         .glass-card {
-            background: rgba(11, 15, 25, 0.75);
+            background: rgba(11, 15, 25, 0.70);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -35,17 +46,15 @@
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
 
-    <!-- วิดีโอแบ็กกราวด์ Loop -->
-    <video autoplay muted loop playsinline class="fixed top-0 left-0 w-full h-full object-cover -z-50 pointer-events-none opacity-40">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-numbers-31951-large.mp4" type="video/mp4">
-    </video>
+    <!-- แบ็กกราวด์รูปแสงออโรร่าสุดสวย -->
+    <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1920&q=80" alt="Aurora Background" class="aurora-bg">
 
     <!-- ส่วนหัวเว็บไซต์สไตล์ The Local -->
     <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 drop-shadow-lg">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 drop-shadow-lg">
             W.W.N // INTERNATIONAL
         </h1>
-        <p class="text-sm text-gray-400 mt-2 tracking-wide">Global News Network inspired by The Local</p>
+        <p class="text-sm text-gray-300 mt-2 tracking-wide">Global News Network inspired by The Local</p>
 
         <!-- แผงเลือกประเทศ & ปุ่มแปลภาษา -->
         <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl shadow-2xl">
@@ -126,7 +135,7 @@
                 : allNewsData.filter(item => item.cat && item.cat.toLowerCase() === currentCountry.toLowerCase());
 
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center text-gray-400 py-10 glass-card rounded-2xl">No news found for this country.</div>`;
+                container.innerHTML = `<div class="text-center text-gray-300 py-10 glass-card rounded-2xl">No news found for this country.</div>`;
                 return;
             }
 
