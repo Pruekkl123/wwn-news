@@ -41,6 +41,12 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .glass-modal {
+            background: rgba(11, 15, 25, 0.90);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
         .glass-btn {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(12px);
@@ -95,6 +101,35 @@
         <!-- ข่าวจะแสดงตรงนี้ -->
     </main>
 
+    <!-- หน้าต่าง Modal อ่านข่าวเต็มจอ (ซ่อนไว้ก่อนจนกว่าจะกด) -->
+    <div id="news-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="glass-modal w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-8 shadow-2xl relative border border-cyan-500/30">
+            <!-- ปุ่มปิด Modal -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 glass-btn px-3 py-1.5 rounded-full text-sm font-bold text-gray-300 hover:text-white">
+                ✕ ปิด
+            </button>
+
+            <!-- เนื้อหาข่าวเต็มจอ -->
+            <div class="flex items-center gap-3 mb-4">
+                <span id="modal-cat" class="px-3 py-1 text-xs font-semibold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30"></span>
+                <span id="modal-date" class="text-xs text-gray-400"></span>
+            </div>
+            
+            <h2 id="modal-title" class="text-2xl md:text-3xl font-extrabold mb-4 text-white leading-tight"></h2>
+            
+            <img id="modal-img" src="" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80';" class="w-full h-72 md:h-96 object-cover rounded-2xl mb-6 border border-white/10 shadow-lg">
+            
+            <p id="modal-desc" class="text-gray-200 text-base md:text-lg leading-relaxed mb-6"></p>
+
+            <!-- ปุ่มฟังเสียงในหน้าเต็มจอ -->
+            <div class="flex justify-end gap-3 pt-4 border-t border-white/10">
+                <button id="modal-speak-btn" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 text-cyan-300 border-cyan-500/40">
+                    🔊 ฟังเสียงข่าวนี้
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -137,22 +172,39 @@
             }
         }
 
-        // ฟังก์ชันสั่งให้อ่านข่าวออกเสียง
-        function speakNews(title, desc) {
+        // ฟังก์ชันสั่งอ่านเสียง
+        function speakText(title, desc) {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // หยุดเสียงเก่าที่กำลังอ่านค้างอยู่ก่อน
-                const textToSpeech = `${title}. ${desc}`;
-                const utterance = new SpeechSynthesisUtterance(textToSpeech);
-                
-                // เช็กว่าหน้าเว็บตอนนี้แปลเป็นไทยหรือยัง ถ้าแปลเป็นไทยให้พยายามอ่านสำเนียงไทย
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(`${title}. ${desc}`);
                 const isThai = document.documentElement.lang === 'th' || document.body.innerText.includes('ข่าว');
                 utterance.lang = isThai ? 'th-TH' : 'en-US';
-                utterance.rate = 1.0; // ความเร็วในการอ่านปกติ
-
+                utterance.rate = 1.0;
                 window.speechSynthesis.speak(utterance);
             } else {
                 alert("เบราว์เซอร์ของคุณไม่รองรับระบบอ่านออกเสียงครับ");
             }
+        }
+
+        // เปิด Modal อ่านข่าวเต็มจอ
+        function openModal(title, desc, cat, date, img) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-cat').innerText = cat || 'General';
+            document.getElementById('modal-date').innerText = date;
+            document.getElementById('modal-img').src = img || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80';
+            
+            // ผูกฟังก์ชันปุ่มฟังเสียงใน Modal
+            const speakBtn = document.getElementById('modal-speak-btn');
+            speakBtn.onclick = () => speakText(title, desc);
+
+            document.getElementById('news-modal').classList.remove('hidden');
+        }
+
+        // ปิด Modal
+        function closeModal() {
+            document.getElementById('news-modal').classList.add('hidden');
+            window.speechSynthesis.cancel(); // หยุดเสียงอ่านเวลาปิดหน้าต่าง
         }
 
         function renderNews() {
@@ -170,25 +222,29 @@
 
             filtered.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'glass-card p-6 rounded-2xl shadow-xl transition-all duration-300 hover:border-cyan-500/50';
+                card.className = 'glass-card p-6 rounded-2xl shadow-xl transition-all duration-300 hover:border-cyan-500/50 cursor-pointer group';
                 
-                // Escape string ป้องกันปัญหาเครื่องหมายคำถามในข้อความที่จะส่งเข้าไปอ่าน
-                const safeTitle = item.title.replace(/'/g, "\\'");
-                const safeDesc = item.desc.replace(/'/g, "\\'");
+                // Escape string ป้องกัน Error
+                const safeTitle = item.title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                const safeDesc = item.desc.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                const safeCat = item.cat || 'General';
+                const safeDate = item.date;
+                const safeImg = item.img || '';
+
+                // คลิกที่การ์ดเพื่อเปิดอ่านเต็มจอ
+                card.onclick = () => openModal(item.title, item.desc, safeCat, safeDate, safeImg);
 
                 card.innerHTML = `
                     <div class="flex justify-between items-center mb-3">
-                        <span class="px-3 py-1 text-xs font-semibold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">${item.cat || 'General'}</span>
-                        <div class="flex items-center gap-2">
-                            <button onclick="speakNews('${safeTitle}', '${safeDesc}')" class="glass-btn px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/30">
-                                🔊 ฟังข่าว
-                            </button>
-                            <span class="text-xs text-gray-400">${item.date}</span>
-                        </div>
+                        <span class="px-3 py-1 text-xs font-semibold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">${safeCat}</span>
+                        <span class="text-xs text-gray-400">${safeDate}</span>
                     </div>
-                    <h2 class="text-xl font-bold mb-2 text-white">${item.title}</h2>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">${item.desc}</p>
-                    ${item.img ? `<img src="${item.img}" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80';" class="w-full h-48 object-cover rounded-xl mt-2 border border-white/10">` : ''}
+                    <h2 class="text-xl font-bold mb-2 text-white group-hover:text-cyan-300 transition-colors">${item.title}</h2>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4 line-clamp-2">${item.desc}</p>
+                    ${safeImg ? `<img src="${safeImg}" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80';" class="w-full h-48 object-cover rounded-xl mt-2 border border-white/10">` : ''}
+                    <div class="mt-4 text-xs text-cyan-400 font-semibold flex items-center gap-1">
+                        👉 คลิกเพื่ออ่านข่าวเต็มจอ / ฟังเสียง
+                    </div>
                 `;
                 container.appendChild(card);
             });
