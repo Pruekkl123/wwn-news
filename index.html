@@ -15,7 +15,7 @@
             min-height: 100vh;
         }
 
-        /* Loading Screen สีขาวสะอาดตา ดอกไม้หมุนโหลด */
+        /* Loading Screen สีขาว ดอกไม้หมุนโหลด */
         #loading-screen {
             position: fixed;
             inset: 0;
@@ -42,7 +42,7 @@
             filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.08));
         }
 
-        /* Animation การ์ดข่าว Teleport ขยับสั่น 5 ที (5 Keyframes steps) */
+        /* Animation การ์ดข่าว Teleport ขยับสั่น 5 ที */
         @keyframes teleportShake5Times {
             0% {
                 opacity: 0;
@@ -115,16 +115,16 @@
 <body class="min-h-screen p-4 md:p-8 relative">
 
     <!-- Loading Screen สีขาว ดอกไม้หมุนโหลด -->
-    <div id="loading-screen">
+    <div id="loading-screen" translate="no" class="notranslate">
         <div class="loading-flower">🌸</div>
-        <h2 class="text-2xl font-extrabold tracking-widest text-slate-800">W.W.N // LOADING</h2>
+        <h2 class="text-2xl font-extrabold tracking-widest text-slate-800">W<span class="text-sky-600">.</span>W<span class="text-sky-600">.</span>N <span class="text-slate-400 font-light">//</span> LOADING</h2>
         <p class="text-xs text-slate-500 mt-2 font-medium">Preparing blooming global news experience...</p>
     </div>
 
-    <!-- ส่วนหัวเว็บไซต์ -->
+    <!-- ส่วนหัวเว็บไซต์ (ล็อกจุดห้ามแปล) -->
     <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 drop-shadow-sm">
-            W.W.N // INTERNATIONAL
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 drop-shadow-sm notranslate" translate="no">
+            W<span class="text-sky-500">.</span>W<span class="text-sky-500">.</span>N <span class="text-slate-400 font-light">//</span> INTERNATIONAL
         </h1>
         <p class="text-sm text-slate-500 mt-2 tracking-wide font-medium">Global News Network inspired by The Local</p>
 
