@@ -15,74 +15,26 @@
             min-height: 100vh;
         }
 
-        /* Intro Screen เอฟเฟกต์ Teleport วาร์ปทะลุมิติตอนโหลดเสร็จ */
-        #intro-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: #020617;
-            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s ease;
-        }
-
-        /* เอฟเฟกต์วาร์ป (Teleport Zoom & Glow) */
-        @keyframes teleportEffect {
-            0% {
-                transform: scale(0.2) rotate(-180deg);
-                opacity: 0;
-                filter: blur(20px) brightness(3);
-            }
-            50% {
-                transform: scale(1.1) rotate(10deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.5);
-            }
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1);
-            }
-        }
-
-        .teleport-box {
-            animation: teleportEffect 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-            text-align: center;
-        }
-
-        /* เมื่อโหลดเสร็จ จะทำการขยายใหญ่ทะลุจอแบบ Teleport ออกไป */
-        .teleport-out {
-            transform: scale(15);
-            opacity: 0;
-            filter: blur(10px);
-        }
-
-        @keyframes textFadeUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .intro-text {
-            animation: textFadeUp 1s ease 0.4s forwards;
-            opacity: 0;
-        }
-
-        /* Animation ข่าวหมุนตัวเข้ามา */
-        @keyframes cardRotateIn {
+        /* Animation เฉพาะตัวการ์ดข่าว พุ่งวาร์ปเหมือน Teleport หมุนตัวเข้ามา */
+        @keyframes teleportCardIn {
             0% {
                 opacity: 0;
-                transform: perspective(1000px) rotateX(25deg) translateY(40px) scale(0.9);
+                transform: scale(0.3) translateY(60px) rotateX(45deg);
+                filter: blur(10px);
+            }
+            70% {
+                transform: scale(1.03) translateY(-10px) rotateX(-5deg);
+                filter: blur(0px);
             }
             100% {
                 opacity: 1;
-                transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+                transform: scale(1) translateY(0) rotateX(0deg);
+                filter: blur(0px);
             }
         }
 
-        .animate-card-rotate {
-            animation: cardRotateIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .animate-teleport-card {
+            animation: teleportCardIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         .glass-card {
@@ -118,19 +70,6 @@
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
-
-    <!-- Intro Screen เอฟเฟกต์ Teleport วาร์ป -->
-    <div id="intro-screen">
-        <div class="teleport-box">
-            <div class="text-6xl mb-4">🌀</div>
-            <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-wider mb-2">
-                W.W.N // TELEPORTING
-            </h1>
-            <p class="intro-text text-sm text-cyan-400 font-medium tracking-wide">
-                Initializing quantum news stream...
-            </p>
-        </div>
-    </div>
 
     <!-- ส่วนหัวเว็บไซต์ -->
     <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
@@ -194,17 +133,6 @@
     </div>
 
     <script type="text/javascript">
-        // สั่งทำงานเอฟเฟกต์ Teleport วาร์ปออกเมื่อโหลดเว็บครบ 2 วินาที
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const intro = document.getElementById('intro-screen');
-                if (intro) {
-                    intro.classList.add('teleport-out');
-                    setTimeout(() => intro.style.display = 'none', 800);
-                }
-            }, 2000);
-        });
-
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en',
@@ -249,7 +177,7 @@
         function speakText(title, desc) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(`${title}.${desc}`);
+                const utterance = new SpeechSynthesisUtterance(`${title}. ${desc}`);
                 const isThai = document.documentElement.lang === 'th' || document.body.innerText.includes('ข่าว');
                 utterance.lang = isThai ? 'th-TH' : 'en-US';
                 utterance.rate = 1.0;
@@ -292,8 +220,9 @@
 
             filtered.forEach((item, index) => {
                 const card = document.createElement('div');
-                card.className = 'glass-card p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-sky-400 cursor-pointer group animate-card-rotate';
-                card.style.animationDelay = `${index * 0.15}s`;
+                // เอฟเฟกต์ Teleport เฉพาะการ์ดข่าว พร้อมหน่วงเวลากระจายตัวทีละใบ
+                card.className = 'glass-card p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-sky-400 cursor-pointer group animate-teleport-card';
+                card.style.animationDelay = `${index * 0.12}s`;
                 
                 const safeCat = item.cat || 'General';
                 const safeDate = item.date;
@@ -307,4 +236,29 @@
                         <span class="text-xs text-slate-400">${safeDate}</span>
                     </div>
                     <h2 class="text-xl font-bold mb-2 text-slate-800 group-hover:text-sky-600 transition-colors">${item.title}</h2>
-                    <p class="text-slate-600
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2">${item.desc}</p>
+                    ${safeImg ? `<img src="${safeImg}" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80';" class="w-full h-48 object-cover rounded-xl mt-2 border border-slate-200">` : ''}
+                    <div class="mt-4 text-xs text-sky-600 font-semibold flex items-center gap-1">
+                        👉 คลิกเพื่ออ่านข่าวเต็มจอ / ฟังเสียง
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterCountry(country) {
+            currentCountry = country;
+            document.querySelectorAll('#country-filters button').forEach(btn => {
+                if (btn.getAttribute('data-country') === country) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            renderNews();
+        }
+
+        loadNews();
+    </script>
+</body>
+</html>
