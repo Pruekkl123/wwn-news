@@ -1,65 +1,322 @@
 [
-    {
-        "cat": "Germany",
-        "date": "NOV 5, 2026",
-        "title": "Germany accelerates renewable energy rollout across major industrial hubs",
-        "desc": "The German government announced a massive investment package to upgrade the national grid, focusing on wind and solar integration to meet ambitious carbon-neutrality targets.",
-        "img": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        "cat": "France",
-        "date": "NOV 5, 2026",
-        "title": "Paris unveils new urban mobility plans featuring extensive cycling infrastructure",
-        "desc": "City officials in Paris have introduced phase two of their green transit strategy, adding dozens of new protected bike lanes and expanding pedestrian-only zones in central districts.",
-        "img": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        "cat": "Sweden",
-        "date": "NOV 4, 2026",
-        "title": "Stockholm tech sector leads European innovation in sustainable digital infrastructure",
-        "desc": "Local startups and tech giants in Stockholm are pioneering energy-efficient data center designs, utilizing excess heat recycling to warm residential neighborhoods.",
-        "img": "https://images.unsplash.com/photo-1509356843153-3d162423c27d?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        "cat": "Italy",
-        "date": "NOV 4, 2026",
-        "title": "Italy promotes cultural tourism revival in historical regional towns",
-        "desc": "A new nationwide initiative aims to draw international visitors away from major hotspots and into Italy's picturesque smaller villages by highlighting local heritage and gastronomy.",
-        "img": "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        "cat": "Spain",
-        "date": "NOV 3, 2026",
-        "title": "Barcelona modernizes public transit with smart AI-driven scheduling systems",
-        "desc": "The metropolitan transit authority of Barcelona has rolled out an artificial intelligence framework to optimize bus and metro frequencies in response to shifting commuter demands.",
-        "img": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        "cat": "Denmark",
-        "date": "NOV 3, 2026",
-        "title": "Copenhagen sets new global standards for zero-emission maritime shipping",
-        "desc": "Danish maritime researchers and shipping firms successfully tested a green-ammonia powered cargo vessel, marking a major milestone toward decarbonizing global trade routes.",
-        "img": "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        "cat": "Switzerland",
-        "date": "NOV 2, 2026",
-        "title": "Swiss alpine research stations report breakthrough in climate monitoring tech",
-        "desc": "High-altitude observatories across the Swiss Alps have deployed next-generation automated sensors to track glacier retreat and atmospheric shifts with unprecedented precision.",
-        "img": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        "cat": "Austria",
-        "date": "NOV 2, 2026",
-        "title": "Vienna hosts international summit on smart city architecture and living spaces",
-        "desc": "Urban planners and architects gathered in Vienna to showcase modular housing designs and smart energy systems tailored for future urban growth.",
-        "img": "https://images.unsplash.com/photo-1516550893885-303ce5872bb8?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-        "cat": "Norway",
-        "date": "NOV 1, 2026",
-        "title": "Norway expands electric vehicle charging network across scenic national routes",
-        "desc": "The Norwegian Public Roads Administration has completed a major expansion of ultra-fast EV chargers along rural and coastal tourist highways, ensuring seamless electric travel.",
-        "img": "https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?auto=format&fit=crop&w=800&q=80"
-    }
+  {
+    "id": 1,
+    "title": "UPDATE: New hoax bomb threats hit flights across Europe",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/10/800/600",
+    "desc": "Italian, French and Bulgarian fighter jets scrambled Thursday as about 20 flights were hit by a third day of hoax bomb alerts across Europe, authorities and airlines said."
+  },
+  {
+    "id": 2,
+    "title": "Swedish banks raise variable mortgage rates following central bank hike",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/20/800/600",
+    "desc": "Just a day after Sweden's central bank raised the country's key interest rate to 2 percent, banks are starting to follow."
+  },
+  {
+    "id": 3,
+    "title": "Swedish word of the day: möte",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/30/800/600",
+    "desc": "The word of the day is perhaps Sweden’s second favourite pastime, after 'fika', and they often go hand in hand."
+  },
+  {
+    "id": 4,
+    "title": "Where can you celebrate Diwali in Sweden in 2026?",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/40/800/600",
+    "desc": "Diwali or Deepawali, the Hindu festival of light, takes place in early November this year. Where can you celebrate in Sweden?"
+  },
+  {
+    "id": 5,
+    "title": "What does Sweden's new electronic state ID for non-citizens mean for you?",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/50/800/600",
+    "desc": "Starting December 1st, registered residents of Sweden who don't have citizenship can apply for SverigeID – a new, state-issued, alternative to BankID. What is it, and how can you apply for it?"
+  },
+  {
+    "id": 6,
+    "title": "Major train service disruptions after accident south of Stockholm",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/60/800/600",
+    "desc": "Regional trains have been cancelled on several routes south of Stockholm following an accident during track work last night. Current estimates are that disruptions will continue throughout the day and into early tomorrow."
+  },
+  {
+    "id": 7,
+    "title": "Swedish inflation falls sharply in surprise drop",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/70/800/600",
+    "desc": "Swedish inflation is dropping faster than expected, new figures suggest."
+  },
+  {
+    "id": 8,
+    "title": "Today in Sweden: A roundup of the latest news on Thursday",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/80/800/600",
+    "desc": "Travel chaos south of Stockholm following overnight rail collision – and northern municipal chief steps down after porn career revealed. Here's the latest news."
+  },
+  {
+    "id": 9,
+    "title": "Pet passports set to be restored between the EU and the UK",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/90/800/600",
+    "desc": "An agreement set to be announced at the upcoming EU-UK summit could mark the return of pet passports allowing easier travel across the Channel for holidaymakers with dogs, cats and ferrets."
+  },
+  {
+    "id": 10,
+    "title": "Interest rates are rising in Sweden – what does that mean for your finances?",
+    "cat": "Sweden",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/100/800/600",
+    "desc": "Sweden's Riksbank has raised the country's key interest rate from 1.75 percent to 2 percent, with more increases expected in the new year. How can foreigners in Sweden best plan their finances accordingly?"
+  },
+  {
+    "id": 11,
+    "title": "UPDATE: New hoax bomb threats hit flights across Europe",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/110/800/600",
+    "desc": "Italian, French and Bulgarian fighter jets scrambled Thursday as about 20 flights were hit by a third day of hoax bomb alerts across Europe, authorities and airlines said."
+  },
+  {
+    "id": 12,
+    "title": "Danish word of the day: sindssygt",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/120/800/600",
+    "desc": "We have an insane word of the day for you to learn today."
+  },
+  {
+    "id": 13,
+    "title": "KEY DATES: All the school holiday dates in Denmark for 2026 and 2027",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/130/800/600",
+    "desc": "Wondering when schools are off in Denmark? We've put together a handy guide for the coming term so you can plan the year ahead."
+  },
+  {
+    "id": 14,
+    "title": "The 12 Danish Christmas treats you need to know",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/140/800/600",
+    "desc": "'Tis the season for decadent eating, and Denmark's selection of Christmas treats definitely contribute to this. Have you tried them all?"
+  },
+  {
+    "id": 15,
+    "title": "When are Denmark's public holidays in 2027?",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/150/800/600",
+    "desc": "Denmark has ten public holidays in 2027, but unfortunately four of those fall on weekends, meaning workers will only have six extra days off next year. When are they?"
+  },
+  {
+    "id": 16,
+    "title": "Ten of Denmark's best and most-loved Christmas markets",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/160/800/600",
+    "desc": "Spellbinding Christmas markets offering up a cosy atmosphere, handmade gifts, and an authentic experience are available all over Denmark."
+  },
+  {
+    "id": 17,
+    "title": "Today in Denmark: A roundup of the latest news on Thursday",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/170/800/600",
+    "desc": "Tens of thousands of students strike in protest over new student grant rules, two Danish restaurants among top ten worldwide and more news from Denmark on Thursday."
+  },
+  {
+    "id": 18,
+    "title": "Pet passports set to be restored between the EU and the UK",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/180/800/600",
+    "desc": "An agreement set to be announced at the upcoming EU-UK summit could mark the return of pet passports allowing easier travel across the Channel for holidaymakers with dogs, cats and ferrets."
+  },
+  {
+    "id": 19,
+    "title": "Danish People's Party wants three more names taken off citizenship bill",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/190/800/600",
+    "desc": "The Danish People's Party has identified three more people – two Syrian and one Pakistani – who it wants to remove  from the list of 2,055 people whose names are included in the long-stalled citizenship bill."
+  },
+  {
+    "id": 20,
+    "title": "New university checks, taxes and a hunt: What changes in Denmark in November",
+    "cat": "Denmark",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/200/800/600",
+    "desc": "There's a busy month ahead in Denmark, with new legislation on security checks for university admission, a UN climate summit, and the annual Mortensaften duck dinner."
+  },
+  {
+    "id": 21,
+    "title": "'Making friends easily': Readers in Germany reveal what they miss most about home",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/210/800/600",
+    "desc": "From campfires and 'coffee mornings' to familiar foods and absent family, readers reveal the everyday comforts they left behind – and why some are difficult to replace in Germany."
+  },
+  {
+    "id": 22,
+    "title": "How long can skilled workers stay in Germany after losing their job?",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/220/800/600",
+    "desc": "For workers with a residence permit linked to their employment, losing a job comes with the added stress of visa issues. Fortunately a recent rule change offers a bit more leeway."
+  },
+  {
+    "id": 23,
+    "title": "UPDATE: New hoax bomb threats hit flights across Europe",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/230/800/600",
+    "desc": "Italian, French and Bulgarian fighter jets scrambled Thursday as about 20 flights were hit by a third day of hoax bomb alerts across Europe, authorities and airlines said."
+  },
+  {
+    "id": 24,
+    "title": "IN NUMBERS: How many people has Germany deported this year?",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/240/800/600",
+    "desc": "The number of deportations from Germany fell in the first three-quarters of the year, while the number of those expelled to Turkey increased. Here's a look at how many people have been expelled, and to which countries."
+  },
+  {
+    "id": 25,
+    "title": "Where to celebrate Diwali 2026 in Germany",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/250/800/600",
+    "desc": "Diwali, the Hindu festival of lights, takes place from November 6th to the 10th this year. Here's a look at the events where you can mark the holiday in Germany."
+  },
+  {
+    "id": 26,
+    "title": "German politician found dead in Berlin hotel",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/260/800/600",
+    "desc": "A prominent German politician was found dead in a Berlin hotel on Wednesday, police said, adding they had launched an investigation."
+  },
+  {
+    "id": 27,
+    "title": "German word of the day: Kuschelbeziehung",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/270/800/600",
+    "desc": "It is the time of year that single people might seek out a partner, if only to get through the colder months. If you – or your friends – are looking for a cosy relationship, this is a great German word to get familiar with."
+  },
+  {
+    "id": 28,
+    "title": "When are Germany’s public holidays in 2027?",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/280/800/600",
+    "desc": "Germany’s public holidays vary depending on where you live. Nine apply nationwide in 2027, while individual states and even some municipalities have additional days off."
+  },
+  {
+    "id": 29,
+    "title": "Merz sceptical Trump will change tack after US mid-term vote",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/290/800/600",
+    "desc": "The German chancellor suggested that Trump's tactics are not likely to change despite a shift in legislative power following recent elections in the US. Other German leaders previously expressed more optimism."
+  },
+  {
+    "id": 30,
+    "title": "Today in Germany: A roundup of the latest news on Thursday",
+    "cat": "Germany",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/300/800/600",
+    "desc": "Bavarian deputy leader Hubert Aiwanger found dead in Berlin hotel, property giant Vonovia 'concerned' over Berlin left's housing plans, Germany’s climate credibility wanes ahead of COP31 and more news on Thursday, November 5th."
+  },
+  {
+    "id": 31,
+    "title": "France workers strike and march for 'dignified wage'",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/310/800/600",
+    "desc": "Striking workers took part in protests across France against the rising cost of living on Thursday, with an estimated 600,000 people taking to the streets."
+  },
+  {
+    "id": 32,
+    "title": "ANALYSIS: Why are there so many WWII films in French cinemas right now?",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/320/800/600",
+    "desc": "Some of France's most successful films of 2026 are set during the Second World War - coincidence or a response to modern political anxieties? We asked French film experts for their views."
+  },
+  {
+    "id": 33,
+    "title": "The curious names given to people in French towns",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/330/800/600",
+    "desc": "French towns and cities have their own names for the people who live there, known as 'gentilés', and some are considerably harder to guess than others."
+  },
+  {
+    "id": 34,
+    "title": "UPDATE: New hoax bomb threats hit flights across Europe",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/340/800/600",
+    "desc": "Italian, French and Bulgarian fighter jets scrambled Thursday as about 20 flights were hit by a third day of hoax bomb alerts across Europe, authorities and airlines said."
+  },
+  {
+    "id": 35,
+    "title": "Prescriptions, vocab and HRT: Navigating the menopause in France",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/350/800/600",
+    "desc": "The symptoms of perimenopause and menopause itself can be difficult to navigate - even more so when you live in a foreign country. Here's a look at where to get help in France, what treatment is available, and how much it costs."
+  },
+  {
+    "id": 36,
+    "title": "French protests: What to expect on November 7th",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/360/800/600",
+    "desc": "Just two days after nationwide cross-sector strikes, France will see another day of protests as Gilet Jaunes continue their Saturday demos against the rising cost of living."
+  },
+  {
+    "id": 37,
+    "title": "Protests, train delays and Metro closures: What to expect in France on November 5th",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/370/800/600",
+    "desc": "Workers across France are being called to strike on Thursday, November 5th, in a nationwide day of action over wages, the cost of living and public services. From travel disruption and demo routes, here's what to expect."
+  },
+  {
+    "id": 38,
+    "title": "French Expression of the Day: Faire amende honorable",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/380/800/600",
+    "desc": "You might know that 'une amende' means a fine in French - but this expression actually means something else."
+  },
+  {
+    "id": 39,
+    "title": "The 6 best French winter dishes made with cheese",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/390/800/600",
+    "desc": "As the temperatures drop, you might be craving some winter food - which in France often means very hearty dishes made with melted cheese."
+  },
+  {
+    "id": 40,
+    "title": "Four new airlines to take over Ryanair's slots at Paris Orly airport in summer 2027",
+    "cat": "Europe",
+    "date": "Nov 06, 2026",
+    "img": "https://picsum.photos/id/400/800/600",
+    "desc": "Four airlines have been selected to operate new routes from Paris Orly airport next summer, taking over slots previously allocated to Ryanair."
+  }
 ]
