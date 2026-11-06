@@ -7,68 +7,76 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-color: #020617;
-            color: #f3f4f6;
+            /* ธีมสีอ่อน สว่างและสบายตา */
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+            color: #1e293b;
             font-family: 'Prompt', sans-serif;
             overflow-x: hidden;
             margin: 0;
             min-height: 100vh;
         }
 
-        /* แบ็กกราวด์แสงออโรร่าเคลื่อนไหวสมูทๆ */
-        .aurora-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -50;
-            pointer-events: none;
-            background: linear-gradient(125deg, #020617, #064e3b, #0f172a, #1e3a8a, #020617);
-            background-size: 400% 400%;
-            animation: auroraFlow 15s ease infinite;
+        /* Animation ตอนเข้าเว็บสำหรับส่วนหัว */
+        @keyframes headerEntrance {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
-        @keyframes auroraFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .animate-entrance {
+            animation: headerEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
+        /* การ์ดข่าวสไตล์ Light Glassmorphism */
         .glass-card {
-            background: rgba(11, 15, 25, 0.75);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
         }
+        
+        .glass-modal {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(203, 213, 225, 0.8);
+        }
+
+        /* ปุ่มสไตล์ Light Theme */
         .glass-btn {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(203, 213, 225, 0.8);
+            color: #475569;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
+        
         .glass-btn:hover, .glass-btn.active {
-            background: rgba(6, 182, 212, 0.25);
-            border-color: rgba(6, 182, 212, 0.6);
-            color: #22d3ee;
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+            background: #0284c7;
+            border-color: #0284c7;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.3);
         }
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
 
-    <!-- แบ็กกราวด์แสงออโรร่าขยับได้ -->
-    <div class="aurora-bg"></div>
-
-    <!-- ส่วนหัวเว็บไซต์สไตล์ The Local -->
-    <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500 drop-shadow-lg">
+    <!-- ส่วนหัวเว็บไซต์พร้อม Animation ตอนโหลดหน้าเว็บ -->
+    <header class="max-w-6xl mx-auto mb-8 text-center relative z-10 animate-entrance">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 drop-shadow-sm">
             W.W.N // INTERNATIONAL
         </h1>
-        <p class="text-sm text-gray-300 mt-2 tracking-wide">Global News Network inspired by The Local</p>
+        <p class="text-sm text-slate-500 mt-2 tracking-wide font-medium">Global News Network inspired by The Local</p>
 
         <!-- แผงเลือกประเทศ & ปุ่มแปลภาษา -->
-        <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl shadow-2xl">
+        <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl shadow-xl">
             <div id="country-filters" class="flex flex-wrap gap-2 justify-center items-center">
                 <button onclick="filterCountry('all')" class="glass-btn active px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="all">ALL</button>
                 <button onclick="filterCountry('Germany')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Germany">GERMANY</button>
@@ -82,10 +90,10 @@
                 <button onclick="filterCountry('Norway')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Norway">NORWAY</button>
             </div>
 
-            <div class="flex justify-center items-center gap-2 pt-2 border-t border-white/10">
+            <div class="flex justify-center items-center gap-2 pt-2 border-t border-slate-200">
                 <div id="google_translate_element" style="display:none;"></div>
-                <button onclick="triggerTranslate('th')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-cyan-300 border-cyan-500/30">🇹🇭 แปลทั้งหน้าเป็นไทย</button>
-                <button onclick="triggerTranslate('en')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-gray-300">🇬🇧 English</button>
+                <button onclick="triggerTranslate('th')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-sky-700 border-sky-300">🇹🇭 แปลทั้งหน้าเป็นไทย</button>
+                <button onclick="triggerTranslate('en')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600">🇬🇧 English</button>
             </div>
         </div>
     </header>
@@ -94,6 +102,35 @@
     <main id="news-container" class="max-w-4xl mx-auto space-y-6 relative z-10">
         <!-- ข่าวจะแสดงตรงนี้ -->
     </main>
+
+    <!-- หน้าต่าง Modal อ่านข่าวเต็มจอ -->
+    <div id="news-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md hidden">
+        <div class="glass-modal w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-8 shadow-2xl relative border border-sky-200">
+            <!-- ปุ่มปิด Modal -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 glass-btn px-3 py-1.5 rounded-full text-sm font-bold text-slate-600 hover:text-slate-900">
+                ✕ ปิด
+            </button>
+
+            <!-- เนื้อหาข่าวเต็มจอ -->
+            <div class="flex items-center gap-3 mb-4">
+                <span id="modal-cat" class="px-3 py-1 text-xs font-semibold bg-sky-100 text-sky-700 rounded-full border border-sky-200"></span>
+                <span id="modal-date" class="text-xs text-slate-400"></span>
+            </div>
+            
+            <h2 id="modal-title" class="text-2xl md:text-3xl font-extrabold mb-4 text-slate-800 leading-tight"></h2>
+            
+            <img id="modal-img" src="" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80';" class="w-full h-72 md:h-96 object-cover rounded-2xl mb-6 border border-slate-200 shadow-md">
+            
+            <p id="modal-desc" class="text-slate-600 text-base md:text-lg leading-relaxed mb-6"></p>
+
+            <!-- ปุ่มฟังเสียงในหน้าเต็มจอ -->
+            <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+                <button id="modal-speak-btn" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 text-sky-700 border-sky-300">
+                    🔊 ฟังเสียงข่าวนี้
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -137,22 +174,38 @@
             }
         }
 
-        // ฟังก์ชันสั่งให้อ่านข่าวออกเสียง
-        function speakNews(title, desc) {
+        // ฟังก์ชันสั่งอ่านเสียง
+        function speakText(title, desc) {
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // หยุดเสียงเก่าที่กำลังอ่านค้างอยู่ก่อน
-                const textToSpeech = `${title}. ${desc}`;
-                const utterance = new SpeechSynthesisUtterance(textToSpeech);
-                
-                // เช็กว่าหน้าเว็บตอนนี้แปลเป็นไทยหรือยัง ถ้าแปลเป็นไทยให้พยายามอ่านสำเนียงไทย
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(`${title}. ${desc}`);
                 const isThai = document.documentElement.lang === 'th' || document.body.innerText.includes('ข่าว');
                 utterance.lang = isThai ? 'th-TH' : 'en-US';
-                utterance.rate = 1.0; // ความเร็วในการอ่านปกติ
-
+                utterance.rate = 1.0;
                 window.speechSynthesis.speak(utterance);
             } else {
                 alert("เบราว์เซอร์ของคุณไม่รองรับระบบอ่านออกเสียงครับ");
             }
+        }
+
+        // เปิด Modal อ่านข่าวเต็มจอ
+        function openModal(title, desc, cat, date, img) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-cat').innerText = cat || 'General';
+            document.getElementById('modal-date').innerText = date;
+            document.getElementById('modal-img').src = img || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80';
+            
+            const speakBtn = document.getElementById('modal-speak-btn');
+            speakBtn.onclick = () => speakText(title, desc);
+
+            document.getElementById('news-modal').classList.remove('hidden');
+        }
+
+        // ปิด Modal
+        function closeModal() {
+            document.getElementById('news-modal').classList.add('hidden');
+            window.speechSynthesis.cancel();
         }
 
         function renderNews() {
@@ -164,31 +217,31 @@
                 : allNewsData.filter(item => item.cat && item.cat.toLowerCase() === currentCountry.toLowerCase());
 
             if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center text-gray-300 py-10 glass-card rounded-2xl">No news found for this country.</div>`;
+                container.innerHTML = `<div class="text-center text-slate-500 py-10 glass-card rounded-2xl">No news found for this country.</div>`;
                 return;
             }
 
             filtered.forEach(item => {
                 const card = document.createElement('div');
-                card.className = 'glass-card p-6 rounded-2xl shadow-xl transition-all duration-300 hover:border-cyan-500/50';
+                card.className = 'glass-card p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-sky-400 cursor-pointer group';
                 
-                // Escape string ป้องกันปัญหาเครื่องหมายคำถามในข้อความที่จะส่งเข้าไปอ่าน
-                const safeTitle = item.title.replace(/'/g, "\\'");
-                const safeDesc = item.desc.replace(/'/g, "\\'");
+                const safeCat = item.cat || 'General';
+                const safeDate = item.date;
+                const safeImg = item.img || '';
+
+                card.onclick = () => openModal(item.title, item.desc, safeCat, safeDate, safeImg);
 
                 card.innerHTML = `
                     <div class="flex justify-between items-center mb-3">
-                        <span class="px-3 py-1 text-xs font-semibold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">${item.cat || 'General'}</span>
-                        <div class="flex items-center gap-2">
-                            <button onclick="speakNews('${safeTitle}', '${safeDesc}')" class="glass-btn px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/30">
-                                🔊 ฟังข่าว
-                            </button>
-                            <span class="text-xs text-gray-400">${item.date}</span>
-                        </div>
+                        <span class="px-3 py-1 text-xs font-semibold bg-sky-100 text-sky-700 rounded-full border border-sky-200">${safeCat}</span>
+                        <span class="text-xs text-slate-400">${safeDate}</span>
                     </div>
-                    <h2 class="text-xl font-bold mb-2 text-white">${item.title}</h2>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">${item.desc}</p>
-                    ${item.img ? `<img src="${item.img}" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80';" class="w-full h-48 object-cover rounded-xl mt-2 border border-white/10">` : ''}
+                    <h2 class="text-xl font-bold mb-2 text-slate-800 group-hover:text-sky-600 transition-colors">${item.title}</h2>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2">${item.desc}</p>
+                    ${safeImg ? `<img src="${safeImg}" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80';" class="w-full h-48 object-cover rounded-xl mt-2 border border-slate-200">` : ''}
+                    <div class="mt-4 text-xs text-sky-600 font-semibold flex items-center gap-1">
+                        👉 คลิกเพื่ออ่านข่าวเต็มจอ / ฟังเสียง
+                    </div>
                 `;
                 container.appendChild(card);
             });
