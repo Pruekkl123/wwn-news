@@ -1,4 +1,4 @@
-ร<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,7 @@
             min-height: 100vh;
         }
 
-        /* Intro Animation สำหรับหน้าเปิดเว็บ (Splash Screen) */
+        /* Intro Screen ดอกไม้เบ่งบานตอนเข้าเว็บ */
         #intro-screen {
             position: fixed;
             inset: 0;
@@ -28,20 +28,10 @@
             transition: opacity 1s ease, visibility 1s ease;
         }
 
-        /* เอฟเฟกต์ดอกไม้เบ่งบานและหมุนวนเบาๆ */
         @keyframes flowerBloom {
-            0% {
-                transform: scale(0.5) rotate(-20deg);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1) rotate(10deg);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
+            0% { transform: scale(0.5) rotate(-20deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(10deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
         .flower-intro-icon {
@@ -60,20 +50,20 @@
             opacity: 0;
         }
 
-        /* Animation ตอนเข้าเว็บสำหรับส่วนหัวหลัก */
-        @keyframes headerEntrance {
+        /* Animation ข่าวหมุนตัวเข้ามา (Card Flip & Zoom Entrance) */
+        @keyframes cardRotateIn {
             0% {
                 opacity: 0;
-                transform: translateY(-30px) scale(0.95);
+                transform: perspective(1000px) rotateX(25deg) translateY(40px) scale(0.9);
             }
             100% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
             }
         }
 
-        .animate-entrance {
-            animation: headerEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        .animate-card-rotate {
+            animation: cardRotateIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         /* การ์ดข่าวสไตล์ Light Glassmorphism */
@@ -92,7 +82,6 @@
             border: 1px solid rgba(203, 213, 225, 0.8);
         }
 
-        /* ปุ่มสไตล์ Light Theme */
         .glass-btn {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(12px);
@@ -125,8 +114,8 @@
         </div>
     </div>
 
-    <!-- ส่วนหัวเว็บไซต์พร้อม Animation ตอนโหลดหน้าเว็บ -->
-    <header class="max-w-6xl mx-auto mb-8 text-center relative z-10 animate-entrance">
+    <!-- ส่วนหัวเว็บไซต์ -->
+    <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 drop-shadow-sm">
             W.W.N // INTERNATIONAL
         </h1>
@@ -163,12 +152,10 @@
     <!-- หน้าต่าง Modal อ่านข่าวเต็มจอ -->
     <div id="news-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md hidden">
         <div class="glass-modal w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-8 shadow-2xl relative border border-sky-200">
-            <!-- ปุ่มปิด Modal -->
             <button onclick="closeModal()" class="absolute top-4 right-4 glass-btn px-3 py-1.5 rounded-full text-sm font-bold text-slate-600 hover:text-slate-900">
                 ✕ ปิด
             </button>
 
-            <!-- เนื้อหาข่าวเต็มจอ -->
             <div class="flex items-center gap-3 mb-4">
                 <span id="modal-cat" class="px-3 py-1 text-xs font-semibold bg-sky-100 text-sky-700 rounded-full border border-sky-200"></span>
                 <span id="modal-date" class="text-xs text-slate-400"></span>
@@ -180,7 +167,6 @@
             
             <p id="modal-desc" class="text-slate-600 text-base md:text-lg leading-relaxed mb-6"></p>
 
-            <!-- ปุ่มฟังเสียงในหน้าเต็มจอ -->
             <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
                 <button id="modal-speak-btn" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 text-sky-700 border-sky-300">
                     🔊 ฟังเสียงข่าวนี้
@@ -190,7 +176,6 @@
     </div>
 
     <script type="text/javascript">
-        // ซ่อนหน้า Intro อัตโนมัติหลังจากโหลดเว็บครบ 2 วินาที
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const intro = document.getElementById('intro-screen');
@@ -286,9 +271,11 @@
                 return;
             }
 
-            filtered.forEach(item => {
+            filtered.forEach((item, index) => {
                 const card = document.createElement('div');
-                card.className = 'glass-card p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-sky-400 cursor-pointer group';
+                // เพิ่มคลาส animate-card-rotate และหน่วงเวลา (animation-delay) ตามลำดับการ์ด เพื่อให้หมุนเรียงคิวกันสวยๆ
+                card.className = 'glass-card p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-sky-400 cursor-pointer group animate-card-rotate';
+                card.style.animationDelay = `${index * 0.15}s`;
                 
                 const safeCat = item.cat || 'General';
                 const safeDate = item.date;
