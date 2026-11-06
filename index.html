@@ -15,7 +15,7 @@
             min-height: 100vh;
         }
 
-        /* Intro Screen ดอกไม้เบ่งบานตอนเข้าเว็บ */
+        /* Intro Screen เอฟเฟกต์ Teleport วาร์ปทะลุมิติตอนโหลดเสร็จ */
         #intro-screen {
             position: fixed;
             inset: 0;
@@ -24,20 +24,39 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 50%, #fdf4ff 100%);
-            transition: opacity 1s ease, visibility 1s ease;
+            background: #020617;
+            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s ease;
         }
 
-        @keyframes flowerBloom {
-            0% { transform: scale(0.5) rotate(-20deg); opacity: 0; }
-            50% { transform: scale(1.1) rotate(10deg); opacity: 1; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        /* เอฟเฟกต์วาร์ป (Teleport Zoom & Glow) */
+        @keyframes teleportEffect {
+            0% {
+                transform: scale(0.2) rotate(-180deg);
+                opacity: 0;
+                filter: blur(20px) brightness(3);
+            }
+            50% {
+                transform: scale(1.1) rotate(10deg);
+                opacity: 1;
+                filter: blur(0px) brightness(1.5);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+                filter: blur(0px) brightness(1);
+            }
         }
 
-        .flower-intro-icon {
-            animation: flowerBloom 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-            font-size: 5rem;
-            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+        .teleport-box {
+            animation: teleportEffect 1.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            text-align: center;
+        }
+
+        /* เมื่อโหลดเสร็จ จะทำการขยายใหญ่ทะลุจอแบบ Teleport ออกไป */
+        .teleport-out {
+            transform: scale(15);
+            opacity: 0;
+            filter: blur(10px);
         }
 
         @keyframes textFadeUp {
@@ -46,11 +65,11 @@
         }
 
         .intro-text {
-            animation: textFadeUp 1.2s ease 0.3s forwards;
+            animation: textFadeUp 1s ease 0.4s forwards;
             opacity: 0;
         }
 
-        /* Animation ข่าวหมุนตัวเข้ามา (Card Flip & Zoom Entrance) */
+        /* Animation ข่าวหมุนตัวเข้ามา */
         @keyframes cardRotateIn {
             0% {
                 opacity: 0;
@@ -66,7 +85,6 @@
             animation: cardRotateIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* การ์ดข่าวสไตล์ Light Glassmorphism */
         .glass-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
@@ -101,15 +119,15 @@
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
 
-    <!-- Intro Screen ดอกไม้เบ่งบานตอนเข้าเว็บ -->
+    <!-- Intro Screen เอฟเฟกต์ Teleport วาร์ป -->
     <div id="intro-screen">
-        <div class="text-center">
-            <div class="flower-intro-icon mb-4">🌸</div>
-            <h1 class="intro-text text-3xl md:text-4xl font-extrabold text-slate-800 tracking-wider mb-2">
-                W.W.N // INTERNATIONAL
+        <div class="teleport-box">
+            <div class="text-6xl mb-4">🌀</div>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-wider mb-2">
+                W.W.N // TELEPORTING
             </h1>
-            <p class="intro-text text-sm text-slate-500 font-medium tracking-wide">
-                Preparing your blooming global news experience...
+            <p class="intro-text text-sm text-cyan-400 font-medium tracking-wide">
+                Initializing quantum news stream...
             </p>
         </div>
     </div>
@@ -176,12 +194,13 @@
     </div>
 
     <script type="text/javascript">
+        // สั่งทำงานเอฟเฟกต์ Teleport วาร์ปออกเมื่อโหลดเว็บครบ 2 วินาที
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const intro = document.getElementById('intro-screen');
                 if (intro) {
-                    intro.style.opacity = '0';
-                    setTimeout(() => intro.style.display = 'none', 1000);
+                    intro.classList.add('teleport-out');
+                    setTimeout(() => intro.style.display = 'none', 800);
                 }
             }, 2000);
         });
@@ -230,7 +249,7 @@
         function speakText(title, desc) {
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(`${title}. ${desc}`);
+                const utterance = new SpeechSynthesisUtterance(`${title}.${desc}`);
                 const isThai = document.documentElement.lang === 'th' || document.body.innerText.includes('ข่าว');
                 utterance.lang = isThai ? 'th-TH' : 'en-US';
                 utterance.rate = 1.0;
@@ -273,7 +292,6 @@
 
             filtered.forEach((item, index) => {
                 const card = document.createElement('div');
-                // เพิ่มคลาส animate-card-rotate และหน่วงเวลา (animation-delay) ตามลำดับการ์ด เพื่อให้หมุนเรียงคิวกันสวยๆ
                 card.className = 'glass-card p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-sky-400 cursor-pointer group animate-card-rotate';
                 card.style.animationDelay = `${index * 0.15}s`;
                 
@@ -289,29 +307,4 @@
                         <span class="text-xs text-slate-400">${safeDate}</span>
                     </div>
                     <h2 class="text-xl font-bold mb-2 text-slate-800 group-hover:text-sky-600 transition-colors">${item.title}</h2>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2">${item.desc}</p>
-                    ${safeImg ? `<img src="${safeImg}" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80';" class="w-full h-48 object-cover rounded-xl mt-2 border border-slate-200">` : ''}
-                    <div class="mt-4 text-xs text-sky-600 font-semibold flex items-center gap-1">
-                        👉 คลิกเพื่ออ่านข่าวเต็มจอ / ฟังเสียง
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function filterCountry(country) {
-            currentCountry = country;
-            document.querySelectorAll('#country-filters button').forEach(btn => {
-                if (btn.getAttribute('data-country') === country) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            renderNews();
-        }
-
-        loadNews();
-    </script>
-</body>
-</html>
+                    <p class="text-slate-600
