@@ -15,26 +15,67 @@
             min-height: 100vh;
         }
 
-        /* Animation เฉพาะตัวการ์ดข่าว พุ่งวาร์ปเหมือน Teleport หมุนตัวเข้ามา */
-        @keyframes teleportCardIn {
+        /* Loading Screen ตอนเข้าเว็บ */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #0f172a;
+            color: #ffffff;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.8; }
+        }
+
+        .loading-logo {
+            animation: pulseGlow 1.5s infinite ease-in-out;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Animation การ์ดข่าว Teleport ขยับสั่น 5 ที (5 Keyframes steps) */
+        @keyframes teleportShake5Times {
             0% {
                 opacity: 0;
-                transform: scale(0.3) translateY(60px) rotateX(45deg);
-                filter: blur(10px);
+                transform: scale(0.4) translateY(50px) rotate(0deg);
+                filter: blur(8px);
             }
-            70% {
-                transform: scale(1.03) translateY(-10px) rotateX(-5deg);
+            20% {
+                opacity: 0.4;
+                transform: scale(1.05) translateY(-10px) rotate(-3deg);
+                filter: blur(4px);
+            }
+            40% {
+                opacity: 0.7;
+                transform: scale(0.96) translateY(5px) rotate(3deg);
+                filter: blur(2px);
+            }
+            60% {
+                opacity: 0.9;
+                transform: scale(1.02) translateY(-3px) rotate(-1.5deg);
+                filter: blur(1px);
+            }
+            80% {
+                opacity: 0.95;
+                transform: scale(0.99) translateY(1px) rotate(1deg);
                 filter: blur(0px);
             }
             100% {
                 opacity: 1;
-                transform: scale(1) translateY(0) rotateX(0deg);
+                transform: scale(1) translateY(0) rotate(0deg);
                 filter: blur(0px);
             }
         }
 
-        .animate-teleport-card {
-            animation: teleportCardIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        .animate-teleport-5times {
+            animation: teleportShake5Times 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
 
         .glass-card {
@@ -71,6 +112,13 @@
 </head>
 <body class="min-h-screen p-4 md:p-8 relative">
 
+    <!-- Loading Screen ตอนเข้าเว็บ -->
+    <div id="loading-screen">
+        <div class="loading-logo">⚡</div>
+        <h2 class="text-2xl font-extrabold tracking-widest text-cyan-400">W.W.N // LOADING</h2>
+        <p class="text-xs text-slate-400 mt-2">Preparing quantum news portal...</p>
+    </div>
+
     <!-- ส่วนหัวเว็บไซต์ -->
     <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 drop-shadow-sm">
@@ -90,175 +138,4 @@
                 <button onclick="filterCountry('Denmark')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Denmark">DENMARK</button>
                 <button onclick="filterCountry('Switzerland')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Switzerland">SWITZERLAND</button>
                 <button onclick="filterCountry('Austria')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Austria">AUSTRIA</button>
-                <button onclick="filterCountry('Norway')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Norway">NORWAY</button>
-            </div>
-
-            <div class="flex justify-center items-center gap-2 pt-2 border-t border-slate-200">
-                <div id="google_translate_element" style="display:none;"></div>
-                <button onclick="triggerTranslate('th')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-sky-700 border-sky-300">🇹🇭 แปลทั้งหน้าเป็นไทย</button>
-                <button onclick="triggerTranslate('en')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600">🇬🇧 English</button>
-            </div>
-        </div>
-    </header>
-
-    <!-- พื้นที่แสดงข่าว -->
-    <main id="news-container" class="max-w-4xl mx-auto space-y-6 relative z-10">
-        <!-- ข่าวจะแสดงตรงนี้ -->
-    </main>
-
-    <!-- หน้าต่าง Modal อ่านข่าวเต็มจอ -->
-    <div id="news-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md hidden">
-        <div class="glass-modal w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-8 shadow-2xl relative border border-sky-200">
-            <button onclick="closeModal()" class="absolute top-4 right-4 glass-btn px-3 py-1.5 rounded-full text-sm font-bold text-slate-600 hover:text-slate-900">
-                ✕ ปิด
-            </button>
-
-            <div class="flex items-center gap-3 mb-4">
-                <span id="modal-cat" class="px-3 py-1 text-xs font-semibold bg-sky-100 text-sky-700 rounded-full border border-sky-200"></span>
-                <span id="modal-date" class="text-xs text-slate-400"></span>
-            </div>
-            
-            <h2 id="modal-title" class="text-2xl md:text-3xl font-extrabold mb-4 text-slate-800 leading-tight"></h2>
-            
-            <img id="modal-img" src="" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80';" class="w-full h-72 md:h-96 object-cover rounded-2xl mb-6 border border-slate-200 shadow-md">
-            
-            <p id="modal-desc" class="text-slate-600 text-base md:text-lg leading-relaxed mb-6"></p>
-
-            <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
-                <button id="modal-speak-btn" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 text-sky-700 border-sky-300">
-                    🔊 ฟังเสียงข่าวนี้
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'th,en,sv,de,fr,it,es,da,no',
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-
-        function triggerTranslate(lang) {
-            var selectField = document.querySelector(".goog-te-combo");
-            if (selectField) {
-                selectField.value = lang;
-                selectField.dispatchEvent(new Event("change"));
-            } else {
-                alert("ระบบแปลกำลังโหลด กรุณารอสักครู่แล้วลองใหม่อีกครั้งครับ");
-            }
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <style>
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; }
-        .goog-logo-link { display: none !important; }
-        .goog-te-gadget { color: transparent !important; }
-    </style>
-
-    <script>
-        let allNewsData = [];
-        let currentCountry = 'all';
-
-        async function loadNews() {
-            try {
-                const response = await fetch('news.json');
-                allNewsData = await response.json();
-                renderNews();
-            } catch (error) {
-                console.error("โหลดข่าวไม่สำเร็จ:", error);
-            }
-        }
-
-        function speakText(title, desc) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(`${title}. ${desc}`);
-                const isThai = document.documentElement.lang === 'th' || document.body.innerText.includes('ข่าว');
-                utterance.lang = isThai ? 'th-TH' : 'en-US';
-                utterance.rate = 1.0;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert("เบราว์เซอร์ของคุณไม่รองรับระบบอ่านออกเสียงครับ");
-            }
-        }
-
-        function openModal(title, desc, cat, date, img) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-desc').innerText = desc;
-            document.getElementById('modal-cat').innerText = cat || 'General';
-            document.getElementById('modal-date').innerText = date;
-            document.getElementById('modal-img').src = img || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80';
-            
-            const speakBtn = document.getElementById('modal-speak-btn');
-            speakBtn.onclick = () => speakText(title, desc);
-
-            document.getElementById('news-modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('news-modal').classList.add('hidden');
-            window.speechSynthesis.cancel();
-        }
-
-        function renderNews() {
-            const container = document.getElementById('news-container');
-            container.innerHTML = '';
-
-            const filtered = currentCountry === 'all' 
-                ? allNewsData 
-                : allNewsData.filter(item => item.cat && item.cat.toLowerCase() === currentCountry.toLowerCase());
-
-            if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center text-slate-500 py-10 glass-card rounded-2xl">No news found for this country.</div>`;
-                return;
-            }
-
-            filtered.forEach((item, index) => {
-                const card = document.createElement('div');
-                // เอฟเฟกต์ Teleport เฉพาะการ์ดข่าว พร้อมหน่วงเวลากระจายตัวทีละใบ
-                card.className = 'glass-card p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-sky-400 cursor-pointer group animate-teleport-card';
-                card.style.animationDelay = `${index * 0.12}s`;
-                
-                const safeCat = item.cat || 'General';
-                const safeDate = item.date;
-                const safeImg = item.img || '';
-
-                card.onclick = () => openModal(item.title, item.desc, safeCat, safeDate, safeImg);
-
-                card.innerHTML = `
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="px-3 py-1 text-xs font-semibold bg-sky-100 text-sky-700 rounded-full border border-sky-200">${safeCat}</span>
-                        <span class="text-xs text-slate-400">${safeDate}</span>
-                    </div>
-                    <h2 class="text-xl font-bold mb-2 text-slate-800 group-hover:text-sky-600 transition-colors">${item.title}</h2>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2">${item.desc}</p>
-                    ${safeImg ? `<img src="${safeImg}" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80';" class="w-full h-48 object-cover rounded-xl mt-2 border border-slate-200">` : ''}
-                    <div class="mt-4 text-xs text-sky-600 font-semibold flex items-center gap-1">
-                        👉 คลิกเพื่ออ่านข่าวเต็มจอ / ฟังเสียง
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function filterCountry(country) {
-            currentCountry = country;
-            document.querySelectorAll('#country-filters button').forEach(btn => {
-                if (btn.getAttribute('data-country') === country) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            renderNews();
-        }
-
-        loadNews();
-    </script>
-</body>
-</html>
+                <button onclick="filterCountry('Norway')" class="glass-btn px-3 py
