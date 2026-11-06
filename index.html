@@ -15,7 +15,7 @@
             min-height: 100vh;
         }
 
-        /* แบ็กกราวด์แสงออโรร่าเคลื่อนไหวด้วย CSS สมูทๆ การันตีไม่จอดำ 100% */
+        /* แบ็กกราวด์แสงออโรร่าเคลื่อนไหวสมูทๆ */
         .aurora-bg {
             position: fixed;
             top: 0;
@@ -67,7 +67,7 @@
         </h1>
         <p class="text-sm text-gray-300 mt-2 tracking-wide">Global News Network inspired by The Local</p>
 
-        <!-- แผงเลือกประเทศครบชุด & ปุ่มแปลภาษา -->
+        <!-- แผงเลือกประเทศ & ปุ่มแปลภาษา -->
         <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl shadow-2xl">
             <div id="country-filters" class="flex flex-wrap gap-2 justify-center items-center">
                 <button onclick="filterCountry('all')" class="glass-btn active px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="all">ALL</button>
@@ -137,6 +137,24 @@
             }
         }
 
+        // ฟังก์ชันสั่งให้อ่านข่าวออกเสียง
+        function speakNews(title, desc) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // หยุดเสียงเก่าที่กำลังอ่านค้างอยู่ก่อน
+                const textToSpeech = `${title}. ${desc}`;
+                const utterance = new SpeechSynthesisUtterance(textToSpeech);
+                
+                // เช็กว่าหน้าเว็บตอนนี้แปลเป็นไทยหรือยัง ถ้าแปลเป็นไทยให้พยายามอ่านสำเนียงไทย
+                const isThai = document.documentElement.lang === 'th' || document.body.innerText.includes('ข่าว');
+                utterance.lang = isThai ? 'th-TH' : 'en-US';
+                utterance.rate = 1.0; // ความเร็วในการอ่านปกติ
+
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("เบราว์เซอร์ของคุณไม่รองรับระบบอ่านออกเสียงครับ");
+            }
+        }
+
         function renderNews() {
             const container = document.getElementById('news-container');
             container.innerHTML = '';
@@ -153,10 +171,20 @@
             filtered.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'glass-card p-6 rounded-2xl shadow-xl transition-all duration-300 hover:border-cyan-500/50';
+                
+                // Escape string ป้องกันปัญหาเครื่องหมายคำถามในข้อความที่จะส่งเข้าไปอ่าน
+                const safeTitle = item.title.replace(/'/g, "\\'");
+                const safeDesc = item.desc.replace(/'/g, "\\'");
+
                 card.innerHTML = `
                     <div class="flex justify-between items-center mb-3">
                         <span class="px-3 py-1 text-xs font-semibold bg-cyan-500/20 text-cyan-300 rounded-full border border-cyan-500/30">${item.cat || 'General'}</span>
-                        <span class="text-xs text-gray-400">${item.date}</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="speakNews('${safeTitle}', '${safeDesc}')" class="glass-btn px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 text-cyan-300 border-cyan-500/30 hover:bg-cyan-500/30">
+                                🔊 ฟังข่าว
+                            </button>
+                            <span class="text-xs text-gray-400">${item.date}</span>
+                        </div>
                     </div>
                     <h2 class="text-xl font-bold mb-2 text-white">${item.title}</h2>
                     <p class="text-gray-300 text-sm leading-relaxed mb-4">${item.desc}</p>
