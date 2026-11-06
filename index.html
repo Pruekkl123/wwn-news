@@ -6,7 +6,17 @@
     <title>W.W.N - International News Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
+        /* บังคับซ่อนแถบแปลภาษา Google Translate Bar ด้านบนสุดแบบถาวร 100% */
+        .goog-te-banner-frame, .skiptranslate, iframe.goog-te-banner-frame {
+            display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            width: 0 !important;
+            pointer-events: none !important;
+        }
+        html, body {
+            top: 0px !important;
+            position: static !important;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
             color: #1e293b;
             font-family: 'Prompt', sans-serif;
@@ -121,7 +131,7 @@
         <p class="text-xs text-slate-500 mt-2 font-medium">Preparing blooming global news experience...</p>
     </div>
 
-    <!-- ส่วนหัวเว็บไซต์ (ล็อกจุดห้ามแปล) -->
+    <!-- ส่วนหัวเว็บไซต์ -->
     <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 drop-shadow-sm notranslate" translate="no">
             W<span class="text-sky-500">.</span>W<span class="text-sky-500">.</span>N <span class="text-slate-400 font-light">//</span> INTERNATIONAL
@@ -212,13 +222,6 @@
         }
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <style>
-        .goog-te-banner-frame.skiptranslate { display: none !important; }
-        body { top: 0px !important; }
-        .goog-logo-link { display: none !important; }
-        .goog-te-gadget { color: transparent !important; }
-    </style>
 
     <script>
         let allNewsData = [];
