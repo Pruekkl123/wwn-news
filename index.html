@@ -2,89 +2,191 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<title>ข่าวแปลไทย</title>
+<title>WWN News · ข่าวแปลไทย</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fffaf3;--card:#fff;--tx:#1f2430;--mut:#6b7280;--bd:#eee2d0;--p1:#ff5e8a;--p2:#ffb02e;--p3:#4f8cff;--line:#06c755}
-@media(prefers-color-scheme:dark){:root{--bg:#14161d;--card:#1e222c;--tx:#f2f3f7;--mut:#9aa1b2;--bd:#2d3240;color-scheme:dark}}
+:root{--bg:#0d0f14;--bg2:#141821;--card:#161a23;--tx:#f3efe6;--mut:#9a968a;--gold:#d4af6a;--gold2:#f0d9a0;--bd:rgba(212,175,106,.22);--line:#06c755}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font-family:'Prompt',system-ui,sans-serif;line-height:1.6}
-#splash{position:fixed;inset:0;z-index:50;background:linear-gradient(135deg,var(--p1),var(--p2) 50%,var(--p3));display:grid;place-items:center;transition:opacity .6s,visibility .6s;overflow:hidden}
+body{margin:0;color:var(--tx);font-family:'Prompt',system-ui,sans-serif;font-weight:300;line-height:1.7;background:radial-gradient(1200px 600px at 80% -10%,#1d2231 0%,transparent 60%),radial-gradient(900px 500px at -10% 10%,#1a1620 0%,transparent 55%),var(--bg);min-height:100vh}
+a{color:inherit}
+/* ---------- Splash (cute) ---------- */
+#splash{position:fixed;inset:0;z-index:99;background:radial-gradient(circle at 50% 40%,#1c2130,#0b0d12);display:grid;place-items:center;transition:opacity .7s,visibility .7s}
 #splash.out{opacity:0;visibility:hidden}
-.blob{position:absolute;border-radius:50%;background:rgba(255,255,255,.22);animation:fl 4s ease-in-out infinite}
-.blob:nth-child(1){width:220px;height:220px;left:-40px;top:10%}
-.blob:nth-child(2){width:160px;height:160px;right:-20px;top:55%;animation-delay:-1s}
-.blob:nth-child(3){width:100px;height:100px;left:55%;top:8%;animation-delay:-2s}
-@keyframes fl{50%{transform:translateY(-28px) scale(1.08)}}
-.sp{position:relative;text-align:center;color:#fff}
-.sp h1{margin:8px 0 4px;font-size:2rem;animation:pop .8s cubic-bezier(.2,1.6,.4,1) both}
-.logo{font-size:4rem;animation:spin 1.6s ease-in-out}
-@keyframes spin{from{transform:rotate(-360deg) scale(0)}to{transform:none}}
-@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
-.dots{display:flex;gap:10px;justify-content:center;margin-top:22px}
-.dots i{width:14px;height:14px;border-radius:50%;background:#fff;animation:b .9s infinite}
+.stage{text-align:center;position:relative}
+.mascot{width:130px;height:130px;animation:hop 1.1s cubic-bezier(.3,.1,.3,1) infinite;filter:drop-shadow(0 8px 18px rgba(212,175,106,.25))}
+.shadow{width:80px;height:12px;border-radius:50%;background:rgba(212,175,106,.28);margin:2px auto 0;animation:sh 1.1s cubic-bezier(.3,.1,.3,1) infinite}
+@keyframes hop{0%,100%{transform:translateY(0) scale(1.06,.94)}45%{transform:translateY(-34px) scale(.96,1.05)}}
+@keyframes sh{0%,100%{transform:scale(1);opacity:.9}45%{transform:scale(.6);opacity:.4}}
+.eye{transform-box:fill-box;transform-origin:center;animation:blink 3s infinite}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.sp{position:absolute;color:var(--gold2);font-size:20px;animation:tw 1.8s ease-in-out infinite}
+.sp:nth-child(1){left:-28px;top:6px}.sp:nth-child(2){right:-26px;top:30px;animation-delay:.6s;font-size:15px}.sp:nth-child(3){right:6px;top:-18px;animation-delay:1.1s;font-size:13px}
+@keyframes tw{0%,100%{opacity:.2;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(25deg)}}
+.brand{font-family:'Playfair Display',serif;font-size:1.5rem;letter-spacing:.35em;color:var(--gold);margin:22px 0 4px;padding-left:.35em}
+#msg{color:var(--mut);font-size:.9rem;min-height:1.6em}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.dots i{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:dt 1s infinite}
 .dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
-@keyframes b{50%{transform:translateY(-16px)}}
-header{max-width:760px;margin:auto;padding:28px 20px 12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
-h2{margin:0;font-size:1.6rem;background:linear-gradient(90deg,var(--p1),var(--p3));-webkit-background-clip:text;background-clip:text;color:transparent}
-.btn{border-radius:999px;padding:9px 16px;font-weight:600;color:#fff;background:var(--line);text-decoration:none;display:none}
-main{max-width:760px;margin:auto;padding:0 20px 60px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
-.chip{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:6px 14px;font:inherit;cursor:pointer}
-.chip.on{background:var(--p3);border-color:var(--p3);color:#fff}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px;margin:14px 0;opacity:0;transform:translateY(30px);animation:rise .6s forwards}
+@keyframes dt{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-8px);opacity:1}}
+/* ---------- Layout ---------- */
+header{max-width:1040px;margin:auto;padding:34px 22px 10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{font-family:'Playfair Display',serif;font-size:1.7rem;letter-spacing:.22em;color:var(--gold2)}
+.logo small{display:block;font-family:'Prompt',sans-serif;font-size:.7rem;letter-spacing:.3em;color:var(--mut);font-weight:300}
+.btn{display:none;border:1px solid var(--gold);color:var(--gold2);padding:8px 18px;border-radius:999px;text-decoration:none;font-weight:500;font-size:.9rem;transition:.25s}
+.btn:hover{background:var(--gold);color:#14110a}
+.rule{max-width:1040px;margin:12px auto 0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5}
+main{max-width:1040px;margin:auto;padding:18px 22px 70px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 22px}
+.chip{background:transparent;color:var(--mut);border:1px solid var(--bd);border-radius:999px;padding:6px 18px;font:inherit;font-size:.9rem;cursor:pointer;transition:.25s}
+.chip:hover{color:var(--gold2);border-color:var(--gold)}
+.chip.on{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#14110a;border-color:transparent;font-weight:500}
+.rise{opacity:0;transform:translateY(26px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
-.card h3{margin:0 0 6px}.meta{color:var(--mut);font-size:.8rem}
-.thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;margin-bottom:10px;background:var(--bd)}
-.tag{background:var(--p3);color:#fff;border-radius:6px;padding:1px 8px;font-size:.75rem}
-details{color:var(--mut);font-size:.9rem;margin-top:8px}
-.more{display:inline-block;margin-top:8px;color:var(--p3);text-decoration:none;font-weight:600}
-.empty{text-align:center;color:var(--mut);padding:40px 0}
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+/* hero */
+.hero{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--bd);min-height:340px;display:flex;align-items:flex-end;background:var(--card) center/cover no-repeat;margin-bottom:26px}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,20,.05) 20%,rgba(13,15,20,.92))}
+.hero .in{position:relative;padding:28px}
+.hero h3{font-family:'Prompt',serif;font-size:1.75rem;line-height:1.35;font-weight:500;margin:8px 0}
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.card{background:linear-gradient(180deg,#191d28,var(--card));border:1px solid var(--bd);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,border-color .35s,box-shadow .35s}
+.card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px rgba(0,0,0,.45)}
+.thumb{width:100%;aspect-ratio:16/10;object-fit:cover;background:#1c212c}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.meta{font-size:.75rem;color:var(--mut);letter-spacing:.04em}
+.tag{display:inline-block;color:var(--gold2);border:1px solid var(--bd);border-radius:6px;padding:0 9px;margin-right:8px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+h3{margin:0;font-size:1.12rem;font-weight:500;line-height:1.45}
+.desc{color:#cfcabd;font-size:.92rem;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+details{color:var(--mut);font-size:.82rem;margin-top:auto;padding-top:8px}
+summary{cursor:pointer;color:var(--gold)}
+.more{color:var(--gold2);text-decoration:none;font-size:.88rem;font-weight:500;margin-top:6px}
+.more:hover{text-decoration:underline}
+.empty{text-align:center;color:var(--mut);padding:60px 0}
+footer{text-align:center;color:var(--mut);font-size:.75rem;padding:0 20px 40px;letter-spacing:.06em}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
+@media(max-width:560px){.hero h3{font-size:1.35rem}.hero{min-height:280px}.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div id="splash"><div class="blob"></div><div class="blob"></div><div class="blob"></div>
-<div class="sp"><div class="logo">📰</div><h1>ข่าวสดใหม่</h1><div class="dots"><i></i><i></i><i></i></div></div></div>
-<header><h2>📰 ข่าวแปลไทย</h2><a id="oa" class="btn" target="_blank" rel="noopener">＋ เพิ่มเพื่อน LINE OA</a></header>
-<main><div id="chips" class="chips"></div><div id="list"><div class="empty">กำลังโหลด…</div></div></main>
+<div id="splash">
+  <div class="stage">
+    <span class="sp">✦</span><span class="sp">✦</span><span class="sp">✦</span>
+    <svg class="mascot" viewBox="0 0 120 120" aria-hidden="true">
+      <polygon points="24,44 30,10 54,30" fill="#f3e3bd" stroke="#d4af6a" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="96,44 90,10 66,30" fill="#f3e3bd" stroke="#d4af6a" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="31,36 33,20 45,31" fill="#ffc9bf"/><polygon points="89,36 87,20 75,31" fill="#ffc9bf"/>
+      <circle cx="60" cy="68" r="40" fill="#f8ecd0" stroke="#d4af6a" stroke-width="3"/>
+      <ellipse class="eye" cx="44" cy="64" rx="5" ry="7" fill="#2b2418"/><ellipse class="eye" cx="76" cy="64" rx="5" ry="7" fill="#2b2418"/>
+      <circle cx="46" cy="61" r="1.8" fill="#fff"/><circle cx="78" cy="61" r="1.8" fill="#fff"/>
+      <ellipse cx="34" cy="78" rx="8" ry="5" fill="#ff9fa0" opacity=".6"/><ellipse cx="86" cy="78" rx="8" ry="5" fill="#ff9fa0" opacity=".6"/>
+      <path d="M55 76 Q60 82 65 76" fill="none" stroke="#2b2418" stroke-width="2.6" stroke-linecap="round"/>
+      <ellipse cx="60" cy="72" rx="3" ry="2.2" fill="#e58a8a"/>
+      <path d="M18 70 L32 72 M18 80 L32 78 M102 70 L88 72 M102 80 L88 78" stroke="#d4af6a" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <div class="shadow"></div>
+    <div class="brand">WWN NEWS</div>
+    <div id="msg">กำลังเตรียมข่าวให้นะ…</div>
+    <div class="dots"><i></i><i></i><i></i></div>
+  </div>
+</div>
+
+<header>
+  <div class="logo">WWN NEWS<small>ข่าวแปลไทย · THAI EDITION</small></div>
+  <a id="oa" class="btn" target="_blank" rel="noopener">＋ เพิ่มเพื่อน LINE OA</a>
+</header>
+<div class="rule"></div>
+<main><div id="chips" class="chips"></div><div id="list"></div></main>
+<footer>แปลอัตโนมัติด้วย Google Translate · อาจมีความคลาดเคลื่อน</footer>
+
 <script>
-var OA_ID = "985diaue"; // ใส่ LINE OA ID ของคุณ เช่น "@yourshop" (เว้นว่างไว้ = ไม่แสดงปุ่ม)
-var items = [], cat = "ทั้งหมด";
+var OA_ID = ""; // ใส่ LINE OA ID เช่น "@yourshop" (เว้นว่าง = ไม่แสดงปุ่ม)
+var items = [], cat = "ทั้งหมด", minDone = false, dataDone = false;
+var msgs = ["กำลังเตรียมข่าวให้นะ…", "แปลเป็นไทยให้อยู่…", "ใกล้เสร็จแล้ว ✨"], mi = 0;
+
 if (OA_ID) { var a = document.getElementById("oa"); a.href = "https://line.me/R/ti/p/" + encodeURIComponent(OA_ID); a.style.display = "inline-block"; }
-setTimeout(function () { document.getElementById("splash").classList.add("out"); }, 2200);
+var mt = setInterval(function () { mi = (mi + 1) % msgs.length; document.getElementById("msg").textContent = msgs[mi]; }, 900);
+function hideSplash() { if (minDone && dataDone) { document.getElementById("splash").classList.add("out"); clearInterval(mt); } }
+setTimeout(function () { minDone = true; hideSplash(); }, 2400);
+setTimeout(function () { minDone = dataDone = true; hideSplash(); }, 7000);
+
 function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
 
+/* ---------- แปลฝั่งเบราว์เซอร์ (ใช้เมื่อ news.json ยังไม่มีคำแปล) ---------- */
+function cached(t) { try { return localStorage.getItem("wwnth:" + t.slice(0, 120) + t.length); } catch (e) { return null; } }
+function store(t, v) { try { localStorage.setItem("wwnth:" + t.slice(0, 120) + t.length, v); } catch (e) {} }
+function gt(text) {
+  if (!text) return Promise.resolve("");
+  var c = cached(text); if (c) return Promise.resolve(c);
+  return fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=th&dt=t&q=" + encodeURIComponent(text.slice(0, 1500)))
+    .then(function (r) { return r.json(); })
+    .then(function (j) { var out = j[0].map(function (s) { return s[0]; }).join(""); if (out) store(text, out); return out || text; });
+}
+function setText(kind, idx, val) {
+  var els = document.querySelectorAll('[data-' + kind + '="' + idx + '"]');
+  for (var i = 0; i < els.length; i++) els[i].textContent = val;
+}
+function translateMissing() {
+  var queue = [];
+  items.forEach(function (n, i) {
+    if (!n.titleTh) queue.push(["titleTh", "title", "t", i]);
+    if (!n.descTh) queue.push(["descTh", "desc", "d", i]);
+  });
+  function worker() {
+    var job = queue.shift(); if (!job) return;
+    var n = items[job[3]];
+    gt(n[job[1]]).then(function (th) { n[job[0]] = th; setText(job[2], job[3], th); })
+      .catch(function () {}).then(worker);
+  }
+  for (var k = 0; k < 4; k++) worker();
+}
+
+/* ---------- แสดงผล ---------- */
 function render() {
   var cats = ["ทั้งหมด"];
   items.forEach(function (n) { if (n.cat && cats.indexOf(n.cat) < 0) cats.push(n.cat); });
   document.getElementById("chips").innerHTML = cats.map(function (c) {
     return '<button class="chip' + (c === cat ? " on" : "") + '" data-c="' + esc(c) + '">' + esc(c) + "</button>";
   }).join("");
-  var shown = cat === "ทั้งหมด" ? items : items.filter(function (n) { return n.cat === cat; });
+  var shown = items.filter(function (n) { return cat === "ทั้งหมด" || n.cat === cat; });
   var L = document.getElementById("list");
   if (!shown.length) { L.innerHTML = '<div class="empty">ยังไม่มีข่าว</div>'; return; }
-  L.innerHTML = shown.map(function (n, i) {
-    var link = n.url || n.link;
-    return '<article class="card" style="animation-delay:' + (2.3 + Math.min(i, 8) * 0.12) + 's">' +
+  var heroIdx = items.indexOf(shown[0]), h = shown[0], html = "";
+  var link0 = h.url || h.link;
+  html += '<article class="hero rise"' + (h.img ? ' style="background-image:url(\'' + esc(h.img).replace(/'/g, "%27") + '\')"' : "") + '><div class="in">' +
+    '<div class="meta"><span class="tag">' + esc(h.cat) + "</span>" + esc(h.date) + "</div>" +
+    '<h3 data-t="' + heroIdx + '">' + esc(h.titleTh || h.title) + "</h3>" +
+    '<div class="desc" data-d="' + heroIdx + '">' + esc(h.descTh || h.desc) + "</div>" +
+    (link0 ? '<a class="more" target="_blank" rel="noopener" href="' + esc(link0) + '">อ่านต้นฉบับ →</a>' : "") + "</div></article>";
+  html += '<div class="grid">' + shown.slice(1).map(function (n, i) {
+    var idx = items.indexOf(n), link = n.url || n.link;
+    return '<article class="card rise" style="animation-delay:' + (0.1 + Math.min(i, 9) * 0.07) + 's">' +
       (n.img ? '<img class="thumb" loading="lazy" src="' + esc(n.img) + '" alt="">' : "") +
-      '<div class="meta"><span class="tag">' + esc(n.cat) + "</span> " + esc(n.date) + "</div>" +
-      "<h3>" + esc(n.titleTh || n.title) + "</h3><div>" + esc(n.descTh || n.desc) + "</div>" +
+      '<div class="body"><div class="meta"><span class="tag">' + esc(n.cat) + "</span>" + esc(n.date) + "</div>" +
+      '<h3 data-t="' + idx + '">' + esc(n.titleTh || n.title) + "</h3>" +
+      '<div class="desc" data-d="' + idx + '">' + esc(n.descTh || n.desc) + "</div>" +
       "<details><summary>ต้นฉบับภาษาอังกฤษ</summary><b>" + esc(n.title) + "</b><br>" + esc(n.desc) + "</details>" +
       (link ? '<a class="more" target="_blank" rel="noopener" href="' + esc(link) + '">อ่านต้นฉบับ →</a>' : "") +
-      "</article>";
-  }).join("");
+      "</div></article>";
+  }).join("") + "</div>";
+  L.innerHTML = html;
 }
 document.getElementById("chips").addEventListener("click", function (e) {
   var c = e.target.getAttribute("data-c"); if (c) { cat = c; render(); }
 });
-function load() {
+
+function load(first) {
   fetch("news.json?t=" + Date.now()).then(function (r) { return r.json(); })
-    .then(function (d) { items = d; render(); })
-    .catch(function () { document.getElementById("list").innerHTML = '<div class="empty">โหลดข่าวไม่สำเร็จ</div>'; });
+    .then(function (d) {
+      items = d; render(); translateMissing();
+      if (first) { dataDone = true; hideSplash(); }
+    })
+    .catch(function () {
+      if (first) { document.getElementById("list").innerHTML = '<div class="empty">โหลดข่าวไม่สำเร็จ</div>'; dataDone = true; hideSplash(); }
+    });
 }
-load(); setInterval(load, 60000);
+load(true);
+setInterval(function () { load(false); }, 120000);
 </script>
 </body>
 </html>
