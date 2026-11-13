@@ -1,331 +1,90 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>W.W.N - International News Network</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* บังคับซ่อนแถบแปลภาษา Google Translate Bar ด้านบนสุดแบบถาวร 100% */
-        .goog-te-banner-frame, .skiptranslate, iframe.goog-te-banner-frame {
-            display: none !important;
-            visibility: hidden !important;
-            height: 0 !important;
-            width: 0 !important;
-            pointer-events: none !important;
-        }
-        html, body {
-            top: 0px !important;
-            position: static !important;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
-            color: #1e293b;
-            font-family: 'Prompt', sans-serif;
-            overflow-x: hidden;
-            margin: 0;
-            min-height: 100vh;
-        }
-
-        /* Loading Screen สีขาว โลโก้แมวน้อยหมุนดุ๊กดิ๊ก */
-        #loading-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        @keyframes catBounce {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(3deg); }
-        }
-
-        .loading-logo-img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            animation: catBounce 1.2s infinite ease-in-out;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
-            border-radius: 50%;
-        }
-
-        /* Animation การ์ดข่าว Teleport ขยับสั่น 5 ที */
-        @keyframes teleportShake5Times {
-            0% {
-                opacity: 0;
-                transform: scale(0.4) translateY(50px) rotate(0deg);
-                filter: blur(8px);
-            }
-            20% {
-                opacity: 0.4;
-                transform: scale(1.05) translateY(-10px) rotate(-3deg);
-                filter: blur(4px);
-            }
-            40% {
-                opacity: 0.7;
-                transform: scale(0.96) translateY(5px) rotate(3deg);
-                filter: blur(2px);
-            }
-            60% {
-                opacity: 0.9;
-                transform: scale(1.02) translateY(-3px) rotate(-1.5deg);
-                filter: blur(1px);
-            }
-            80% {
-                opacity: 0.95;
-                transform: scale(0.99) translateY(1px) rotate(1deg);
-                filter: blur(0px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0) rotate(0deg);
-                filter: blur(0px);
-            }
-        }
-
-        .animate-teleport-5times {
-            animation: teleportShake5Times 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-        }
-        
-        .glass-modal {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(203, 213, 225, 0.8);
-        }
-
-        .glass-btn {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(203, 213, 225, 0.8);
-            color: #475569;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-        
-        .glass-btn:hover, .glass-btn.active {
-            background: #0284c7;
-            border-color: #0284c7;
-            color: #ffffff;
-            box-shadow: 0 0 15px rgba(2, 132, 199, 0.3);
-        }
-    </style>
+<meta charset="utf-8">
+<title>ข่าวแปลไทย</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf3;--card:#fff;--tx:#1f2430;--mut:#6b7280;--bd:#eee2d0;--p1:#ff5e8a;--p2:#ffb02e;--p3:#4f8cff;--line:#06c755}
+@media(prefers-color-scheme:dark){:root{--bg:#14161d;--card:#1e222c;--tx:#f2f3f7;--mut:#9aa1b2;--bd:#2d3240;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Prompt',system-ui,sans-serif;line-height:1.6}
+#splash{position:fixed;inset:0;z-index:50;background:linear-gradient(135deg,var(--p1),var(--p2) 50%,var(--p3));display:grid;place-items:center;transition:opacity .6s,visibility .6s;overflow:hidden}
+#splash.out{opacity:0;visibility:hidden}
+.blob{position:absolute;border-radius:50%;background:rgba(255,255,255,.22);animation:fl 4s ease-in-out infinite}
+.blob:nth-child(1){width:220px;height:220px;left:-40px;top:10%}
+.blob:nth-child(2){width:160px;height:160px;right:-20px;top:55%;animation-delay:-1s}
+.blob:nth-child(3){width:100px;height:100px;left:55%;top:8%;animation-delay:-2s}
+@keyframes fl{50%{transform:translateY(-28px) scale(1.08)}}
+.sp{position:relative;text-align:center;color:#fff}
+.sp h1{margin:8px 0 4px;font-size:2rem;animation:pop .8s cubic-bezier(.2,1.6,.4,1) both}
+.logo{font-size:4rem;animation:spin 1.6s ease-in-out}
+@keyframes spin{from{transform:rotate(-360deg) scale(0)}to{transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+.dots{display:flex;gap:10px;justify-content:center;margin-top:22px}
+.dots i{width:14px;height:14px;border-radius:50%;background:#fff;animation:b .9s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes b{50%{transform:translateY(-16px)}}
+header{max-width:760px;margin:auto;padding:28px 20px 12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+h2{margin:0;font-size:1.6rem;background:linear-gradient(90deg,var(--p1),var(--p3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{border-radius:999px;padding:9px 16px;font-weight:600;color:#fff;background:var(--line);text-decoration:none;display:none}
+main{max-width:760px;margin:auto;padding:0 20px 60px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
+.chip{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:6px 14px;font:inherit;cursor:pointer}
+.chip.on{background:var(--p3);border-color:var(--p3);color:#fff}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px;margin:14px 0;opacity:0;transform:translateY(30px);animation:rise .6s forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.card h3{margin:0 0 6px}.meta{color:var(--mut);font-size:.8rem}
+.thumb{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;margin-bottom:10px;background:var(--bd)}
+.tag{background:var(--p3);color:#fff;border-radius:6px;padding:1px 8px;font-size:.75rem}
+details{color:var(--mut);font-size:.9rem;margin-top:8px}
+.more{display:inline-block;margin-top:8px;color:var(--p3);text-decoration:none;font-weight:600}
+.empty{text-align:center;color:var(--mut);padding:40px 0}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important}}
+</style>
 </head>
-<body class="min-h-screen p-4 md:p-8 relative">
+<body>
+<div id="splash"><div class="blob"></div><div class="blob"></div><div class="blob"></div>
+<div class="sp"><div class="logo">📰</div><h1>ข่าวสดใหม่</h1><div class="dots"><i></i><i></i><i></i></div></div></div>
+<header><h2>📰 ข่าวแปลไทย</h2><a id="oa" class="btn" target="_blank" rel="noopener">＋ เพิ่มเพื่อน LINE OA</a></header>
+<main><div id="chips" class="chips"></div><div id="list"><div class="empty">กำลังโหลด…</div></div></main>
+<script>
+var OA_ID = "985diaue"; // ใส่ LINE OA ID ของคุณ เช่น "@yourshop" (เว้นว่างไว้ = ไม่แสดงปุ่ม)
+var items = [], cat = "ทั้งหมด";
+if (OA_ID) { var a = document.getElementById("oa"); a.href = "https://line.me/R/ti/p/" + encodeURIComponent(OA_ID); a.style.display = "inline-block"; }
+setTimeout(function () { document.getElementById("splash").classList.add("out"); }, 2200);
+function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
 
-    <!-- Loading Screen สีขาว พร้อมโลโก้แมวน้อยดุ๊กดิ๊ก -->
-    <div id="loading-screen" translate="no" class="notranslate">
-        <img src="logo.png" alt="Logo" class="loading-logo-img" onerror="this.src='https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=200&q=80'">
-        <h2 class="text-2xl font-extrabold tracking-widest text-slate-800">W<span class="text-sky-600">.</span>W<span class="text-sky-600">.</span>N <span class="text-slate-400 font-light">//</span> LOADING</h2>
-        <p class="text-xs text-slate-500 mt-2 font-medium">Preparing angelic global news experience...</p>
-    </div>
-
-    <!-- ส่วนหัวเว็บไซต์ -->
-    <header class="max-w-6xl mx-auto mb-8 text-center relative z-10">
-        <div class="flex justify-center items-center gap-3 mb-2">
-            <img src="logo.png" alt="Logo" class="w-12 h-12 object-contain rounded-full shadow-md border border-slate-200" onerror="this.style.display='none'">
-            <h1 class="text-4xl md:text-5xl font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-700 drop-shadow-sm notranslate" translate="no">
-                W<span class="text-sky-500">.</span>W<span class="text-sky-500">.</span>N <span class="text-slate-400 font-light">//</span> INTERNATIONAL
-            </h1>
-        </div>
-        <p class="text-sm text-slate-500 mt-1 tracking-wide font-medium">Global News Network inspired by The Local</p>
-
-        <!-- แผงเลือกประเทศ & ปุ่มแปลภาษา -->
-        <div class="flex flex-col gap-4 mt-6 p-4 glass-card rounded-2xl shadow-xl">
-            <div id="country-filters" class="flex flex-wrap gap-2 justify-center items-center">
-                <button onclick="filterCountry('all')" class="glass-btn active px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="all">ALL</button>
-                <button onclick="filterCountry('Germany')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Germany">GERMANY</button>
-                <button onclick="filterCountry('France')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="France">FRANCE</button>
-                <button onclick="filterCountry('Sweden')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Sweden">SWEDEN</button>
-                <button onclick="filterCountry('Italy')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Italy">ITALY</button>
-                <button onclick="filterCountry('Spain')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Spain">SPAIN</button>
-                <button onclick="filterCountry('Denmark')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Denmark">DENMARK</button>
-                <button onclick="filterCountry('Switzerland')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Switzerland">SWITZERLAND</button>
-                <button onclick="filterCountry('Austria')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Austria">AUSTRIA</button>
-                <button onclick="filterCountry('Norway')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-semibold" data-country="Norway">NORWAY</button>
-            </div>
-
-            <div class="flex justify-center items-center gap-2 pt-2 border-t border-slate-200">
-                <div id="google_translate_element" style="display:none;"></div>
-                <button onclick="triggerTranslate('th')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-sky-700 border-sky-300">🇹🇭 แปลทั้งหน้าเป็นไทย</button>
-                <button onclick="triggerTranslate('en')" class="glass-btn px-3 py-1.5 rounded-xl text-xs font-bold text-slate-600">🇬🇧 English</button>
-            </div>
-        </div>
-    </header>
-
-    <!-- พื้นที่แสดงข่าว -->
-    <main id="news-container" class="max-w-4xl mx-auto space-y-6 relative z-10">
-        <!-- ข่าวจะแสดงตรงนี้ -->
-    </main>
-
-    <!-- หน้าต่าง Modal อ่านข่าวเต็มจอ -->
-    <div id="news-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md hidden">
-        <div class="glass-modal w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl p-6 md:p-8 shadow-2xl relative border border-sky-200">
-            <button onclick="closeModal()" class="absolute top-4 right-4 glass-btn px-3 py-1.5 rounded-full text-sm font-bold text-slate-600 hover:text-slate-900">
-                ✕ ปิด
-            </button>
-
-            <div class="flex items-center gap-3 mb-4">
-                <span id="modal-cat" class="px-3 py-1 text-xs font-semibold bg-sky-100 text-sky-700 rounded-full border border-sky-200"></span>
-                <span id="modal-date" class="text-xs text-slate-400"></span>
-            </div>
-            
-            <h2 id="modal-title" class="text-2xl md:text-3xl font-extrabold mb-4 text-slate-800 leading-tight"></h2>
-            
-            <img id="modal-img" src="" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80';" class="w-full h-72 md:h-96 object-cover rounded-2xl mb-6 border border-slate-200 shadow-md">
-            
-            <p id="modal-desc" class="text-slate-600 text-base md:text-lg leading-relaxed mb-6"></p>
-
-            <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
-                <button id="modal-speak-btn" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 text-sky-700 border-sky-300">
-                    🔊 ฟังเสียงข่าวนี้
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loading-screen');
-                if (loader) {
-                    loader.style.opacity = '0';
-                    setTimeout(() => loader.style.display = 'none', 800);
-                }
-            }, 1200);
-        });
-
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'th,en,sv,de,fr,it,es,da,no',
-                autoDisplay: false
-            }, 'google_translate_element');
-        }
-
-        function triggerTranslate(lang) {
-            var selectField = document.querySelector(".goog-te-combo");
-            if (selectField) {
-                selectField.value = lang;
-                selectField.dispatchEvent(new Event("change"));
-            } else {
-                alert("ระบบแปลกำลังโหลด กรุณารอสักครู่แล้วลองใหม่อีกครั้งครับ");
-            }
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <script>
-        let allNewsData = [];
-        let currentCountry = 'all';
-
-        async function loadNews() {
-            try {
-                const response = await fetch('news.json');
-                allNewsData = await response.json();
-                renderNews();
-            } catch (error) {
-                console.error("โหลดข่าวไม่สำเร็จ:", error);
-            }
-        }
-
-        function speakText(title, desc) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-                const utterance = new SpeechSynthesisUtterance(`${title}. ${desc}`);
-                const isThai = document.documentElement.lang === 'th' || document.body.innerText.includes('ข่าว');
-                utterance.lang = isThai ? 'th-TH' : 'en-US';
-                utterance.rate = 1.0;
-                window.speechSynthesis.speak(utterance);
-            } else {
-                alert("เบราว์เซอร์ของคุณไม่รองรับระบบอ่านออกเสียงครับ");
-            }
-        }
-
-        function openModal(title, desc, cat, date, img) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-desc').innerText = desc;
-            document.getElementById('modal-cat').innerText = cat || 'General';
-            document.getElementById('modal-date').innerText = date;
-            document.getElementById('modal-img').src = img || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80';
-            
-            const speakBtn = document.getElementById('modal-speak-btn');
-            speakBtn.onclick = () => speakText(title, desc);
-
-            document.getElementById('news-modal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('news-modal').classList.add('hidden');
-            window.speechSynthesis.cancel();
-        }
-
-        function renderNews() {
-            const container = document.getElementById('news-container');
-            container.innerHTML = '';
-
-            const filtered = currentCountry === 'all' 
-                ? allNewsData 
-                : allNewsData.filter(item => item.cat && item.cat.toLowerCase() === currentCountry.toLowerCase());
-
-            if (filtered.length === 0) {
-                container.innerHTML = `<div class="text-center text-slate-500 py-10 glass-card rounded-2xl">No news found for this country.</div>`;
-                return;
-            }
-
-            filtered.forEach((item, index) => {
-                const card = document.createElement('div');
-                card.className = 'glass-card p-6 rounded-2xl shadow-md transition-all duration-300 hover:border-sky-400 cursor-pointer group animate-teleport-5times';
-                card.style.animationDelay = `${index * 0.15}s`;
-                
-                const safeCat = item.cat || 'General';
-                const safeDate = item.date;
-                const safeImg = item.img || '';
-
-                card.onclick = () => openModal(item.title, item.desc, safeCat, safeDate, safeImg);
-
-                card.innerHTML = `
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="px-3 py-1 text-xs font-semibold bg-sky-100 text-sky-700 rounded-full border border-sky-200">${safeCat}</span>
-                        <span class="text-xs text-slate-400">${safeDate}</span>
-                    </div>
-                    <h2 class="text-xl font-bold mb-2 text-slate-800 group-hover:text-sky-600 transition-colors">${item.title}</h2>
-                    <p class="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2">${item.desc}</p>
-                    ${safeImg ? `<img src="${safeImg}" alt="News Image" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=80';" class="w-full h-48 object-cover rounded-xl mt-2 border border-slate-200">` : ''}
-                    <div class="mt-4 text-xs text-sky-600 font-semibold flex items-center gap-1">
-                        👉 คลิกเพื่ออ่านข่าวเต็มจอ / ฟังเสียง
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function filterCountry(country) {
-            currentCountry = country;
-            document.querySelectorAll('#country-filters button').forEach(btn => {
-                if (btn.getAttribute('data-country') === country) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-            renderNews();
-        }
-
-        loadNews();
-    </script>
+function render() {
+  var cats = ["ทั้งหมด"];
+  items.forEach(function (n) { if (n.cat && cats.indexOf(n.cat) < 0) cats.push(n.cat); });
+  document.getElementById("chips").innerHTML = cats.map(function (c) {
+    return '<button class="chip' + (c === cat ? " on" : "") + '" data-c="' + esc(c) + '">' + esc(c) + "</button>";
+  }).join("");
+  var shown = cat === "ทั้งหมด" ? items : items.filter(function (n) { return n.cat === cat; });
+  var L = document.getElementById("list");
+  if (!shown.length) { L.innerHTML = '<div class="empty">ยังไม่มีข่าว</div>'; return; }
+  L.innerHTML = shown.map(function (n, i) {
+    var link = n.url || n.link;
+    return '<article class="card" style="animation-delay:' + (2.3 + Math.min(i, 8) * 0.12) + 's">' +
+      (n.img ? '<img class="thumb" loading="lazy" src="' + esc(n.img) + '" alt="">' : "") +
+      '<div class="meta"><span class="tag">' + esc(n.cat) + "</span> " + esc(n.date) + "</div>" +
+      "<h3>" + esc(n.titleTh || n.title) + "</h3><div>" + esc(n.descTh || n.desc) + "</div>" +
+      "<details><summary>ต้นฉบับภาษาอังกฤษ</summary><b>" + esc(n.title) + "</b><br>" + esc(n.desc) + "</details>" +
+      (link ? '<a class="more" target="_blank" rel="noopener" href="' + esc(link) + '">อ่านต้นฉบับ →</a>' : "") +
+      "</article>";
+  }).join("");
+}
+document.getElementById("chips").addEventListener("click", function (e) {
+  var c = e.target.getAttribute("data-c"); if (c) { cat = c; render(); }
+});
+function load() {
+  fetch("news.json?t=" + Date.now()).then(function (r) { return r.json(); })
+    .then(function (d) { items = d; render(); })
+    .catch(function () { document.getElementById("list").innerHTML = '<div class="empty">โหลดข่าวไม่สำเร็จ</div>'; });
+}
+load(); setInterval(load, 60000);
+</script>
 </body>
 </html>
