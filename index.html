@@ -44,15 +44,17 @@ main{max-width:1040px;margin:auto;padding:18px 22px 70px}
 .rise{opacity:0;transform:translateY(26px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
 /* hero */
-.hero{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--bd);min-height:340px;display:flex;align-items:flex-end;background:var(--card) center/cover no-repeat;margin-bottom:26px}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,15,20,.05) 20%,rgba(13,15,20,.92))}
-.hero .in{position:relative;padding:28px}
+.hero{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--bd);min-height:340px;display:flex;align-items:flex-end;background:linear-gradient(135deg,#232a3b,#12151c);margin-bottom:26px}
+.herobg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,15,20,.05) 20%,rgba(13,15,20,.92))}
+.hero .in{position:relative;z-index:2;padding:28px}
 .hero h3{font-family:'Prompt',serif;font-size:1.75rem;line-height:1.35;font-weight:500;margin:8px 0}
 /* grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
 .card{background:linear-gradient(180deg,#191d28,var(--card));border:1px solid var(--bd);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,border-color .35s,box-shadow .35s}
 .card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px rgba(0,0,0,.45)}
 .thumb{width:100%;aspect-ratio:16/10;object-fit:cover;background:#1c212c}
+.ph{display:grid;place-items:center;font-size:2.6rem;background:linear-gradient(135deg,#232a3b,#12151c);color:var(--gold)}
 .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
 .meta{font-size:.75rem;color:var(--mut);letter-spacing:.04em}
 .tag{display:inline-block;color:var(--gold2);border:1px solid var(--bd);border-radius:6px;padding:0 9px;margin-right:8px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
@@ -110,17 +112,27 @@ function hideSplash() { if (minDone && dataDone) { document.getElementById("spla
 setTimeout(function () { minDone = true; hideSplash(); }, 2400);
 setTimeout(function () { minDone = dataDone = true; hideSplash(); }, 7000);
 
+function imgFail(el) { var d = document.createElement("div"); d.className = "thumb ph"; d.textContent = "📰"; el.replaceWith(d); }
 function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
 
 /* ---------- แปลฝั่งเบราว์เซอร์ (ใช้เมื่อ news.json ยังไม่มีคำแปล) ---------- */
 function cached(t) { try { return localStorage.getItem("wwnth:" + t.slice(0, 120) + t.length); } catch (e) { return null; } }
 function store(t, v) { try { localStorage.setItem("wwnth:" + t.slice(0, 120) + t.length, v); } catch (e) {} }
+function gtx(text) {
+  return fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=th&dt=t&q=" + encodeURIComponent(text))
+    .then(function (r) { return r.json(); })
+    .then(function (j) { return j[0].map(function (s) { return s[0]; }).join(""); });
+}
 function gt(text) {
   if (!text) return Promise.resolve("");
   var c = cached(text); if (c) return Promise.resolve(c);
-  return fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=th&dt=t&q=" + encodeURIComponent(text.slice(0, 1500)))
-    .then(function (r) { return r.json(); })
-    .then(function (j) { var out = j[0].map(function (s) { return s[0]; }).join(""); if (out) store(text, out); return out || text; });
+  text = text.slice(0, 1500);
+  // 1) ผ่าน /api/translate (Vercel function, ไม่ติด CORS)  2) ถ้าไม่มี ลองเรียก Google ตรงๆ
+  return fetch("/api/translate?q=" + encodeURIComponent(text))
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (j) { return j.text; })
+    .catch(function () { return gtx(text); })
+    .then(function (out) { if (out) store(text, out); return out || text; });
 }
 function setText(kind, idx, val) {
   var els = document.querySelectorAll('[data-' + kind + '="' + idx + '"]');
@@ -153,7 +165,7 @@ function render() {
   if (!shown.length) { L.innerHTML = '<div class="empty">ยังไม่มีข่าว</div>'; return; }
   var heroIdx = items.indexOf(shown[0]), h = shown[0], html = "";
   var link0 = h.url || h.link;
-  html += '<article class="hero rise"' + (h.img ? ' style="background-image:url(\'' + esc(h.img).replace(/'/g, "%27") + '\')"' : "") + '><div class="in">' +
+  html += '<article class="hero rise">' + (h.img ? '<img class="herobg" referrerpolicy="no-referrer" onerror="this.remove()" src="' + esc(h.img) + '" alt="">' : "") + '<div class="in">' +
     '<div class="meta"><span class="tag">' + esc(h.cat) + "</span>" + esc(h.date) + "</div>" +
     '<h3 data-t="' + heroIdx + '">' + esc(h.titleTh || h.title) + "</h3>" +
     '<div class="desc" data-d="' + heroIdx + '">' + esc(h.descTh || h.desc) + "</div>" +
@@ -161,7 +173,7 @@ function render() {
   html += '<div class="grid">' + shown.slice(1).map(function (n, i) {
     var idx = items.indexOf(n), link = n.url || n.link;
     return '<article class="card rise" style="animation-delay:' + (0.1 + Math.min(i, 9) * 0.07) + 's">' +
-      (n.img ? '<img class="thumb" loading="lazy" src="' + esc(n.img) + '" alt="">' : "") +
+      (n.img ? '<img class="thumb" loading="lazy" referrerpolicy="no-referrer" onerror="imgFail(this)" src="' + esc(n.img) + '" alt="">' : '<div class="thumb ph">📰</div>') +
       '<div class="body"><div class="meta"><span class="tag">' + esc(n.cat) + "</span>" + esc(n.date) + "</div>" +
       '<h3 data-t="' + idx + '">' + esc(n.titleTh || n.title) + "</h3>" +
       '<div class="desc" data-d="' + idx + '">' + esc(n.descTh || n.desc) + "</div>" +
