@@ -4,7 +4,9 @@ import re
 import html
 import time
 import calendar
+import hashlib
 import urllib.request
+from collections import Counter
 from datetime import datetime, timedelta
 
 # The Local ครบทั้ง 9 ประเทศ
@@ -20,8 +22,11 @@ THE_LOCAL_FEEDS = {
     'Austria': 'https://feeds.thelocal.com/rss/at',
 }
 
-PER_FEED = 10          # จำนวนข่าวต่อประเทศ
-MAX_AGE_DAYS = 14      # ข้ามข่าวที่เก่ากว่านี้ (ใส่ 0 = ไม่กรอง)
+OUT = "news.json"
+PER_FEED = 25          # อ่านข่าวล่าสุดจากแต่ละประเทศสูงสุดกี่ข่าวต่อรอบ
+MAX_AGE_DAYS = 14      # เก็บข่าวย้อนหลังกี่วัน (ข่าวเก่ากว่านี้จะถูกลบ)
+MAX_NEW_PER_RUN = 250  # เปิดหน้าข่าวใหม่ได้สูงสุดกี่หน้าต่อรอบ (กันรันนานเกินไป ที่เหลือรอบหน้าค่อยทำ)
+MIN_PER_DAY = 10       # เป้าหมายข่าวต่อวัน (ใช้เตือนใน log)
 BODY_CHARS = 1000      # ความยาวเนื้อข่าวที่ดึงมาแสดง (ย่อหน้าแรกๆ)
 UA = {"User-Agent": "Mozilla/5.0 (compatible; WWNNewsBot/1.0)"}
 SKIP = ("subscribe", "become a member", "sign up", "cookie", "newsletter", "log in",
@@ -71,8 +76,6 @@ def extract_page(page):
 
 
 def page_info(url):
-    if not url:
-        return None, ""
     try:
         req = urllib.request.Request(url, headers=UA)
         with urllib.request.urlopen(req, timeout=10) as r:
@@ -83,50 +86,81 @@ def page_info(url):
         return None, ""
 
 
-if __name__ == "__main__":
-    all_news = []
-    news_id = 1
-    cutoff = datetime.now() - timedelta(days=MAX_AGE_DAYS) if MAX_AGE_DAYS else None
+def item_ts(item):
+    if item.get("ts"):
+        return item["ts"]
+    try:
+        return int(datetime.strptime(item.get("date", ""), "%b %d, %Y").timestamp() * 1000)
+    except Exception:
+        return 0
 
+
+def main():
+    # ข่าวเดิมที่เก็บไว้ (สะสมข้ามรอบ จะได้มีข่าวครบทุกวัน)
+    try:
+        with open(OUT, encoding="utf-8") as f:
+            old = json.load(f)
+    except Exception:
+        old = []
+    cutoff = datetime.now() - timedelta(days=MAX_AGE_DAYS)
+    cutoff_ms = int(cutoff.timestamp() * 1000)
+    items = {i["url"]: i for i in old if i.get("url") and item_ts(i) >= cutoff_ms}
+    print(f"เก็บข่าวเดิมไว้ {len(items)} ข่าว")
+
+    new_count = 0
     for category, feed_url in THE_LOCAL_FEEDS.items():
         try:
             feed = feedparser.parse(feed_url)
             if not feed.entries:
                 print(f"Warning: no entries for {category} ({feed_url})")
                 continue
-            count = 0
-            for entry in feed.entries:
-                if count >= PER_FEED:
-                    break
+            added = 0
+            for entry in feed.entries[:PER_FEED]:
+                link = getattr(entry, "link", "")
+                if not link or link in items:
+                    continue
                 if getattr(entry, "published_parsed", None):
                     dt = datetime.fromtimestamp(calendar.timegm(entry.published_parsed))
                 else:
                     dt = datetime.now()
-                if cutoff and dt < cutoff:
+                if dt < cutoff:
                     continue
-
-                link = getattr(entry, "link", "")
+                if new_count >= MAX_NEW_PER_RUN:
+                    continue  # เกินโควตารอบนี้ ไว้รอบหน้า
                 page_img, body = page_info(link)
                 time.sleep(0.3)
                 summary = clean(entry.summary) if hasattr(entry, "summary") else clean(entry.title)
-                image_url = rss_image(entry) or page_img or f"https://picsum.photos/id/{news_id * 10}/800/600"
-
-                all_news.append({
-                    "id": news_id,
+                seed = hashlib.md5(link.encode()).hexdigest()[:10]
+                items[link] = {
+                    "id": 0,
                     "title": clean(entry.title, 300),
                     "cat": category,
                     "date": dt.strftime("%b %d, %Y"),
-                    "img": image_url,
+                    "ts": int(dt.timestamp() * 1000),
+                    "img": rss_image(entry) or page_img or f"https://picsum.photos/seed/{seed}/800/600",
                     "desc": body if len(body) > len(summary) else summary,  # เนื้อข่าวแบบละเอียด
                     "summary": summary,
                     "url": link,
-                })
-                news_id += 1
-                count += 1
+                }
+                new_count += 1
+                added += 1
+            print(f"{category}: ข่าวใหม่ {added}")
         except Exception as e:
             print(f"Error fetching {category}: {e}")
 
-    with open('news.json', 'w', encoding='utf-8') as f:
-        json.dump(all_news, f, ensure_ascii=False, indent=2)
+    result = sorted(items.values(), key=item_ts, reverse=True)
+    for i, n in enumerate(result, 1):
+        n["id"] = i
 
-    print(f"Successfully generated {len(all_news)} articles.")
+    with open(OUT, "w", encoding="utf-8") as f:
+        json.dump(result, f, ensure_ascii=False, indent=2)
+
+    per_day = Counter(n["date"] for n in result)
+    for day in sorted(per_day, key=lambda d: datetime.strptime(d, "%b %d, %Y"), reverse=True):
+        mark = "" if per_day[day] >= MIN_PER_DAY else f"  <-- น้อยกว่า {MIN_PER_DAY}"
+        print(f"{day}: {per_day[day]} ข่าว{mark}")
+    print(f"Successfully generated {len(result)} articles ({new_count} new).")
+
+
+if __name__ == "__main__":
+    main()
