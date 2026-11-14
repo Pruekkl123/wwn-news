@@ -22,7 +22,7 @@ header,main,.ticker,.stripe{position:relative;z-index:2}
 #splash::after{content:"";position:absolute;inset:14px;border:3px dashed #c98f5a;border-radius:22px;pointer-events:none}
 #splash.out{opacity:0;visibility:hidden}
 .stage{text-align:center;position:relative;z-index:2}
-.mascot{width:150px;height:150px;animation:pose .8s steps(1,end) infinite}
+.mascot{width:110px;height:110px;animation:pose .8s steps(1,end) infinite}
 @keyframes pose{0%{transform:translateY(0) rotate(-3deg)}25%{transform:translateY(-16px) rotate(2deg)}50%{transform:translateY(-30px) rotate(-2deg) scale(1.03)}75%{transform:translateY(-14px) rotate(3deg)}}
 .eye{transform-box:fill-box;transform-origin:center;animation:blink 1.6s steps(1,end) infinite}
 @keyframes blink{0%{transform:scaleY(1)}88%{transform:scaleY(.1)}94%{transform:scaleY(1)}}
@@ -31,12 +31,26 @@ header,main,.ticker,.stripe{position:relative;z-index:2}
 .sp{position:absolute;color:#e8a13a;font-size:24px;animation:tw 1s steps(1,end) infinite}
 .sp:nth-child(1){left:-34px;top:6px}.sp:nth-child(2){right:-32px;top:34px;animation-delay:-.3s;font-size:17px}.sp:nth-child(3){right:2px;top:-22px;animation-delay:-.6s;font-size:15px}
 @keyframes tw{0%{opacity:.25;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(20deg)}}
-.tiles{display:flex;gap:6px;justify-content:center;margin:22px 0 10px}
-.tiles b{width:34px;height:42px;display:grid;place-items:center;font-family:'Fredoka',sans-serif;font-size:1.35rem;color:#fff;border-radius:6px;box-shadow:2px 4px 0 rgba(90,55,20,.35);animation:tl .9s steps(1,end) infinite}
-.tiles i{width:12px}
-.tiles b:nth-child(1){background:#ff5c8a;animation-delay:0s}.tiles b:nth-child(2){background:#ffa63d;animation-delay:-.12s}.tiles b:nth-child(3){background:#3da5ff;animation-delay:-.24s}
-.tiles b:nth-child(5){background:#2ecc71;animation-delay:-.36s}.tiles b:nth-child(6){background:#8b5cf6;animation-delay:-.48s}.tiles b:nth-child(7){background:#ff5c8a;animation-delay:-.6s}.tiles b:nth-child(8){background:#ffa63d;animation-delay:-.72s}
-@keyframes tl{0%{transform:rotate(-4deg) translateY(0)}33%{transform:rotate(3deg) translateY(-6px)}66%{transform:rotate(-2deg) translateY(2px)}}
+.catwrap{display:inline-block;transform:translateX(var(--cx,0px));transition:transform .3s steps(3,end)}
+.wwn{display:flex;gap:14px;justify-content:center;margin:16px 0 6px;min-height:150px}
+.col{width:90px;display:flex;flex-direction:column;align-items:center;opacity:0}
+.col.show{opacity:1}
+.big{width:80px;height:92px;display:grid;place-items:center;font-family:'Fredoka',sans-serif;font-size:3.2rem;color:#fff;border-radius:10px;box-shadow:3px 5px 0 rgba(90,55,20,.35)}
+.col:nth-child(1) .big{background:#ff5c8a}.col:nth-child(2) .big{background:#ffa63d}.col:nth-child(3) .big{background:#3da5ff}
+.col.show .big{animation:popin .5s steps(1,end) forwards,wob .8s steps(1,end) .5s infinite}
+@keyframes popin{0%{transform:scale(0) rotate(-12deg)}25%{transform:scale(.7) rotate(8deg)}50%{transform:scale(1.15) rotate(-5deg)}75%{transform:scale(.95) rotate(3deg)}100%{transform:scale(1) rotate(-2deg)}}
+@keyframes wob{0%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-3px)}100%{transform:rotate(-2deg) translateY(0)}}
+.word{margin-top:8px;text-align:center;min-height:56px}
+.word span{display:block;font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.35rem;color:#6b4423;letter-spacing:.04em;white-space:nowrap}
+.word i{font-style:normal;display:inline-block;opacity:0}
+.col.on .word i{animation:ltr .3s steps(1,end) forwards;animation-delay:calc(var(--k)*.12s)}
+@keyframes ltr{0%{opacity:1;transform:translateY(-14px) rotate(-12deg) scale(1.3)}50%{opacity:1;transform:translateY(3px) rotate(6deg)}100%{opacity:1;transform:none}}
+.word small{display:block;opacity:0;font-size:.8rem;color:#a2784a;font-weight:600}
+.col.on .word small{animation:ltr .3s steps(1,end) .55s forwards}
+#eq{min-height:1.6em;font-weight:700;color:#6b4423;opacity:0}
+#eq.on{opacity:1;animation:popin .5s steps(1,end)}
+.cele .big{animation:wob .5s steps(1,end) infinite!important}
+#skip{position:absolute;right:26px;bottom:26px;z-index:3;border:2px dashed #8a5a2b;background:#fff8e6;color:#6b4423;border-radius:999px;padding:6px 14px;font:inherit;font-weight:600;cursor:pointer}
 #msg{color:#6b4423;font-weight:600;min-height:1.6em}
 .prog{display:flex;gap:6px;justify-content:center;margin-top:12px}
 .prog u{width:22px;height:22px;border-radius:4px;border:2px solid #8a5a2b;text-decoration:none}
@@ -129,7 +143,7 @@ footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:
 <div id="splash">
   <div class="stage">
     <span class="sp">✦</span><span class="sp">✦</span><span class="sp">✦</span>
-    <svg class="mascot" viewBox="0 0 120 120" aria-hidden="true">
+    <div class="catwrap" id="cat"><svg class="mascot" viewBox="0 0 120 120" aria-hidden="true">
       <defs><filter id="boil" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="1" result="t"><animate attributeName="seed" values="1;2;3;4;5;6" dur=".6s" calcMode="discrete" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="t" scale="3.5"/></filter></defs>
       <g filter="url(#boil)">
         <polygon points="24,44 30,10 54,30" fill="#fff3d6" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
@@ -143,13 +157,15 @@ footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:
         <ellipse cx="60" cy="72" rx="3" ry="2.2" fill="#e58a8a"/>
         <path d="M18 70 L32 72 M18 80 L32 78 M102 70 L88 72 M102 80 L88 78" stroke="#8a5a2b" stroke-width="2" stroke-linecap="round"/>
       </g>
-    </svg>
+    </svg></div>
     <div class="shadow"></div>
-    <div class="tiles"><b>W</b><b>W</b><b>N</b><i></i><b>N</b><b>E</b><b>W</b><b>S</b></div>
+    <div id="wwn" class="wwn"></div>
+    <div id="eq"></div>
     <div id="msg">กำลังเตรียมข่าวให้นะ…</div>
     <div class="prog"><u></u><u></u><u></u><u></u><u></u><u></u></div>
     <div id="fr">🎞 เฟรม 01</div>
   </div>
+  <button id="skip">ข้าม ›</button>
 </div>
 
 <header>
@@ -184,9 +200,13 @@ footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:
 
 <script>
 var LINE_URL = ""; // ลิงก์แอดเพื่อนของ LINE OA เช่น "https://lin.ee/xxxxxxx" (ใส่อย่างใดอย่างหนึ่ง)
-var OA_ID = "";    // หรือใส่ LINE OA ID เช่น "@yourshop" (เว้นว่างทั้งคู่ = ปุ่มแอดไลน์จะไม่แสดง)
+var OA_ID = "@985diaue"; // LINE OA ID (ถ้ามีลิงก์ lin.ee ใส่ที่ LINE_URL แทนได้)
 var $ = function (i) { return document.getElementById(i); };
 var items = [], cat = "ทั้งหมด", dkey = "ทั้งหมด", minDone = false, dataDone = false;
+// ความหมายของ W.W.N ที่โชว์ตอนโหลด [ตัวอักษร, คำอังกฤษ, คำไทย] (แก้ได้)
+var WWN = [["W", "World", "ทั่วโลก"], ["W", "Wide", "กว้างไกล"], ["N", "News", "ข่าวสาร"]];
+var seen = false; try { seen = !!localStorage.getItem("wwnseen"); } catch (e) {}
+var TS = seen ? 0.45 : 1, MIN = Math.round(6200 * TS);
 var msgs = ["กำลังเตรียมข่าวให้นะ…", "แปลเป็นไทยให้อยู่…", "ใกล้เสร็จแล้ว ✨"], mi = 0;
 var CT = { Sweden: ["🇸🇪", "สวีเดน", "#3da5ff"], Norway: ["🇳🇴", "นอร์เวย์", "#ff5c8a"], Denmark: ["🇩🇰", "เดนมาร์ก", "#ff7a59"], Germany: ["🇩🇪", "เยอรมนี", "#f5b301"], France: ["🇫🇷", "ฝรั่งเศส", "#8b5cf6"], Italy: ["🇮🇹", "อิตาลี", "#2ecc71"], Spain: ["🇪🇸", "สเปน", "#ff9f1c"], Switzerland: ["🇨🇭", "สวิตเซอร์แลนด์", "#e63946"], Austria: ["🇦🇹", "ออสเตรีย", "#14b8a6"] };
 function ci(c) { return CT[c] || ["📰", c, "#ff5c8a"]; }
@@ -204,9 +224,33 @@ var fn = 0, ft = setInterval(function () {
   var u = document.querySelectorAll(".prog u"), k = fn % (u.length + 1);
   for (var i = 0; i < u.length; i++) u[i].className = i < k ? "on" : "";
 }, 330);
-function hideSplash() { if (minDone && dataDone) { $("splash").classList.add("out"); clearInterval(mt); clearInterval(ft); } }
-setTimeout(function () { minDone = true; hideSplash(); }, 2400);
-setTimeout(function () { minDone = dataDone = true; hideSplash(); }, 7000);
+function hideSplash() { if (minDone && dataDone) { $("splash").classList.add("out"); clearInterval(mt); clearInterval(ft); try { localStorage.setItem("wwnseen", "1"); } catch (e) {} } }
+$("skip").onclick = function () { if (!dataDone) $("list").innerHTML = '<div class="empty">กำลังโหลดข่าว…</div>'; minDone = dataDone = true; hideSplash(); };
+setTimeout(function () { minDone = true; hideSplash(); }, MIN);
+setTimeout(function () { minDone = dataDone = true; hideSplash(); }, MIN + 3500);
+
+/* ---------- ซีเควนซ์อธิบาย W.W.N แบบ stop-motion ---------- */
+(function () {
+  var box = $("wwn"), cols = [], cat = $("cat");
+  WWN.forEach(function (w) {
+    var c = document.createElement("div"); c.className = "col";
+    var letters = w[1].split("").map(function (ch, k) { return '<i style="--k:' + k + '">' + ch + "</i>"; }).join("");
+    c.innerHTML = '<b class="big">' + w[0] + '</b><div class="word"><span>' + letters + "</span><small>" + w[2] + "</small></div>";
+    box.appendChild(c); cols.push(c);
+  });
+  $("eq").textContent = "= " + WWN.map(function (w) { return w[1]; }).join(" ") + " · ข่าวทั่วโลก ถึงมือคุณ";
+  var at = [-104, 0, 104];
+  var steps = [
+    [300, function () { cols[0].classList.add("show"); cat.style.setProperty("--cx", at[0] + "px"); }],
+    [1000, function () { cols[0].classList.add("on"); }],
+    [2000, function () { cols[1].classList.add("show"); cat.style.setProperty("--cx", at[1] + "px"); }],
+    [2700, function () { cols[1].classList.add("on"); }],
+    [3700, function () { cols[2].classList.add("show"); cat.style.setProperty("--cx", at[2] + "px"); }],
+    [4400, function () { cols[2].classList.add("on"); }],
+    [5200, function () { $("eq").classList.add("on"); cat.style.setProperty("--cx", "0px"); box.classList.add("cele"); }]
+  ];
+  steps.forEach(function (st) { setTimeout(st[1], st[0] * TS); });
+})();
 
 /* ---------- ของตกแต่ง ---------- */
 (function () {
