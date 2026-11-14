@@ -205,7 +205,6 @@ var $ = function (i) { return document.getElementById(i); };
 var items = [], cat = "ทั้งหมด", dkey = "ทั้งหมด", minDone = false, dataDone = false;
 // ความหมายของ W.W.N ที่โชว์ตอนโหลด [ตัวอักษร, คำอังกฤษ, คำไทย] (แก้ได้)
 var WWN = [["W", "World", "ทั่วโลก"], ["W", "Wide", "กว้างไกล"], ["N", "News", "ข่าวสาร"]];
-var seen = false; try { seen = !!localStorage.getItem("wwnseen"); } catch (e) {}
 var TS = seen ? 0.45 : 1, MIN = Math.round(6200 * TS);
 var msgs = ["กำลังเตรียมข่าวให้นะ…", "แปลเป็นไทยให้อยู่…", "ใกล้เสร็จแล้ว ✨"], mi = 0;
 var CT = { Sweden: ["🇸🇪", "สวีเดน", "#3da5ff"], Norway: ["🇳🇴", "นอร์เวย์", "#ff5c8a"], Denmark: ["🇩🇰", "เดนมาร์ก", "#ff7a59"], Germany: ["🇩🇪", "เยอรมนี", "#f5b301"], France: ["🇫🇷", "ฝรั่งเศส", "#8b5cf6"], Italy: ["🇮🇹", "อิตาลี", "#2ecc71"], Spain: ["🇪🇸", "สเปน", "#ff9f1c"], Switzerland: ["🇨🇭", "สวิตเซอร์แลนด์", "#e63946"], Austria: ["🇦🇹", "ออสเตรีย", "#14b8a6"] };
