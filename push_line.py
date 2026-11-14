@@ -23,11 +23,16 @@ def load(path, default):
 news = load("news.json", [])
 sent = set(load(SENT_FILE, []))
 
-# เลือกข่าวที่ยังไม่เคยส่ง สลับหมวดละข่าว (Sweden, Denmark, ...) จนครบ MAX_ITEMS
+# หัวข้อที่มีคำเหล่านี้จะไม่ถูกส่งเข้า LINE (fun fact / คำศัพท์ประจำวัน / ควิซ)
+EXCLUDE = ("word of the day", "expression of the day", "phrase of the day", "saying of the day",
+           "word of the week", "fun fact", "did you know", "quiz")
+
 groups = {}
 for n in news:
     key = n.get("url") or n.get("title")
     if key in sent:
+        continue
+    if any(k in (n.get("title") or "").lower() for k in EXCLUDE):
         continue
     groups.setdefault(n.get("cat", ""), []).append(n)
 
