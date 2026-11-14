@@ -140,13 +140,12 @@ footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:
   <div id="count"></div>
   <div id="list"></div>
 </main>
-<footer>แปลอัตโนมัติด้วย Google Translate · อาจมีความคลาดเคลื่อน · ข่าวจาก The Local</footer>
 
 <script>
-var OA_ID = ""; // ใส่ LINE OA ID เช่น "@yourshop" (เว้นว่าง = ไม่แสดงปุ่ม)
+var OA_ID = ""; // ใส่ LINE OA ID เช่น "@985diaue" (เว้นว่าง = ไม่แสดงปุ่ม)
 var $ = function (i) { return document.getElementById(i); };
 var items = [], cat = "ทั้งหมด", dkey = "ทั้งหมด", minDone = false, dataDone = false;
-var msgs = ["กำลังเตรียมข่าวให้นะ…", "แปลเป็นไทยให้อยู่…", "ใกล้เสร็จแล้ว ✨"], mi = 0;
+var msgs = ["กำลังเตรียมข่าวให้ รอเป็นมั้ย", "แปลเป็นไทยให้อยู่รอสิ", "ใกล้เสร็จแล้ว พอใจมั้ย"], mi = 0;
 var CT = { Sweden: ["🇸🇪", "สวีเดน", "#3da5ff"], Norway: ["🇳🇴", "นอร์เวย์", "#ff5c8a"], Denmark: ["🇩🇰", "เดนมาร์ก", "#ff7a59"], Germany: ["🇩🇪", "เยอรมนี", "#f5b301"], France: ["🇫🇷", "ฝรั่งเศส", "#8b5cf6"], Italy: ["🇮🇹", "อิตาลี", "#2ecc71"], Spain: ["🇪🇸", "สเปน", "#ff9f1c"], Switzerland: ["🇨🇭", "สวิตเซอร์แลนด์", "#e63946"], Austria: ["🇦🇹", "ออสเตรีย", "#14b8a6"] };
 function ci(c) { return CT[c] || ["📰", c, "#ff5c8a"]; }
 
