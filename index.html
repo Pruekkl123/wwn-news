@@ -4,87 +4,121 @@
 <meta charset="utf-8">
 <title>WWN News · ข่าวแปลไทย</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0d0f14;--bg2:#141821;--card:#161a23;--tx:#f3efe6;--mut:#9a968a;--gold:#d4af6a;--gold2:#f0d9a0;--bd:rgba(212,175,106,.22);--line:#06c755}
+:root{--tx:#2b2440;--mut:#7a7390;--pink:#ff5c8a;--org:#ffa63d;--yel:#ffd23f;--blue:#3da5ff;--green:#2ecc71;--pur:#8b5cf6;--line:#06c755}
 *{box-sizing:border-box}
-body{margin:0;color:var(--tx);font-family:'Prompt',system-ui,sans-serif;font-weight:300;line-height:1.7;background:radial-gradient(1200px 600px at 80% -10%,#1d2231 0%,transparent 60%),radial-gradient(900px 500px at -10% 10%,#1a1620 0%,transparent 55%),var(--bg);min-height:100vh}
+body{margin:0;color:var(--tx);font-family:'Prompt',system-ui,sans-serif;line-height:1.65;min-height:100vh;background:linear-gradient(120deg,#ffe0ec,#fff1c2,#d6f0ff,#dcf8e0,#ffe0ec);background-size:300% 300%;animation:bgmove 18s ease infinite}
+@keyframes bgmove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 a{color:inherit}
-/* ---------- Splash (cute) ---------- */
-#splash{position:fixed;inset:0;z-index:99;background:radial-gradient(circle at 50% 40%,#1c2130,#0b0d12);display:grid;place-items:center;transition:opacity .7s,visibility .7s}
+/* ลอยตกแต่ง */
+#bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.fl{position:absolute;bottom:-60px;animation:drift linear infinite;opacity:.85}
+@keyframes drift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(var(--sw),-55vh) rotate(180deg)}100%{transform:translate(0,-120vh) rotate(360deg)}}
+header,main,.ticker,.stripe{position:relative;z-index:2}
+/* ---------- Splash ---------- */
+#splash{position:fixed;inset:0;z-index:99;background:linear-gradient(135deg,#ff9ec4,#ffd27a 50%,#8fd3ff);display:grid;place-items:center;overflow:hidden;transition:opacity .7s,visibility .7s}
 #splash.out{opacity:0;visibility:hidden}
 .stage{text-align:center;position:relative}
-.mascot{width:130px;height:130px;animation:hop 1.1s cubic-bezier(.3,.1,.3,1) infinite;filter:drop-shadow(0 8px 18px rgba(212,175,106,.25))}
-.shadow{width:80px;height:12px;border-radius:50%;background:rgba(212,175,106,.28);margin:2px auto 0;animation:sh 1.1s cubic-bezier(.3,.1,.3,1) infinite}
+.mascot{width:130px;height:130px;animation:hop 1.1s cubic-bezier(.3,.1,.3,1) infinite;filter:drop-shadow(0 10px 14px rgba(0,0,0,.18))}
+.shadow{width:80px;height:12px;border-radius:50%;background:rgba(0,0,0,.14);margin:2px auto 0;animation:sh 1.1s cubic-bezier(.3,.1,.3,1) infinite}
 @keyframes hop{0%,100%{transform:translateY(0) scale(1.06,.94)}45%{transform:translateY(-34px) scale(.96,1.05)}}
 @keyframes sh{0%,100%{transform:scale(1);opacity:.9}45%{transform:scale(.6);opacity:.4}}
 .eye{transform-box:fill-box;transform-origin:center;animation:blink 3s infinite}
 @keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
-.sp{position:absolute;color:var(--gold2);font-size:20px;animation:tw 1.8s ease-in-out infinite}
-.sp:nth-child(1){left:-28px;top:6px}.sp:nth-child(2){right:-26px;top:30px;animation-delay:.6s;font-size:15px}.sp:nth-child(3){right:6px;top:-18px;animation-delay:1.1s;font-size:13px}
-@keyframes tw{0%,100%{opacity:.2;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(25deg)}}
-.brand{font-family:'Playfair Display',serif;font-size:1.5rem;letter-spacing:.35em;color:var(--gold);margin:22px 0 4px;padding-left:.35em}
-#msg{color:var(--mut);font-size:.9rem;min-height:1.6em}
+.sp{position:absolute;color:#fff;font-size:22px;animation:tw 1.6s ease-in-out infinite}
+.sp:nth-child(1){left:-30px;top:6px}.sp:nth-child(2){right:-28px;top:30px;animation-delay:.5s;font-size:16px}.sp:nth-child(3){right:4px;top:-20px;animation-delay:1s;font-size:14px}
+@keyframes tw{0%,100%{opacity:.3;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(25deg)}}
+.brand{font-family:'Fredoka',sans-serif;font-size:2rem;letter-spacing:.12em;color:#fff;margin:20px 0 2px;text-shadow:0 3px 0 rgba(0,0,0,.12)}
+#msg{color:#fff;font-weight:500;min-height:1.6em}
 .dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
-.dots i{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:dt 1s infinite}
+.dots i{width:11px;height:11px;border-radius:50%;background:#fff;animation:dt 1s infinite}
 .dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
-@keyframes dt{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-8px);opacity:1}}
-/* ---------- Layout ---------- */
-header{max-width:1040px;margin:auto;padding:34px 22px 10px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.logo{font-family:'Playfair Display',serif;font-size:1.7rem;letter-spacing:.22em;color:var(--gold2)}
-.logo small{display:block;font-family:'Prompt',sans-serif;font-size:.7rem;letter-spacing:.3em;color:var(--mut);font-weight:300}
-.btn{display:none;border:1px solid var(--gold);color:var(--gold2);padding:8px 18px;border-radius:999px;text-decoration:none;font-weight:500;font-size:.9rem;transition:.25s}
-.btn:hover{background:var(--gold);color:#14110a}
-.rule{max-width:1040px;margin:12px auto 0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5}
-main{max-width:1040px;margin:auto;padding:18px 22px 70px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 22px}
-.chip{background:transparent;color:var(--mut);border:1px solid var(--bd);border-radius:999px;padding:6px 18px;font:inherit;font-size:.9rem;cursor:pointer;transition:.25s}
-.chip:hover{color:var(--gold2);border-color:var(--gold)}
-.chip.on{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#14110a;border-color:transparent;font-weight:500}
-.rise{opacity:0;transform:translateY(26px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes dt{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-10px);opacity:1}}
+.cf{position:absolute;top:-20px;width:10px;height:14px;border-radius:2px;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+/* ---------- Header ---------- */
+header{max-width:1040px;margin:auto;padding:26px 20px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.brandrow{display:flex;align-items:center;gap:12px}
+.mini{width:68px;height:68px;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(0,0,0,.15))}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+.logo{font-family:'Fredoka',sans-serif;font-size:2rem;font-weight:700;letter-spacing:.08em;line-height:1.1;background:linear-gradient(90deg,var(--pink),var(--org),var(--blue),var(--pur),var(--pink));background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rb 6s linear infinite}
+@keyframes rb{to{background-position:250% 0}}
+.logo small{display:block;font-family:'Prompt',sans-serif;font-size:.8rem;letter-spacing:.15em;color:var(--mut);-webkit-text-fill-color:var(--mut);font-weight:500}
+.btn{display:none;background:var(--line);color:#fff;padding:9px 18px;border-radius:999px;text-decoration:none;font-weight:600;box-shadow:0 4px 0 #04943f;transition:.15s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #04943f}
+.stripe{height:8px;max-width:1040px;margin:10px auto 0;border-radius:99px;background:repeating-linear-gradient(90deg,var(--pink) 0 24px,var(--yel) 24px 48px,var(--blue) 48px 72px,var(--green) 72px 96px);background-size:192px 100%;animation:mv 3s linear infinite}
+@keyframes mv{to{background-position:192px 0}}
+main{max-width:1040px;margin:auto;padding:16px 20px 70px}
+.ticker{overflow:hidden;white-space:nowrap;border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--org));color:#fff;font-weight:500;padding:7px 0;margin:0 0 18px;box-shadow:0 5px 0 rgba(255,92,138,.3)}
+.tk{display:inline-block;animation:tick 50s linear infinite}
+@keyframes tick{to{transform:translateX(-50%)}}
+/* ---------- Filters ---------- */
+.lab{font-weight:600;margin:10px 0 6px;font-size:.95rem}
+.row{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none}
+.row::-webkit-scrollbar{display:none}
+.row.wrap{flex-wrap:wrap;overflow:visible}
+.chip{flex:0 0 auto;background:#fff;color:var(--tx);border:2px solid #fff;border-radius:999px;padding:6px 16px;font:inherit;font-weight:500;cursor:pointer;box-shadow:0 4px 0 rgba(43,36,64,.1);transition:transform .15s,box-shadow .15s}
+.chip:hover{transform:translateY(-3px) rotate(-2deg)}
+.chip:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(43,36,64,.1)}
+.chip b{font-size:.75rem;background:#f0ecff;border-radius:99px;padding:0 7px;margin-left:4px;color:var(--pur)}
+.chip.on{background:linear-gradient(135deg,var(--pink),var(--org));color:#fff;border-color:transparent;animation:pop .35s}
+.chip.on b{background:rgba(255,255,255,.3);color:#fff}
+.chip.d.on{background:linear-gradient(135deg,var(--blue),var(--pur))}
+@keyframes pop{0%{transform:scale(.85)}60%{transform:scale(1.1)}100%{transform:scale(1)}}
+#count{color:var(--mut);font-size:.9rem;margin:2px 0 14px}
+.bu{position:fixed;z-index:200;pointer-events:none;font-size:22px;animation:bu .9s ease-out forwards}
+@keyframes bu{to{transform:translate(var(--dx),var(--dy)) scale(.4) rotate(240deg);opacity:0}}
+/* ---------- News ---------- */
+.rise{opacity:0;transform:translateY(30px) scale(.96);animation:rise .7s cubic-bezier(.2,.9,.3,1.3) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
-/* hero */
-.hero{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--bd);min-height:340px;display:flex;align-items:flex-end;background:linear-gradient(135deg,#232a3b,#12151c);margin-bottom:26px}
-.herobg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(13,15,20,.05) 20%,rgba(13,15,20,.92))}
-.hero .in{position:relative;z-index:2;padding:28px}
-.hero h3{font-family:'Prompt',serif;font-size:1.75rem;line-height:1.35;font-weight:500;margin:8px 0}
-/* grid */
+.hero{border-radius:28px;padding:4px;margin-bottom:24px;background:linear-gradient(120deg,var(--pink),var(--org),var(--yel),var(--blue),var(--pur),var(--pink));background-size:300% 300%;animation:bgmove 8s linear infinite,rise .7s cubic-bezier(.2,.9,.3,1.3) forwards;opacity:0}
+.hin{position:relative;border-radius:24px;overflow:hidden;min-height:320px;display:flex;align-items:flex-end;background:linear-gradient(135deg,#ffb3cf,#a5d8ff)}
+.herobg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hin::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(43,36,64,0) 25%,rgba(43,36,64,.88))}
+.hin .in{position:relative;z-index:2;padding:26px;color:#fff}
+.hin h3{font-size:1.7rem;line-height:1.35;margin:8px 0}
+.hin .desc{color:#f3efff}
+.hin .more{color:#ffe27a}
+.hin .meta{color:#e8e2ff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
-.card{background:linear-gradient(180deg,#191d28,var(--card));border:1px solid var(--bd);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .35s,border-color .35s,box-shadow .35s}
-.card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 18px 40px rgba(0,0,0,.45)}
-.thumb{width:100%;aspect-ratio:16/10;object-fit:cover;background:#1c212c}
-.ph{display:grid;place-items:center;font-size:2.6rem;background:linear-gradient(135deg,#232a3b,#12151c);color:var(--gold)}
-.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:6px;flex:1}
-.meta{font-size:.75rem;color:var(--mut);letter-spacing:.04em}
-.tag{display:inline-block;color:var(--gold2);border:1px solid var(--bd);border-radius:6px;padding:0 9px;margin-right:8px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
-h3{margin:0;font-size:1.12rem;font-weight:500;line-height:1.45}
-.desc{color:#cfcabd;font-size:.92rem;display:-webkit-box;-webkit-line-clamp:12;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-line}
-details{color:var(--mut);font-size:.82rem;margin-top:auto;padding-top:8px}
-summary{cursor:pointer;color:var(--gold)}
-.more{color:var(--gold2);text-decoration:none;font-size:.88rem;font-weight:500;margin-top:6px}
+.card{--cc:var(--pink);background:#fff;border-radius:22px;overflow:hidden;display:flex;flex-direction:column;border-top:8px solid var(--cc);box-shadow:0 8px 0 rgba(43,36,64,.07),0 14px 24px rgba(43,36,64,.08);transition:transform .3s cubic-bezier(.3,1.6,.5,1),box-shadow .3s}
+.card:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:0 12px 0 var(--cc),0 22px 30px rgba(43,36,64,.14)}
+.thumb{width:100%;aspect-ratio:16/10;object-fit:cover;background:#f2ecff}
+.ph{display:grid;place-items:center;font-size:2.8rem;background:linear-gradient(135deg,#ffe0ec,#d6f0ff)}
+.body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.meta{font-size:.78rem;color:var(--mut)}
+.tag{display:inline-block;background:var(--cc,var(--pink));color:#fff;border-radius:99px;padding:0 11px;margin-right:6px;font-weight:600;font-size:.76rem}
+.card:hover .tag{animation:wig .5s}
+@keyframes wig{25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+h3{margin:0;font-size:1.1rem;font-weight:600;line-height:1.45}
+.desc{color:#4b4463;font-size:.92rem;display:-webkit-box;-webkit-line-clamp:12;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-line}
+details{color:var(--mut);font-size:.82rem;margin-top:auto;padding-top:6px}
+summary{cursor:pointer;color:var(--blue);font-weight:500}
+.more{color:var(--pink);text-decoration:none;font-weight:600;font-size:.9rem;margin-top:4px}
 .more:hover{text-decoration:underline}
-.empty{text-align:center;color:var(--mut);padding:60px 0}
-footer{text-align:center;color:var(--mut);font-size:.75rem;padding:0 20px 40px;letter-spacing:.06em}
-@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
-@media(max-width:560px){.hero h3{font-size:1.35rem}.hero{min-height:280px}.grid{grid-template-columns:1fr}}
+.empty{text-align:center;color:var(--mut);padding:60px 0;font-size:1.1rem}
+footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:.78rem;padding:0 20px 40px}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}#bg{display:none}}
+@media(max-width:560px){.hin h3{font-size:1.3rem}.hin{min-height:280px}.grid{grid-template-columns:1fr}.logo{font-size:1.6rem}}
 </style>
 </head>
 <body>
+<div id="bg"></div>
 <div id="splash">
   <div class="stage">
     <span class="sp">✦</span><span class="sp">✦</span><span class="sp">✦</span>
     <svg class="mascot" viewBox="0 0 120 120" aria-hidden="true">
-      <polygon points="24,44 30,10 54,30" fill="#f3e3bd" stroke="#d4af6a" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="96,44 90,10 66,30" fill="#f3e3bd" stroke="#d4af6a" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="31,36 33,20 45,31" fill="#ffc9bf"/><polygon points="89,36 87,20 75,31" fill="#ffc9bf"/>
-      <circle cx="60" cy="68" r="40" fill="#f8ecd0" stroke="#d4af6a" stroke-width="3"/>
+      <polygon points="24,44 30,10 54,30" fill="#fff3d6" stroke="#ff8fb3" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="96,44 90,10 66,30" fill="#fff3d6" stroke="#ff8fb3" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="31,36 33,20 45,31" fill="#ffb3c7"/><polygon points="89,36 87,20 75,31" fill="#ffb3c7"/>
+      <circle cx="60" cy="68" r="40" fill="#fff8e6" stroke="#ff8fb3" stroke-width="3"/>
       <ellipse class="eye" cx="44" cy="64" rx="5" ry="7" fill="#2b2418"/><ellipse class="eye" cx="76" cy="64" rx="5" ry="7" fill="#2b2418"/>
       <circle cx="46" cy="61" r="1.8" fill="#fff"/><circle cx="78" cy="61" r="1.8" fill="#fff"/>
-      <ellipse cx="34" cy="78" rx="8" ry="5" fill="#ff9fa0" opacity=".6"/><ellipse cx="86" cy="78" rx="8" ry="5" fill="#ff9fa0" opacity=".6"/>
+      <ellipse cx="34" cy="78" rx="8" ry="5" fill="#ff7f9f" opacity=".55"/><ellipse cx="86" cy="78" rx="8" ry="5" fill="#ff7f9f" opacity=".55"/>
       <path d="M55 76 Q60 82 65 76" fill="none" stroke="#2b2418" stroke-width="2.6" stroke-linecap="round"/>
       <ellipse cx="60" cy="72" rx="3" ry="2.2" fill="#e58a8a"/>
-      <path d="M18 70 L32 72 M18 80 L32 78 M102 70 L88 72 M102 80 L88 78" stroke="#d4af6a" stroke-width="2" stroke-linecap="round"/>
+      <path d="M18 70 L32 72 M18 80 L32 78 M102 70 L88 72 M102 80 L88 78" stroke="#ff8fb3" stroke-width="2" stroke-linecap="round"/>
     </svg>
     <div class="shadow"></div>
     <div class="brand">WWN NEWS</div>
@@ -94,28 +128,78 @@ footer{text-align:center;color:var(--mut);font-size:.75rem;padding:0 20px 40px;l
 </div>
 
 <header>
-  <div class="logo">WWN NEWS<small>ข่าวแปลไทย · THAI EDITION</small></div>
+  <div class="brandrow"><span id="slot"></span><div class="logo">WWN NEWS<small>ข่าวแปลไทย</small></div></div>
   <a id="oa" class="btn" target="_blank" rel="noopener">＋ เพิ่มเพื่อน LINE OA</a>
 </header>
-<div class="rule"></div>
-<main><div id="chips" class="chips"></div><div id="list"></div></main>
-<footer>แปลอัตโนมัติด้วย Google Translate · อาจมีความคลาดเคลื่อน</footer>
+<div class="stripe"></div>
+<main>
+  <div class="ticker" style="margin-top:16px"><div class="tk" id="tk">🔥 กำลังโหลดข่าวเด่น…</div></div>
+  <div class="lab">🌍 เลือกประเทศ</div><div id="cchips" class="row wrap"></div>
+  <div class="lab">📅 เลือกวันที่</div><div id="dchips" class="row"></div>
+  <div id="count"></div>
+  <div id="list"></div>
+</main>
+<footer>แปลอัตโนมัติด้วย Google Translate · อาจมีความคลาดเคลื่อน · ข่าวจาก The Local</footer>
 
 <script>
 var OA_ID = ""; // ใส่ LINE OA ID เช่น "@yourshop" (เว้นว่าง = ไม่แสดงปุ่ม)
-var items = [], cat = "ทั้งหมด", minDone = false, dataDone = false;
+var $ = function (i) { return document.getElementById(i); };
+var items = [], cat = "ทั้งหมด", dkey = "ทั้งหมด", minDone = false, dataDone = false;
 var msgs = ["กำลังเตรียมข่าวให้นะ…", "แปลเป็นไทยให้อยู่…", "ใกล้เสร็จแล้ว ✨"], mi = 0;
+var CT = { Sweden: ["🇸🇪", "สวีเดน", "#3da5ff"], Norway: ["🇳🇴", "นอร์เวย์", "#ff5c8a"], Denmark: ["🇩🇰", "เดนมาร์ก", "#ff7a59"], Germany: ["🇩🇪", "เยอรมนี", "#f5b301"], France: ["🇫🇷", "ฝรั่งเศส", "#8b5cf6"], Italy: ["🇮🇹", "อิตาลี", "#2ecc71"], Spain: ["🇪🇸", "สเปน", "#ff9f1c"], Switzerland: ["🇨🇭", "สวิตเซอร์แลนด์", "#e63946"], Austria: ["🇦🇹", "ออสเตรีย", "#14b8a6"] };
+function ci(c) { return CT[c] || ["📰", c, "#ff5c8a"]; }
 
-if (OA_ID) { var a = document.getElementById("oa"); a.href = "https://line.me/R/ti/p/" + encodeURIComponent(OA_ID); a.style.display = "inline-block"; }
-var mt = setInterval(function () { mi = (mi + 1) % msgs.length; document.getElementById("msg").textContent = msgs[mi]; }, 900);
-function hideSplash() { if (minDone && dataDone) { document.getElementById("splash").classList.add("out"); clearInterval(mt); } }
+if (OA_ID) { var a = $("oa"); a.href = "https://line.me/R/ti/p/" + encodeURIComponent(OA_ID); a.style.display = "inline-block"; }
+var mt = setInterval(function () { mi = (mi + 1) % msgs.length; $("msg").textContent = msgs[mi]; }, 900);
+function hideSplash() { if (minDone && dataDone) { $("splash").classList.add("out"); clearInterval(mt); } }
 setTimeout(function () { minDone = true; hideSplash(); }, 2400);
 setTimeout(function () { minDone = dataDone = true; hideSplash(); }, 7000);
+
+/* ---------- ของตกแต่ง ---------- */
+(function () {
+  var E = ["⭐", "🎈", "☁️", "✈️", "🌈", "🎉", "💛", "📰", "✨", "🪁", "🍀", "🌸", "🦋", "🍭"], bg = $("bg");
+  for (var i = 0; i < 18; i++) {
+    var s = document.createElement("span"); s.className = "fl"; s.textContent = E[i % E.length];
+    s.style.cssText = "left:" + Math.random() * 96 + "%;font-size:" + (18 + Math.random() * 24) + "px;animation-duration:" + (16 + Math.random() * 18) + "s;animation-delay:-" + Math.random() * 30 + "s;--sw:" + (Math.random() * 120 - 60) + "px";
+    bg.appendChild(s);
+  }
+  var C = ["#ff5c8a", "#ffd23f", "#3da5ff", "#2ecc71", "#8b5cf6", "#fff"], sp = $("splash");
+  for (var j = 0; j < 26; j++) {
+    var c = document.createElement("i"); c.className = "cf";
+    c.style.cssText = "left:" + Math.random() * 100 + "%;background:" + C[j % C.length] + ";animation-duration:" + (3 + Math.random() * 3) + "s;animation-delay:-" + Math.random() * 5 + "s";
+    sp.appendChild(c);
+  }
+  var m = document.querySelector("#splash .mascot").cloneNode(true); m.setAttribute("class", "mini"); $("slot").appendChild(m);
+})();
+function burst(x, y) {
+  var E = ["✨", "⭐", "🎉", "💖", "🌟", "🎈"];
+  for (var i = 0; i < 9; i++) {
+    var b = document.createElement("span"), ang = Math.random() * 6.28, d = 50 + Math.random() * 60;
+    b.className = "bu"; b.textContent = E[i % E.length];
+    b.style.cssText = "left:" + x + "px;top:" + y + "px;--dx:" + Math.cos(ang) * d + "px;--dy:" + Math.sin(ang) * d + "px";
+    document.body.appendChild(b); setTimeout(function (el) { el.remove(); }.bind(null, b), 950);
+  }
+}
+
+/* ---------- วันที่ ---------- */
+var MON = { Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11 };
+function parseDate(n) {
+  if (n.ts) return new Date(n.ts);
+  var m = /^([A-Za-z]{3})\w*\.? (\d{1,2}), (\d{4})$/.exec(n.date || "");
+  if (m && MON[m[1]] != null) return new Date(+m[3], MON[m[1]], +m[2]);
+  var d = new Date(n.date); return isNaN(d) ? null : d;
+}
+function key(d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+function dlabel(d, k) {
+  var t = new Date(), y = new Date(t.getFullYear(), t.getMonth(), t.getDate() - 1);
+  if (k === key(t)) return "วันนี้"; if (k === key(y)) return "เมื่อวาน";
+  return d.toLocaleDateString("th-TH", { weekday: "short", day: "numeric", month: "short" });
+}
 
 function imgFail(el) { var d = document.createElement("div"); d.className = "thumb ph"; d.textContent = "📰"; el.replaceWith(d); }
 function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
 
-/* ---------- แปลฝั่งเบราว์เซอร์ (ใช้เมื่อ news.json ยังไม่มีคำแปล) ---------- */
+/* ---------- แปล (ผ่าน /api/translate ก่อน แล้วค่อยลอง Google ตรงๆ) ---------- */
 function cached(t) { try { return localStorage.getItem("wwnth:" + t.slice(0, 120) + t.length); } catch (e) { return null; } }
 function store(t, v) { try { localStorage.setItem("wwnth:" + t.slice(0, 120) + t.length, v); } catch (e) {} }
 function gtx(text) {
@@ -127,16 +211,17 @@ function gt(text) {
   if (!text) return Promise.resolve("");
   var c = cached(text); if (c) return Promise.resolve(c);
   text = text.slice(0, 1500);
-  // 1) ผ่าน /api/translate (Vercel function, ไม่ติด CORS)  2) ถ้าไม่มี ลองเรียก Google ตรงๆ
   return fetch("/api/translate?q=" + encodeURIComponent(text))
     .then(function (r) { if (!r.ok) throw 0; return r.json(); })
     .then(function (j) { return j.text; })
     .catch(function () { return gtx(text); })
     .then(function (out) { if (out) store(text, out); return out || text; });
 }
+var tkTimer;
 function setText(kind, idx, val) {
   var els = document.querySelectorAll('[data-' + kind + '="' + idx + '"]');
   for (var i = 0; i < els.length; i++) els[i].textContent = val;
+  if (kind === "t") { clearTimeout(tkTimer); tkTimer = setTimeout(ticker, 500); }
 }
 function translateMissing() {
   var queue = [];
@@ -147,58 +232,76 @@ function translateMissing() {
   function worker() {
     var job = queue.shift(); if (!job) return;
     var n = items[job[3]];
-    gt(n[job[1]]).then(function (th) { n[job[0]] = th; setText(job[2], job[3], th); })
-      .catch(function () {}).then(worker);
+    gt(n[job[1]]).then(function (th) { n[job[0]] = th; setText(job[2], job[3], th); }).catch(function () {}).then(worker);
   }
   for (var k = 0; k < 4; k++) worker();
 }
 
 /* ---------- แสดงผล ---------- */
+function ticker() {
+  var t = items.slice(0, 8).map(function (n) { return (ci(n.cat)[0]) + " " + (n.titleTh || n.title); }).join("   ✦   ");
+  if (t) $("tk").textContent = "🔥 ข่าวเด่น: " + t + "   ✦   🔥 ข่าวเด่น: " + t + "   ✦   ";
+}
 function render() {
-  var cats = ["ทั้งหมด"];
-  items.forEach(function (n) { if (n.cat && cats.indexOf(n.cat) < 0) cats.push(n.cat); });
-  document.getElementById("chips").innerHTML = cats.map(function (c) {
-    return '<button class="chip' + (c === cat ? " on" : "") + '" data-c="' + esc(c) + '">' + esc(c) + "</button>";
-  }).join("");
-  var shown = items.filter(function (n) { return cat === "ทั้งหมด" || n.cat === cat; });
-  var L = document.getElementById("list");
-  if (!shown.length) { L.innerHTML = '<div class="empty">ยังไม่มีข่าว</div>'; return; }
-  var heroIdx = items.indexOf(shown[0]), h = shown[0], html = "";
-  var link0 = h.url || h.link;
-  html += '<article class="hero rise">' + (h.img ? '<img class="herobg" referrerpolicy="no-referrer" onerror="this.remove()" src="' + esc(h.img) + '" alt="">' : "") + '<div class="in">' +
-    '<div class="meta"><span class="tag">' + esc(h.cat) + "</span>" + esc(h.date) + "</div>" +
-    '<h3 data-t="' + heroIdx + '">' + esc(h.titleTh || h.title) + "</h3>" +
-    '<div class="desc" data-d="' + heroIdx + '">' + esc(h.descTh || h.desc) + "</div>" +
-    (link0 ? '<a class="more" target="_blank" rel="noopener" href="' + esc(link0) + '">อ่านต้นฉบับ →</a>' : "") + "</div></article>";
+  var okC = function (n) { return cat === "ทั้งหมด" || n.cat === cat; };
+  var okD = function (n) { return dkey === "ทั้งหมด" || n._k === dkey; };
+  // ชิปประเทศ (นับตามวันที่ที่เลือก)
+  var cc = {}, order = [];
+  items.forEach(function (n) { if (okD(n)) { if (!cc[n.cat]) { cc[n.cat] = 0; order.push(n.cat); } cc[n.cat]++; } });
+  var total = order.reduce(function (s, c) { return s + cc[c]; }, 0);
+  $("cchips").innerHTML = '<button class="chip' + (cat === "ทั้งหมด" ? " on" : "") + '" data-c="ทั้งหมด">🌍 ทั้งหมด<b>' + total + "</b></button>" +
+    order.map(function (c) { var f = ci(c); return '<button class="chip' + (c === cat ? " on" : "") + '" data-c="' + esc(c) + '">' + f[0] + " " + f[1] + "<b>" + cc[c] + "</b></button>"; }).join("");
+  // ชิปวันที่ (นับตามประเทศที่เลือก)
+  var dd = {}, dobj = {};
+  items.forEach(function (n) { if (n._k && okC(n)) { dd[n._k] = (dd[n._k] || 0) + 1; dobj[n._k] = n._d; } });
+  var keys = Object.keys(dd).sort().reverse().slice(0, 14), dtotal = keys.reduce(function (s, k) { return s + dd[k]; }, 0);
+  $("dchips").innerHTML = '<button class="chip d' + (dkey === "ทั้งหมด" ? " on" : "") + '" data-d="ทั้งหมด">📅 ทุกวัน<b>' + dtotal + "</b></button>" +
+    keys.map(function (k) { return '<button class="chip d' + (k === dkey ? " on" : "") + '" data-d="' + k + '">' + esc(dlabel(dobj[k], k)) + "<b>" + dd[k] + "</b></button>"; }).join("");
+
+  var shown = items.filter(function (n) { return okC(n) && okD(n); });
+  $("count").textContent = "พบ " + shown.length + " ข่าว";
+  var L = $("list");
+  if (!shown.length) { L.innerHTML = '<div class="empty">🙈 ไม่มีข่าวในตัวเลือกนี้ ลองเลือกวันหรือประเทศอื่นดูนะ</div>'; return; }
+  var h = shown[0], hi = items.indexOf(h), l0 = h.url || h.link, f0 = ci(h.cat);
+  var html = '<article class="hero"><div class="hin">' + (h.img ? '<img class="herobg" referrerpolicy="no-referrer" onerror="this.remove()" src="' + esc(h.img) + '" alt="">' : "") + '<div class="in">' +
+    '<div class="meta"><span class="tag" style="--cc:' + f0[2] + '">' + f0[0] + " " + f0[1] + "</span>" + esc(h._d ? h._d.toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" }) : h.date) + "</div>" +
+    '<h3 data-t="' + hi + '">' + esc(h.titleTh || h.title) + "</h3>" +
+    '<div class="desc" data-d="' + hi + '">' + esc(h.descTh || h.desc) + "</div>" +
+    (l0 ? '<a class="more" target="_blank" rel="noopener" href="' + esc(l0) + '">อ่านต้นฉบับ →</a>' : "") + "</div></div></article>";
   html += '<div class="grid">' + shown.slice(1).map(function (n, i) {
-    var idx = items.indexOf(n), link = n.url || n.link;
-    return '<article class="card rise" style="animation-delay:' + (0.1 + Math.min(i, 9) * 0.07) + 's">' +
+    var idx = items.indexOf(n), link = n.url || n.link, f = ci(n.cat);
+    return '<article class="card rise" style="--cc:' + f[2] + ";animation-delay:" + (0.05 + Math.min(i, 11) * 0.06) + 's">' +
       (n.img ? '<img class="thumb" loading="lazy" referrerpolicy="no-referrer" onerror="imgFail(this)" src="' + esc(n.img) + '" alt="">' : '<div class="thumb ph">📰</div>') +
-      '<div class="body"><div class="meta"><span class="tag">' + esc(n.cat) + "</span>" + esc(n.date) + "</div>" +
+      '<div class="body"><div class="meta"><span class="tag">' + f[0] + " " + f[1] + "</span>" + esc(n._d ? n._d.toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" }) : n.date) + "</div>" +
       '<h3 data-t="' + idx + '">' + esc(n.titleTh || n.title) + "</h3>" +
       '<div class="desc" data-d="' + idx + '">' + esc(n.descTh || n.desc) + "</div>" +
       "<details><summary>ต้นฉบับภาษาอังกฤษ</summary><b>" + esc(n.title) + "</b><br>" + esc(n.desc) + "</details>" +
-      (link ? '<a class="more" target="_blank" rel="noopener" href="' + esc(link) + '">อ่านต้นฉบับ →</a>' : "") +
-      "</div></article>";
+      (link ? '<a class="more" target="_blank" rel="noopener" href="' + esc(link) + '">อ่านต้นฉบับ →</a>' : "") + "</div></article>";
   }).join("") + "</div>";
   L.innerHTML = html;
+  var hero = L.querySelector(".hero"); if (hero) hero.style.opacity = 1;
 }
-document.getElementById("chips").addEventListener("click", function (e) {
-  var c = e.target.getAttribute("data-c"); if (c) { cat = c; render(); }
+document.addEventListener("click", function (e) {
+  var b = e.target.closest ? e.target.closest(".chip") : null; if (!b) return;
+  if (b.hasAttribute("data-c")) cat = b.getAttribute("data-c"); else if (b.hasAttribute("data-d")) dkey = b.getAttribute("data-d"); else return;
+  burst(e.clientX, e.clientY); render();
 });
 
 function load(first) {
   fetch("news.json?t=" + Date.now()).then(function (r) { return r.json(); })
     .then(function (d) {
-      items = d; render(); translateMissing();
+      items = d;
+      items.forEach(function (n) { var dt = parseDate(n); n._d = dt; n._k = dt ? key(dt) : null; });
+      if (dkey !== "ทั้งหมด" && !items.some(function (n) { return n._k === dkey; })) dkey = "ทั้งหมด";
+      render(); ticker(); translateMissing();
       if (first) { dataDone = true; hideSplash(); }
     })
     .catch(function () {
-      if (first) { document.getElementById("list").innerHTML = '<div class="empty">โหลดข่าวไม่สำเร็จ</div>'; dataDone = true; hideSplash(); }
+      if (first) { $("list").innerHTML = '<div class="empty">โหลดข่าวไม่สำเร็จ</div>'; dataDone = true; hideSplash(); }
     });
 }
 load(true);
-setInterval(function () { load(false); }, 120000);
+setInterval(function () { load(false); }, 180000);
 </script>
 </body>
 </html>
