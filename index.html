@@ -16,26 +16,33 @@ a{color:inherit}
 .fl{position:absolute;bottom:-60px;animation:drift linear infinite;opacity:.85}
 @keyframes drift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(var(--sw),-55vh) rotate(180deg)}100%{transform:translate(0,-120vh) rotate(360deg)}}
 header,main,.ticker,.stripe{position:relative;z-index:2}
-/* ---------- Splash ---------- */
-#splash{position:fixed;inset:0;z-index:99;background:linear-gradient(135deg,#ff9ec4,#ffd27a 50%,#8fd3ff);display:grid;place-items:center;overflow:hidden;transition:opacity .7s,visibility .7s}
+/* ---------- Splash (stop-motion) ---------- */
+#splash{position:fixed;inset:0;z-index:99;display:grid;place-items:center;overflow:hidden;background:#f1deb8;transition:opacity .6s steps(5),visibility .6s}
+#splash::before{content:"";position:absolute;inset:0;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .15 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+#splash::after{content:"";position:absolute;inset:14px;border:3px dashed #c98f5a;border-radius:22px;pointer-events:none}
 #splash.out{opacity:0;visibility:hidden}
-.stage{text-align:center;position:relative}
-.mascot{width:130px;height:130px;animation:hop 1.1s cubic-bezier(.3,.1,.3,1) infinite;filter:drop-shadow(0 10px 14px rgba(0,0,0,.18))}
-.shadow{width:80px;height:12px;border-radius:50%;background:rgba(0,0,0,.14);margin:2px auto 0;animation:sh 1.1s cubic-bezier(.3,.1,.3,1) infinite}
-@keyframes hop{0%,100%{transform:translateY(0) scale(1.06,.94)}45%{transform:translateY(-34px) scale(.96,1.05)}}
-@keyframes sh{0%,100%{transform:scale(1);opacity:.9}45%{transform:scale(.6);opacity:.4}}
-.eye{transform-box:fill-box;transform-origin:center;animation:blink 3s infinite}
-@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
-.sp{position:absolute;color:#fff;font-size:22px;animation:tw 1.6s ease-in-out infinite}
-.sp:nth-child(1){left:-30px;top:6px}.sp:nth-child(2){right:-28px;top:30px;animation-delay:.5s;font-size:16px}.sp:nth-child(3){right:4px;top:-20px;animation-delay:1s;font-size:14px}
-@keyframes tw{0%,100%{opacity:.3;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(25deg)}}
-.brand{font-family:'Fredoka',sans-serif;font-size:2rem;letter-spacing:.12em;color:#fff;margin:20px 0 2px;text-shadow:0 3px 0 rgba(0,0,0,.12)}
-#msg{color:#fff;font-weight:500;min-height:1.6em}
-.dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
-.dots i{width:11px;height:11px;border-radius:50%;background:#fff;animation:dt 1s infinite}
-.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
-@keyframes dt{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-10px);opacity:1}}
-.cf{position:absolute;top:-20px;width:10px;height:14px;border-radius:2px;animation:fall linear infinite}
+.stage{text-align:center;position:relative;z-index:2}
+.mascot{width:150px;height:150px;animation:pose .8s steps(1,end) infinite}
+@keyframes pose{0%{transform:translateY(0) rotate(-3deg)}25%{transform:translateY(-16px) rotate(2deg)}50%{transform:translateY(-30px) rotate(-2deg) scale(1.03)}75%{transform:translateY(-14px) rotate(3deg)}}
+.eye{transform-box:fill-box;transform-origin:center;animation:blink 1.6s steps(1,end) infinite}
+@keyframes blink{0%{transform:scaleY(1)}88%{transform:scaleY(.1)}94%{transform:scaleY(1)}}
+.shadow{width:90px;height:12px;border-radius:50%;background:rgba(90,55,20,.25);margin:4px auto 0;animation:sh .8s steps(1,end) infinite}
+@keyframes sh{0%{transform:scale(1)}25%{transform:scale(.85)}50%{transform:scale(.7)}75%{transform:scale(.88)}}
+.sp{position:absolute;color:#e8a13a;font-size:24px;animation:tw 1s steps(1,end) infinite}
+.sp:nth-child(1){left:-34px;top:6px}.sp:nth-child(2){right:-32px;top:34px;animation-delay:-.3s;font-size:17px}.sp:nth-child(3){right:2px;top:-22px;animation-delay:-.6s;font-size:15px}
+@keyframes tw{0%{opacity:.25;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(20deg)}}
+.tiles{display:flex;gap:6px;justify-content:center;margin:22px 0 10px}
+.tiles b{width:34px;height:42px;display:grid;place-items:center;font-family:'Fredoka',sans-serif;font-size:1.35rem;color:#fff;border-radius:6px;box-shadow:2px 4px 0 rgba(90,55,20,.35);animation:tl .9s steps(1,end) infinite}
+.tiles i{width:12px}
+.tiles b:nth-child(1){background:#ff5c8a;animation-delay:0s}.tiles b:nth-child(2){background:#ffa63d;animation-delay:-.12s}.tiles b:nth-child(3){background:#3da5ff;animation-delay:-.24s}
+.tiles b:nth-child(5){background:#2ecc71;animation-delay:-.36s}.tiles b:nth-child(6){background:#8b5cf6;animation-delay:-.48s}.tiles b:nth-child(7){background:#ff5c8a;animation-delay:-.6s}.tiles b:nth-child(8){background:#ffa63d;animation-delay:-.72s}
+@keyframes tl{0%{transform:rotate(-4deg) translateY(0)}33%{transform:rotate(3deg) translateY(-6px)}66%{transform:rotate(-2deg) translateY(2px)}}
+#msg{color:#6b4423;font-weight:600;min-height:1.6em}
+.prog{display:flex;gap:6px;justify-content:center;margin-top:12px}
+.prog u{width:22px;height:22px;border-radius:4px;border:2px solid #8a5a2b;text-decoration:none}
+.prog u.on{background:#ffd23f}
+#fr{margin-top:10px;font:600 .75rem/1 monospace;color:#a2784a;letter-spacing:.15em}
+.cf{position:absolute;top:-20px;width:11px;height:15px;border-radius:2px;animation:fall steps(14,end) infinite}
 @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
 /* ---------- Header ---------- */
 header{max-width:1040px;margin:auto;padding:26px 20px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -45,7 +52,7 @@ header{max-width:1040px;margin:auto;padding:26px 20px 8px;display:flex;align-ite
 .logo{font-family:'Fredoka',sans-serif;font-size:2rem;font-weight:700;letter-spacing:.08em;line-height:1.1;background:linear-gradient(90deg,var(--pink),var(--org),var(--blue),var(--pur),var(--pink));background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rb 6s linear infinite}
 @keyframes rb{to{background-position:250% 0}}
 .logo small{display:block;font-family:'Prompt',sans-serif;font-size:.8rem;letter-spacing:.15em;color:var(--mut);-webkit-text-fill-color:var(--mut);font-weight:500}
-.btn{display:none;background:var(--line);color:#fff;padding:9px 18px;border-radius:999px;text-decoration:none;font-weight:600;box-shadow:0 4px 0 #04943f;transition:.15s}
+.btn{background:var(--line);color:#fff;padding:9px 18px;border-radius:999px;text-decoration:none;font-weight:600;box-shadow:0 4px 0 #04943f;transition:.15s}
 .btn:active{transform:translateY(3px);box-shadow:0 1px 0 #04943f}
 .stripe{height:8px;max-width:1040px;margin:10px auto 0;border-radius:99px;background:repeating-linear-gradient(90deg,var(--pink) 0 24px,var(--yel) 24px 48px,var(--blue) 48px 72px,var(--green) 72px 96px);background-size:192px 100%;animation:mv 3s linear infinite}
 @keyframes mv{to{background-position:192px 0}}
@@ -66,7 +73,20 @@ main{max-width:1040px;margin:auto;padding:16px 20px 70px}
 .chip.on b{background:rgba(255,255,255,.3);color:#fff}
 .chip.d.on{background:linear-gradient(135deg,var(--blue),var(--pur))}
 @keyframes pop{0%{transform:scale(.85)}60%{transform:scale(1.1)}100%{transform:scale(1)}}
-  .chip.zero{opacity:.55}
+.chip.zero{opacity:.55}
+.lb{display:none}.lb.show{display:inline-flex;align-items:center;gap:6px}
+.hbtns{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn2{background:#fff;color:var(--tx);border:2px solid #fff;border-radius:999px;padding:8px 16px;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 4px 0 rgba(43,36,64,.1);transition:transform .15s}
+.btn2:hover{transform:translateY(-3px) rotate(-2deg)}
+.fab{position:fixed;right:16px;bottom:18px;z-index:60;background:var(--line);color:#fff;padding:12px 20px;border-radius:999px;text-decoration:none;font-weight:700;box-shadow:0 5px 0 #04943f,0 10px 20px rgba(0,0,0,.2);animation:fabw 2.6s ease-in-out infinite}
+@keyframes fabw{0%,100%{transform:translateY(0) rotate(0)}10%{transform:translateY(-6px) rotate(-3deg)}20%{transform:translateY(0) rotate(3deg)}30%{transform:rotate(0)}}
+.modal{position:fixed;inset:0;z-index:150;background:rgba(43,36,64,.55);display:grid;place-items:center;padding:20px}
+.modal[hidden]{display:none}
+.mbox{position:relative;background:#fff;border-radius:26px;padding:26px 24px;max-width:460px;width:100%;max-height:90vh;overflow:auto;animation:pop .35s}
+.mbox h2{margin:0 0 8px}.mbox ul{padding-left:20px;margin:10px 0 16px}.mbox li{margin:4px 0}
+.mbox .small{font-size:.78rem;color:var(--mut);margin:14px 0 0}
+.mx{position:absolute;top:12px;right:12px;border:0;background:#f0ecff;border-radius:50%;width:34px;height:34px;font-size:1rem;cursor:pointer}
+footer a{color:var(--pur);font-weight:600}
 #count{color:var(--mut);font-size:.9rem;margin:2px 0 14px}
 .bu{position:fixed;z-index:200;pointer-events:none;font-size:22px;animation:bu .9s ease-out forwards}
 @keyframes bu{to{transform:translate(var(--dx),var(--dy)) scale(.4) rotate(240deg);opacity:0}}
@@ -110,27 +130,31 @@ footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:
   <div class="stage">
     <span class="sp">✦</span><span class="sp">✦</span><span class="sp">✦</span>
     <svg class="mascot" viewBox="0 0 120 120" aria-hidden="true">
-      <polygon points="24,44 30,10 54,30" fill="#fff3d6" stroke="#ff8fb3" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="96,44 90,10 66,30" fill="#fff3d6" stroke="#ff8fb3" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="31,36 33,20 45,31" fill="#ffb3c7"/><polygon points="89,36 87,20 75,31" fill="#ffb3c7"/>
-      <circle cx="60" cy="68" r="40" fill="#fff8e6" stroke="#ff8fb3" stroke-width="3"/>
-      <ellipse class="eye" cx="44" cy="64" rx="5" ry="7" fill="#2b2418"/><ellipse class="eye" cx="76" cy="64" rx="5" ry="7" fill="#2b2418"/>
-      <circle cx="46" cy="61" r="1.8" fill="#fff"/><circle cx="78" cy="61" r="1.8" fill="#fff"/>
-      <ellipse cx="34" cy="78" rx="8" ry="5" fill="#ff7f9f" opacity=".55"/><ellipse cx="86" cy="78" rx="8" ry="5" fill="#ff7f9f" opacity=".55"/>
-      <path d="M55 76 Q60 82 65 76" fill="none" stroke="#2b2418" stroke-width="2.6" stroke-linecap="round"/>
-      <ellipse cx="60" cy="72" rx="3" ry="2.2" fill="#e58a8a"/>
-      <path d="M18 70 L32 72 M18 80 L32 78 M102 70 L88 72 M102 80 L88 78" stroke="#ff8fb3" stroke-width="2" stroke-linecap="round"/>
+      <defs><filter id="boil" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="1" result="t"><animate attributeName="seed" values="1;2;3;4;5;6" dur=".6s" calcMode="discrete" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="t" scale="3.5"/></filter></defs>
+      <g filter="url(#boil)">
+        <polygon points="24,44 30,10 54,30" fill="#fff3d6" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="96,44 90,10 66,30" fill="#fff3d6" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
+        <polygon points="31,36 33,20 45,31" fill="#ffb3c7"/><polygon points="89,36 87,20 75,31" fill="#ffb3c7"/>
+        <circle cx="60" cy="68" r="40" fill="#fff8e6" stroke="#8a5a2b" stroke-width="3"/>
+        <ellipse class="eye" cx="44" cy="64" rx="5" ry="7" fill="#2b2418"/><ellipse class="eye" cx="76" cy="64" rx="5" ry="7" fill="#2b2418"/>
+        <circle cx="46" cy="61" r="1.8" fill="#fff"/><circle cx="78" cy="61" r="1.8" fill="#fff"/>
+        <ellipse cx="34" cy="78" rx="8" ry="5" fill="#ff7f9f" opacity=".6"/><ellipse cx="86" cy="78" rx="8" ry="5" fill="#ff7f9f" opacity=".6"/>
+        <path d="M55 76 Q60 82 65 76" fill="none" stroke="#2b2418" stroke-width="2.6" stroke-linecap="round"/>
+        <ellipse cx="60" cy="72" rx="3" ry="2.2" fill="#e58a8a"/>
+        <path d="M18 70 L32 72 M18 80 L32 78 M102 70 L88 72 M102 80 L88 78" stroke="#8a5a2b" stroke-width="2" stroke-linecap="round"/>
+      </g>
     </svg>
     <div class="shadow"></div>
-    <div class="brand">WWN NEWS</div>
+    <div class="tiles"><b>W</b><b>W</b><b>N</b><i></i><b>N</b><b>E</b><b>W</b><b>S</b></div>
     <div id="msg">กำลังเตรียมข่าวให้นะ…</div>
-    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="prog"><u></u><u></u><u></u><u></u><u></u><u></u></div>
+    <div id="fr">🎞 เฟรม 01</div>
   </div>
 </div>
 
 <header>
   <div class="brandrow"><span id="slot"></span><div class="logo">WWN NEWS<small>ข่าวแปลไทย</small></div></div>
-  <a id="oa" class="btn" target="_blank" rel="noopener">＋ เพิ่มเพื่อน LINE OA</a>
+  <div class="hbtns"><button class="btn2" id="aboutBtn">ℹ️ เกี่ยวกับเรา</button><a class="btn lb" target="_blank" rel="noopener">💚 แอดไลน์</a></div>
 </header>
 <div class="stripe"></div>
 <main>
@@ -140,18 +164,47 @@ footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:
   <div id="count"></div>
   <div id="list"></div>
 </main>
+<a class="fab lb" target="_blank" rel="noopener">💚 แอดไลน์ รับข่าวทุกวัน</a>
+<div id="about" class="modal" hidden>
+  <div class="mbox">
+    <button class="mx" id="aboutX" aria-label="ปิด">✕</button>
+    <h2>👋 เกี่ยวกับเรา</h2>
+    <p><b>WWN NEWS</b> รวมข่าวเด่นจาก The Local ทั้ง 9 ประเทศในยุโรป แล้วแปลเป็นภาษาไทยให้อ่านง่าย อัปเดตทุกวัน</p>
+    <ul>
+      <li>🌍 สวีเดน นอร์เวย์ เดนมาร์ก เยอรมนี ฝรั่งเศส อิตาลี สเปน สวิตเซอร์แลนด์ ออสเตรีย</li>
+      <li>🕕 อัปเดตวันละ 3 รอบ: เช้า เที่ยง เย็น</li>
+      <li>📅 เลือกอ่านย้อนหลังตามวันที่และประเทศได้</li>
+      <li>💚 รับข่าวสรุปผ่าน LINE OA ของเรา</li>
+    </ul>
+    <a class="btn lb" target="_blank" rel="noopener">💚 แอดไลน์</a>
+    <p class="small">ข่าวต้นฉบับเป็นของ The Local กดอ่านต้นฉบับได้ในแต่ละข่าว คำแปลเป็นการแปลอัตโนมัติ อาจมีความคลาดเคลื่อน</p>
+  </div>
+</div>
+<footer>แปลอัตโนมัติด้วย Google Translate · อาจมีความคลาดเคลื่อน · ข่าวจาก The Local · <a href="#" id="aboutLink">เกี่ยวกับเรา</a></footer>
 
 <script>
-var OA_ID = ""; // ใส่ LINE OA ID เช่น "@985diaue" (เว้นว่าง = ไม่แสดงปุ่ม)
+var LINE_URL = ""; // ลิงก์แอดเพื่อนของ LINE OA เช่น "https://lin.ee/xxxxxxx" (ใส่อย่างใดอย่างหนึ่ง)
+var OA_ID = "";    // หรือใส่ LINE OA ID เช่น "@yourshop" (เว้นว่างทั้งคู่ = ปุ่มแอดไลน์จะไม่แสดง)
 var $ = function (i) { return document.getElementById(i); };
 var items = [], cat = "ทั้งหมด", dkey = "ทั้งหมด", minDone = false, dataDone = false;
-var msgs = ["กำลังเตรียมข่าวให้ รอเป็นมั้ย", "แปลเป็นไทยให้อยู่รอสิ", "ใกล้เสร็จแล้ว พอใจมั้ย"], mi = 0;
+var msgs = ["กำลังเตรียมข่าวให้นะ…", "แปลเป็นไทยให้อยู่…", "ใกล้เสร็จแล้ว ✨"], mi = 0;
 var CT = { Sweden: ["🇸🇪", "สวีเดน", "#3da5ff"], Norway: ["🇳🇴", "นอร์เวย์", "#ff5c8a"], Denmark: ["🇩🇰", "เดนมาร์ก", "#ff7a59"], Germany: ["🇩🇪", "เยอรมนี", "#f5b301"], France: ["🇫🇷", "ฝรั่งเศส", "#8b5cf6"], Italy: ["🇮🇹", "อิตาลี", "#2ecc71"], Spain: ["🇪🇸", "สเปน", "#ff9f1c"], Switzerland: ["🇨🇭", "สวิตเซอร์แลนด์", "#e63946"], Austria: ["🇦🇹", "ออสเตรีย", "#14b8a6"] };
 function ci(c) { return CT[c] || ["📰", c, "#ff5c8a"]; }
 
-if (OA_ID) { var a = $("oa"); a.href = "https://line.me/R/ti/p/" + encodeURIComponent(OA_ID); a.style.display = "inline-block"; }
+var LURL = LINE_URL || (OA_ID ? "https://line.me/R/ti/p/" + encodeURIComponent(OA_ID) : "");
+if (LURL) { var lbs = document.querySelectorAll(".lb"); for (var li = 0; li < lbs.length; li++) { lbs[li].href = LURL; lbs[li].classList.add("show"); } }
+function openAbout(e) { if (e) e.preventDefault(); $("about").hidden = false; }
+$("aboutBtn").onclick = openAbout; $("aboutLink").onclick = openAbout;
+$("aboutX").onclick = function () { $("about").hidden = true; };
+$("about").addEventListener("click", function (e) { if (e.target === this) this.hidden = true; });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape") $("about").hidden = true; });
 var mt = setInterval(function () { mi = (mi + 1) % msgs.length; $("msg").textContent = msgs[mi]; }, 900);
-function hideSplash() { if (minDone && dataDone) { $("splash").classList.add("out"); clearInterval(mt); } }
+var fn = 0, ft = setInterval(function () {
+  fn++; $("fr").textContent = "🎞 เฟรม " + ("0" + ((fn % 24) + 1)).slice(-2);
+  var u = document.querySelectorAll(".prog u"), k = fn % (u.length + 1);
+  for (var i = 0; i < u.length; i++) u[i].className = i < k ? "on" : "";
+}, 330);
+function hideSplash() { if (minDone && dataDone) { $("splash").classList.add("out"); clearInterval(mt); clearInterval(ft); } }
 setTimeout(function () { minDone = true; hideSplash(); }, 2400);
 setTimeout(function () { minDone = dataDone = true; hideSplash(); }, 7000);
 
@@ -169,7 +222,7 @@ setTimeout(function () { minDone = dataDone = true; hideSplash(); }, 7000);
     c.style.cssText = "left:" + Math.random() * 100 + "%;background:" + C[j % C.length] + ";animation-duration:" + (3 + Math.random() * 3) + "s;animation-delay:-" + Math.random() * 5 + "s";
     sp.appendChild(c);
   }
-  var m = document.querySelector("#splash .mascot").cloneNode(true); m.setAttribute("class", "mini"); $("slot").appendChild(m);
+  var m = document.querySelector("#splash .mascot").cloneNode(true); m.setAttribute("class", "mini"); var df = m.querySelector("defs"); if (df) df.remove(); var fs = m.querySelectorAll("[filter]"); for (var q = 0; q < fs.length; q++) fs[q].removeAttribute("filter"); $("slot").appendChild(m);
 })();
 function burst(x, y) {
   var E = ["✨", "⭐", "🎉", "💖", "🌟", "🎈"];
@@ -246,11 +299,12 @@ function render() {
   var okC = function (n) { return cat === "ทั้งหมด" || n.cat === cat; };
   var okD = function (n) { return dkey === "ทั้งหมด" || n._k === dkey; };
   // ชิปประเทศ (นับตามวันที่ที่เลือก)
-  var cc = {}, order = [];
-  items.forEach(function (n) { if (okD(n)) { if (!cc[n.cat]) { cc[n.cat] = 0; order.push(n.cat); } cc[n.cat]++; } });
+  var order = Object.keys(CT), cc = {};
+  order.forEach(function (c) { cc[c] = 0; });
+  items.forEach(function (n) { if (okD(n)) { if (cc[n.cat] == null) { cc[n.cat] = 0; order.push(n.cat); } cc[n.cat]++; } });
   var total = order.reduce(function (s, c) { return s + cc[c]; }, 0);
   $("cchips").innerHTML = '<button class="chip' + (cat === "ทั้งหมด" ? " on" : "") + '" data-c="ทั้งหมด">🌍 ทั้งหมด<b>' + total + "</b></button>" +
-    order.map(function (c) { var f = ci(c); return '<button class="chip' + (c === cat ? " on" : "") + '" data-c="' + esc(c) + '">' + f[0] + " " + f[1] + "<b>" + cc[c] + "</b></button>"; }).join("");
+    order.map(function (c) { var f = ci(c); return '<button class="chip' + (c === cat ? " on" : "") + (cc[c] ? "" : " zero") + '" data-c="' + esc(c) + '">' + f[0] + " " + f[1] + "<b>" + cc[c] + "</b></button>"; }).join("");
   // ชิปวันที่ (นับตามประเทศที่เลือก)
   var dd = {}, dobj = {};
   items.forEach(function (n) { if (n._k && okC(n)) { dd[n._k] = (dd[n._k] || 0) + 1; dobj[n._k] = n._d; } });
