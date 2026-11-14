@@ -1,362 +1,442 @@
 [
   {
     "id": 1,
+    "title": "Swedish word of the day: novent",
+    "cat": "Sweden",
+    "date": "Nov 04, 2024",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2024/11/Screenshot-2024-11-04-110942.jpg@webp",
+    "desc": "This modern-day Swedish 'tradition' puts the festive in the festive period before it even starts.",
+    "url": "https://www.thelocal.se/20241104/swedish-word-of-the-day-novent",
+    "titleTh": "Swedish word of the day: novent",
+    "descTh": "This modern-day Swedish 'tradition' puts the festive in the festive period before it even starts."
+  },
+  {
+    "id": 2,
+    "title": "OPINION: Sweden's Centre Party is betraying foreign-born voters",
+    "cat": "Sweden",
+    "date": "Nov 11, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/sdlmSnEm8yQ8fg-nh.jpg@webp",
+    "desc": "The Centre Party won the trust of foreign-born voters by promising to stand up for their rights and deny the Sweden Democrats political influence. If it abandons these central election pledges, many will see it as a betrayal they will never forget, Richard Orange argues.",
+    "url": "https://www.thelocal.se/20261111/opinion-is-swedens-centre-party-about-to-betray-foreign-born-voters",
+    "titleTh": "OPINION: Sweden's Centre Party is betraying foreign-born voters",
+    "descTh": "The Centre Party won the trust of foreign-born voters by promising to stand up for their rights and deny the Sweden Democrats political influence. If it abandons these central election pledges, many will see it as a betrayal they will never forget, Richard Orange argues."
+  },
+  {
+    "id": 3,
+    "title": "Is it too late to switch to a fixed-term mortgage in Sweden?",
+    "cat": "Sweden",
+    "date": "Nov 09, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2023/07/till-salu.jpg@webp",
+    "desc": "Sweden's central bank, the Riksbank, has cut the key interest rate from 1.75 percent to 2 percent, with more increases expected in the new year. Does this mean that its time to switch to a fixed mortgage?",
+    "url": "https://www.thelocal.se/20261109/is-it-too-late-to-switch-to-a-fixed-term-mortgage-in-sweden",
+    "titleTh": "Is it too late to switch to a fixed-term mortgage in Sweden?",
+    "descTh": "Sweden's central bank, the Riksbank, has cut the key interest rate from 1.75 percent to 2 percent, with more increases expected in the new year. Does this mean that its time to switch to a fixed mortgage?"
+  },
+  {
+    "id": 4,
     "title": "Sweden wants to block Russian athletes from competing in country: minister to AFP",
     "cat": "Sweden",
     "date": "Nov 14, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20210307__94G7H9__v5__MidRes__CorrectionSkiNordicWorldCrossCountry50kmMen.jpg@webp",
     "desc": "Sweden's government said Friday that it wanted to prevent Russian athletes from competing there, following similar announcements from neighbouring Finland and Norway.",
-    "url": "https://www.thelocal.se/20261114/sweden-wants-to-block-russian-athletes-from-competing-in-country-minister-to-afp"
+    "url": "https://www.thelocal.se/20261114/sweden-wants-to-block-russian-athletes-from-competing-in-country-minister-to-afp",
+    "titleTh": "Sweden wants to block Russian athletes from competing in country: minister to AFP",
+    "descTh": "Sweden's government said Friday that it wanted to prevent Russian athletes from competing there, following similar announcements from neighbouring Finland and Norway."
   },
   {
-    "id": 2,
+    "id": 5,
     "title": "Opinion: Sweden's Brexit Brits aren't 'sob stories', they're victims of state failure",
     "cat": "Sweden",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/sdl8qpPkLuAXXg_NormalHires.jpg@webp",
     "desc": "A Swedish journalist claims that coverage of the deportations of Brexit Brits amounts to nothing more than \"sob stories\". She couldn't be more wrong: the cases are an example of state failure, argues The Local's James Savage.",
-    "url": "https://www.thelocal.se/20261113/opinion-swedens-brexit-brits-arent-sob-stories-theyre-victims-of-state-failure"
+    "url": "https://www.thelocal.se/20261113/opinion-swedens-brexit-brits-arent-sob-stories-theyre-victims-of-state-failure",
+    "titleTh": "Opinion: Sweden's Brexit Brits aren't 'sob stories', they're victims of state failure",
+    "descTh": "A Swedish journalist claims that coverage of the deportations of Brexit Brits amounts to nothing more than \"sob stories\". She couldn't be more wrong: the cases are an example of state failure, argues The Local's James Savage."
   },
   {
-    "id": 3,
+    "id": 6,
     "title": "Swedish party leaders race to meet Centre Party's coalition deadline",
     "cat": "Sweden",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/sdlUo1sEYcpyak_NormalHires.jpg@webp",
     "desc": "Sweden's Social Democrats and Moderates are set to present their government proposals to the Centre Party today, in a last-ditch attempt to win them over to their side.",
-    "url": "https://www.thelocal.se/20261113/swedish-party-leaders-race-to-meet-centre-partys-coalition-deadline"
+    "url": "https://www.thelocal.se/20261113/swedish-party-leaders-race-to-meet-centre-partys-coalition-deadline",
+    "titleTh": "Swedish party leaders race to meet Centre Party's coalition deadline",
+    "descTh": "Sweden's Social Democrats and Moderates are set to present their government proposals to the Centre Party today, in a last-ditch attempt to win them over to their side."
   },
   {
-    "id": 4,
+    "id": 7,
     "title": "Blame game over dwindling chance to stop Sweden's unfair deportations",
     "cat": "Sweden",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/niels.jpg@webp",
     "desc": "A bitter blame game has erupted between leading Left Party and Centre Party MPs, with each accusing the other of squandering a chance to stop unfair deportations by blocking a Magdalena Andersson government.",
-    "url": "https://www.thelocal.se/20261113/blame-game-over-missed-chance-to-stop-swedens-unfair-deportations"
+    "url": "https://www.thelocal.se/20261113/blame-game-over-missed-chance-to-stop-swedens-unfair-deportations",
+    "titleTh": "Blame game over dwindling chance to stop Sweden's unfair deportations",
+    "descTh": "A bitter blame game has erupted between leading Left Party and Centre Party MPs, with each accusing the other of squandering a chance to stop unfair deportations by blocking a Magdalena Andersson government."
   },
   {
-    "id": 5,
+    "id": 8,
     "title": "Can you form a Swedish government? A Very Useful decision tree from The Local",
     "cat": "Sweden",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/sdlUkDYLEdg6bo_NormalHires1.jpg@webp",
     "desc": "As the process to form a Swedish government drags on past the two-month mark, The Local decided we could all use a bit of comic relief.",
-    "url": "https://www.thelocal.se/20261113/can-you-form-a-swedish-government-a-decision-tree-from-the-local"
+    "url": "https://www.thelocal.se/20261113/can-you-form-a-swedish-government-a-decision-tree-from-the-local",
+    "titleTh": "Can you form a Swedish government? A Very Useful decision tree from The Local",
+    "descTh": "As the process to form a Swedish government drags on past the two-month mark, The Local decided we could all use a bit of comic relief."
   },
   {
-    "id": 6,
+    "id": 9,
     "title": "EXPLAINED: When do you have to leave Sweden to change permit type?",
     "cat": "Sweden",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2019/02/1550058697_sdltb976c09-nh-1.jpg@webp",
     "desc": "The Local has reported on several cases recently where foreigners have been forced to leave Sweden to apply for a residency permit on new grounds. Here are the rules to the best of our understanding.",
-    "url": "https://www.thelocal.se/20261113/explained-when-do-you-have-to-leave-sweden-to-change-permit-type"
+    "url": "https://www.thelocal.se/20261113/explained-when-do-you-have-to-leave-sweden-to-change-permit-type",
+    "titleTh": "EXPLAINED: When do you have to leave Sweden to change permit type?",
+    "descTh": "The Local has reported on several cases recently where foreigners have been forced to leave Sweden to apply for a residency permit on new grounds. Here are the rules to the best of our understanding."
   },
   {
-    "id": 7,
+    "id": 10,
     "title": "Up to 100 drivers stranded on E4 in northern Sweden snowstorm",
     "cat": "Sweden",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/sdllrR3LMq-0-0_NormalHires.jpg@webp",
     "desc": "Drivers in parts of northern Sweden are being warned to leave their car at home, after heavy snowfall continued overnight.",
-    "url": "https://www.thelocal.se/20261113/latest-up-to-100-drivers-stranded-on-e4-in-northern-sweden-snowstorm"
-  },
-  {
-    "id": 8,
-    "title": "Feeling unlucky? Swedish superstitions to watch out for on Friday 13th",
-    "cat": "Sweden",
-    "date": "Jan 13, 2017",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2017/01/sdl58h1rYJoJhs-nh.jpg@webp",
-    "desc": "Friday 13th means bad luck in Sweden and plenty of other places. Of course you are far too sensible to believe in any of that, but if you do, here are another 13 (sorry) things you need to watch out for.",
-    "url": "https://www.thelocal.se/20170113/swedish-superstitions-friday-13th-2017"
-  },
-  {
-    "id": 9,
-    "title": "Foreigners in Sweden sick and tired of political brinkmanship",
-    "cat": "Sweden",
-    "date": "Nov 12, 2026",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2023/06/sweden-in-focus.jpg@webp",
-    "desc": "This week: Temperature rises but still stalemate in Swedish politics, cost of living on the up, and why is goose blood on the menu this weekend?",
-    "url": "https://www.thelocal.se/20261112/foreigners-in-sweden-sick-and-tired-of-political-brinkmanship"
-  },
-  {
-    "id": 10,
-    "title": "'I just want to scream!' How foreigners in Sweden feel about the government drama",
-    "cat": "Sweden",
-    "date": "Nov 12, 2026",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/sdlzYALpnIS_qE_NormalHires.jpg@webp",
-    "desc": "After almost 60 days without a new government, there's suddenly a flurry of activity among Swedish party leaders. We asked The Local’s readers how you feel about this nail-biter.",
-    "url": "https://www.thelocal.se/20261112/i-just-want-to-scream-how-foreigners-in-sweden-feel-about-the-government-drama"
+    "url": "https://www.thelocal.se/20261113/latest-up-to-100-drivers-stranded-on-e4-in-northern-sweden-snowstorm",
+    "titleTh": "Up to 100 drivers stranded on E4 in northern Sweden snowstorm",
+    "descTh": "Drivers in parts of northern Sweden are being warned to leave their car at home, after heavy snowfall continued overnight."
   },
   {
     "id": 11,
+    "title": "On the Agenda: What's happening in Denmark next week?",
+    "cat": "Denmark",
+    "date": "Nov 14, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/fridays.jpg@webp",
+    "desc": "Next week sees concerts and conferences as well as football and plenty of festive cheer. See what else is happening in Denmark in next week's agenda.",
+    "url": "https://www.thelocal.dk/20261114/on-the-agenda-whats-happening-in-denmark-next-week-10",
+    "titleTh": "On the Agenda: What's happening in Denmark next week?",
+    "descTh": "Next week sees concerts and conferences as well as football and plenty of festive cheer. See what else is happening in Denmark in next week's agenda."
+  },
+  {
+    "id": 12,
+    "title": "How to save money on your energy bill in Denmark",
+    "cat": "Denmark",
+    "date": "Nov 11, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2021/12/20200624-121414-A-1920x1280web-1.jpg@webp",
+    "desc": "Energy prices in Denmark are always higher in autumn and winter. So, what can you do on an individual level to lower your energy bills in the long run?",
+    "url": "https://www.thelocal.dk/20261111/how-to-save-money-on-your-energy-bill-in-denmark",
+    "titleTh": "How to save money on your energy bill in Denmark",
+    "descTh": "Energy prices in Denmark are always higher in autumn and winter. So, what can you do on an individual level to lower your energy bills in the long run?"
+  },
+  {
+    "id": 13,
     "title": "Danish expression of the day: tak for i dag",
     "cat": "Denmark",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/word-of-the-day-template-32.jpg@webp",
     "desc": "Today's expression of the day is a useful way to sign off at the end of a busy workday, and a handy one to build on for other farewells.",
-    "url": "https://www.thelocal.dk/20261113/danish-expression-of-the-day-tak-for-i-dag"
+    "url": "https://www.thelocal.dk/20261113/danish-expression-of-the-day-tak-for-i-dag",
+    "titleTh": "Danish expression of the day: tak for i dag",
+    "descTh": "Today's expression of the day is a useful way to sign off at the end of a busy workday, and a handy one to build on for other farewells."
   },
   {
-    "id": 12,
+    "id": 14,
     "title": "Which industries and regions in Denmark have the most unfilled job openings?",
     "cat": "Denmark",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/20250826-110950-1-1920x1280web.jpg@webp",
     "desc": "There has been no improvement in Denmark's tight labour market over the past six months, with employers especially struggling to fill positions in skilled trades, construction, cooks and daycare teachers.",
-    "url": "https://www.thelocal.dk/20261113/which-jobs-and-regions-in-denmark-have-the-most-unfilled-vacancies"
+    "url": "https://www.thelocal.dk/20261113/which-jobs-and-regions-in-denmark-have-the-most-unfilled-vacancies",
+    "titleTh": "Which industries and regions in Denmark have the most unfilled job openings?",
+    "descTh": "There has been no improvement in Denmark's tight labour market over the past six months, with employers especially struggling to fill positions in skilled trades, construction, cooks and daycare teachers."
   },
   {
-    "id": 13,
+    "id": 15,
     "title": "How badly has Denmark been affected by the Microsoft outage?",
     "cat": "Denmark",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/20261113-070110-L-1920x1277web.jpg@webp",
     "desc": "Almost every company in Denmark and large parts of the public sector have been hit by the outage that hit a long list of Microsoft services on November 12th and 13th. Here's what you need to know.",
-    "url": "https://www.thelocal.dk/20261113/how-badly-has-denmark-been-affected-by-the-microsoft-outage"
+    "url": "https://www.thelocal.dk/20261113/how-badly-has-denmark-been-affected-by-the-microsoft-outage",
+    "titleTh": "How badly has Denmark been affected by the Microsoft outage?",
+    "descTh": "Almost every company in Denmark and large parts of the public sector have been hit by the outage that hit a long list of Microsoft services on November 12th and 13th. Here's what you need to know."
   },
   {
-    "id": 14,
+    "id": 16,
     "title": "Friday 13th: Do Danes believe in ghosts and 'nisser'?",
     "cat": "Denmark",
     "date": "Aug 13, 2021",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2021/08/phil-baum-kZtZ2zzH5OM-unsplash.jpeg@webp",
     "desc": "Friday the 13th is here again, so let's take a look at how common it is in Denmark to believe in ghosts (and zombies), why it's a shame people still think black cats are unlucky, and where the phrase \"7-9-13\" comes from.",
-    "url": "https://www.thelocal.dk/20210813/friday-13th-ten-of-the-weirdest-danish-superstitions"
+    "url": "https://www.thelocal.dk/20210813/friday-13th-ten-of-the-weirdest-danish-superstitions",
+    "titleTh": "Friday 13th: Do Danes believe in ghosts and 'nisser'?",
+    "descTh": "Friday the 13th is here again, so let's take a look at how common it is in Denmark to believe in ghosts (and zombies), why it's a shame people still think black cats are unlucky, and where the phrase \"7-9-13\" comes from."
   },
   {
-    "id": 15,
+    "id": 17,
     "title": "How much do you stand to gain or lose from Denmark’s new tax reform?",
     "cat": "Denmark",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/golfing-session-golf-center-denmark-1_©Richard-Clark-custom.jpg@webp",
     "desc": "Denmark's government has struck a historic parliamentary agreement with the Danish People's Party. How much do you stand to gain or lose?",
-    "url": "https://www.thelocal.dk/20261113/how-much-do-you-stand-to-gain-or-lose-from-denmarks-new-tax-reform"
+    "url": "https://www.thelocal.dk/20261113/how-much-do-you-stand-to-gain-or-lose-from-denmarks-new-tax-reform",
+    "titleTh": "How much do you stand to gain or lose from Denmark’s new tax reform?",
+    "descTh": "Denmark's government has struck a historic parliamentary agreement with the Danish People's Party. How much do you stand to gain or lose?"
   },
   {
-    "id": 16,
+    "id": 18,
     "title": "Denmark to reveal European migrant 'return hub' next week",
     "cat": "Denmark",
     "date": "Nov 12, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20230612__33J89WJ__v2__MidRes__TopshotFranceEuBritainMigrants.jpg@webp",
     "desc": "The first country to host a so-called \"return hub\" for migrants expelled from Europe should be revealed next week, Denmark's prime minister said Thursday.",
-    "url": "https://www.thelocal.dk/20261112/denmark-to-reveal-european-migrant-return-hub-next-week"
+    "url": "https://www.thelocal.dk/20261112/denmark-to-reveal-european-migrant-return-hub-next-week",
+    "titleTh": "Denmark to reveal European migrant 'return hub' next week",
+    "descTh": "The first country to host a so-called \"return hub\" for migrants expelled from Europe should be revealed next week, Denmark's prime minister said Thursday."
   },
   {
-    "id": 17,
+    "id": 19,
     "title": "Danish expression of the day: held i uheld",
     "cat": "Denmark",
     "date": "Nov 12, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/word-of-the-day-template-31.jpg@webp",
     "desc": "Even the Danish language has its silver linings, and today's expression of the day is one of them.",
-    "url": "https://www.thelocal.dk/20261112/danish-expression-of-the-day-held-i-uheld"
+    "url": "https://www.thelocal.dk/20261112/danish-expression-of-the-day-held-i-uheld",
+    "titleTh": "Danish expression of the day: held i uheld",
+    "descTh": "Even the Danish language has its silver linings, and today's expression of the day is one of them."
   },
   {
-    "id": 18,
+    "id": 20,
     "title": "Copenhagen launches new service providing advice on women's health",
     "cat": "Denmark",
     "date": "Nov 12, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/pexels-fbyf-studio-1601304170-29705697-1.jpg@webp",
     "desc": "Sexual health organisation Sex og Samfund has launched a new advice program focusing on women's health with the support of regional healthcare in Copenhagen.",
-    "url": "https://www.thelocal.dk/20261112/copenhagen-launches-new-service-providing-advice-on-womens-health"
-  },
-  {
-    "id": 19,
-    "title": "Travellers accused of overstaying EU's 90-day rule after being caught in EES chaos",
-    "cat": "Denmark",
-    "date": "Nov 12, 2026",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20250924__76JB69X__v1__MidRes__BritainEuTransportGetlinkEurostar-2-1.jpg@webp",
-    "desc": "Several British travellers have told how they were incorrectly accused of overstaying their 90-day allowance due to the chaotic introduction of the EU's new EES biometric border checks.",
-    "url": "https://www.thelocal.dk/20261112/travellers-accused-of-overstaying-eus-90-day-rule-after-being-caught-up-in-ees-chaos"
-  },
-  {
-    "id": 20,
-    "title": "Denmark's government strikes deal to abolish top and middle tax rates",
-    "cat": "Denmark",
-    "date": "Nov 12, 2026",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/20261112-115649-L-1920x1280web.jpg@webp",
-    "desc": "Denmark's government has struck a political agreement with the Danish People's Party on a new tax reform, which will abolish the top and middle rates of tax, and also cut corporation tax and taxes on petrol and diesel.",
-    "url": "https://www.thelocal.dk/20261112/denmarks-government-strikes-deal-to-abolish-top-and-middle-tax-rates"
+    "url": "https://www.thelocal.dk/20261112/copenhagen-launches-new-service-providing-advice-on-womens-health",
+    "titleTh": "Copenhagen launches new service providing advice on women's health",
+    "descTh": "Sexual health organisation Sex og Samfund has launched a new advice program focusing on women's health with the support of regional healthcare in Copenhagen."
   },
   {
     "id": 21,
+    "title": "Who is Bernd das Brot, the depressed loaf of bread loved by Germans?",
+    "cat": "Germany",
+    "date": "May 10, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/04/231480888.jpg@webp",
+    "desc": "Bernd das Brot is not your usual TV star. Yet the chronically depressed loaf has a legion of fans in Germany and across the world. Who is he?",
+    "url": "https://www.thelocal.de/20260510/who-is-bernd-das-brot-the-depressed-loaf-of-bread-loved-by-germans",
+    "titleTh": "Who is Bernd das Brot, the depressed loaf of bread loved by Germans?",
+    "descTh": "Bernd das Brot is not your usual TV star. Yet the chronically depressed loaf has a legion of fans in Germany and across the world. Who is he?"
+  },
+  {
+    "id": 22,
+    "title": "LISTED: The major German companies cutting jobs at the end of 2026",
+    "cat": "Germany",
+    "date": "Nov 09, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20260709__B9QM7DC__v1__MidRes__GermanyEconomyIndustryAutomobileLayoffsUnionsPro.jpg@webp",
+    "desc": "Recent weeks and months have seen thousands of jobs cut across industries at a number of Germany's largest companies. Here's a roundup of the businesses reducing their workforces now.",
+    "url": "https://www.thelocal.de/20261109/listed-the-major-german-companies-cutting-jobs-at-the-end-of-2026",
+    "titleTh": "LISTED: The major German companies cutting jobs at the end of 2026",
+    "descTh": "Recent weeks and months have seen thousands of jobs cut across industries at a number of Germany's largest companies. Here's a roundup of the businesses reducing their workforces now."
+  },
+  {
+    "id": 23,
+    "title": "What tenants and landlords need to know about Germany’s heating meter deadline",
+    "cat": "Germany",
+    "date": "Oct 05, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/10/590217833.jpg@webp",
+    "desc": "Millions of renters in Germany could be affected by new heating meter rules from January 2027. Here's how to check whether your building complies and when you could be entitled to a reduction in heating costs.",
+    "url": "https://www.thelocal.de/20261005/what-tenants-and-landlords-need-to-know-about-germanys-heating-meter-deadline",
+    "titleTh": "What tenants and landlords need to know about Germany’s heating meter deadline",
+    "descTh": "Millions of renters in Germany could be affected by new heating meter rules from January 2027. Here's how to check whether your building complies and when you could be entitled to a reduction in heating costs."
+  },
+  {
+    "id": 24,
     "title": "Harassment and bath toys: Why the German army kept making headlines this week",
     "cat": "Germany",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/6321749891.jpg@webp",
     "desc": "From a damning harassment study and surging conscientious objectors to banned Chinese EVs and armed bath toys, Germany’s rapid military expansion is experiencing some very public growing pains.",
-    "url": "https://www.thelocal.de/20261113/harassment-and-bath-toys-why-the-german-army-kept-making-headlines-this-week"
+    "url": "https://www.thelocal.de/20261113/harassment-and-bath-toys-why-the-german-army-kept-making-headlines-this-week",
+    "titleTh": "Harassment and bath toys: Why the German army kept making headlines this week",
+    "descTh": "From a damning harassment study and surging conscientious objectors to banned Chinese EVs and armed bath toys, Germany’s rapid military expansion is experiencing some very public growing pains."
   },
   {
-    "id": 22,
+    "id": 25,
     "title": "How to maximise your vacation time around Germany's public holidays in 2027",
     "cat": "Germany",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/623201173.jpg@webp",
     "desc": "Forward-thinking employees can more than double the amount of time they have for trips with their paid days off by planning around holidays and long weekends. Here's your guide to maximising vacations in 2027.",
-    "url": "https://www.thelocal.de/20261113/how-to-maximise-your-vacation-time-around-germanys-public-holidays-in-2027"
+    "url": "https://www.thelocal.de/20261113/how-to-maximise-your-vacation-time-around-germanys-public-holidays-in-2027",
+    "titleTh": "How to maximise your vacation time around Germany's public holidays in 2027",
+    "descTh": "Forward-thinking employees can more than double the amount of time they have for trips with their paid days off by planning around holidays and long weekends. Here's your guide to maximising vacations in 2027."
   },
   {
-    "id": 23,
+    "id": 26,
     "title": "How Germany is reforming its spy agencies",
     "cat": "Germany",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20261113__D7DP9KE__v1__MidRes__FilesGermanyPoliticsEspionage.jpg@webp",
     "desc": "Germany's parliament passed a sweeping overhaul of the country's intelligence agencies on Friday, granting the BND foreign spy service new powers to launch covert operations like sabotage or cyber attacks.",
-    "url": "https://www.thelocal.de/20261113/how-germany-is-reforming-its-spy-agencies"
+    "url": "https://www.thelocal.de/20261113/how-germany-is-reforming-its-spy-agencies",
+    "titleTh": "How Germany is reforming its spy agencies",
+    "descTh": "Germany's parliament passed a sweeping overhaul of the country's intelligence agencies on Friday, granting the BND foreign spy service new powers to launch covert operations like sabotage or cyber attacks."
   },
   {
-    "id": 24,
+    "id": 27,
     "title": "Can you be sacked in Germany for a workplace romance?",
     "cat": "Germany",
     "date": "Jul 21, 2025",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2025/07/artur-tumasjan-syYLeGPJd0Q-unsplash.jpg@webp",
     "desc": "Germany's strict protections of personal freedom and privacy extend to the workplace, limiting employers' ability to interfere with office romances, but there are some rules to be aware of.",
-    "url": "https://www.thelocal.de/20250721/can-you-be-sacked-in-germany-for-a-workplace-romance"
+    "url": "https://www.thelocal.de/20250721/can-you-be-sacked-in-germany-for-a-workplace-romance",
+    "titleTh": "Can you be sacked in Germany for a workplace romance?",
+    "descTh": "Germany's strict protections of personal freedom and privacy extend to the workplace, limiting employers' ability to interfere with office romances, but there are some rules to be aware of."
   },
   {
-    "id": 25,
+    "id": 28,
     "title": "How you can see shooting starts over Germany this November",
     "cat": "Germany",
     "date": "Nov 12, 2024",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2024/11/33323948-1.jpg@webp",
     "desc": "Sky gazers have a good chance of seeing shooting stars through the end of November as two meteor showers light up Germany’s night sky.",
-    "url": "https://www.thelocal.de/20241112/how-to-best-see-shooting-starts-over-germany-this-november"
+    "url": "https://www.thelocal.de/20241112/how-to-best-see-shooting-starts-over-germany-this-november",
+    "titleTh": "How you can see shooting starts over Germany this November",
+    "descTh": "Sky gazers have a good chance of seeing shooting stars through the end of November as two meteor showers light up Germany’s night sky."
   },
   {
-    "id": 26,
+    "id": 29,
     "title": "German government reaches agreement on record €560.9 billion budget",
     "cat": "Germany",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/632590945.jpg@webp",
     "desc": "Germany’s coalition has hammered out a massive €560.9 billion budget for 2027 after all-night marathon negotiations, sparing some social benefits while leaving a promised electricity tax cut in limbo.",
-    "url": "https://www.thelocal.de/20261113/german-government-reaches-agreement-on-record-e560-9-billion-budget"
+    "url": "https://www.thelocal.de/20261113/german-government-reaches-agreement-on-record-e560-9-billion-budget",
+    "titleTh": "German government reaches agreement on record €560.9 billion budget",
+    "descTh": "Germany’s coalition has hammered out a massive €560.9 billion budget for 2027 after all-night marathon negotiations, sparing some social benefits while leaving a promised electricity tax cut in limbo."
   },
   {
-    "id": 27,
+    "id": 30,
     "title": "Microsoft outage hits Germany and Deutsche Bahn",
     "cat": "Germany",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/632737285.jpg@webp",
     "desc": "Companies and consumers worldwide were affected by a major cloud-based service disruption at Microsoft. At Deutsche Bahn email communications were temporarily down.",
-    "url": "https://www.thelocal.de/20261113/microsoft-outage-hits-germany-and-deutsche-bahn"
-  },
-  {
-    "id": 28,
-    "title": "Friday the 13th: Eight strange German superstitions you should know",
-    "cat": "Germany",
-    "date": "Dec 13, 2019",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2023/07/richard-burlton-wUg4u1kKTXw-unsplash-3.jpg@webp",
-    "desc": "It is Friday the 13th and, just like most countries, Germany has its own list of strange superstitions.",
-    "url": "https://www.thelocal.de/20191213/8-strange-superstitions-that-the-germans-hold"
-  },
-  {
-    "id": 29,
-    "title": "How your eligibility for German citizenship can be affected by unemployment",
-    "cat": "Germany",
-    "date": "Sep 17, 2025",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2025/09/AFP__20250410__39UU4ZP__v1__MidRes__GermanyEconomyPoliticsUnemployment.jpg@webp",
-    "desc": "Being able to demonstrate financial security is a prerequisite for naturalising as German, and this can get complicated for anyone who receives short-term unemployment benefits. The Local asked several immigration offices for clarification.",
-    "url": "https://www.thelocal.de/20250917/how-exactly-do-unemployment-benefits-affect-your-eligibility-for-german-citizenship"
-  },
-  {
-    "id": 30,
-    "title": "What does the US midterm result mean for German defence and trade?",
-    "cat": "Germany",
-    "date": "Nov 12, 2026",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20261109__D6WB276__v1__MidRes__FrancePoliticsDiplomacyG7.jpg@webp",
-    "desc": "Shifting political influences in the White House may soon ripple outward through transatlantic relations. Jeff Rathke, President of the German-American Institute, unpacks what a Democratic-led Congress might change, and what it won't.",
-    "url": "https://www.thelocal.de/20261112/what-does-the-us-mid-term-result-mean-for-german-defence-and-trade"
+    "url": "https://www.thelocal.de/20261113/microsoft-outage-hits-germany-and-deutsche-bahn",
+    "titleTh": "Microsoft outage hits Germany and Deutsche Bahn",
+    "descTh": "Companies and consumers worldwide were affected by a major cloud-based service disruption at Microsoft. At Deutsche Bahn email communications were temporarily down."
   },
   {
     "id": 31,
+    "title": "French Expression of the Day: Être à la bourre",
+    "cat": "Europe",
+    "date": "Nov 13, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2019/03/Être-à-la-bourre.jpg@webp",
+    "desc": "If you’re somebody who has a small (or big) problem with punctuality, then this French expression is for you.",
+    "url": "https://www.thelocal.fr/20261113/french-expression-of-the-day-tre-la-bourre",
+    "titleTh": "French Expression of the Day: Être à la bourre",
+    "descTh": "If you’re somebody who has a small (or big) problem with punctuality, then this French expression is for you."
+  },
+  {
+    "id": 32,
+    "title": "TELL US: What is your experience with racism in France?",
+    "cat": "Europe",
+    "date": "Nov 10, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20260925__C9DY6ZH__v1__MidRes__FrancePoliticsHarkisAlgeriaCeremony.jpg@webp",
+    "desc": "Recent comments by French far-right leader Marine Le Pen have reignited debate about racism and discrimination in France.",
+    "url": "https://www.thelocal.fr/20261110/tell-us-what-is-you-experience-with-racism-in-france",
+    "titleTh": "TELL US: What is your experience with racism in France?",
+    "descTh": "Recent comments by French far-right leader Marine Le Pen have reignited debate about racism and discrimination in France."
+  },
+  {
+    "id": 33,
+    "title": "OPINION: France's failing centre is to blame for popularity of Mélenchon's fantasy economics",
+    "cat": "Europe",
+    "date": "Nov 12, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20261107__D6RB3AM__v1__MidRes__France2027PoliticsElection.jpg@webp",
+    "desc": "The manifesto from the far left candidate Jean-Luc Mélenchon has been slammed as 'economic suicide' for France - so why is he so popular, asks John Lichfield.",
+    "url": "https://www.thelocal.fr/20261112/opinion-failing-centre-is-to-blame-for-popularity-of-melenchons-fantasy-economics",
+    "titleTh": "OPINION: France's failing centre is to blame for popularity of Mélenchon's fantasy economics",
+    "descTh": "The manifesto from the far left candidate Jean-Luc Mélenchon has been slammed as 'economic suicide' for France - so why is he so popular, asks John Lichfield."
+  },
+  {
+    "id": 34,
+    "title": "PODCAST 🎧: How the surging far-left would change France and why so many new French WWII films?",
+    "cat": "Europe",
+    "date": "Nov 10, 2026",
+    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/06/podcast-4.jpg@webp",
+    "desc": "The Talking France podcast is back, exploring what France might look like under a far-left president, the latest developments on strikes and protests, and what the recent wave of WWII films tells us about the country's current political climate.",
+    "url": "https://www.thelocal.fr/20261110/podcast-how-the-surging-far-left-would-change-france-and-why-so-many-new-french-wwii-films",
+    "titleTh": "PODCAST 🎧: How the surging far-left would change France and why so many new French WWII films?",
+    "descTh": "The Talking France podcast is back, exploring what France might look like under a far-left president, the latest developments on strikes and protests, and what the recent wave of WWII films tells us about the country's current political climate."
+  },
+  {
+    "id": 35,
     "title": "Two Brits charged over €16m French château fraud",
     "cat": "Europe",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/Screenshot-2026-11-13-17.29.11.jpg@webp",
     "desc": "Two British businessmen have been formally charged over a suspected fraud of €16 million centred on a château in south-west France.",
-    "url": "https://www.thelocal.fr/20261113/two-brits-charged-over-e16m-french-chateau-fraud"
+    "url": "https://www.thelocal.fr/20261113/two-brits-charged-over-e16m-french-chateau-fraud",
+    "titleTh": "Two Brits charged over €16m French château fraud",
+    "descTh": "Two British businessmen have been formally charged over a suspected fraud of €16 million centred on a château in south-west France."
   },
   {
-    "id": 32,
+    "id": 36,
     "title": "French gas prices to rise for a fourth month in a row in December",
     "cat": "Europe",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20261110__D73T663__v1__MidRes__FranceEnergyGas.jpg@webp",
     "desc": "The reference price of gas in France will rise by 5.8 percent on December 1st, the fourth consecutive monthly increase.",
-    "url": "https://www.thelocal.fr/20261113/french-gas-prices-to-rise-for-a-fourth-month-in-a-row-in-december"
+    "url": "https://www.thelocal.fr/20261113/french-gas-prices-to-rise-for-a-fourth-month-in-a-row-in-december",
+    "titleTh": "French gas prices to rise for a fourth month in a row in December",
+    "descTh": "The reference price of gas in France will rise by 5.8 percent on December 1st, the fourth consecutive monthly increase."
   },
   {
-    "id": 33,
+    "id": 37,
     "title": "French films with English subtitles to watch in December 2026",
     "cat": "Europe",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2025/11/AFP__20251114__84343NR__v6__MidRes__FranceEntertainmentCinema.jpg@webp",
     "desc": "A special screening La Haine to celebrate the 11th anniversary of the film club, L'Âge d’Or in the presence of the director, two films from Leos Carax, and a couple of Christmas classics",
-    "url": "https://www.thelocal.fr/20261113/french-films-with-english-subtitles-to-watch-in-december-2026"
+    "url": "https://www.thelocal.fr/20261113/french-films-with-english-subtitles-to-watch-in-december-2026",
+    "titleTh": "French films with English subtitles to watch in December 2026",
+    "descTh": "A special screening La Haine to celebrate the 11th anniversary of the film club, L'Âge d’Or in the presence of the director, two films from Leos Carax, and a couple of Christmas classics"
   },
   {
-    "id": 34,
+    "id": 38,
     "title": "Friday the 13th: The most unusual French superstitions",
     "cat": "Europe",
     "date": "Jul 13, 2018",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2018/07/AFP__20231028__33ZA3WC__v1__Preview__UsLifestyleTraditionHalloweenOffbeat-1.jpg@webp",
     "desc": "Unlike some countries, Friday the 13th is regarded as particularly lucky in France - but that doesn't mean there aren't plenty of other superstitions about things that will allegedly bring you bad fortune.",
-    "url": "https://www.thelocal.fr/20180713/french-superstitions-customs-culture"
+    "url": "https://www.thelocal.fr/20180713/french-superstitions-customs-culture",
+    "titleTh": "Friday the 13th: The most unusual French superstitions",
+    "descTh": "Unlike some countries, Friday the 13th is regarded as particularly lucky in France - but that doesn't mean there aren't plenty of other superstitions about things that will allegedly bring you bad fortune."
   },
   {
-    "id": 35,
+    "id": 39,
     "title": "MAP: What to expect from France's latest day of protests on November 14th",
     "cat": "Europe",
     "date": "Nov 13, 2026",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20261107__D6R82RT__v1__MidRes__FranceSocialPoliticsDemo.jpg@webp",
     "desc": "The fifth consecutive day of protests in France over the cost of living are planned for Saturday, November 14th - from demo routes to policing and protest numbers, here's what to expect.",
-    "url": "https://www.thelocal.fr/20261113/map-what-to-expect-from-frances-latest-day-of-protests-on-november-14th"
+    "url": "https://www.thelocal.fr/20261113/map-what-to-expect-from-frances-latest-day-of-protests-on-november-14th",
+    "titleTh": "MAP: What to expect from France's latest day of protests on November 14th",
+    "descTh": "The fifth consecutive day of protests in France over the cost of living are planned for Saturday, November 14th - from demo routes to policing and protest numbers, here's what to expect."
   },
   {
-    "id": 36,
+    "id": 40,
     "title": "Could you be sacked in France for a workplace romance?",
     "cat": "Europe",
     "date": "Nov 05, 2019",
     "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2019/11/AFP__20170913__SD7SZ__v5__Preview__TopshotFranceEuPoliticsParliament-1.jpg@webp",
     "desc": "France might have a reputation as a place where anything goes when it comes to l'amour, but if you strike up a relationship with a colleague, there are some rules to be observed.",
-    "url": "https://www.thelocal.fr/20191105/love-as-you-want-the-rules-around-dating-colleagues-in-france"
-  },
-  {
-    "id": 37,
-    "title": "French Word of the Day: Lacrymo",
-    "cat": "Europe",
-    "date": "Nov 13, 2026",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/lacrymo-word-of-day.jpg@webp",
-    "desc": "This has become something of a topic of conversation in France in recent weeks.",
-    "url": "https://www.thelocal.fr/20261113/french-word-of-the-day-lacrymo"
-  },
-  {
-    "id": 38,
-    "title": "Is there really a 1949 treaty that allows Americans an extra three months in France?",
-    "cat": "Europe",
-    "date": "Jun 24, 2024",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2024/06/AFP__20180706__1777TW__v1__Preview__FranceTransportAirportControl.jpg@webp",
-    "desc": "You might have heard rumours about an old but never-repealed treaty between France and the USA that allows Americans an extra three-month stay in France without requiring a visa. But is it still valid?",
-    "url": "https://www.thelocal.fr/20240624/is-there-really-a-1949-treaty-that-allows-americans-an-extra-three-months-in-france"
-  },
-  {
-    "id": 39,
-    "title": "What to do if your French landlord won't accept a foreign guarantor",
-    "cat": "Europe",
-    "date": "Nov 13, 2026",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20240129__34GZ74U__v1__MidRes__FrancePropertyHousing.jpg@webp",
-    "desc": "A financial guarantor is a standard requirement if you're looking for a place to rent in France, but most landlords will only accept a guarantor who lives in France, which is tricky for newly-arrived foreigners.",
-    "url": "https://www.thelocal.fr/20261113/what-to-do-if-your-french-landlord-wont-accept-a-foreign-guarantor"
-  },
-  {
-    "id": 40,
-    "title": "France reports school hoax bomb threats",
-    "cat": "Europe",
-    "date": "Nov 12, 2026",
-    "img": "https://assets.thelocal.com/cdn-cgi/plain/https://apiwp.thelocal.com/wp-content/uploads/2026/11/AFP__20261105__D6K837D__v1__MidRes__FranceAviationSecurity.jpg@webp",
-    "desc": "Three French schools received fake bomb warnings on Thursday, the education ministry said, after similar hoaxes in Britain, Ireland and Italy.",
-    "url": "https://www.thelocal.fr/20261112/france-reports-school-hoax-bomb-threats"
+    "url": "https://www.thelocal.fr/20191105/love-as-you-want-the-rules-around-dating-colleagues-in-france",
+    "titleTh": "Could you be sacked in France for a workplace romance?",
+    "descTh": "France might have a reputation as a place where anything goes when it comes to l'amour, but if you strike up a relationship with a colleague, there are some rules to be observed."
   }
 ]
