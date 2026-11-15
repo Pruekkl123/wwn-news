@@ -134,6 +134,23 @@ summary{cursor:pointer;color:var(--blue);font-weight:500}
 .more:hover{text-decoration:underline}
 .empty{text-align:center;color:var(--mut);padding:60px 0;font-size:1.1rem}
 footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:.78rem;padding:0 20px 40px}
+
+/* ---------- Liquid glass ---------- */
+.glass{position:relative;background:rgba(255,255,255,.4);backdrop-filter:blur(18px) saturate(1.5);-webkit-backdrop-filter:blur(18px) saturate(1.5);border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 1px rgba(255,255,255,.9),inset 0 -6px 14px rgba(255,255,255,.25),0 8px 24px rgba(43,36,64,.12)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 38%),radial-gradient(120% 60% at 15% 0%,rgba(255,255,255,.65),transparent 60%)}
+.glass>*{position:relative;z-index:1}
+header.glass{border-radius:26px;margin:0 20px;padding-left:20px;padding-right:20px;max-width:1000px}
+.btn.glass,.btn2.glass{background:rgba(6,199,85,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn2.glass{background:rgba(255,255,255,.45)}
+.chip.glass{background:rgba(255,255,255,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.7)}
+.chip.glass.on{background:linear-gradient(135deg,rgba(255,92,138,.75),rgba(255,166,61,.75))}
+.card.glass{background:rgba(255,255,255,.42)}
+.hin.glass{background:rgba(255,255,255,.14)}
+.ticker.glass{background:rgba(255,92,138,.5)}
+.fab.glass{background:rgba(6,199,85,.55)}
+.mbox.glass{background:rgba(255,255,255,.55)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:rgba(255,255,255,.85)}}
+
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}#bg{display:none}}
 @media(max-width:560px){.hin h3{font-size:1.3rem}.hin{min-height:280px}.grid{grid-template-columns:1fr}.logo{font-size:1.6rem}}
 </style>
@@ -168,21 +185,21 @@ footer{position:relative;z-index:2;text-align:center;color:var(--mut);font-size:
   <button id="skip">ข้าม ›</button>
 </div>
 
-<header>
+<header class="glass">
   <div class="brandrow"><span id="slot"></span><div class="logo">WWN NEWS<small>ข่าวแปลไทย</small></div></div>
-  <div class="hbtns"><button class="btn2" id="aboutBtn">ℹ️ เกี่ยวกับเรา</button><a class="btn lb" target="_blank" rel="noopener">💚 แอดไลน์</a></div>
+  <div class="hbtns"><button class="btn2 glass" id="aboutBtn">ℹ️ เกี่ยวกับเรา</button><a class="btn glass lb" target="_blank" rel="noopener">💚 แอดไลน์</a></div>
 </header>
 <div class="stripe"></div>
 <main>
-  <div class="ticker" style="margin-top:16px"><div class="tk" id="tk">🔥 กำลังโหลดข่าวเด่น…</div></div>
+  <div class="ticker glass" style="margin-top:16px"><div class="tk" id="tk">🔥 กำลังโหลดข่าวเด่น…</div></div>
   <div class="lab">🌍 เลือกประเทศ</div><div id="cchips" class="row wrap"></div>
   <div class="lab">📅 เลือกวันที่</div><div id="dchips" class="row"></div>
   <div id="count"></div>
   <div id="list"></div>
 </main>
-<a class="fab lb" target="_blank" rel="noopener">💚 แอดไลน์ รับข่าวทุกวัน</a>
+<a class="fab glass lb" target="_blank" rel="noopener">💚 แอดไลน์ รับข่าวทุกวัน</a>
 <div id="about" class="modal" hidden>
-  <div class="mbox">
+  <div class="mbox glass">
     <button class="mx" id="aboutX" aria-label="ปิด">✕</button>
     <h2>👋 เกี่ยวกับเรา</h2>
     <p><b>WWN NEWS</b> รวมข่าวเด่นจาก The Local ทั้ง 9 ประเทศในยุโรป แล้วแปลเป็นภาษาไทยให้อ่านง่าย อัปเดตทุกวัน</p>
@@ -205,6 +222,7 @@ var $ = function (i) { return document.getElementById(i); };
 var items = [], cat = "ทั้งหมด", dkey = "ทั้งหมด", minDone = false, dataDone = false;
 // ความหมายของ W.W.N ที่โชว์ตอนโหลด [ตัวอักษร, คำอังกฤษ, คำไทย] (แก้ได้)
 var WWN = [["W", "World", "ทั่วโลก"], ["W", "Wide", "กว้างไกล"], ["N", "News", "ข่าวสาร"]];
+var seen = false; try { seen = !!localStorage.getItem("wwnseen"); } catch (e) {}
 var TS = seen ? 0.45 : 1, MIN = Math.round(6200 * TS);
 var msgs = ["กำลังเตรียมข่าวให้นะ…", "แปลเป็นไทยให้อยู่…", "ใกล้เสร็จแล้ว ✨"], mi = 0;
 var CT = { Sweden: ["🇸🇪", "สวีเดน", "#3da5ff"], Norway: ["🇳🇴", "นอร์เวย์", "#ff5c8a"], Denmark: ["🇩🇰", "เดนมาร์ก", "#ff7a59"], Germany: ["🇩🇪", "เยอรมนี", "#f5b301"], France: ["🇫🇷", "ฝรั่งเศส", "#8b5cf6"], Italy: ["🇮🇹", "อิตาลี", "#2ecc71"], Spain: ["🇪🇸", "สเปน", "#ff9f1c"], Switzerland: ["🇨🇭", "สวิตเซอร์แลนด์", "#e63946"], Austria: ["🇦🇹", "ออสเตรีย", "#14b8a6"] };
@@ -346,28 +364,28 @@ function render() {
   order.forEach(function (c) { cc[c] = 0; });
   items.forEach(function (n) { if (okD(n)) { if (cc[n.cat] == null) { cc[n.cat] = 0; order.push(n.cat); } cc[n.cat]++; } });
   var total = order.reduce(function (s, c) { return s + cc[c]; }, 0);
-  $("cchips").innerHTML = '<button class="chip' + (cat === "ทั้งหมด" ? " on" : "") + '" data-c="ทั้งหมด">🌍 ทั้งหมด<b>' + total + "</b></button>" +
-    order.map(function (c) { var f = ci(c); return '<button class="chip' + (c === cat ? " on" : "") + (cc[c] ? "" : " zero") + '" data-c="' + esc(c) + '">' + f[0] + " " + f[1] + "<b>" + cc[c] + "</b></button>"; }).join("");
+  $("cchips").innerHTML = '<button class="chip glass' + (cat === "ทั้งหมด" ? " on" : "") + '" data-c="ทั้งหมด">🌍 ทั้งหมด<b>' + total + "</b></button>" +
+    order.map(function (c) { var f = ci(c); return '<button class="chip glass' + (c === cat ? " on" : "") + (cc[c] ? "" : " zero") + '" data-c="' + esc(c) + '">' + f[0] + " " + f[1] + "<b>" + cc[c] + "</b></button>"; }).join("");
   // ชิปวันที่ (นับตามประเทศที่เลือก)
   var dd = {}, dobj = {};
   items.forEach(function (n) { if (n._k && okC(n)) { dd[n._k] = (dd[n._k] || 0) + 1; dobj[n._k] = n._d; } });
   var keys = Object.keys(dd).sort().reverse().slice(0, 14), dtotal = keys.reduce(function (s, k) { return s + dd[k]; }, 0);
-  $("dchips").innerHTML = '<button class="chip d' + (dkey === "ทั้งหมด" ? " on" : "") + '" data-d="ทั้งหมด">📅 ทุกวัน<b>' + dtotal + "</b></button>" +
-    keys.map(function (k) { return '<button class="chip d' + (k === dkey ? " on" : "") + '" data-d="' + k + '">' + esc(dlabel(dobj[k], k)) + "<b>" + dd[k] + "</b></button>"; }).join("");
+  $("dchips").innerHTML = '<button class="chip glass d' + (dkey === "ทั้งหมด" ? " on" : "") + '" data-d="ทั้งหมด">📅 ทุกวัน<b>' + dtotal + "</b></button>" +
+    keys.map(function (k) { return '<button class="chip glass d' + (k === dkey ? " on" : "") + '" data-d="' + k + '">' + esc(dlabel(dobj[k], k)) + "<b>" + dd[k] + "</b></button>"; }).join("");
 
   var shown = items.filter(function (n) { return okC(n) && okD(n); });
   $("count").textContent = "พบ " + shown.length + " ข่าว";
   var L = $("list");
   if (!shown.length) { L.innerHTML = '<div class="empty">🙈 ไม่มีข่าวในตัวเลือกนี้ ลองเลือกวันหรือประเทศอื่นดูนะ</div>'; return; }
   var h = shown[0], hi = items.indexOf(h), l0 = h.url || h.link, f0 = ci(h.cat);
-  var html = '<article class="hero"><div class="hin">' + (h.img ? '<img class="herobg" referrerpolicy="no-referrer" onerror="this.remove()" src="' + esc(h.img) + '" alt="">' : "") + '<div class="in">' +
+  var html = '<article class="hero"><div class="hin glass">' + (h.img ? '<img class="herobg" referrerpolicy="no-referrer" onerror="this.remove()" src="' + esc(h.img) + '" alt="">' : "") + '<div class="in">' +
     '<div class="meta"><span class="tag" style="--cc:' + f0[2] + '">' + f0[0] + " " + f0[1] + "</span>" + esc(h._d ? h._d.toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" }) : h.date) + "</div>" +
     '<h3 data-t="' + hi + '">' + esc(h.titleTh || h.title) + "</h3>" +
     '<div class="desc" data-d="' + hi + '">' + esc(h.descTh || h.desc) + "</div>" +
     (l0 ? '<a class="more" target="_blank" rel="noopener" href="' + esc(l0) + '">อ่านต้นฉบับ →</a>' : "") + "</div></div></article>";
   html += '<div class="grid">' + shown.slice(1).map(function (n, i) {
     var idx = items.indexOf(n), link = n.url || n.link, f = ci(n.cat);
-    return '<article class="card rise" style="--cc:' + f[2] + ";animation-delay:" + (0.05 + Math.min(i, 11) * 0.06) + 's">' +
+    return '<article class="card glass rise" style="--cc:' + f[2] + ";animation-delay:" + (0.05 + Math.min(i, 11) * 0.06) + 's">' +
       (n.img ? '<img class="thumb" loading="lazy" referrerpolicy="no-referrer" onerror="imgFail(this)" src="' + esc(n.img) + '" alt="">' : '<div class="thumb ph">📰</div>') +
       '<div class="body"><div class="meta"><span class="tag">' + f[0] + " " + f[1] + "</span>" + esc(n._d ? n._d.toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" }) : n.date) + "</div>" +
       '<h3 data-t="' + idx + '">' + esc(n.titleTh || n.title) + "</h3>" +
