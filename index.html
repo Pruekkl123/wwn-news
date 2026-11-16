@@ -238,7 +238,6 @@ function playSting() {
   tone(ctx, 494, 0.18, 0.45, 0.14, "triangle");
   tone(ctx, 588, 0.18, 0.55, 0.11, "triangle");
 }
-function soundReady() { var ctx = getCtx(); return !!ctx && ctx.state !== "suspended"; }
 $("soundBtn").onclick = function () {
   var ctx = getCtx(); var btn = this;
   if (ctx && ctx.state === "suspended") { ctx.resume().then(function () { finishToggle(btn); }); }
@@ -391,7 +390,7 @@ document.addEventListener("click", function (e) {
 function load(first) {
   fetch("news.json?t=" + Date.now()).then(function (r) { return r.json(); })
     .then(function (d) {
-            items = d.filter(function (n) { return !n.hidden; });
+      items = d.filter(function (n) { return !n.hidden; });
       items.forEach(function (n) { var dt = parseDate(n); n._d = dt; n._k = dt ? key(dt) : null; });
       if (dkey !== "ทั้งหมด" && !items.some(function (n) { return n._k === dkey; })) dkey = "ทั้งหมด";
       render(); ticker(); translateMissing();
@@ -401,14 +400,6 @@ function load(first) {
       if (first) { $("list").innerHTML = '<div class="empty">โหลดข่าวไม่สำเร็จ</div>'; dataDone = true; hideSplash(); }
     });
 }
-fetch("announcement.json?t=" + Date.now()).then(function (r) { return r.json(); }).then(function (a) {
-  if (a && a.show && a.text) {
-    var b = document.createElement("div");
-    b.style.cssText = "max-width:1040px;margin:0 auto 14px;background:#ffe8a3;color:#5a4300;border-radius:14px;padding:10px 16px;font-weight:600;font-size:.9rem";
-    b.textContent = "📣 " + a.text;
-    document.querySelector("main").prepend(b);
-  }
-}).catch(function () {});
 fetch("announcement.json?t=" + Date.now()).then(function (r) { return r.json(); }).then(function (a) {
   if (a && a.show && a.text) {
     var b = document.createElement("div");
