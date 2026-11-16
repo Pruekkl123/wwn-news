@@ -11,58 +11,45 @@
 body{margin:0;color:var(--tx);font-family:'Prompt',system-ui,sans-serif;line-height:1.65;min-height:100vh;background:linear-gradient(120deg,#ffe0ec,#fff1c2,#d6f0ff,#dcf8e0,#ffe0ec);background-size:300% 300%;animation:bgmove 18s ease infinite}
 @keyframes bgmove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 a{color:inherit}
-/* ลอยตกแต่ง */
 #bg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .fl{position:absolute;bottom:-60px;animation:drift linear infinite;opacity:.85}
 @keyframes drift{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(var(--sw),-55vh) rotate(180deg)}100%{transform:translate(0,-120vh) rotate(360deg)}}
 header,main,.ticker,.stripe{position:relative;z-index:2}
-/* ---------- Splash (stop-motion) ---------- */
-#splash{position:fixed;inset:0;z-index:99;display:grid;place-items:center;overflow:hidden;background:#f1deb8;transition:opacity .6s steps(5),visibility .6s}
-#splash::before{content:"";position:absolute;inset:0;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .3 0 0 0 0 .15 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
-#splash::after{content:"";position:absolute;inset:14px;border:3px dashed #c98f5a;border-radius:22px;pointer-events:none}
+
+/* ---------- Splash: W.W.N TV broadcast intro ---------- */
+#splash{position:fixed;inset:0;z-index:99;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#13295a 0%,#060b18 72%);transition:opacity .6s,visibility .6s}
 #splash.out{opacity:0;visibility:hidden}
-.stage{text-align:center;position:relative;z-index:2}
-.mascot{width:110px;height:110px;animation:pose .8s steps(1,end) infinite}
-@keyframes pose{0%{transform:translateY(0) rotate(-3deg)}25%{transform:translateY(-16px) rotate(2deg)}50%{transform:translateY(-30px) rotate(-2deg) scale(1.03)}75%{transform:translateY(-14px) rotate(3deg)}}
-.eye{transform-box:fill-box;transform-origin:center;animation:blink 1.6s steps(1,end) infinite}
-@keyframes blink{0%{transform:scaleY(1)}88%{transform:scaleY(.1)}94%{transform:scaleY(1)}}
-.shadow{width:90px;height:12px;border-radius:50%;background:rgba(90,55,20,.25);margin:4px auto 0;animation:sh .8s steps(1,end) infinite}
-@keyframes sh{0%{transform:scale(1)}25%{transform:scale(.85)}50%{transform:scale(.7)}75%{transform:scale(.88)}}
-.sp{position:absolute;color:#e8a13a;font-size:24px;animation:tw 1s steps(1,end) infinite}
-.sp:nth-child(1){left:-34px;top:6px}.sp:nth-child(2){right:-32px;top:34px;animation-delay:-.3s;font-size:17px}.sp:nth-child(3){right:2px;top:-22px;animation-delay:-.6s;font-size:15px}
-@keyframes tw{0%{opacity:.25;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(20deg)}}
-.catwrap{display:inline-block;transform:translateX(var(--cx,0px));transition:transform .3s steps(3,end)}
-.wwn{display:flex;gap:14px;justify-content:center;margin:16px 0 6px;min-height:150px}
-.col{width:90px;display:flex;flex-direction:column;align-items:center;opacity:0}
-.col.show{opacity:1}
-.big{width:80px;height:92px;display:grid;place-items:center;font-family:'Fredoka',sans-serif;font-size:3.2rem;color:#fff;border-radius:10px;box-shadow:3px 5px 0 rgba(90,55,20,.35)}
-.col:nth-child(1) .big{background:#ff5c8a}.col:nth-child(2) .big{background:#ffa63d}.col:nth-child(3) .big{background:#3da5ff}
-.col.show .big{animation:popin .5s steps(1,end) forwards,wob .8s steps(1,end) .5s infinite}
-@keyframes popin{0%{transform:scale(0) rotate(-12deg)}25%{transform:scale(.7) rotate(8deg)}50%{transform:scale(1.15) rotate(-5deg)}75%{transform:scale(.95) rotate(3deg)}100%{transform:scale(1) rotate(-2deg)}}
-@keyframes wob{0%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-3px)}100%{transform:rotate(-2deg) translateY(0)}}
-.word{margin-top:8px;text-align:center;min-height:56px}
-.word span{display:block;font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.35rem;color:#6b4423;letter-spacing:.04em;white-space:nowrap}
-.word i{font-style:normal;display:inline-block;opacity:0}
-.col.on .word i{animation:ltr .3s steps(1,end) forwards;animation-delay:calc(var(--k)*.12s)}
-@keyframes ltr{0%{opacity:1;transform:translateY(-14px) rotate(-12deg) scale(1.3)}50%{opacity:1;transform:translateY(3px) rotate(6deg)}100%{opacity:1;transform:none}}
-.word small{display:block;opacity:0;font-size:.8rem;color:#a2784a;font-weight:600}
-.col.on .word small{animation:ltr .3s steps(1,end) .55s forwards}
-#eq{min-height:1.6em;font-weight:700;color:#6b4423;opacity:0}
-#eq.on{opacity:1;animation:popin .5s steps(1,end)}
-.cele .big{animation:wob .5s steps(1,end) infinite!important}
-#skip{position:absolute;right:26px;bottom:26px;z-index:3;border:2px dashed #8a5a2b;background:#fff8e6;color:#6b4423;border-radius:999px;padding:6px 14px;font:inherit;font-weight:600;cursor:pointer}
-#msg{color:#6b4423;font-weight:600;min-height:1.6em}
-.prog{display:flex;gap:6px;justify-content:center;margin-top:12px}
-.prog u{width:22px;height:22px;border-radius:4px;border:2px solid #8a5a2b;text-decoration:none}
-.prog u.on{background:#ffd23f}
-#fr{margin-top:10px;font:600 .75rem/1 monospace;color:#a2784a;letter-spacing:.15em}
-.cf{position:absolute;top:-20px;width:11px;height:15px;border-radius:2px;animation:fall steps(14,end) infinite}
-@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+#splash.flash::before{content:"";position:absolute;inset:0;background:#fff;opacity:.9;animation:flashfade .45s forwards;z-index:5}
+@keyframes flashfade{to{opacity:0}}
+.scan{position:absolute;top:0;bottom:0;width:160px;left:-25%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);animation:scan 2.6s linear infinite;mix-blend-mode:screen}
+@keyframes scan{to{left:120%}}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(90,160,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(90,160,255,.1) 1px,transparent 1px);background-size:42px 42px;-webkit-mask-image:radial-gradient(circle at 50% 42%,#000 10%,transparent 65%);mask-image:radial-gradient(circle at 50% 42%,#000 10%,transparent 65%)}
+.globe{position:absolute;top:10%;left:50%;transform:translateX(-50%);font-size:2.6rem;opacity:.4;animation:gspin 4.5s linear infinite;filter:drop-shadow(0 0 22px rgba(90,170,255,.7))}
+@keyframes gspin{to{transform:translateX(-50%) rotate(360deg)}}
+.stage{position:relative;z-index:2;text-align:center;padding-top:16%}
+.live{position:absolute;top:22px;left:24px;z-index:3;display:flex;align-items:center;gap:7px;background:#d2122e;color:#fff;padding:4px 12px;border-radius:4px;font-weight:700;font-size:.72rem;letter-spacing:.1em;opacity:0;transition:opacity .3s}
+.live.show{opacity:1}
+.live i{width:7px;height:7px;border-radius:50%;background:#fff;animation:blink 1s steps(1,end) infinite}
+@keyframes blink{50%{opacity:.15}}
+.letters{display:flex;gap:16px;justify-content:center}
+.L{font-family:'Fredoka',sans-serif;font-weight:700;font-size:4.4rem;color:#fff;text-shadow:0 0 20px rgba(90,170,255,.85),0 4px 0 rgba(0,0,0,.35);opacity:0;transform:scale(3) rotate(-10deg)}
+.L.hit{animation:slam .45s cubic-bezier(.2,1.7,.4,1) forwards}
+@keyframes slam{0%{opacity:0;transform:scale(3) rotate(-10deg)}60%{opacity:1;transform:scale(.85) rotate(5deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+.sub{margin-top:14px;letter-spacing:.38em;font-size:.95rem;font-weight:600;color:#8fc3ff;opacity:0}
+.sub.show{animation:fadeup .6s forwards}
+@keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.tbar{position:absolute;left:0;right:0;bottom:70px;height:34px;background:#d2122e;display:flex;align-items:center;overflow:hidden;opacity:0;transition:opacity .3s}
+.tbar.show{opacity:1}
+.ttrack{display:inline-block;white-space:nowrap;padding-left:100%;animation:tick2 9s linear infinite;color:#fff;font-weight:600;font-size:.84rem}
+@keyframes tick2{to{transform:translateX(-100%)}}
+#soundBtn{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:999px;padding:6px 16px;font:inherit;font-size:.78rem;cursor:pointer;backdrop-filter:blur(6px);z-index:3}
+#skip{position:absolute;right:22px;bottom:18px;z-index:3;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-weight:600;cursor:pointer;backdrop-filter:blur(6px)}
+@media(max-width:560px){.L{font-size:3.1rem}.globe{font-size:2rem}.stage{padding-top:20%}}
+
 /* ---------- Header ---------- */
 header{max-width:1040px;margin:auto;padding:26px 20px 8px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .brandrow{display:flex;align-items:center;gap:12px}
-.mini{width:68px;height:68px;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 6px 8px rgba(0,0,0,.15))}
-@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+.brandicon{font-size:2rem;filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
 .logo{font-family:'Fredoka',sans-serif;font-size:2rem;font-weight:700;letter-spacing:.08em;line-height:1.1;background:linear-gradient(90deg,var(--pink),var(--org),var(--blue),var(--pur),var(--pink));background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rb 6s linear infinite}
 @keyframes rb{to{background-position:250% 0}}
 .logo small{display:block;font-family:'Prompt',sans-serif;font-size:.8rem;letter-spacing:.15em;color:var(--mut);-webkit-text-fill-color:var(--mut);font-weight:500}
@@ -74,7 +61,6 @@ main{max-width:1040px;margin:auto;padding:16px 20px 70px}
 .ticker{overflow:hidden;white-space:nowrap;border-radius:999px;background:linear-gradient(90deg,var(--pink),var(--org));color:#fff;font-weight:500;padding:7px 0;margin:0 0 18px;box-shadow:0 5px 0 rgba(255,92,138,.3)}
 .tk{display:inline-block;animation:tick 50s linear infinite}
 @keyframes tick{to{transform:translateX(-50%)}}
-/* ---------- Filters ---------- */
 .lab{font-weight:600;margin:10px 0 6px;font-size:.95rem}
 .row{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none}
 .row::-webkit-scrollbar{display:none}
@@ -104,7 +90,6 @@ footer a{color:var(--pur);font-weight:600}
 #count{color:var(--mut);font-size:.9rem;margin:2px 0 14px}
 .bu{position:fixed;z-index:200;pointer-events:none;font-size:22px;animation:bu .9s ease-out forwards}
 @keyframes bu{to{transform:translate(var(--dx),var(--dy)) scale(.4) rotate(240deg);opacity:0}}
-/* ---------- News ---------- */
 .rise{opacity:0;transform:translateY(30px) scale(.96);animation:rise .7s cubic-bezier(.2,.9,.3,1.3) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
 .hero{border-radius:28px;padding:4px;margin-bottom:24px;background:linear-gradient(120deg,var(--pink),var(--org),var(--yel),var(--blue),var(--pur),var(--pink));background-size:300% 300%;animation:bgmove 8s linear infinite,rise .7s cubic-bezier(.2,.9,.3,1.3) forwards;opacity:0}
@@ -157,36 +142,27 @@ header.glass{border-radius:26px;margin:0 20px;padding-left:20px;padding-right:20
 </head>
 <body>
 <div id="bg"></div>
+
 <div id="splash">
+  <div class="scan"></div>
+  <div class="hgrid"></div>
+  <div class="live" id="liveTag"><i></i>LIVE</div>
   <div class="stage">
-    <span class="sp">✦</span><span class="sp">✦</span><span class="sp">✦</span>
-    <div class="catwrap" id="cat"><svg class="mascot" viewBox="0 0 120 120" aria-hidden="true">
-      <defs><filter id="boil" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="1" result="t"><animate attributeName="seed" values="1;2;3;4;5;6" dur=".6s" calcMode="discrete" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="t" scale="3.5"/></filter></defs>
-      <g filter="url(#boil)">
-        <polygon points="24,44 30,10 54,30" fill="#fff3d6" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
-        <polygon points="96,44 90,10 66,30" fill="#fff3d6" stroke="#8a5a2b" stroke-width="3" stroke-linejoin="round"/>
-        <polygon points="31,36 33,20 45,31" fill="#ffb3c7"/><polygon points="89,36 87,20 75,31" fill="#ffb3c7"/>
-        <circle cx="60" cy="68" r="40" fill="#fff8e6" stroke="#8a5a2b" stroke-width="3"/>
-        <ellipse class="eye" cx="44" cy="64" rx="5" ry="7" fill="#2b2418"/><ellipse class="eye" cx="76" cy="64" rx="5" ry="7" fill="#2b2418"/>
-        <circle cx="46" cy="61" r="1.8" fill="#fff"/><circle cx="78" cy="61" r="1.8" fill="#fff"/>
-        <ellipse cx="34" cy="78" rx="8" ry="5" fill="#ff7f9f" opacity=".6"/><ellipse cx="86" cy="78" rx="8" ry="5" fill="#ff7f9f" opacity=".6"/>
-        <path d="M55 76 Q60 82 65 76" fill="none" stroke="#2b2418" stroke-width="2.6" stroke-linecap="round"/>
-        <ellipse cx="60" cy="72" rx="3" ry="2.2" fill="#e58a8a"/>
-        <path d="M18 70 L32 72 M18 80 L32 78 M102 70 L88 72 M102 80 L88 78" stroke="#8a5a2b" stroke-width="2" stroke-linecap="round"/>
-      </g>
-    </svg></div>
-    <div class="shadow"></div>
-    <div id="wwn" class="wwn"></div>
-    <div id="eq"></div>
-    <div id="msg">กำลังเตรียมข่าวให้นะ…</div>
-    <div class="prog"><u></u><u></u><u></u><u></u><u></u><u></u></div>
-    <div id="fr">🎞 เฟรม 01</div>
+    <div class="globe">🌐</div>
+    <div class="letters">
+      <span class="L" id="L1">W</span>
+      <span class="L" id="L2">W</span>
+      <span class="L" id="L3">N</span>
+    </div>
+    <div class="sub" id="subTag">WORLDWIDE NEWS</div>
   </div>
-  <button id="skip">ข้าม ›</button>
+  <div class="tbar" id="tbarTag"><div class="ttrack" id="introTicker">กำลังเชื่อมสัญญาณข่าวทั่วโลก…</div></div>
+  <button id="soundBtn" type="button">🔇 เปิดเสียง</button>
+  <button id="skip" type="button">ข้าม ›</button>
 </div>
 
 <header class="glass">
-  <div class="brandrow"><span id="slot"></span><div class="logo">WWN NEWS<small>ข่าวแปลไทย</small></div></div>
+  <div class="brandrow"><span class="brandicon">📡</span><div class="logo">WWN NEWS<small>ข่าวแปลไทย</small></div></div>
   <div class="hbtns"><button class="btn2 glass" id="aboutBtn">ℹ️ เกี่ยวกับเรา</button><a class="btn glass lb" target="_blank" rel="noopener">💚 แอดไลน์</a></div>
 </header>
 <div class="stripe"></div>
@@ -202,7 +178,7 @@ header.glass{border-radius:26px;margin:0 20px;padding-left:20px;padding-right:20
   <div class="mbox glass">
     <button class="mx" id="aboutX" aria-label="ปิด">✕</button>
     <h2>👋 เกี่ยวกับเรา</h2>
-    <p><b>WWN NEWS</b> รวมข่าวเด่นจาก The Local ทั้ง 9 ประเทศในยุโรป แล้วแปลเป็นภาษาไทยให้อ่านง่าย อัปเดตทุกวัน</p>
+    <p><b>WWN NEWS (Worldwide News)</b> รวมข่าวเด่นจาก The Local ทั้ง 9 ประเทศในยุโรป แล้วแปลเป็นภาษาไทยให้อ่านง่าย อัปเดตทุกวัน</p>
     <ul>
       <li>🌍 สวีเดน นอร์เวย์ เดนมาร์ก เยอรมนี ฝรั่งเศส อิตาลี สเปน สวิตเซอร์แลนด์ ออสเตรีย</li>
       <li>🕕 อัปเดตวันละ 3 รอบ: เช้า เที่ยง เย็น</li>
@@ -217,14 +193,12 @@ header.glass{border-radius:26px;margin:0 20px;padding-left:20px;padding-right:20
 
 <script>
 var LINE_URL = ""; // ลิงก์แอดเพื่อนของ LINE OA เช่น "https://lin.ee/xxxxxxx" (ใส่อย่างใดอย่างหนึ่ง)
-var OA_ID = "@985diaue"; // LINE OA ID (ถ้ามีลิงก์ lin.ee ใส่ที่ LINE_URL แทนได้)
+var OA_ID = "@985diaue"; // LINE OA ID
 var $ = function (i) { return document.getElementById(i); };
 var items = [], cat = "ทั้งหมด", dkey = "ทั้งหมด", minDone = false, dataDone = false;
-// ความหมายของ W.W.N ที่โชว์ตอนโหลด [ตัวอักษร, คำอังกฤษ, คำไทย] (แก้ได้)
-var WWN = [["W", "World", "ทั่วโลก"], ["W", "Wide", "กว้างไกล"], ["N", "News", "ข่าวสาร"]];
 var seen = false; try { seen = !!localStorage.getItem("wwnseen"); } catch (e) {}
-var TS = seen ? 0.45 : 1, MIN = Math.round(6200 * TS);
-var msgs = ["กำลังเตรียมข่าวให้นะ…", "แปลเป็นไทยให้อยู่…", "ใกล้เสร็จแล้ว ✨"], mi = 0;
+var TS = seen ? 0.4 : 1, MIN = Math.round(5200 * TS);
+var msgs = ["กำลังเตรียมข่าวให้นะ…", "แปลเป็นไทยให้อยู่…", "ใกล้ออกอากาศแล้ว ✨"], mi = 0;
 var CT = { Sweden: ["🇸🇪", "สวีเดน", "#3da5ff"], Norway: ["🇳🇴", "นอร์เวย์", "#ff5c8a"], Denmark: ["🇩🇰", "เดนมาร์ก", "#ff7a59"], Germany: ["🇩🇪", "เยอรมนี", "#f5b301"], France: ["🇫🇷", "ฝรั่งเศส", "#8b5cf6"], Italy: ["🇮🇹", "อิตาลี", "#2ecc71"], Spain: ["🇪🇸", "สเปน", "#ff9f1c"], Switzerland: ["🇨🇭", "สวิตเซอร์แลนด์", "#e63946"], Austria: ["🇦🇹", "ออสเตรีย", "#14b8a6"] };
 function ci(c) { return CT[c] || ["📰", c, "#ff5c8a"]; }
 
@@ -235,41 +209,62 @@ $("aboutBtn").onclick = openAbout; $("aboutLink").onclick = openAbout;
 $("aboutX").onclick = function () { $("about").hidden = true; };
 $("about").addEventListener("click", function (e) { if (e.target === this) this.hidden = true; });
 document.addEventListener("keydown", function (e) { if (e.key === "Escape") $("about").hidden = true; });
-var mt = setInterval(function () { mi = (mi + 1) % msgs.length; $("msg").textContent = msgs[mi]; }, 900);
-var fn = 0, ft = setInterval(function () {
-  fn++; $("fr").textContent = "🎞 เฟรม " + ("0" + ((fn % 24) + 1)).slice(-2);
-  var u = document.querySelectorAll(".prog u"), k = fn % (u.length + 1);
-  for (var i = 0; i < u.length; i++) u[i].className = i < k ? "on" : "";
-}, 330);
-function hideSplash() { if (minDone && dataDone) { $("splash").classList.add("out"); clearInterval(mt); clearInterval(ft); try { localStorage.setItem("wwnseen", "1"); } catch (e) {} } }
+var mt = setInterval(function () { mi = (mi + 1) % msgs.length; $("introTicker").textContent = msgs[mi]; }, 1300);
+function hideSplash() { if (minDone && dataDone) { $("splash").classList.add("out"); clearInterval(mt); } }
 $("skip").onclick = function () { if (!dataDone) $("list").innerHTML = '<div class="empty">กำลังโหลดข่าว…</div>'; minDone = dataDone = true; hideSplash(); };
 setTimeout(function () { minDone = true; hideSplash(); }, MIN);
 setTimeout(function () { minDone = dataDone = true; hideSplash(); }, MIN + 3500);
 
-/* ---------- ซีเควนซ์อธิบาย W.W.N แบบ stop-motion ---------- */
+/* ---------- เสียงประกอบ (สังเคราะห์เองทั้งหมด ไม่ใช้ไฟล์เสียงจากที่อื่น) ---------- */
+var ACtx = null, soundOn = false;
+function getCtx() { if (!ACtx) { try { ACtx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} } return ACtx; }
+function tone(ctx, freq, t, dur, vol, type) {
+  try {
+    var o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = type || "sine";
+    o.frequency.setValueAtTime(freq, ctx.currentTime + t);
+    g.gain.setValueAtTime(0.0001, ctx.currentTime + t);
+    g.gain.linearRampToValueAtTime(vol, ctx.currentTime + t + 0.02);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + t + dur);
+    o.connect(g); g.connect(ctx.destination);
+    o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + dur + 0.05);
+  } catch (e) {}
+}
+function playHit() { var ctx = getCtx(); if (ctx) tone(ctx, 196, 0, 0.14, 0.22, "square"); }
+function playSting() {
+  var ctx = getCtx(); if (!ctx) return;
+  tone(ctx, 294, 0.00, 0.22, 0.22, "square");
+  tone(ctx, 392, 0.18, 0.45, 0.2, "triangle");
+  tone(ctx, 494, 0.18, 0.45, 0.14, "triangle");
+  tone(ctx, 588, 0.18, 0.55, 0.11, "triangle");
+}
+function soundReady() { var ctx = getCtx(); return !!ctx && ctx.state !== "suspended"; }
+$("soundBtn").onclick = function () {
+  var ctx = getCtx(); var btn = this;
+  if (ctx && ctx.state === "suspended") { ctx.resume().then(function () { finishToggle(btn); }); }
+  else finishToggle(btn);
+};
+function finishToggle(btn) {
+  soundOn = !soundOn;
+  if (soundOn) { playSting(); btn.textContent = "🔊 เปิดเสียงอยู่"; try { localStorage.setItem("wwnSound", "1"); } catch (e) {} }
+  else { btn.textContent = "🔇 เปิดเสียง"; try { localStorage.removeItem("wwnSound"); } catch (e) {} }
+}
+try { if (localStorage.getItem("wwnSound") === "1") { soundOn = true; $("soundBtn").textContent = "🔊 เปิดเสียงอยู่"; } } catch (e) {}
+
+/* ---------- ซีเควนซ์เปิดรายการข่าว W.W.N ---------- */
 (function () {
-  var box = $("wwn"), cols = [], cat = $("cat");
-  WWN.forEach(function (w) {
-    var c = document.createElement("div"); c.className = "col";
-    var letters = w[1].split("").map(function (ch, k) { return '<i style="--k:' + k + '">' + ch + "</i>"; }).join("");
-    c.innerHTML = '<b class="big">' + w[0] + '</b><div class="word"><span>' + letters + "</span><small>" + w[2] + "</small></div>";
-    box.appendChild(c); cols.push(c);
-  });
-  $("eq").textContent = "= " + WWN.map(function (w) { return w[1]; }).join(" ") + " · ข่าวทั่วโลก ถึงมือคุณ";
-  var at = [-104, 0, 104];
   var steps = [
-    [300, function () { cols[0].classList.add("show"); cat.style.setProperty("--cx", at[0] + "px"); }],
-    [1000, function () { cols[0].classList.add("on"); }],
-    [2000, function () { cols[1].classList.add("show"); cat.style.setProperty("--cx", at[1] + "px"); }],
-    [2700, function () { cols[1].classList.add("on"); }],
-    [3700, function () { cols[2].classList.add("show"); cat.style.setProperty("--cx", at[2] + "px"); }],
-    [4400, function () { cols[2].classList.add("on"); }],
-    [5200, function () { $("eq").classList.add("on"); cat.style.setProperty("--cx", "0px"); box.classList.add("cele"); }]
+    [200, function () { $("liveTag").classList.add("show"); }],
+    [450, function () { $("L1").classList.add("hit"); if (soundOn) playHit(); }],
+    [800, function () { $("L2").classList.add("hit"); if (soundOn) playHit(); }],
+    [1150, function () { $("L3").classList.add("hit"); $("splash").classList.add("flash"); if (soundOn) playSting(); }],
+    [1550, function () { $("subTag").classList.add("show"); }],
+    [1900, function () { $("tbarTag").classList.add("show"); }]
   ];
   steps.forEach(function (st) { setTimeout(st[1], st[0] * TS); });
 })();
 
-/* ---------- ของตกแต่ง ---------- */
+/* ---------- ของตกแต่งพื้นหลังหน้าเว็บหลัก ---------- */
 (function () {
   var E = ["⭐", "🎈", "☁️", "✈️", "🌈", "🎉", "💛", "📰", "✨", "🪁", "🍀", "🌸", "🦋", "🍭"], bg = $("bg");
   for (var i = 0; i < 18; i++) {
@@ -277,13 +272,6 @@ setTimeout(function () { minDone = dataDone = true; hideSplash(); }, MIN + 3500)
     s.style.cssText = "left:" + Math.random() * 96 + "%;font-size:" + (18 + Math.random() * 24) + "px;animation-duration:" + (16 + Math.random() * 18) + "s;animation-delay:-" + Math.random() * 30 + "s;--sw:" + (Math.random() * 120 - 60) + "px";
     bg.appendChild(s);
   }
-  var C = ["#ff5c8a", "#ffd23f", "#3da5ff", "#2ecc71", "#8b5cf6", "#fff"], sp = $("splash");
-  for (var j = 0; j < 26; j++) {
-    var c = document.createElement("i"); c.className = "cf";
-    c.style.cssText = "left:" + Math.random() * 100 + "%;background:" + C[j % C.length] + ";animation-duration:" + (3 + Math.random() * 3) + "s;animation-delay:-" + Math.random() * 5 + "s";
-    sp.appendChild(c);
-  }
-  var m = document.querySelector("#splash .mascot").cloneNode(true); m.setAttribute("class", "mini"); var df = m.querySelector("defs"); if (df) df.remove(); var fs = m.querySelectorAll("[filter]"); for (var q = 0; q < fs.length; q++) fs[q].removeAttribute("filter"); $("slot").appendChild(m);
 })();
 function burst(x, y) {
   var E = ["✨", "⭐", "🎉", "💖", "🌟", "🎈"];
@@ -359,14 +347,12 @@ function ticker() {
 function render() {
   var okC = function (n) { return cat === "ทั้งหมด" || n.cat === cat; };
   var okD = function (n) { return dkey === "ทั้งหมด" || n._k === dkey; };
-  // ชิปประเทศ (นับตามวันที่ที่เลือก)
   var order = Object.keys(CT), cc = {};
   order.forEach(function (c) { cc[c] = 0; });
   items.forEach(function (n) { if (okD(n)) { if (cc[n.cat] == null) { cc[n.cat] = 0; order.push(n.cat); } cc[n.cat]++; } });
   var total = order.reduce(function (s, c) { return s + cc[c]; }, 0);
   $("cchips").innerHTML = '<button class="chip glass' + (cat === "ทั้งหมด" ? " on" : "") + '" data-c="ทั้งหมด">🌍 ทั้งหมด<b>' + total + "</b></button>" +
     order.map(function (c) { var f = ci(c); return '<button class="chip glass' + (c === cat ? " on" : "") + (cc[c] ? "" : " zero") + '" data-c="' + esc(c) + '">' + f[0] + " " + f[1] + "<b>" + cc[c] + "</b></button>"; }).join("");
-  // ชิปวันที่ (นับตามประเทศที่เลือก)
   var dd = {}, dobj = {};
   items.forEach(function (n) { if (n._k && okC(n)) { dd[n._k] = (dd[n._k] || 0) + 1; dobj[n._k] = n._d; } });
   var keys = Object.keys(dd).sort().reverse().slice(0, 14), dtotal = keys.reduce(function (s, k) { return s + dd[k]; }, 0);
@@ -409,7 +395,7 @@ function load(first) {
       items.forEach(function (n) { var dt = parseDate(n); n._d = dt; n._k = dt ? key(dt) : null; });
       if (dkey !== "ทั้งหมด" && !items.some(function (n) { return n._k === dkey; })) dkey = "ทั้งหมด";
       render(); ticker(); translateMissing();
-      if (first) { dataDone = true; hideSplash(); }
+      if (first) { dataDone = true; hideSplash(); try { localStorage.setItem("wwnseen", "1"); } catch (e) {} }
     })
     .catch(function () {
       if (first) { $("list").innerHTML = '<div class="empty">โหลดข่าวไม่สำเร็จ</div>'; dataDone = true; hideSplash(); }
