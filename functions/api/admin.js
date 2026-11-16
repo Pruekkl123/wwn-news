@@ -70,7 +70,7 @@ export async function onRequestPost(ctx) {
       ok: true,
       newsCount: news.ok ? news.content.length : null,
       hiddenCount: news.ok ? news.content.filter(function (n) { return n.hidden; }).length : null,
-      latestNews: news.ok ? news.content.slice(0, 5).map(function (n) { return { title: n.titleTh || n.title, cat: n.cat, date: n.date, url: n.url, hidden: !!n.hidden }; }) : [],
+      latestNews: news.ok ? news.content.slice(0, 300).map(function (n) { return { title: n.titleTh || n.title, cat: n.cat, date: n.date, url: n.url, hidden: !!n.hidden }; }) : [],
       lastRun: lastRun,
       sentCount: sentCount,
     });
