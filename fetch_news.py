@@ -148,9 +148,20 @@ def main():
         except Exception as e:
             print(f"Error fetching {category}: {e}")
 
+        # กันรูปซ้ำ: ถ้าหลายข่าวใช้รูปเดียวกัน ให้ข่าวที่ใหม่สุดได้รูปจริง ที่เหลือใช้รูปสุ่มแทน
+    seen_img = set()
+    for n in sorted(items.values(), key=item_ts, reverse=True):
+        img = n.get("img")
+        if img and not img.startswith("https://picsum.photos/seed/"):
+            if img in seen_img:
+                seed = hashlib.md5(n["url"].encode()).hexdigest()[:10]
+                n["img"] = f"https://picsum.photos/seed/{seed}/800/600"
+            else:
+                seen_img.add(img)
+
     result = sorted(items.values(), key=item_ts, reverse=True)
     for i, n in enumerate(result, 1):
-        n["id"] = i
+
 
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
