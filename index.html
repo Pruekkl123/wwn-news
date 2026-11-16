@@ -409,6 +409,14 @@ fetch("announcement.json?t=" + Date.now()).then(function (r) { return r.json(); 
     document.querySelector("main").prepend(b);
   }
 }).catch(function () {});
+fetch("announcement.json?t=" + Date.now()).then(function (r) { return r.json(); }).then(function (a) {
+  if (a && a.show && a.text) {
+    var b = document.createElement("div");
+    b.style.cssText = "max-width:1040px;margin:0 auto 14px;background:#ffe8a3;color:#5a4300;border-radius:14px;padding:10px 16px;font-weight:600;font-size:.9rem";
+    b.textContent = "📣 " + a.text;
+    document.querySelector("main").prepend(b);
+  }
+}).catch(function () {});
 load(true);
 setInterval(function () { load(false); }, 180000);
 </script>
