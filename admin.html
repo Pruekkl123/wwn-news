@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<title>WWN Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff5c8a;--blue:#3da5ff;--bg:#f6f4ff;--card:#fff;--tx:#2b2440;--mut:#7a7390;--green:#2ecc71;--red:#d2122e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Prompt',system-ui,sans-serif;padding:20px 16px 60px}
+h1{font-size:1.4rem;margin:0 0 4px}
+.sub{color:var(--mut);font-size:.85rem;margin:0 0 20px}
+.card{background:var(--card);border-radius:18px;padding:18px;margin-bottom:18px;box-shadow:0 2px 10px rgba(43,36,64,.08)}
+.card h2{font-size:1.05rem;margin:0 0 12px}
+label{display:block;font-size:.85rem;font-weight:600;margin:10px 0 4px}
+input[type=text],input[type=password],input[type=url],textarea,select{width:100%;padding:9px 10px;border:1px solid #e3deff;border-radius:10px;font:inherit;font-size:.92rem}
+textarea{min-height:70px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>*{flex:1;min-width:140px}
+button{background:var(--pink);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;margin-top:12px}
+button.secondary{background:var(--blue)}
+button.danger{background:var(--red)}
+button.small{padding:5px 10px;font-size:.8rem;margin:0}
+button:disabled{opacity:.5;cursor:default}
+.msg{font-size:.85rem;margin-top:8px;white-space:pre-wrap;word-break:break-all}
+.msg.ok{color:#0a8a3f}
+.msg.err{color:var(--red)}
+.chk{display:flex;align-items:center;gap:8px;font-size:.88rem;margin-top:10px}
+.chk input{width:auto}
+.newsitem{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0ecff;font-size:.85rem}
+.newsitem:last-child{border-bottom:0}
+.newsitem .t{flex:1}
+.newsitem .t b{display:block}
+.newsitem .t small{color:var(--mut)}
+.pill{display:inline-block;background:#f0ecff;color:var(--blue);border-radius:99px;padding:1px 8px;font-size:.72rem;margin-left:6px}
+.pill.hidden{background:#ffe4e4;color:var(--red)}
+#gate{max-width:360px;margin:60px auto}
+[hidden]{display:none!important}
+.stat{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+.stat div{background:#f6f4ff;border-radius:12px;padding:10px 14px;text-align:center;min-width:90px}
+.stat b{display:block;font-size:1.3rem}
+.stat span{font-size:.72rem;color:var(--mut)}
+</style>
+</head>
+<body>
+
+<div id="gate" class="card">
+  <h1>🔒 WWN Admin</h1>
+  <p class="sub">ใส่รหัสผ่านเพื่อเข้าใช้งาน</p>
+  <input type="password" id="pw" placeholder="รหัสผ่าน">
+  <button id="pwGo">เข้าสู่ระบบ</button>
+  <div class="msg" id="pwMsg"></div>
+</div>
+
+<div id="panel" hidden>
+  <h1>📡 WWN Admin Panel</h1>
+  <p class="sub">จัดการเว็บข่าว WWN News</p>
+
+  <div class="card">
+    <h2>📊 สถานะระบบ</h2>
+    <div class="stat" id="stat"></div>
+    <div id="lastRun" style="font-size:.85rem;color:var(--mut)"></div>
+    <button class="secondary" id="refreshBtn">รีเฟรชสถานะ</button>
+    <div class="msg" id="statusMsg"></div>
+    <div id="newsList" style="margin-top:14px"></div>
+  </div>
+
+  <div class="card">
+    <h2>⚡ สั่งดึงข่าว + ส่งเข้า LINE ทันที</h2>
+    <p class="sub" style="margin:0 0 6px">ไม่ต้องรอรอบ 06:00 / 12:00 / 18:00</p>
+    <div class="chk"><input type="checkbox" id="dryRun" checked><label for="dryRun" style="margin:0">โหมดทดสอบ (ไม่ส่งเข้า LINE จริง)</label></div>
+    <button id="runNowBtn">สั่งรันตอนนี้</button>
+    <div class="msg" id="runMsg"></div>
+  </div>
+
+  <div class="card">
+    <h2>🚨 เพิ่มข่าวด่วน</h2>
+    <label>หัวข้อ (ไทย)</label><input type="text" id="bTitleTh" placeholder="หัวข้อข่าวด่วน">
+    <label>เนื้อข่าว (ไทย)</label><textarea id="bDescTh" placeholder="รายละเอียด"></textarea>
+    <div class="row">
+      <div><label>หมวด</label>
+        <select id="bCat">
+          <option>ด่วน</option><option>Sweden</option><option>Norway</option><option>Denmark</option>
+          <option>Germany</option><option>France</option><option>Italy</option><option>Spain</option>
+          <option>Switzerland</option><option>Austria</option>
+        </select>
+      </div>
+      <div><label>ลิงก์รูป (ไม่ใส่ก็ได้)</label><input type="url" id="bImg" placeholder="https://..."></div>
+    </div>
+    <label>ลิงก์ต้นฉบับ (ไม่ใส่ก็ได้)</label><input type="url" id="bUrl" placeholder="https://...">
+    <div class="chk"><input type="checkbox" id="bSendLine"><label for="bSendLine" style="margin:0">ส่งเข้า LINE OA ทันทีด้วย (broadcast ถึงผู้ติดตามทุกคน)</label></div>
+    <button class="danger" id="breakingBtn">เผยแพร่ข่าวด่วน</button>
+    <div class="msg" id="breakingMsg"></div>
+  </div>
+
+  <div class="card">
+    <h2>📣 ประกาศหน้าเว็บ</h2>
+    <p class="sub" style="margin:0 0 6px">ข้อความแบนเนอร์ที่จะโชว์บนสุดของหน้าเว็บ</p>
+    <textarea id="annText" placeholder="เช่น เว็บจะปิดปรับปรุงคืนนี้ 23:00-00:00 น."></textarea>
+    <div class="chk"><input type="checkbox" id="annShow"><label for="annShow" style="margin:0">แสดงประกาศนี้บนเว็บ</label></div>
+    <button id="annBtn">บันทึกประกาศ</button>
+    <div class="msg" id="annMsg"></div>
+  </div>
+</div>
+
+<script>
+var $ = function (i) { return document.getElementById(i); };
+var PW = "";
+
+$("pwGo").onclick = function () {
+  PW = $("pw").value;
+  if (!PW) return;
+  call("status", {}).then(function (r) {
+    if (r && r.ok) {
+      $("gate").hidden = true; $("panel").hidden = false;
+      renderStatus(r);
+    } else {
+      $("pwMsg").className = "msg err"; $("pwMsg").textContent = (r && r.error) || "เข้าสู่ระบบไม่สำเร็จ";
+    }
+  });
+};
+$("pw").addEventListener("keydown", function (e) { if (e.key === "Enter") $("pwGo").click(); });
+
+function call(action, extra) {
+  var body = Object.assign({ action: action, password: PW }, extra || {});
+  return fetch("/api/admin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+    .then(function (r) { return r.json().then(function (j) { j._http = r.status; return j; }); })
+    .catch(function () { return { ok: false, error: "เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ" }; });
+}
+
+function renderStatus(r) {
+  $("stat").innerHTML =
+    '<div><b>' + (r.newsCount == null ? "–" : r.newsCount) + '</b><span>ข่าวทั้งหมด</span></div>' +
+    '<div><b>' + (r.hiddenCount == null ? "–" : r.hiddenCount) + '</b><span>ข่าวที่ซ่อนไว้</span></div>' +
+    '<div><b>' + (r.sentCount == null ? "–" : r.sentCount) + '</b><span>ส่งเข้า LINE แล้ว</span></div>';
+  var lr = r.lastRun;
+  $("lastRun").textContent = lr
+    ? "รอบล่าสุด: " + lr.status + (lr.conclusion ? " (" + lr.conclusion + ")" : "") + " · " + new Date(lr.created_at).toLocaleString("th-TH")
+    : "ยังไม่พบประวัติการรัน";
+  var html = (r.latestNews || []).map(function (n) {
+    return '<div class="newsitem"><div class="t"><b>' + esc(n.title) + (n.hidden ? '<span class="pill hidden">ซ่อนอยู่</span>' : '') + '</b><small>' + esc(n.cat) + " · " + esc(n.date) + '</small></div>' +
+      '<button class="small ' + (n.hidden ? "secondary" : "danger") + '" onclick="toggleHide(\'' + encodeURIComponent(n.url) + '\',' + !n.hidden + ')">' + (n.hidden ? "เลิกซ่อน" : "ซ่อน") + '</button></div>';
+  }).join("");
+  $("newsList").innerHTML = html || '<p class="sub">ไม่มีข้อมูลข่าว</p>';
+}
+function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
+
+window.toggleHide = function (encodedUrl, hide) {
+  var url = decodeURIComponent(encodedUrl);
+  call(hide ? "hide" : "unhide", { url: url }).then(function (r) {
+    if (r.ok) refresh(); else alert("ทำรายการไม่สำเร็จ: " + JSON.stringify(r.detail || r.error));
+  });
+};
+
+function refresh() {
+  $("statusMsg").textContent = "กำลังโหลด…"; $("statusMsg").className = "msg";
+  call("status", {}).then(function (r) {
+    if (r.ok) { renderStatus(r); $("statusMsg").textContent = ""; }
+    else { $("statusMsg").className = "msg err"; $("statusMsg").textContent = r.error || "โหลดไม่สำเร็จ"; }
+  });
+}
+$("refreshBtn").onclick = refresh;
+
+$("runNowBtn").onclick = function () {
+  var btn = this; btn.disabled = true;
+  $("runMsg").className = "msg"; $("runMsg").textContent = "กำลังสั่งรัน…";
+  call("run-now", { dryRun: $("dryRun").checked }).then(function (r) {
+    btn.disabled = false;
+    if (r.ok) { $("runMsg").className = "msg ok"; $("runMsg").textContent = "สั่งรันสำเร็จ ไปดูผลที่ GitHub Actions ได้เลย (ใช้เวลาราว 1-3 นาที)"; }
+    else { $("runMsg").className = "msg err"; $("runMsg").textContent = "สั่งรันไม่สำเร็จ: " + (r.body || r.error || ""); }
+  });
+};
+
+$("breakingBtn").onclick = function () {
+  var titleTh = $("bTitleTh").value.trim(), descTh = $("bDescTh").value.trim();
+  if (!titleTh) { $("breakingMsg").className = "msg err"; $("breakingMsg").textContent = "กรอกหัวข้อก่อน"; return; }
+  var btn = this; btn.disabled = true;
+  $("breakingMsg").className = "msg"; $("breakingMsg").textContent = "กำลังเผยแพร่…";
+  call("breaking", {
+    titleTh: titleTh, descTh: descTh, cat: $("bCat").value,
+    img: $("bImg").value.trim(), url: $("bUrl").value.trim(), sendLine: $("bSendLine").checked,
+  }).then(function (r) {
+    btn.disabled = false;
+    if (r.ok) {
+      $("breakingMsg").className = "msg ok";
+      $("breakingMsg").textContent = "เผยแพร่แล้ว" + (r.lineResult ? (r.lineResult.ok ? " · ส่งเข้า LINE สำเร็จ" : " · ส่งเข้า LINE ไม่สำเร็จ") : "");
+      $("bTitleTh").value = ""; $("bDescTh").value = ""; $("bImg").value = ""; $("bUrl").value = "";
+      refresh();
+    } else { $("breakingMsg").className = "msg err"; $("breakingMsg").textContent = "ไม่สำเร็จ: " + JSON.stringify(r.detail || r.error); }
+  });
+};
+
+$("annBtn").onclick = function () {
+  var btn = this; btn.disabled = true;
+  $("annMsg").className = "msg"; $("annMsg").textContent = "กำลังบันทึก…";
+  call("announcement", { text: $("annText").value, show: $("annShow").checked }).then(function (r) {
+    btn.disabled = false;
+    if (r.ok) { $("annMsg").className = "msg ok"; $("annMsg").textContent = "บันทึกแล้ว เว็บจะอัปเดตภายใน 1 นาที"; }
+    else { $("annMsg").className = "msg err"; $("annMsg").textContent = "ไม่สำเร็จ: " + JSON.stringify(r.detail || r.error); }
+  });
+};
+</script>
+</body>
+</html>
