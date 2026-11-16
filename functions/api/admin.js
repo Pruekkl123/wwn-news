@@ -119,7 +119,7 @@ export async function onRequestPost(ctx) {
     var put2 = await ghPutFile(env, "news.json", list2, f2.sha, "admin: add breaking news");
     var lineResult = null;
     if (data.sendLine && env.LINE_CHANNEL_ACCESS_TOKEN) {
-      var text = "🚨 ข่าวด่วน\n\n" + item2.titleTh + "\n" + item2.descTh + "\n\nอ่านเพิ่มเติม: https://wwn-news.pages.dev";
+            var text = "🚨 ข่าวด่วน\n\n" + item2.titleTh + "\n" + item2.descTh + "\n\nอ่านเพิ่มเติม: " + item2.url;
       var r2 = await fetch("https://api.line.me/v2/bot/message/broadcast", {
         method: "POST",
         headers: { Authorization: "Bearer " + env.LINE_CHANNEL_ACCESS_TOKEN, "Content-Type": "application/json" },
