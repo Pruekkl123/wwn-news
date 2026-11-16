@@ -48,8 +48,8 @@ export async function onRequestPost(ctx) {
   var data;
   try { data = await request.json(); } catch (e) { return jsonRes({ error: "bad json" }, 400); }
 
-  if (!env.ADMIN_PASSWORD || data.password !== env.ADMIN_PASSWORD) {
-    return jsonRes({ error: "รหัสผ่านไม่ถูกต้อง" }, 401);
+    if (!env.ADMIN_PASSWORD || data.password !== env.ADMIN_PASSWORD) {
+    return jsonRes({ error: "รหัสผ่านไม่ถูกต้อง", hasEnv: !!env.ADMIN_PASSWORD, envLen: (env.ADMIN_PASSWORD || "").length, gotLen: (data.password || "").length }, 401);
   }
 
   var action = data.action;
