@@ -7,7 +7,7 @@ import urllib.error
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
-SITE_URL = os.environ.get("SITE_URL", "https://wwn-news.vercel.app")
+SITE_URL = os.environ.get("SITE_URL", "https://wwn-news.pages.dev")
 MAX_ITEMS = 5
 SENT_FILE = "sent_news.json"
 
