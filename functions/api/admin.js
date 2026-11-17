@@ -106,7 +106,7 @@ export async function onRequestPost(ctx) {
       title: data.titleEn || data.titleTh || "Breaking news",
       titleTh: data.titleTh || data.titleEn || "ข่าวด่วน",
       cat: data.cat || "ด่วน",
-      date: new Date(now).toDateString(),
+      date: new Date(now).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
       ts: now,
       img: data.img || ("https://picsum.photos/seed/" + now + "/800/600"),
       desc: data.descEn || data.descTh || "",
