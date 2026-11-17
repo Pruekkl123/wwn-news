@@ -42,6 +42,8 @@ button:disabled{opacity:.5;cursor:default}
 .stat div{background:#f6f4ff;border-radius:12px;padding:10px 14px;text-align:center;min-width:90px}
 .stat b{display:block;font-size:1.3rem}
 .stat span{font-size:.72rem;color:var(--mut)}
+#newsSearch{margin-top:10px}
+#moreBtn{display:none;width:100%}
 </style>
 </head>
 <body>
@@ -59,12 +61,14 @@ button:disabled{opacity:.5;cursor:default}
   <p class="sub">จัดการเว็บข่าว WWN News</p>
 
   <div class="card">
-    <h2>📊 สถานะระบบ</h2>
+    <h2>📊 สถานะระบบ · ซ่อน/แสดงข่าว</h2>
     <div class="stat" id="stat"></div>
     <div id="lastRun" style="font-size:.85rem;color:var(--mut)"></div>
     <button class="secondary" id="refreshBtn">รีเฟรชสถานะ</button>
     <div class="msg" id="statusMsg"></div>
+    <input type="text" id="newsSearch" placeholder="🔍 ค้นหาข่าวที่จะซ่อน/แสดง (พิมพ์บางส่วนของหัวข้อ)">
     <div id="newsList" style="margin-top:14px"></div>
+    <button class="secondary small" id="moreBtn">แสดงเพิ่มเติม</button>
   </div>
 
   <div class="card">
@@ -108,6 +112,7 @@ button:disabled{opacity:.5;cursor:default}
 <script>
 var $ = function (i) { return document.getElementById(i); };
 var PW = "";
+var allNews = [], shownCount = 20;
 
 $("pwGo").onclick = function () {
   PW = $("pw").value;
@@ -129,6 +134,7 @@ function call(action, extra) {
     .then(function (r) { return r.json().then(function (j) { j._http = r.status; return j; }); })
     .catch(function () { return { ok: false, error: "เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ" }; });
 }
+function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
 
 function renderStatus(r) {
   $("stat").innerHTML =
@@ -139,13 +145,24 @@ function renderStatus(r) {
   $("lastRun").textContent = lr
     ? "รอบล่าสุด: " + lr.status + (lr.conclusion ? " (" + lr.conclusion + ")" : "") + " · " + new Date(lr.created_at).toLocaleString("th-TH")
     : "ยังไม่พบประวัติการรัน";
-  var html = (r.latestNews || []).map(function (n) {
+  allNews = r.latestNews || [];
+  shownCount = 20;
+  renderNewsList();
+}
+
+function renderNewsList() {
+  var q = ($("newsSearch").value || "").trim().toLowerCase();
+  var filtered = allNews.filter(function (n) { return !q || (n.title || "").toLowerCase().indexOf(q) > -1; });
+  var slice = filtered.slice(0, shownCount);
+  var html = slice.map(function (n) {
     return '<div class="newsitem"><div class="t"><b>' + esc(n.title) + (n.hidden ? '<span class="pill hidden">ซ่อนอยู่</span>' : '') + '</b><small>' + esc(n.cat) + " · " + esc(n.date) + '</small></div>' +
       '<button class="small ' + (n.hidden ? "secondary" : "danger") + '" onclick="toggleHide(\'' + encodeURIComponent(n.url) + '\',' + !n.hidden + ')">' + (n.hidden ? "เลิกซ่อน" : "ซ่อน") + '</button></div>';
   }).join("");
-  $("newsList").innerHTML = html || '<p class="sub">ไม่มีข้อมูลข่าว</p>';
+  $("newsList").innerHTML = html || '<p class="sub">ไม่พบข่าวที่ตรงกับคำค้นหา</p>';
+  $("moreBtn").style.display = filtered.length > shownCount ? "block" : "none";
 }
-function esc(s) { var d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
+$("newsSearch").addEventListener("input", function () { shownCount = 20; renderNewsList(); });
+$("moreBtn").onclick = function () { shownCount += 30; renderNewsList(); };
 
 window.toggleHide = function (encodedUrl, hide) {
   var url = decodeURIComponent(encodedUrl);
