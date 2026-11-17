@@ -6,7 +6,7 @@ import time
 import urllib.parse
 import urllib.request
 
-SITE = os.environ.get("SITE_URL", "https://wwn-news.vercel.app")
+SITE = os.environ.get("SITE_URL", "https://wwn-news.pages.dev")
 UA = {"User-Agent": "Mozilla/5.0 (compatible; WWNNewsBot/1.0)"}
 
 
