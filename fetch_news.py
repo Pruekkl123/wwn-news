@@ -24,10 +24,10 @@ THE_LOCAL_FEEDS = {
 
 OUT = "news.json"
 PER_FEED = 25          # อ่านข่าวล่าสุดจากแต่ละประเทศสูงสุดกี่ข่าวต่อรอบ
-MAX_AGE_DAYS = 14      # เก็บข่าวย้อนหลังกี่วัน (ข่าวเก่ากว่านี้จะถูกลบ)
-MAX_NEW_PER_RUN = 250  # เปิดหน้าข่าวใหม่ได้สูงสุดกี่หน้าต่อรอบ (กันรันนานเกินไป ที่เหลือรอบหน้าค่อยทำ)
-MIN_PER_DAY = 10       # เป้าหมายข่าวต่อวัน (ใช้เตือนใน log)
-BODY_CHARS = 1000      # ความยาวเนื้อข่าวที่ดึงมาแสดง (ย่อหน้าแรกๆ)
+MAX_AGE_DAYS = 14       # เก็บข่าวย้อนหลังกี่วัน (ข่าวเก่ากว่านี้จะถูกลบ)
+MAX_NEW_PER_RUN = 250   # เปิดหน้าข่าวใหม่ได้สูงสุดกี่หน้าต่อรอบ (กันรันนานเกินไป ที่เหลือรอบหน้าค่อยทำ)
+MIN_PER_DAY = 10        # เป้าหมายข่าวต่อวัน (ใช้เตือนใน log)
+BODY_CHARS = 1000       # ความยาวเนื้อข่าวที่ดึงมาแสดง (ย่อหน้าแรกๆ)
 UA = {"User-Agent": "Mozilla/5.0 (compatible; WWNNewsBot/1.0)"}
 SKIP = ("subscribe", "become a member", "sign up", "cookie", "newsletter", "log in",
         "read also", "read more", "advertisement", "already a member")
@@ -148,7 +148,7 @@ def main():
         except Exception as e:
             print(f"Error fetching {category}: {e}")
 
-        # กันรูปซ้ำ: ถ้าหลายข่าวใช้รูปเดียวกัน ให้ข่าวที่ใหม่สุดได้รูปจริง ที่เหลือใช้รูปสุ่มแทน
+    # กันรูปซ้ำ: ถ้าหลายข่าวใช้รูปเดียวกัน ให้ข่าวที่ใหม่สุดได้รูปจริง ที่เหลือใช้รูปสุ่มแทน
     seen_img = set()
     for n in sorted(items.values(), key=item_ts, reverse=True):
         img = n.get("img")
@@ -161,7 +161,7 @@ def main():
 
     result = sorted(items.values(), key=item_ts, reverse=True)
     for i, n in enumerate(result, 1):
-
+        n["id"] = i
 
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
