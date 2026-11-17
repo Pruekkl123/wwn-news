@@ -166,7 +166,7 @@ def main():
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
 
-    per_day = Counter(n["date"] for n in result)
+        per_day = Counter(datetime.fromtimestamp(item_ts(n) / 1000).strftime("%b %d, %Y") for n in result)
     for day in sorted(per_day, key=lambda d: datetime.strptime(d, "%b %d, %Y"), reverse=True):
         mark = "" if per_day[day] >= MIN_PER_DAY else f"  <-- น้อยกว่า {MIN_PER_DAY}"
         print(f"{day}: {per_day[day]} ข่าว{mark}")
