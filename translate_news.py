@@ -1,5 +1,3 @@
-# แปลข่าวใน news.json จากอังกฤษเป็นไทย (ฟรี ไม่ต้องใช้ API key ไม่ต้องติดตั้งแพ็กเกจเพิ่ม)
-# ลำดับการแปล: 1) ผ่าน /api/translate บนเว็บของเรา  2) เรียก Google Translate ตรงๆ
 import json
 import os
 import time
