@@ -216,6 +216,23 @@ $("breakingBtn").onclick = function () {
   });
 };
 
+$("testTransBtn").onclick = function () {
+  var btn = this; btn.disabled = true;
+  $("testTransMsg").className = "msg"; $("testTransMsg").textContent = "กำลังทดสอบ…";
+  fetch("/api/translate?q=hello")
+    .then(function (r) { return r.text().then(function (t) { return { status: r.status, body: t }; }); })
+    .then(function (res) {
+      btn.disabled = false;
+      $("testTransMsg").className = res.status === 200 ? "msg ok" : "msg err";
+      $("testTransMsg").textContent = "สถานะ: " + res.status + "\n\nผลลัพธ์:\n" + res.body.slice(0, 800);
+    })
+    .catch(function (e) {
+      btn.disabled = false;
+      $("testTransMsg").className = "msg err";
+      $("testTransMsg").textContent = "เชื่อมต่อไม่ได้: " + e;
+    });
+};
+
 $("annBtn").onclick = function () {
   var btn = this; btn.disabled = true;
   $("annMsg").className = "msg"; $("annMsg").textContent = "กำลังบันทึก…";
